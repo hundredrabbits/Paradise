@@ -1,12 +1,10 @@
-// require(`./action`);
-
 function Look()
 {
-  // Action.call();
+  require(`../action`).call(this);
 
-  this.run = function(params)
+  this.reaction = function()
   {
-    console.log("hey",params)
+    return "You are looking.."
   }
 }
 

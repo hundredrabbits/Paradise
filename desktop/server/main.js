@@ -2,20 +2,20 @@ function Server()
 {
   this.act = function(action,params)
   {
-    try {
-      const response = require(`./actions/${action}`);
-      const responder = new response()
-      return responder.run(params)
-    } catch (ex) {
-      console.log(`Unknown command!`)
-    }   
-
-    return "--" 
+    const responder = this.response(action)
+    console.log(new responder)
+    return new responder().run(params)
   }
 
-  this.respond = function()
+  this.response = function(action)
   {
-
+    try {
+      return require(`./actions/${action}`);
+    }
+    catch(ex) {
+      return require(`./action`);
+    } 
+    return require(`./action`);
   }
 }
 
