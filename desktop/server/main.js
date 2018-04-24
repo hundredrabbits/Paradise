@@ -1,18 +1,19 @@
 function Server()
 {
+  this.ghost = null
+
   this.act = function(action,params)
   {
     const responder = this.response(action)
-    console.log(new responder)
-    return new responder().run(params)
+    return new responder(this.ghost).run(params)
   }
 
   this.response = function(action)
   {
-    try {
+    try{
       return require(`./actions/${action}`);
     }
-    catch(ex) {
+    catch(ex){
       return require(`./action`);
     } 
     return require(`./action`);
