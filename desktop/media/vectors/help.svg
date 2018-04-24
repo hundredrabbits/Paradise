@@ -1,0 +1,9 @@
+<svg class="vector" width="20px" height="20px" xmlns="http://www.w3.org/2000/svg" baseProfile="full" version="1.1" style="
+width: 20px;
+    height: 20px;
+    stroke: white;
+    stroke-width: 1px;
+    fill: none;
+    stroke-linecap: round;">
+    <line x1="2" y1="10" x2="18" y2="10"></line>
+</svg>
