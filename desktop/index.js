@@ -1,13 +1,12 @@
-const vessel = require('./server/vessel')
-const server = require('./server/main');
+const Paradise = require('./server/paradise')
+const Vessel = require('./server/vessel')
+const server = require('./server/main')
+
 const arg = process.argv.splice(2,process.argv.length-2)
 const act = arg.splice(0,1)[0]
 const cmd = arg.join(' ')
 
-const ghost = new vessel();
+server.parade = new Paradise()
+server.ghost = server.parade.find_ghost()
 
-server.ghost = ghost
-
-console.log(server.act(act,cmd))
-
-module.exports = server.act(act,cmd)
+console.log(server.ghost.act(server.parade,act,cmd))

@@ -1,8 +1,6 @@
-function Look(ghost)
+function Look(parade,host)
 {
-  require(`../action`).call(this,ghost);
-
-  this.ghost = ghost;
+  require(`../action`).call(this,parade,host);
 
   this.reaction = function()
   {
