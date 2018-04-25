@@ -1,6 +1,6 @@
-function Look(parade,host)
+function Look(host)
 {
-  require(`../action`).call(this,parade,host);
+  require(`../action`).call(this,host);
 
   this.reaction = function()
   {

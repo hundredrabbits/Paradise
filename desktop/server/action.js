@@ -1,14 +1,15 @@
-function Action(parade,host)
+function Action(host)
 {
-  this.parade = parade;
   this.host = host;
 
-  this.run = function()
+  this.run = function(params)
   {
+    this.operate(params);
+
     var h = {}
     h.host = this.host;
     h.reaction = this.reaction();
-    h.visibles = this.parade.find_visibles_for(this.host);
+    h.visibles = this.host.sight();
     return h
   }
 
@@ -20,6 +21,11 @@ function Action(parade,host)
   this.visibles = function()
   {
     return []
+  }
+
+  this.operate = function()
+  {
+    console.log("Nothing to do..")
   }
 }
 

@@ -2,22 +2,14 @@ const Vessel = require('./vessel')
 
 function Paradise()
 {
-  this.world = [new Vessel().to_h(),new Vessel({name:"teacup"}).to_h()]
+  this.world = [new Vessel(),new Vessel({name:"teacup"})]
 
-  this.find_ghost = function()
+  this.ghost = function()
   {
-    return new Vessel(this.world[0]);
-  }
-
-  this.find_visibles_for = function(vessel)
-  {
-    var a = []
-    for(id in this.world){
-      var vessel = new Vessel(this.world[id]);
-      a.push(vessel)
-    }
-    return a
+    var v = new Vessel(this.world[0])
+    v.parade = this
+    return v;
   }
 }
 
-module.exports = Paradise
+module.exports = new Paradise()
