@@ -7,6 +7,12 @@ function Paradise()
     new Vessel({name:"cupboard",parent:0}),
     new Vessel({name:"teacup",parent:0})]
 
+  this.add = function(vessel)
+  {
+    this.world.push(vessel)
+    this.update()
+  }
+
   this.update = function()
   {
     // Connect IDs

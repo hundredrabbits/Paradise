@@ -6,6 +6,7 @@ const cmd = arg.join(' ')
 
 let parade = new Paradise()
 
-console.log(parade.ghost().debug())
-parade.ghost().act(act,cmd)
-console.log(parade.ghost().debug())
+parade.ghost().act("enter","the teacup")
+parade.ghost().act("leave")
+parade.ghost().act("warp","to 1")
+parade.ghost().act("create","a table")
