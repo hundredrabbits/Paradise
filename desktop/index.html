@@ -2,81 +2,25 @@
 <html>
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
-    <!-- <script type="text/javascript" src="scripts/jquery.js"></script> -->
-    <script type="text/javascript" src="scripts/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="scripts/jquery.transit.min.js"></script>
-    <script type="text/javascript" src="scripts/lib/logo.js"></script>
-
-    <script type="text/javascript" src="scripts/core/oquonie.js"></script>
-    <script type="text/javascript" src="scripts/core/dialog.js"></script>
-    <script type="text/javascript" src="scripts/core/overlay.js"></script>
-    <script type="text/javascript" src="scripts/core/interface.js"></script>
-    <script type="text/javascript" src="scripts/core/stage.js"></script>
-    <script type="text/javascript" src="scripts/core/animator.js"></script>
-    <script type="text/javascript" src="scripts/core/animation.js"></script>
-    <script type="text/javascript" src="scripts/core/spellbook.js"></script>
-    <script type="text/javascript" src="scripts/core/game.js"></script>
-    <script type="text/javascript" src="scripts/core/music.js"></script>
-    <script type="text/javascript" src="scripts/core/artbook.js"></script>
-
-    <script type="text/javascript" src="scripts/core/world.js"></script>
-
-    <script type="text/javascript" src="scripts/core/tile.js"></script>
-    <script type="text/javascript" src="scripts/core/event.js"></script>
-    <script type="text/javascript" src="scripts/core/floor.js"></script>
-    <script type="text/javascript" src="scripts/core/wall.js"></script>
-    <script type="text/javascript" src="scripts/core/room.js"></script>
-    <script type="text/javascript" src="scripts/core/step.js"></script>
-    <script type="text/javascript" src="scripts/core/sprite.js"></script>
-
-    <script type="text/javascript" src="scripts/event/blocker.js"></script>
-    <script type="text/javascript" src="scripts/event/door.js"></script>
-    <script type="text/javascript" src="scripts/event/pillar.js"></script>
-    <script type="text/javascript" src="scripts/event/pillarbase.js"></script>
-    <script type="text/javascript" src="scripts/event/ramen.js"></script>
-    <script type="text/javascript" src="scripts/event/player.js"></script>
-    <script type="text/javascript" src="scripts/event/plan.js"></script>
-    <script type="text/javascript" src="scripts/event/gate.js"></script>
-    <script type="text/javascript" src="scripts/event/owl.js"></script>
-    <script type="text/javascript" src="scripts/event/speaker.js"></script>
-    <script type="text/javascript" src="scripts/event/shark.js"></script>
-    <script type="text/javascript" src="scripts/event/tree.js"></script>
-    <script type="text/javascript" src="scripts/event/noface.js"></script>
-    <script type="text/javascript" src="scripts/event/wizard.js"></script>
-    <script type="text/javascript" src="scripts/event/teleport.js"></script>
-    <script type="text/javascript" src="scripts/event/credit.js"></script>
-    <script type="text/javascript" src="scripts/event/red.js"></script>
-    <script type="text/javascript" src="scripts/event/petunia.js"></script>
-    <script type="text/javascript" src="scripts/event/boss.js"></script>
-    <script type="text/javascript" src="scripts/event/ghost.js"></script>
-    <script type="text/javascript" src="scripts/event/shadow.js"></script>
-    <script type="text/javascript" src="scripts/event/hiversaires.js"></script>
-    <script type="text/javascript" src="scripts/event/broken.js"></script>
-    <script type="text/javascript" src="scripts/event/pillargate.js"></script>
-    <script type="text/javascript" src="scripts/event/cameo.js"></script>
-
-    <script type="text/javascript" src="scripts/core/keyboard.js"></script>
-    <script type="text/javascript" src="scripts/core/walkthrough.js"></script>
-
     <link rel="stylesheet" type="text/css" href="links/reset.css"/>
     <link rel="stylesheet" type="text/css" href="links/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="links/main.css"/>
-    <title>Oquonie</title>
+    <title>Paradise</title>
   </head>
   <body>
+    <wr>
+      <h1>You are a Ghost in Paradise.</h1>
+      <h2>-235-</h2>
+      <p>You have found the library, it is raining. You have found the library, it is raining. You have found the library, it is raining. You have found the library, it is raining. </p>
+      <p>You see a cupboard.</p>
+      <list>
+        <ln>The haven is a paradox.</ln>
+        <ln>The haven is a paradox.</ln>
+        <ln>The haven is a paradox.</ln>
+      </list>
+      <input placeholder="What would you like to do?"/>
+    </wr>
     <script>
-      var DEBUG = false;
-      var oquonie = new Oquonie();
-      oquonie.install();
-      var keyboard = new Keyboard();
-      document.onkeyup = function(event){ keyboard.listen_onkeyup(event); };
-      document.onkeydown = function(event){ keyboard.listen_onkeydown(event); };
-      document.addEventListener('mousedown', function(e){ oquonie.mousedown(e); }, false);
-      var logo = new Logo(false);
-      logo.install(120);
-      setTimeout(function(){ logo.remove(); }, 5500);
-      setTimeout(function(){ oquonie.start(); }, DEBUG ? 100 : 3000);
     </script>
   </body>
 </html>

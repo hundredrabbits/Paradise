@@ -5,10 +5,3 @@
 *           { margin:0;padding:0;border:0;outline:0;text-decoration:none;font-weight:inherit;font-style:inherit;color:inherit;font-size:100%;font-family:inherit;vertical-align:baseline;list-style:none;border-collapse:separate;border-spacing:0; -webkit-font-smoothing: antialiased;-moz-osx-font-smoothing: grayscale;}
 *:focus         { outline: none}
 ::selection       { background: #eee; opacity:1.0; color:#000; padding:10px; /* Safari */ }
-
-@font-face {
-  font-family: 'InputMono-Regular';
-  src: url('../img/InputMono-Regular.eot') format('embedded-opentype'), url('../img/InputMono-Regular.ttf')  format('truetype'), url('../img/InputMono-Regular.svg#InputMono-Regular') format('svg');
-  font-weight: normal;
-  font-style: normal;
-}

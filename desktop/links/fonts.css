@@ -48,29 +48,22 @@
 /* Lora */
 
 @font-face {
-    font-family: 'playfair_regular';
-    src: url('../media/fonts/playfair_regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'frank_ruhl_light';
+  src: url('../media/fonts/frank_ruhl_light.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'playfair_bold';
-    src: url('../media/fonts/playfair_bold.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'frank_ruhl_regular';
+  src: url('../media/fonts/frank_ruhl_regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-    font-family: 'playfair_black';
-    src: url('../media/fonts/playfair_black.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: 'playfair_black_italic';
-    src: url('../media/fonts/playfair_black_italic.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+  font-family: 'archivo_regular';
+  src: url('../media/fonts/archivo_regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
