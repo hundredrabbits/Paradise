@@ -9,6 +9,7 @@ function Paradise()
 
   this.add = function(vessel)
   {
+    console.log(`+ add ${vessel.to_s()}`)
     this.world.push(vessel)
     this.update()
   }

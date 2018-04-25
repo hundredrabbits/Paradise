@@ -9,9 +9,6 @@ function Create(host)
     var parts = params.split(" ")
     var name = parts[parts.length-1]
 
-    console.log(`Paradise size: ${this.host.parade.world.length}`)
-    console.log(`Creating ${name}`)
-
     var vessel = new Vessel({
       name:name,
       owner:this.host.id,
@@ -19,8 +16,6 @@ function Create(host)
     });
 
     this.host.parade.add(vessel)
-
-    console.log(`Paradise size: ${this.host.parade.world.length}`)
   }
 }
 

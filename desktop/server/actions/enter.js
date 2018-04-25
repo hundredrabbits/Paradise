@@ -7,16 +7,12 @@ function Enter(host)
     var target = this.find_target(params,this.host.siblings());
 
     if(target){
+      console.log(`? target ${target.to_s()}`)
       this.host.move(target)
     }
     else{
-      console.log(`missing:${target.to_s()}`)
+      console.log(`! missing ${params}`)
     }
-  }
-
-  this.reaction = function()
-  {
-    return "You are entering.."
   }
 }
 

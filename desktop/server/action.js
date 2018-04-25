@@ -2,6 +2,7 @@ function Action(host,name)
 {
   this.name = name;
   this.host = host;
+  this.docs = `No documentation for '${name}'`
 
   this.run = function(params = "")
   {
