@@ -7,7 +7,6 @@ function Enter(host)
     var target = this.find_target(params,this.host.siblings());
 
     if(target){
-      console.log(`? target ${target.to_s()}`)
       this.host.move(target)
     }
     else{

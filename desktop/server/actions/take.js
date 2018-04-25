@@ -7,7 +7,6 @@ function Take(host)
     var target = this.find_target(params,this.host.siblings());
 
     if(target){
-      console.log(`? target ${target.to_s()}`)
       target.move(this.host)
     }
     else{

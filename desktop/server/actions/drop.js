@@ -7,7 +7,6 @@ function Drop(host)
     var target = this.find_target(params,this.host.children());
 
     if(target){
-      console.log(`? target ${target.to_s()}`)
       target.move(this.host.parent())
     }
     else{
