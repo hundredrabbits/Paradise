@@ -5,8 +5,14 @@ function Enter(host)
   this.operate = function(params)
   {
     var visibles = this.host.sight();
-    console.log(visibles)
-    console.log(params)
+    var target = this.find_target(params,visibles);
+
+    if(target){
+      this.move(target)
+    }
+    else{
+      console.log("no target")
+    }
   }
 
   this.reaction = function()

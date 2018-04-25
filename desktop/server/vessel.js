@@ -7,7 +7,7 @@ let basic = {
 
 function Vessel(data = basic)
 {
-  this.parade = null;
+  this.parade = null
   this.data = data;
 
   this.act = function(action,params)
@@ -24,17 +24,28 @@ function Vessel(data = basic)
     catch(ex){
       return require(`./action`);
     } 
-    return require(`./action`);
   }
 
   this.parent = function()
   {
-    console.log("Parent:",this.data.parent,this.parade) // TODO
+    return this.parade.world[this.data.parent]
+  }
+
+  // Helpers
+
+  this.is = function(str)
+  {
+    var parts = str.split(" ")
+    var last_word = parts[parts.length-1].toLowerCase();
+
+    if(last_word == this.data.name){
+      return true;
+    }
+    return false;
   }
 
   this.sight = function()
   {
-    console.log("Sight:")
     var siblings = this.siblings();
     return siblings
   }
@@ -44,11 +55,18 @@ function Vessel(data = basic)
     var a = []
     for(id in this.parade.world){
       var vessel = this.parade.world[id];
-      if(vessel.parent().id == this.host.parent.id){
+      if(vessel.parent().id == this.parent().id && vessel.id != this.id){
         a.push(vessel)
       }
     }
     return a
+  }
+
+  // Formatters
+
+  this.debug = function()
+  {
+    return this.data
   }
 
   this.to_h = function()
@@ -57,6 +75,11 @@ function Vessel(data = basic)
       name: this.name,
       attr: this.attr
     }
+  }
+
+  this.to_s = function()
+  {
+    return `<<${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}(${this.id})>>`
   }
 }
 
