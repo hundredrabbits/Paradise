@@ -10,8 +10,6 @@ function Vessel(data = basic)
   this.parade = null
   this.data = data;
 
-  this.details = `${this.data.name}`
-
   this.act = function(action,params)
   {
     const responder = this.response(action)
