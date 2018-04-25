@@ -10,6 +10,12 @@ function Vessel(data = basic)
   this.parade = null
   this.data = data;
 
+  this.cmd = function(str)
+  {
+    var parts = str.split(" ")
+    this.act(parts.splice(0,1)[0],parts.join(' '))
+  }
+
   this.act = function(action,params)
   {
     const responder = this.response(action)
