@@ -1,11 +1,9 @@
 function Drop(host)
 {
-  require(`../action`).call(this,host);
+  require(`../action`).call(this,host,"create");
 
   this.operate = function(params)
   {
-    console.log(`Drop..${params}`)
-
     var target = this.find_target(params,this.host.children());
 
     if(target){

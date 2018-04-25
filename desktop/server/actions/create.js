@@ -2,7 +2,7 @@ let Vessel = require('../vessel')
 
 function Create(host)
 {
-  require(`../action`).call(this,host);
+  require(`../action`).call(this,host,"create");
 
   this.operate = function(params)
   {

@@ -1,14 +1,17 @@
-function Action(host)
+function Action(host,name)
 {
+  this.name = name;
   this.host = host;
 
-  this.run = function(params)
+  this.run = function(params = "")
   {
+    console.log(`${this.name}->${params}`)
     this.operate(params);
 
     var h = {}
     h.host = this.host;
     h.reaction = this.reaction();
+    console.log("")
     return h
   }
 

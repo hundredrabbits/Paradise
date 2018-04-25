@@ -16,9 +16,15 @@ function Vessel(data = basic)
     return new responder(this).run(params)
   }
 
+  this.set = function(key,value)
+  {
+    console.log(`- set ${this.to_s()} ${key}='${value}'`)
+    this.data[key] = value;
+  }
+
   this.move = function(target)
   {
-    this.data.parent = target.id
+    this.set("parent",target.id)
   }
 
   this.response = function(action)
@@ -91,7 +97,7 @@ function Vessel(data = basic)
 
   this.to_s = function()
   {
-    return `<<${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}(${this.id})>>`
+    return `${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}#${this.id}`
   }
 }
 

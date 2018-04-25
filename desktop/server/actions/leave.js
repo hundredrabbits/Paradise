@@ -1,6 +1,6 @@
 function Leave(host)
 {
-  require(`../action`).call(this,host);
+  require(`../action`).call(this,host,"leave");
 
   this.operate = function(params)
   {

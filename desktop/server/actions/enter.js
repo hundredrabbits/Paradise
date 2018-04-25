@@ -1,11 +1,9 @@
 function Enter(host)
 {
-  require(`../action`).call(this,host);
+  require(`../action`).call(this,host,"enter");
 
   this.operate = function(params)
   {
-    console.log(`Enter..${params}`)
-
     var target = this.find_target(params,this.host.siblings());
 
     if(target){
