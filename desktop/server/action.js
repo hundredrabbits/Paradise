@@ -6,13 +6,14 @@ function Action(host,name)
 
   this.run = function(params = "")
   {
-    console.log(`${this.name}->${params}`)
     this.operate(params);
 
     var h = {}
+    h.sight = {
+      h1:`You are ${this.host}.`
+    }
     h.host = this.host;
     h.reaction = this.reaction();
-    console.log("")
     return h
   }
 
@@ -23,9 +24,7 @@ function Action(host,name)
 
   this.operate = function()
   {
-    console.log("Nothing to do..")
   }
-
 
   // Parsers
 

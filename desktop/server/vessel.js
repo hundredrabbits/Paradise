@@ -13,7 +13,7 @@ function Vessel(data = basic)
   this.cmd = function(str)
   {
     var parts = str.split(" ")
-    this.act(parts.splice(0,1)[0],parts.join(' '))
+    return this.act(parts.splice(0,1)[0],parts.join(' '))
   }
 
   this.act = function(action,params)
@@ -104,6 +104,13 @@ function Vessel(data = basic)
   this.to_s = function()
   {
     return `${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}#${this.id}`
+  }
+
+  this.toString = function()
+  {
+    var article = this.data.attr ? "the" : "a"
+
+    return `${article ? article+' ' : ''}${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}`;
   }
 }
 

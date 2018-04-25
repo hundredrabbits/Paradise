@@ -1,7 +1,9 @@
 function Client()
 {
   this.controller = new Controller();
-  this.input_el = null;
+
+  this.input = null;
+  this.h1 = null;
 
   this.start = function()
   {
@@ -15,9 +17,14 @@ function Client()
 
     this.controller.commit();
 
-    this.input_el = document.getElementById("input");
-    this.input_el.oninput = (key) => { this.hint(key); };
-    this.input_el.onkeyup = (key) => { if(key.key == "Enter"){ this.validate(); } };
+    this.h1 = document.getElementById("h1");
+    this.input = document.getElementById("input");
+
+    // Events
+    this.input.oninput = (key) => { this.hint(key); };
+    this.input.onkeyup = (key) => { if(key.key == "Enter"){ this.validate(); } };
+
+    this.query();
   }
 
   this.hint = function(key)
@@ -25,9 +32,21 @@ function Client()
     console.log("HEY",key); 
   }
 
-  this.validate = function(value = this.input_el.value)
+  this.validate = function(value = this.input.value)
   {
-    this.input_el.value = "";
+    this.input.value = "";
     console.log("VALIDATE",value); 
+  }
+
+  this.query = function(id = 0,q = "")
+  {
+    this.update(parade.query(q))
+  }
+
+  this.update = function(response)
+  {
+    this.h1.innerHTML = response.sight.h1
+
+    console.log(response)
   }
 }

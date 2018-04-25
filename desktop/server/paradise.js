@@ -11,6 +11,11 @@ function Paradise()
     this.update()
   }
 
+  this.query = function()
+  {
+    return this.ghost().cmd("look")
+  }
+
   this.update = function()
   {
     // Connect IDs
