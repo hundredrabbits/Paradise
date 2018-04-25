@@ -4,7 +4,7 @@ function Leave(host)
 
   this.operate = function(params)
   {
-    this.move(this.host.parent().parent())
+    this.host.move(this.host.parent().parent())
   }
 
   this.reaction = function()

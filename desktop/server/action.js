@@ -9,7 +9,6 @@ function Action(host)
     var h = {}
     h.host = this.host;
     h.reaction = this.reaction();
-    h.visibles = this.host.sight();
     return h
   }
 
@@ -21,12 +20,6 @@ function Action(host)
   this.operate = function()
   {
     console.log("Nothing to do..")
-  }
-
-  this.move = function(target)
-  {
-    console.log(`Moving $${this.host.id} into $${target.id}.`)
-    this.host.data.parent = target.id
   }
 
 

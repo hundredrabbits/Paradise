@@ -11,7 +11,7 @@ function Warp(host)
     var target = this.host.parade.world[id];
 
     if(target){
-      this.move(target)
+      this.host.move(target)
     }
   }
 

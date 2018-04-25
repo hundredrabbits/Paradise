@@ -16,6 +16,11 @@ function Vessel(data = basic)
     return new responder(this).run(params)
   }
 
+  this.move = function(target)
+  {
+    this.data.parent = target.id
+  }
+
   this.response = function(action)
   {
     try{
@@ -45,18 +50,24 @@ function Vessel(data = basic)
     return false;
   }
 
-  this.sight = function()
-  {
-    var siblings = this.siblings();
-    return siblings
-  }
-
   this.siblings = function()
   {
     var a = []
     for(id in this.parade.world){
       var vessel = this.parade.world[id];
       if(vessel.parent().id == this.parent().id && vessel.id != this.id){
+        a.push(vessel)
+      }
+    }
+    return a
+  }
+
+  this.children = function()
+  {
+    var a = []
+    for(id in this.parade.world){
+      var vessel = this.parade.world[id];
+      if(vessel.parent().id == this.id && vessel.id != this.id){
         a.push(vessel)
       }
     }
