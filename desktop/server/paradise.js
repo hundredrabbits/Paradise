@@ -2,10 +2,7 @@ const Vessel = require('./vessel')
 
 function Paradise()
 {
-  this.world = [
-    new Vessel({name:"ghost",parent:0}),
-    new Vessel({name:"cupboard",parent:0}),
-    new Vessel({name:"teacup",parent:0})]
+  this.world = [new Vessel({name:"ghost",parent:0})]
 
   this.add = function(vessel)
   {
@@ -32,27 +29,29 @@ function Paradise()
   this.walkthrough = function()
   {    
     console.log("---------------BASIC---------------\n")
-    this.ghost().cmd("create a table")
-    this.ghost().cmd("enter the table")
-    this.ghost().cmd("leave the table")
+    this.ghost().cmd("create a cupboard")
+    this.ghost().cmd("become a ghost")
+    this.ghost().cmd("enter the cupboard")
+    this.ghost().cmd("leave")
     console.log("---------------ADVANCED---------------\n")
-    this.ghost().cmd("move over the table")
-    this.ghost().cmd("warp to 0")
+    this.ghost().cmd("help")
+    this.ghost().cmd("help with drop")
+    this.ghost().cmd("warp to 1")
+    this.ghost().cmd("create a teacup")
+    this.ghost().cmd("take the teacup")
+    this.ghost().cmd("drop the teacup")
+    console.log("---------------NARRATIVE---------------\n")
+    this.ghost().cmd("move over the teacup")
+    this.ghost().cmd("note it is raining in the cupboard.")
     this.ghost().cmd("transform into a cat")
     this.ghost().cmd("transmute into gold")
-    console.log("---------------NARRATIVE---------------\n")
-    this.ghost().cmd("note it is raining.")
-    this.ghost().cmd("inspect")
-    this.ghost().cmd("take the table")
-    this.ghost().cmd("drop the table")
     console.log("---------------PROGRAM---------------\n")
-    this.ghost().cmd("create a machine")
-    this.ghost().cmd("enter the machine")
+    this.ghost().cmd("enter the teacup")
     this.ghost().cmd("program create a coffee")
     this.ghost().cmd("leave")
-    this.ghost().cmd("use the machine")
-    this.ghost().cmd("call the machine")
-    this.ghost().cmd("cast the machine on the teapot")
+    this.ghost().cmd("inspect the teacup")
+    this.ghost().cmd("use the teacup")
+    this.ghost().cmd("cast the teacup")
   }
 }
 

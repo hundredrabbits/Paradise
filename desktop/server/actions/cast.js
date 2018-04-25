@@ -1,10 +1,10 @@
-function Use(host)
+function Cast(host)
 {
-  require(`../action`).call(this,host,"use");
+  require(`../action`).call(this,host,"cast");
 
   this.operate = function(params)
   {
-    var target = this.find_target(params,this.host.siblings());
+    var target = this.find_target(params,this.host.parade.world);
 
     if(target){
       this.host.cmd(target.data.program)
@@ -15,4 +15,4 @@ function Use(host)
   }
 }
 
-module.exports = Use
+module.exports = Cast

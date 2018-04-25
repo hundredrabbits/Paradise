@@ -1,6 +1,6 @@
-function Use(host)
+function Become(host)
 {
-  require(`../action`).call(this,host,"use");
+  require(`../action`).call(this,host,"become");
 
   this.operate = function(params)
   {
@@ -15,4 +15,4 @@ function Use(host)
   }
 }
 
-module.exports = Use
+module.exports = Become
