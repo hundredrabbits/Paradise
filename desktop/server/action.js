@@ -14,7 +14,7 @@ function Action(host,name)
         page:this.page(),
         note:`${this.host.parent().data.note}`,
         view:this.view(),
-        tips:`<ln>No tips..</ln>`,
+        tips:this.tips(),
         reaction: reaction
       },
       docs: this.documentation()
@@ -53,7 +53,7 @@ function Action(host,name)
     if(siblings.length > 0){
       return `You see ${siblings[0]}.`
     }
-    return "You see nothing."
+    return "There is nothing here, why don't you <action data='create'>create</action> something."
   }
 
   this.page = function()
@@ -65,7 +65,6 @@ function Action(host,name)
   this.documentation = function()
   {
     var actions = {}
-
     var _actions = {
       create:require('./actions/create'),
       become:require('./actions/become'),
@@ -87,12 +86,40 @@ function Action(host,name)
       use:require('./actions/use'),
       cast:require('./actions/cast'),
     }
-    
     for(id in _actions){
       var action = new _actions[id]
       actions[id] = action.docs
     }
     return actions
+  }
+
+  this.tips = function()
+  {
+    var a = []
+    // Paradox
+    if(this.host.is_paradox()){
+      a.push("This vessel is a paradox, you cannot leave.")
+    }
+    // Empty
+    if(this.host.siblings().length < 1){
+      a.push("This vessel is empty, you should <action data='create'>create</action> something.")
+    }
+
+    return a
+  }
+
+  function remove_articles(str)
+  {
+    var s = ` ${str} `;
+    s = s.replace(/ a /g,'')
+    s = s.replace(/ an /g,'')
+    s = s.replace(/ the /g,'')
+    s = s.replace(/ to /g,'')
+    s = s.replace(/ in /g,'')
+    s = s.replace(/ some /g,'')
+    s = s.replace(/ one /g,'')
+    s = s.replace(/ two /g,'')
+    return s
   }
 
   String.prototype.to_base = function()

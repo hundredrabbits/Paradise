@@ -85,6 +85,18 @@ function Vessel(data = basic)
     return a
   }
 
+  // Checks
+
+  this.is_paradox = function()
+  {
+    return this.parent().id == this.id ? true : false
+  }
+
+  this.is_program = function()
+  {
+    return this.data.program ? true : false
+  }
+
   // Formatters
 
   this.debug = function()

@@ -85,8 +85,15 @@ function Client()
     this.page.innerHTML = response.sight.page
     this.note.innerHTML = response.sight.note
     this.view.innerHTML = response.sight.view
-    this.tips.innerHTML = response.sight.tips
     this.reaction.innerHTML = response.sight.reaction
+
+    // Tips
+    var html = ""
+    for(id in response.sight.tips){
+      var tip = response.sight.tips[id];
+      html += `<ln>${tip}</ln>`;
+    }
+    this.tips.innerHTML = html
 
     this.docs = response.docs
 
