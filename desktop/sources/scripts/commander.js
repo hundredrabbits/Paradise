@@ -8,6 +8,7 @@ function Commander(el,hint_el)
     var q = this.el.value
     this.el.value = "";
     client.update(parade.query(q))
+    this.el.focus();
   }
 
   this.action = function()
@@ -31,6 +32,7 @@ function Commander(el,hint_el)
   this.complete = function()
   {
     this.el.value += this.autocomplete()
+    setTimeout(() => { this.el.focus(); },500)
   }
 
   this.autocomplete = function()

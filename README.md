@@ -3,6 +3,12 @@
 ## Tasks
 
 - `warp to any ghost`
+- tutorial
+- implement graphics
+- walkthrough
+- icon
+- documentation
+- import/export
 
 ## Actions
 

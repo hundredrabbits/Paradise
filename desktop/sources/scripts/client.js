@@ -1,6 +1,7 @@
 function Client()
 {
   this.controller = new Controller();
+  this.walkthrough = new Walkthrough();
 
   this.input = null;
   this.h1   = null;
@@ -43,14 +44,16 @@ function Client()
     this.reaction = document.getElementById("reaction");
 
     // Events
-    this.input.el.oninput = (key) => { this.input.update(key); };
-    this.input.el.onkeyup = (key) => { if(key.key == "Enter"){ this.input.validate(); } };
+    this.input.el.oninput   = (key) => { this.input.update(key); };
+    this.input.el.onkeydown = (key) => { if(key.key == "Tab"){ this.input.complete(); } }
+    this.input.el.onkeyup   = (key) => { if(key.key == "Enter"){ this.input.validate(); } };
 
     this.query();
   }
 
   this.query = function(id = 0,q = "")
   {
+    console.info(id,q)
     this.update(parade.query(q))
   }
 
