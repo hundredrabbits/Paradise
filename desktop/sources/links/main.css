@@ -1,7 +1,7 @@
 html { background: #efefef; padding: 30px; overflow: hidden; -webkit-app-region: drag;}
 body { background: #fff;padding: 30px; max-width: 420px; min-width: 420px; margin:0px auto; font-family: 'lora_regular'; overflow: hidden; -webkit-app-region: drag;}
 body wr { display: block;background: #fff;height: calc(100vh - 180px);margin: 0px auto;width: calc(100% - 60px);position: relative;min-height: 500px;-webkit-app-region: no-drag;transition: all 250ms;padding: 30px;border: 1px solid #efefef;}
-body wr page { display: block;overflow-y: scroll;height: calc(100vh - 220px); }
+body wr page { display: block;overflow-y: scroll;height: calc(100vh - 220px); transition:all 250ms;}
 body wr page h1 { font-family: 'frank_ruhl_light'; font-size: 40px;text-transform: uppercase;text-align: center;line-height: 50px;margin-bottom: 30px;margin-top: 30px; font-weight: normal; }
 body wr page h2 { text-align: center; margin-bottom: 30px; font-size:14px; line-height: 20px; text-transform: uppercase; font-family: 'frank_ruhl_regular';  }
 body wr page h2 action { border-bottom:0px; }
@@ -20,5 +20,10 @@ body wr action:hover { border-bottom:1px solid #ccc; cursor: pointer}
 #reaction { background: #efefef;font-size: 14px;line-height: 45px;padding: 0px 15px;border-radius: 2px; transition: all 500ms; display: block }
 #reaction action { border-bottom:0px; font-family: 'lora_bold_italic' }
 
+/* Animation */
+
 .hidden { opacity: 0; height:0px; }
 .visible { opacity: 1; height:auto; }
+
+body.loading page { opacity: 0; }
+body.ready page { opacity: 1 }

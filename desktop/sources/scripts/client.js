@@ -3,6 +3,7 @@ function Client()
   this.controller = new Controller();
   this.walkthrough = new Walkthrough();
 
+  this.el = null;
   this.input = null;
   this.h1   = null;
   this.page = null;
@@ -35,6 +36,7 @@ function Client()
 
     this.controller.commit();
 
+    this.el = document.body;
     this.h1 = document.getElementById("h1");
     this.page = document.getElementById("page");
     this.note = document.getElementById("note");
@@ -54,7 +56,11 @@ function Client()
   this.query = function(id = 0,q = "")
   {
     console.info(id,q)
-    this.update(parade.query(q))
+    this.el.className = "loading"
+    setTimeout(()=>{ 
+      this.update(parade.query(q))
+      this.el.className = "ready" 
+    },250)
   }
 
   this.update = function(response)

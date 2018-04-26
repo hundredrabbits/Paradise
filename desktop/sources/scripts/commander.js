@@ -7,7 +7,7 @@ function Commander(el,hint_el)
   {
     var q = this.el.value
     this.el.value = "";
-    client.update(parade.query(q))
+    client.query(0,q)
     this.el.focus();
   }
 
