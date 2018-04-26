@@ -10,6 +10,7 @@ function Drop(host)
 
     if(target){
       target.move(this.host.parent())
+      return `You dropped ${target.particle()} <action data='take the ${target.name()}'>${target.name()}</action>.`
     }
     else{
       console.log(`! missing ${target}`)

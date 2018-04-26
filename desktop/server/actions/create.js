@@ -18,7 +18,7 @@ function Create(host)
     });
     this.host.parade.add(vessel)
     
-    return `You created ${vessel}.`
+    return `You created <action>${vessel}</action>.`
   }
 
 }

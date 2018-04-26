@@ -6,7 +6,10 @@ function Program(host)
 
   this.operate = function(params)
   {
+    var is_update = !this.host.parent().data.program ? false : true;
+
     this.host.parent().set("program",params)
+    return `You ${is_update ? 'updated the' : 'added a'} program to <action>${this.host.parent()}</action>.`
   }
 }
 

@@ -18,6 +18,7 @@ body wr action:hover { border-bottom:1px solid #ccc; cursor: pointer}
 
 #note { display: block; transition: all 250ms }
 #reaction { background: #efefef;font-size: 14px;line-height: 45px;padding: 0px 15px;border-radius: 2px; transition: all 500ms; display: block }
+#reaction action { border-bottom:0px; font-family: 'lora_bold_italic' }
 
 .hidden { opacity: 0; height:0px; }
 .visible { opacity: 1; height:auto; }
