@@ -18,7 +18,7 @@ function Create(host)
     });
     this.host.parade.add(vessel)
     
-    return `You created <action>${vessel}</action>.`
+    return `<p>You created <action data='enter the ${vessel.name()}'>${vessel}</action> in the ${this.host.parent().name()}.</p>`
   }
 
 }

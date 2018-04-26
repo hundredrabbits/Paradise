@@ -9,7 +9,8 @@ function Help(host)
 
     try{
       var a = require(`./${action}`);
-      return new a().docs
+      var obj = new a()
+      return `<img src='media/graphics/inspect.png'/><h3>${obj.name}</h3><p>${obj.docs}</p>`
     }
     catch(err){
       if(action){

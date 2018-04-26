@@ -2,6 +2,8 @@ function Inspect(host)
 {
   require(`../action`).call(this,host,"inspect");
 
+  this.docs = `Inspect a vessel to see its program, precise location and various details. An excellent tool to find issues with vessels.`;
+
   this.operate = function(params)
   {
     var target = this.find_target(params,this.host.siblings());

@@ -10,7 +10,7 @@ function Enter(host)
 
     if(target){
       this.host.move(target)
-      return `You entered ${target.particle()} <action>${target.name()}</action>.`
+      return `<p>You entered the <action>${target.name()}</action>.</p>`
     }
     else{
       console.log(`! missing ${params}`)
