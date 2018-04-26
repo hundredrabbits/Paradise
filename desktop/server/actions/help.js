@@ -16,9 +16,21 @@ function Help(host)
         console.log(`Unknown action ${action}`)
       }
       else{
-        console.log("You are asking for help..")  
+        return this.general();
       }
     }
+  }
+
+  this.general = function()
+  {
+    var html = ""
+
+    var docs = this.documentation()
+
+    for(id in docs){
+      html += `- ${id}<br />`
+    }
+    return html
   }
 }
 

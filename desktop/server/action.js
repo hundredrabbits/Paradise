@@ -130,11 +130,11 @@ function Action(host,name)
     }
     // Empty
     if(this.host.siblings().length < 1){
-      a.push("This vessel is empty, why don't you <action data='create'>create</action> something.")
+      a.push("This vessel is empty, why don't you <action data='create '>create</action> something.")
     }
     // Note/Program
     if(!this.host.parent().data.note && !this.host.parent().is_program()){
-      a.push("This vessel has no description, you should <action data='note'>add one</action>.")
+      a.push("This vessel has no description, you should <action data='note '>add one</action>.")
     }
 
     return a
