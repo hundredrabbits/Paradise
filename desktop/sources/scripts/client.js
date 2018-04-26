@@ -10,6 +10,8 @@ function Client()
   this.tips = null;
   this.hint = null;
 
+  this.docs = {}
+
   this.start = function()
   {
     this.controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Left'); },"CmdOrCtrl+,");
@@ -19,6 +21,14 @@ function Client()
     this.controller.add("default","*","Documentation",() => { left.controller.docs(); },"CmdOrCtrl+Esc");
     this.controller.add("default","*","Reset",() => { left.theme.reset(); },"CmdOrCtrl+Backspace");
     this.controller.add("default","*","Quit",() => { left.project.quit(); },"CmdOrCtrl+Q");
+
+    this.controller.add_role("default","Edit","undo");
+    this.controller.add_role("default","Edit","redo");
+    this.controller.add_role("default","Edit","cut");
+    this.controller.add_role("default","Edit","copy");
+    this.controller.add_role("default","Edit","paste");
+    this.controller.add_role("default","Edit","delete");
+    this.controller.add_role("default","Edit","selectall");
 
     this.controller.commit();
 
@@ -39,7 +49,21 @@ function Client()
 
   this.update_hint = function()
   {
-    this.hint.innerHTML = this.input.value+" <"
+    if(!this.input.value || this.input.value.length < 2){ this.hint.innerHTML = ""; return; }
+
+    var query = this.input.value.split(" ")[0].toLowerCase();
+    for(name in this.docs){
+      var action = this.docs[name ]
+      if(name == query){
+        this.hint.innerHTML = `<t class='ghost'>${this.input.value}</t> ${action}`
+        break;
+      }
+      if(name.substr(0,query.length) == query){
+        this.hint.innerHTML = `<t class='ghost'>${query}</t>${name.substr(query.length)}`
+        break;
+      }      
+    }
+    
   }
 
   this.validate = function(value = this.input.value)
@@ -60,6 +84,8 @@ function Client()
     this.note.innerHTML = response.sight.note
     this.view.innerHTML = response.sight.view
     this.tips.innerHTML = response.sight.tips
+
+    this.docs = response.docs
 
     this.update_hint();
 

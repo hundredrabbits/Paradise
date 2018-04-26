@@ -17,9 +17,7 @@ function Action(host,name)
         tips:`<ln>No tips..</ln>`,
         reaction: this.reaction()
       },
-      docs : {
-        drop: "something"
-      }
+      docs: this.documentation()
     }
     return h
   }
@@ -31,6 +29,7 @@ function Action(host,name)
 
   this.operate = function()
   {
+    return ""
   }
 
   // Parsers
@@ -44,6 +43,39 @@ function Action(host,name)
       }
     }
     return null
+  }
+
+  this.documentation = function()
+  {
+    var actions = {}
+
+    var _actions = {
+      create:require('./actions/create'),
+      become:require('./actions/become'),
+      enter:require('./actions/enter'),
+      leave:require('./actions/leave'),
+
+      help:require('./actions/help'),
+      warp:require('./actions/warp'),
+      take:require('./actions/take'),
+      drop:require('./actions/drop'),
+
+      move:require('./actions/move'),
+      note:require('./actions/note'),
+      transform:require('./actions/transform'),
+      transmute:require('./actions/transmute'),
+
+      inspect:require('./actions/inspect'),
+      program:require('./actions/program'),
+      use:require('./actions/use'),
+      cast:require('./actions/cast'),
+    }
+    
+    for(id in _actions){
+      var action = new _actions[id]
+      actions[id] = action.docs
+    }
+    return actions
   }
 
   String.prototype.to_base = function()

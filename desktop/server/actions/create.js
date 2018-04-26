@@ -4,6 +4,8 @@ function Create(host)
 {
   require(`../action`).call(this,host,"create");
 
+  this.docs = "Hello there?"
+  
   this.operate = function(params)
   {
     var parts = params.split(" ")

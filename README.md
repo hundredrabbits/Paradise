@@ -7,10 +7,10 @@
 - Leave
 
 # Advanced
+- Help
 - Warp
-- Move
-- Transform
-- Transmute
+- Take
+- Drop
 
 # Narrative
 - Note
