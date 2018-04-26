@@ -8,12 +8,19 @@ function Action(host,name)
   {
     this.operate(params);
 
-    var h = {}
-    h.sight = {
-      h1:`You are ${this.host}.`
+    var h = {
+      sight: {
+        h1:`You are ${this.host} in ${this.host.parent()}.`,
+        page:`-${this.host.parent().id}-`,
+        note:`${this.host.parent().data.note}`,
+        view:`You see..`,
+        tips:`<ln>No tips..</ln>`,
+        reaction: this.reaction()
+      },
+      docs : {
+        drop: "something"
+      }
     }
-    h.host = this.host;
-    h.reaction = this.reaction();
     return h
   }
 
