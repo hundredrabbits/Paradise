@@ -10,6 +10,7 @@ function Become(host)
 
     if(target){
       this.host.cmd(target.data.program)
+      return `You became <action>${this.host}</action>.`
     }
     else{
       console.log(`! missing ${params}`)

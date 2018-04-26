@@ -10,7 +10,7 @@ function Transform(host)
     var name = parts[parts.length-1].toLowerCase()
 
     this.host.set("name",name)
-    return `You transformed into ${this.host}.`
+    return `You transformed into <action>${this.host}</action>.`
   }
 }
 

@@ -9,11 +9,11 @@ function Help(host)
 
     try{
       var a = require(`./${action}`);
-      console.log(new a().docs)
+      return new a().docs
     }
     catch(err){
       if(action){
-        console.log(`Unknown action ${action}`)
+        return `Unknown action ${action}`
       }
       else{
         return this.general();
