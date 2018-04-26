@@ -7,7 +7,7 @@ function Commander(el,hint_el)
   {
     var q = this.el.value
     this.el.value = "";
-    this.update(parade.query(q))
+    client.update(parade.query(q))
   }
 
   this.action = function()
@@ -25,7 +25,12 @@ function Commander(el,hint_el)
   {
     if(!this.el.value || this.el.value.length < 2){ this.hint_el.innerHTML = ""; return; }
 
-    this.hint_el.innerHTML = `<t class='ghost'>${target}</t>${name.substr(target.length)}`
+    this.hint_el.innerHTML = `<t class='ghost'>${this.el.value}</t>${this.autocomplete()}`
+  }
+
+  this.complete = function()
+  {
+    this.el.value += this.autocomplete()
   }
 
   this.autocomplete = function()
@@ -45,14 +50,25 @@ function Commander(el,hint_el)
     for(name in client.docs){
       var action = client.docs[name]
       if(name.substr(0,target.length) == target){
-        
-        break;
+        return name.substr(target.length)
       }      
     }
   }
 
   this.vessel_hint = function()
   {
+    var param = this.el.value.replace(this.action(),"").trim()
+    var article = param.split(" ")[0]
+    var target = param.split(" ")[1]
 
+    if(article == "the" && target && target != article){
+      for(id in client.visibles){
+        var name = client.visibles[id].data.name
+        if(name.substr(0,target.length) == target){
+          return name.substr(target.length)
+        }      
+      }
+    }
+    return ""
   }
 }

@@ -30,6 +30,7 @@ function Client()
     this.controller.add_role("default","Edit","paste");
     this.controller.add_role("default","Edit","delete");
     this.controller.add_role("default","Edit","selectall");
+    this.controller.add("default","Edit","Autocomplete",() => { this.input.complete(); },"Tab");
 
     this.controller.commit();
 
