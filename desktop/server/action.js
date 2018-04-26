@@ -46,9 +46,9 @@ function Action(host,name)
   this.header = function()
   {
     if(this.host.is_paradox()){
-      return `You are the paradox of <action>${this.host}</action>.`  
+      return `You are the paradox of ${this.host.particle()} ${this.host.name()}.`  
     }
-    return `You are <action data='warp to ${this.host.id}'>${this.host.name()}</action> in <action data='leave'>${this.host.parent().name()}</action>.`
+    return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} <action data='leave'>${this.host.parent().name()}</action>.`
   }
 
   this.view = function()

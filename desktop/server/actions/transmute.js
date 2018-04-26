@@ -10,6 +10,7 @@ function Transmute(host)
     var attr = parts[parts.length-1].toLowerCase()
 
     this.host.set("attr",attr)
+    return `You transmuted into ${this.host}.`
   }
 }
 

@@ -124,7 +124,7 @@ function Vessel(data = basic)
 
   this.name = function()
   {
-    return `${this.particle()} ${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}`
+    return `${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}`
   }
 
   this.type = function()
@@ -139,9 +139,7 @@ function Vessel(data = basic)
 
   this.toString = function()
   {
-    var article = this.data.attr ? "the" : "a"
-
-    return `${article ? article+' ' : ''}<action class='${this.type()}' data='${this.action()}'>${this.name()}</action>`;
+    return `${this.particle()} ${this.name()}`;
   }
 }
 

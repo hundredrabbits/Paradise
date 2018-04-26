@@ -10,6 +10,7 @@ function Take(host)
 
     if(target){
       target.move(this.host)
+      return `You took ${target.particle()} <action data='drop the ${target.name()}'>${target.name()}</action>.`
     }
     else{
       console.log(`! missing ${params}`)

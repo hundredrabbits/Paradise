@@ -6,8 +6,8 @@ function Walkthrough()
     "enter the teapot",
     "leave",
 
-    "take the teacup",
-    "drop the teacup",
+    "take the teapot",
+    "drop the teapot",
 
     "transform into a cat",
     "transmute into gold",

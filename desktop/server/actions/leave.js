@@ -17,7 +17,7 @@ function Leave(host)
 
     this.host.move(this.host.parent().parent())
 
-    return `You left the ${origin}.`
+    return `You left the <action data='enter the ${origin}'>${origin}</action>.`
   }
 }
 

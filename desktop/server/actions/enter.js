@@ -10,6 +10,7 @@ function Enter(host)
 
     if(target){
       this.host.move(target)
+      return `You entered ${target}.`
     }
     else{
       console.log(`! missing ${params}`)
