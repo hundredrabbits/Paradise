@@ -4,12 +4,12 @@ function Paradise()
 {
   this.world = [
     new Vessel({name:"ghost",parent:1,note:"Well, well, hello there."}),
-    new Vessel({name:"paradise",parent:1,note:"It's raining, still."})
+    new Vessel({name:"library",parent:1,note:"It's raining, still."})
   ]
 
   this.add = function(vessel)
   {
-    console.log(`+ add ${vessel.to_s()}`)
+    console.log(`+ add ${vessel.name()}`)
     this.world.push(vessel)
     this.update()
   }

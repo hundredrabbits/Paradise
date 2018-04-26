@@ -7,7 +7,7 @@ function Inspect(host)
     var target = this.find_target(params,this.host.siblings());
 
     if(target){
-      console.log(`? target ${target.to_s()}`)
+      console.log(`? target ${target.name()}`)
       // TODO
     }
     else{

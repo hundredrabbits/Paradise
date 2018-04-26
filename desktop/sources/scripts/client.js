@@ -8,10 +8,10 @@ function Client()
   this.note = null;
   this.view = null;
   this.tips = null;
-  this.hint = null;
   this.reaction = null;
 
   this.docs = {}
+  this.visibles = []
 
   this.start = function()
   {
@@ -38,51 +38,19 @@ function Client()
     this.note = document.getElementById("note");
     this.view = document.getElementById("view");
     this.tips = document.getElementById("tips");
-    this.hint = document.getElementById("hint");
-    this.input = document.getElementById("input");
+    this.input = new Commander(document.getElementById("input"),document.getElementById("hint"));
     this.reaction = document.getElementById("reaction");
 
     // Events
-    this.input.oninput = (key) => { this.update_hint(key); };
-    this.input.onkeyup = (key) => { if(key.key == "Enter"){ this.validate(); } };
+    this.input.el.oninput = (key) => { this.input.update(key); };
+    this.input.el.onkeyup = (key) => { if(key.key == "Enter"){ this.input.validate(); } };
 
     this.query();
-  }
-
-  this.update_hint = function()
-  {
-    if(!this.input.value || this.input.value.length < 2){ this.hint.innerHTML = ""; return; }
-
-    var query = this.input.value.split(" ")[0].toLowerCase();
-    for(name in this.docs){
-      var action = this.docs[name ]
-      if(name == query){
-        this.hint.innerHTML = `<t class='ghost'>${this.input.value}</t> ${action}`
-        break;
-      }
-      if(name.substr(0,query.length) == query){
-        this.hint.innerHTML = `<t class='ghost'>${query}</t>${name.substr(query.length)}`
-        break;
-      }      
-    }
-  }
-
-  this.validate = function(value = this.input.value)
-  {
-    var q = this.input.value
-    this.input.value = "";
-    this.update(parade.query(q))
   }
 
   this.query = function(id = 0,q = "")
   {
     this.update(parade.query(q))
-  }
-
-  this.inject = function(value)
-  {
-    this.input.value = value;
-    this.input.focus();
   }
 
   this.update = function(response)
@@ -109,11 +77,14 @@ function Client()
     this.tips.innerHTML = html
 
     this.docs = response.docs
+    this.visibles = response.visibles
 
-    this.update_hint();
+    this.input.update();
 
     console.log(response)
   }
+
+  // Misc
 
   this.reset = function()
   {
@@ -125,7 +96,7 @@ function Client()
     if(event===undefined){ event = window.event; }
     var target = 'target' in event? event.target : event.srcElement;
     if(target.tagName.toLowerCase() == "action"){
-      client.inject(target.getAttribute("data"))
+      client.input.inject(target.getAttribute("data"))
     }
   };
 }

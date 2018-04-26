@@ -1,25 +1,31 @@
 # Paradise
 
-# Basic
-- Create
-- Become
-- Enter
-- Leave
+## Tasks
 
-# Advanced
-- Help
-- Warp
-- Take
-- Drop
+- `warp to any ghost`
 
-# Narrative
-- Note
-- Inspect
-- Take
-- Drop
+## Actions
 
-# Programming
-- Program
-- Use
-- Call
-- Cast
+### Basic
+- `Create`
+- `Become`
+- `Enter`
+- `Leave`
+
+### Advanced
+- `Help`
+- `Warp`
+- `Take`
+- `Drop`
+
+### Narrative
+- `Note`
+- `Inspect`
+- `Take`
+- `Drop`
+
+### Programming
+- `Program`
+- `Use`
+- `Call`
+- `Cast`

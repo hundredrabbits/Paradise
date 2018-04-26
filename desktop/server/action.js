@@ -17,7 +17,8 @@ function Action(host,name)
         tips:this.tips(),
         reaction: reaction
       },
-      docs: this.documentation()
+      docs: this.documentation(),
+      visibles: this.visibles()
     }
     return h
   }
@@ -47,7 +48,7 @@ function Action(host,name)
     if(this.host.is_paradox()){
       return `You are the paradox of <action>${this.host}</action>.`  
     }
-    return `You are <action data='warp to ${this.host.id}'>${this.host}</action> in <action data='leave'>${this.host.parent()}</action>.`
+    return `You are <action data='warp to ${this.host.id}'>${this.host.name()}</action> in <action data='leave'>${this.host.parent().name()}</action>.`
   }
 
   this.view = function()
@@ -137,6 +138,14 @@ function Action(host,name)
       a.push("This vessel has no description, you should <action data='note '>add one</action>.")
     }
 
+    return a
+  }
+
+  this.visibles = function()
+  {
+    var a = []
+    a = a.concat(this.host.siblings())
+    a = a.concat(this.host.children())
     return a
   }
 

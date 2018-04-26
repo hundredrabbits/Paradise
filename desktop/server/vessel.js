@@ -24,7 +24,7 @@ function Vessel(data = basic)
 
   this.set = function(key,value)
   {
-    console.log(`- set ${this.to_s()} ${key}='${value}'`)
+    console.log(`- set ${this.name()} ${key}='${value}'`)
     this.data[key] = value;
   }
 
@@ -115,14 +115,16 @@ function Vessel(data = basic)
     }
   }
 
-  this.to_s = function()
+  this.particle = function()
   {
-    return `${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}#${this.id}`
+    if(this.data.attr){ return "the"; }
+    var letter = this.data.name.substr(0,1).toLowerCase();
+    return letter == "a" || letter == "e" || letter == "i" || letter == "o" || letter == "u" ? "an" : "a"
   }
 
   this.name = function()
   {
-    return `${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}`
+    return `${this.particle()} ${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}`
   }
 
   this.type = function()
