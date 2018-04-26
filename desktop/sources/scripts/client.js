@@ -9,6 +9,7 @@ function Client()
   this.view = null;
   this.tips = null;
   this.hint = null;
+  this.reaction = null;
 
   this.docs = {}
 
@@ -39,6 +40,7 @@ function Client()
     this.tips = document.getElementById("tips");
     this.hint = document.getElementById("hint");
     this.input = document.getElementById("input");
+    this.reaction = document.getElementById("reaction");
 
     // Events
     this.input.oninput = (key) => { this.update_hint(key); };
@@ -84,6 +86,7 @@ function Client()
     this.note.innerHTML = response.sight.note
     this.view.innerHTML = response.sight.view
     this.tips.innerHTML = response.sight.tips
+    this.reaction.innerHTML = response.sight.reaction
 
     this.docs = response.docs
 

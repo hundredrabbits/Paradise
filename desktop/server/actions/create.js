@@ -17,7 +17,10 @@ function Create(host)
       parent:this.host.data.parent
     });
     this.host.parade.add(vessel)
+    
+    return `You created ${vessel}.`
   }
+
 }
 
 module.exports = Create

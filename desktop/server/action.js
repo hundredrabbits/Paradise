@@ -6,7 +6,7 @@ function Action(host,name)
 
   this.run = function(params = "")
   {
-    this.operate(params);
+    var reaction = this.operate(params);
 
     var h = {
       sight: {
@@ -15,7 +15,7 @@ function Action(host,name)
         note:`${this.host.parent().data.note}`,
         view:this.view(),
         tips:`<ln>No tips..</ln>`,
-        reaction: this.reaction()
+        reaction: reaction
       },
       docs: this.documentation()
     }
@@ -49,6 +49,12 @@ function Action(host,name)
   {
     var siblings = this.host.siblings()
 
+    if(siblings.length > 2){
+      return `You see ${siblings[0]}, ${siblings[1]} and ${siblings[2]}.`
+    }
+    if(siblings.length > 1){
+      return `You see ${siblings[0]} and ${siblings[1]}.`
+    }
     if(siblings.length > 0){
       return `You see ${siblings[0]}.`
     }

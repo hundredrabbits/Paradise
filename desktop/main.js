@@ -29,7 +29,7 @@ app.win = null;
 
 app.on('ready', () => 
 {
-  app.win = new BrowserWindow({width: 560, height: 720, backgroundColor:"#fff", minWidth: 587, minHeight: 540, frame:false, autoHideMenuBar: true, icon: __dirname + '/icon.ico'})
+  app.win = new BrowserWindow({width: 550, height: 720, backgroundColor:"#efefef", minWidth: 540, minHeight: 540, frame:false, autoHideMenuBar: true, icon: __dirname + '/icon.ico'})
 
   app.win.toggleDevTools();
   

@@ -105,11 +105,26 @@ function Vessel(data = basic)
     return `${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}#${this.id}`
   }
 
+  this.name = function()
+  {
+    return `${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}`
+  }
+
+  this.type = function()
+  {
+    return this.data.program ? 'program' : 'location'
+  }
+
+  this.action = function()
+  {
+    return this.data.program ? `use ${this.name()}` : `enter ${this.name()}`
+  }
+
   this.toString = function()
   {
     var article = this.data.attr ? "the" : "a"
 
-    return `${article ? article+' ' : ''}${this.data.attr ? this.data.attr+' ' : ''}${this.data.name}`;
+    return `${article ? article+' ' : ''}<action class='${this.type()}' data='${this.action()}'>${this.name()}</action>`;
   }
 }
 

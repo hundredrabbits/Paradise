@@ -4,8 +4,12 @@ body wr { display: block; background: #fff; padding: 30px; height: calc(100vh - 
 body wr h1 { font-family: 'frank_ruhl_light';font-size: 40px;text-transform: uppercase;text-align: center;line-height: 50px;margin-bottom: 30px;margin-top: 30px; }
 body wr h2 { text-align: center; margin-bottom: 30px }
 body wr p { font-size: 16px;font-family: 'lora_italic';margin-bottom: 30px;line-height: 24px;}
+body wr p action { text-decoration: underline; }
+body wr p action:hover { cursor: pointer; text-decoration: none }
 body wr list { border-top:1px solid #efefef; display: block; padding-top:30px; }
 body wr list ln { font-size: 12px }
 body wr input { display: block;position: absolute;bottom: 0px;width: calc(100% - 60px);font-family: 'input_mono_regular';font-weight: normal;font-size: 12px;line-height: 30px;border-top: 1px solid #efefef;left: 0px;padding: 5px 30px; background: transparent;}
 body wr hint { display: block;position: absolute;bottom: 0px;width: calc(100% - 60px);font-family: 'input_mono_regular';font-weight: normal;font-size: 12px;line-height: 30px;left: 0px;padding: 5px 30px; color:#999;     height: 30px;overflow: hidden;}
 body wr hint t.ghost { display: inline-block; color:transparent; }
+
+#reaction { background: #efefef;font-size: 14px;line-height: 45px;padding: 0px 15px;border-radius: 2px; }
