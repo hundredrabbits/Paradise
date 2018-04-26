@@ -1,8 +1,8 @@
 html { background: #efefef; padding: 30px; overflow: hidden; -webkit-app-region: drag;}
 body { background: #fff;padding: 30px; max-width: 420px; min-width: 420px; margin:0px auto; font-family: 'lora_regular'; overflow: hidden; -webkit-app-region: drag;}
 body wr { display: block; background: #fff; padding: 30px; height: calc(100vh - 180px); margin: 0px auto; border: 1px solid #efefef; width: calc(100% - 60px); position: relative; min-height: 500px; -webkit-app-region: no-drag; transition:all 250ms;}
-body wr h1 { font-family: 'frank_ruhl_light';font-size: 40px;text-transform: uppercase;text-align: center;line-height: 50px;margin-bottom: 30px;margin-top: 30px; }
-body wr h2 { text-align: center; margin-bottom: 30px; font-size:12px; line-height: 30px }
+body wr h1 { font-family: 'frank_ruhl_light'; font-size: 40px;text-transform: uppercase;text-align: center;line-height: 50px;margin-bottom: 30px;margin-top: 30px; }
+body wr h2 { text-align: center; margin-bottom: 30px; font-size:14px; line-height: 30px; text-transform: uppercase; font-family: 'frank_ruhl_regular';  }
 body wr p { font-size: 18px;font-family: 'lora_italic';margin-bottom: 30px;line-height: 24px;}
 body wr p action { text-decoration: underline; }
 body wr p action:hover { cursor: pointer; text-decoration: none }

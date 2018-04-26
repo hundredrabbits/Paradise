@@ -7,8 +7,11 @@ function Leave(host)
   this.operate = function(params)
   {
     var origin = this.host.parent().name()
-    if(this.host.parent().id == this.host.id){
+    if(this.host.is_paradox()){
       return `You cannot leave the ${this.host.name()} paradox.`
+    }
+    if(this.host.parent().is_paradox()){
+      return `You cannot leave the ${this.host.parent().name()} paradox.`
     }
 
     this.host.move(this.host.parent().parent())

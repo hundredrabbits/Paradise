@@ -66,6 +66,9 @@ function Vessel(data = basic)
     var a = []
     for(id in this.parade.world){
       var vessel = this.parade.world[id];
+      if(vessel.is_paradox()){
+        continue;
+      }
       if(vessel.parent().id == this.parent().id && vessel.id != this.id){
         a.push(vessel)
       }

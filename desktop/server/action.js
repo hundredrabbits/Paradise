@@ -10,7 +10,7 @@ function Action(host,name)
 
     var h = {
       sight: {
-        h1:`You are ${this.host} in ${this.host.parent()}.`,
+        h1:this.header(),
         page:this.page(),
         note:`${this.host.parent().data.note}`,
         view:this.view(),
@@ -38,6 +38,16 @@ function Action(host,name)
       }
     }
     return null
+  } 
+
+  // Formatters
+
+  this.header = function()
+  {
+    if(this.host.is_paradox()){
+      return `You are the paradox of ${this.host}.`  
+    }
+    return `You are ${this.host} in ${this.host.parent()}.`
   }
 
   this.view = function()
@@ -59,7 +69,16 @@ function Action(host,name)
   this.page = function()
   {
     // find Root
-    return `— ${this.host.parent().id} —`
+    var v = this.host.parent()
+    var i = 0
+    while(i < 50){
+      if(v.parent().is_paradox()){
+        v = v.parent()
+        break;
+      }
+      i += 1
+    }
+    return `— <action data='warp to ${v.id}'>${v.name()}</action> —`
   }
 
   this.documentation = function()
@@ -98,7 +117,11 @@ function Action(host,name)
     var a = []
     // Paradox
     if(this.host.is_paradox()){
-      a.push("This vessel is a paradox, you cannot leave.")
+      a.push("Your vessel is a paradox, you cannot leave.")
+    }
+    // Paradox
+    if(this.host.parent().is_paradox()){
+      a.push(`The ${this.host.parent().name()} vessel is a paradox, you cannot leave.`)
     }
     // Empty
     if(this.host.siblings().length < 1){

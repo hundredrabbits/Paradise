@@ -2,7 +2,10 @@ const Vessel = require('./vessel')
 
 function Paradise()
 {
-  this.world = [new Vessel({name:"ghost",parent:0,note:"Well, well, hello there."})]
+  this.world = [
+    new Vessel({name:"ghost",parent:1,note:"Well, well, hello there."}),
+    new Vessel({name:"paradise",parent:1,note:"It's raining, still."})
+  ]
 
   this.add = function(vessel)
   {
