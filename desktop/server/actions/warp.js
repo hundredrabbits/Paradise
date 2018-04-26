@@ -14,11 +14,6 @@ function Warp(host)
       this.host.move(target)
     }
   }
-
-  this.reaction = function()
-  {
-    return "You are warping.."
-  }
 }
 
 module.exports = Warp

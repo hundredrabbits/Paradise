@@ -6,7 +6,11 @@ function Note(host)
 
   this.operate = function(params)
   {
+    var is_update = !this.host.parent().data.note ? false : true;
+
     this.host.parent().set("note",params)
+
+    return `You ${is_update ? 'updated the' : 'added a'} description to ${this.host.parent()}.`
   }
 }
 

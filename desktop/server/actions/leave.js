@@ -3,15 +3,17 @@ function Leave(host)
   require(`../action`).call(this,host,"leave");
 
   this.docs = "Exit the parent vessel."
-  
+
   this.operate = function(params)
   {
-    this.host.move(this.host.parent().parent())
-  }
+    var origin = this.host.parent().name()
+    if(this.host.parent().id == this.host.id){
+      return `You cannot leave the ${this.host.name()} paradox.`
+    }
 
-  this.reaction = function()
-  {
-    return "You are leaving.."
+    this.host.move(this.host.parent().parent())
+
+    return `You left the ${origin}.`
   }
 }
 

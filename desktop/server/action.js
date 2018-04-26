@@ -21,12 +21,7 @@ function Action(host,name)
     }
     return h
   }
-
-  this.reaction = function()
-  {
-    return ""
-  }
-
+  
   this.operate = function()
   {
     return ""
