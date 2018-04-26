@@ -10,7 +10,7 @@ function Inspect(host)
 
     if(target){
       console.log(`? target ${target.name()}`)
-      return `You are inspecting <action>${target}</action>.`
+      return `<p>You are inspecting <action>${target}</action>.</p>`
     }
     else{
       console.log(`! missing ${target}`)

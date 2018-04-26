@@ -9,7 +9,7 @@ function Program(host)
     var is_update = !this.host.parent().data.program ? false : true;
 
     this.host.parent().set("program",params)
-    return `You ${is_update ? 'updated the' : 'added a'} program to <action>${this.host.parent()}</action>.`
+    return `<p>You ${is_update ? 'updated the' : 'added a'} program to <action>${this.host.parent()}</action>.</p>`
   }
 }
 

@@ -12,7 +12,7 @@ function Warp(host)
 
     if(target){
       this.host.move(target)
-      return `You warped to <action>${target}</action>.`
+      return `<p>You warped to <action>${target}</action>.</p>`
     }
   }
 }

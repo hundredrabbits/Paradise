@@ -10,7 +10,7 @@ function Use(host)
 
     if(target){
       this.host.cmd(target.data.program)
-      return `You used <action>${target}</action>.`
+      return `<p>You used <action>${target}</action>.</p>`
     }
     else{
       console.log(`! missing ${params}`)
