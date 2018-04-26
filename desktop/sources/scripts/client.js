@@ -21,7 +21,7 @@ function Client()
     this.controller.add("default","*","Inspect",() => { app.inspect(); },"CmdOrCtrl+.");
     this.controller.add("default","*","Documentation",() => { client.controller.docs(); },"CmdOrCtrl+Esc");
     this.controller.add("default","*","Reset",() => {  },"CmdOrCtrl+Backspace");
-    this.controller.add("default","*","Quit",() => {  },"CmdOrCtrl+Q");
+    this.controller.add("default","*","Quit",() => { app.exit(); },"CmdOrCtrl+Q");
 
     this.controller.add_role("default","Edit","undo");
     this.controller.add_role("default","Edit","redo");
@@ -79,6 +79,12 @@ function Client()
     this.update(parade.query(q))
   }
 
+  this.inject = function(value)
+  {
+    this.input.value = value;
+    this.input.focus();
+  }
+
   this.update = function(response)
   {
     this.h1.innerHTML = response.sight.h1
@@ -108,4 +114,14 @@ function Client()
 
     console.log(response)
   }
+
+  document.onclick= function(event)
+  {
+    if(event===undefined){ event = window.event; }
+    var target = 'target' in event? event.target : event.srcElement;
+    if(target.tagName.toLowerCase() == "action"){
+      client.inject(target.getAttribute("data"))
+    }
+  };
+
 }
