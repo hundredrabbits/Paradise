@@ -12,7 +12,7 @@ function Action(host,name)
       sight: {
         h1:this.header(),
         page:this.page(),
-        note:`${this.host.parent().data.note}`,
+        note:this.note(),
         view:this.view(),
         tips:this.tips(),
         reaction: reaction
@@ -45,9 +45,9 @@ function Action(host,name)
   this.header = function()
   {
     if(this.host.is_paradox()){
-      return `You are the paradox of ${this.host}.`  
+      return `You are the paradox of <action>${this.host}</action>.`  
     }
-    return `You are ${this.host} in ${this.host.parent()}.`
+    return `You are <action data='warp to ${this.host.id}'>${this.host}</action> in <action data='leave'>${this.host.parent()}</action>.`
   }
 
   this.view = function()
@@ -63,7 +63,7 @@ function Action(host,name)
     if(siblings.length > 0){
       return `You see ${siblings[0]}.`
     }
-    return "There is nothing here, why don't you <action data='create'>create</action> something."
+    return "You see nothing."
   }
 
   this.page = function()
@@ -79,6 +79,11 @@ function Action(host,name)
       i += 1
     }
     return `— <action data='warp to ${v.id}'>${v.name()}</action> —`
+  }
+
+  this.note = function()
+  {
+    return this.host.parent().data.note ? this.host.parent().data.note : ''
   }
 
   this.documentation = function()
@@ -125,7 +130,11 @@ function Action(host,name)
     }
     // Empty
     if(this.host.siblings().length < 1){
-      a.push("This vessel is empty, you should <action data='create'>create</action> something.")
+      a.push("This vessel is empty, why don't you <action data='create'>create</action> something.")
+    }
+    // Note/Program
+    if(!this.host.parent().data.note && !this.host.parent().is_program()){
+      a.push("This vessel has no description, you should <action data='note'>add one</action>.")
     }
 
     return a

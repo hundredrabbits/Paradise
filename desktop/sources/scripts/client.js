@@ -83,9 +83,16 @@ function Client()
   {
     this.h1.innerHTML = response.sight.h1
     this.page.innerHTML = response.sight.page
-    this.note.innerHTML = response.sight.note
     this.view.innerHTML = response.sight.view
-    this.reaction.innerHTML = response.sight.reaction
+
+    // Note
+
+    this.note.className = response.sight.note ? 'visible' : 'hidden'
+    this.note.innerHTML = response.sight.note ? response.sight.note : ''
+
+    // Reaction
+    this.reaction.className = response.sight.reaction ? 'visible' : 'hidden'
+    this.reaction.innerHTML = response.sight.reaction ? response.sight.reaction : ''
 
     // Tips
     var html = ""
