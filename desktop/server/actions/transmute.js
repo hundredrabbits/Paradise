@@ -2,6 +2,8 @@ function Transmute(host)
 {
   require(`../action`).call(this,host,"transmute");
 
+  this.docs = "Change your current vessel attribute."
+
   this.operate = function(params)
   {
     var parts = params.split(" ")

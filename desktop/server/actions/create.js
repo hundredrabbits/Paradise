@@ -4,7 +4,7 @@ function Create(host)
 {
   require(`../action`).call(this,host,"create");
 
-  this.docs = "Hello there?"
+  this.docs = "Create a new vessel at your current location. Vessel names and attributes must include less than 14 characters and be unique. "
   
   this.operate = function(params)
   {

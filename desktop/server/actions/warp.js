@@ -2,6 +2,8 @@ function Warp(host)
 {
   require(`../action`).call(this,host,"warp");
 
+  this.docs = "Enter a distant vessel by either its name, or its warp id. The vessel must be visible."
+
   this.operate = function(params)
   {
     var parts = params.split(" ")

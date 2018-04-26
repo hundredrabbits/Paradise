@@ -11,7 +11,7 @@ function Action(host,name)
     var h = {
       sight: {
         h1:`You are ${this.host} in ${this.host.parent()}.`,
-        page:`-${this.host.parent().id}-`,
+        page:this.page(),
         note:`${this.host.parent().data.note}`,
         view:this.view(),
         tips:`<ln>No tips..</ln>`,
@@ -59,6 +59,12 @@ function Action(host,name)
       return `You see ${siblings[0]}.`
     }
     return "You see nothing."
+  }
+
+  this.page = function()
+  {
+    // find Root
+    return `— ${this.host.parent().id} —`
   }
 
   this.documentation = function()
