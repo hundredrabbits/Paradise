@@ -2,6 +2,10 @@ function Help(host)
 {
   require(`../action`).call(this,host,"help");
 
+  this.knowledge = {
+    paradoxes: "Paradoxes are vessels folded onto themselves, existing within their own space. One could argue that Paradise itself is a paradox."
+  }
+
   this.operate = function(params)
   {
     var parts = params.split(" ")
@@ -13,25 +17,36 @@ function Help(host)
       return `<img src='media/graphics/inspect.png'/><h3>${obj.name}</h3><p>${obj.docs}</p>`
     }
     catch(err){
-      if(action){
-        return `Unknown action ${action}`
+      return this.default(action)
+    }
+  }
+
+  this.default = function(key)
+  {
+    if(key){
+      if(this.knowledge[key]){
+        return `<p>${this.knowledge[key]}</p>`;
       }
       else{
-        return this.general();
+        return `Unknown term '${key}'.`  
       }
+    }
+    else{
+      return this.general();
     }
   }
 
   this.general = function()
   {
-    var html = ""
-
     var docs = this.documentation()
-
+    var count = Object.keys(docs).length
+    var list = ""
+    var index = 0
     for(id in docs){
-      html += `- ${id}<br />`
+      list += `<action data='help with ${id}'>${id.capitalize()}</action>${index == count-2 ? ' or ' : (index == count-1 ? '. ' : ', ')} `
+      index += 1
     }
-    return html
+    return `<p>Which action would you like help with? ${list}</p>`
   }
 }
 

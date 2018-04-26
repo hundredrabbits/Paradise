@@ -115,6 +115,12 @@ function Vessel(data = basic)
     }
   }
 
+  this.to_a = function(action = "enter")
+  {
+    action = this.is_program() ? "use" : "enter"
+    return `${this.particle()} <action data='${action} the ${this.name()}'>${this.name()}</action>`
+  }
+
   this.particle = function()
   {
     if(this.data.attr){ return "the"; }

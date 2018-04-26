@@ -46,7 +46,7 @@ function Action(host,name)
   this.header = function()
   {
     if(this.host.is_paradox()){
-      return `You are the paradox of ${this.host.particle()} ${this.host.name()}.`  
+      return `You are the <action data='help with paradoxes'>paradox</action> of ${this.host.particle()} ${this.host.name()}.`  
     }
     return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} <action data='leave'>${this.host.parent().name()}</action>.`
   }
@@ -56,13 +56,13 @@ function Action(host,name)
     var siblings = this.host.siblings()
 
     if(siblings.length > 2){
-      return `You see ${siblings[0]}, ${siblings[1]} and ${siblings[2]}.`
+      return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()} and ${siblings[2].to_a()}.`
     }
     if(siblings.length > 1){
-      return `You see ${siblings[0]} and ${siblings[1]}.`
+      return `You see ${siblings[0].to_a()} and ${siblings[1].to_a()}.`
     }
     if(siblings.length > 0){
-      return `You see ${siblings[0]}.`
+      return `You see ${siblings[0].to_a()}.`
     }
     return "You see nothing."
   }
@@ -123,11 +123,11 @@ function Action(host,name)
     var a = []
     // Paradox
     if(this.host.is_paradox()){
-      a.push("Your vessel is a paradox, you cannot leave.")
+      a.push("Your vessel is a <action data='help with paradoxes'>paradox</action>, you cannot leave.")
     }
     // Paradox
     if(this.host.parent().is_paradox()){
-      a.push(`The ${this.host.parent().name()} vessel is a paradox, you cannot leave.`)
+      a.push(`The ${this.host.parent().name()} vessel is a <action data='help with paradoxes'>paradox</action>, you cannot leave.`)
     }
     // Empty
     if(this.host.siblings().length < 1){
@@ -166,6 +166,11 @@ function Action(host,name)
   String.prototype.to_base = function()
   {
     return this.toLowerCase().replace(/ /g,"_").replace(/[^0-9a-z\+]/gi,"").trim();
+  }
+
+  String.prototype.capitalize = function()
+  {
+    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
   }
 }
 
