@@ -11,9 +11,9 @@ function Paradise()
     this.update()
   }
 
-  this.query = function()
+  this.query = function(q = "look")
   {
-    return this.ghost().cmd("look")
+    return this.ghost().cmd(q)
   }
 
   this.update = function()

@@ -13,7 +13,7 @@ function Action(host,name)
         h1:`You are ${this.host} in ${this.host.parent()}.`,
         page:`-${this.host.parent().id}-`,
         note:`${this.host.parent().data.note}`,
-        view:`You see..`,
+        view:this.view(),
         tips:`<ln>No tips..</ln>`,
         reaction: this.reaction()
       },
@@ -43,6 +43,16 @@ function Action(host,name)
       }
     }
     return null
+  }
+
+  this.view = function()
+  {
+    var siblings = this.host.siblings()
+
+    if(siblings.length > 0){
+      return `You see ${siblings[0]}.`
+    }
+    return "You see nothing."
   }
 
   this.documentation = function()

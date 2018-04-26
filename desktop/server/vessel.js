@@ -39,7 +39,6 @@ function Vessel(data = basic)
       return require(`./actions/${action}`);
     }
     catch(err){
-      console.log(err)
       return require(`./action`);
     } 
   }

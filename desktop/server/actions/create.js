@@ -16,7 +16,6 @@ function Create(host)
       owner:this.host.id,
       parent:this.host.data.parent
     });
-
     this.host.parade.add(vessel)
   }
 }

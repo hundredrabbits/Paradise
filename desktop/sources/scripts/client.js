@@ -18,9 +18,9 @@ function Client()
     this.controller.add("default","*","Fullscreen",() => { app.toggle_fullscreen(); },"CmdOrCtrl+Enter");
     this.controller.add("default","*","Hide",() => { app.toggle_visible(); },"CmdOrCtrl+H");
     this.controller.add("default","*","Inspect",() => { app.inspect(); },"CmdOrCtrl+.");
-    this.controller.add("default","*","Documentation",() => { left.controller.docs(); },"CmdOrCtrl+Esc");
-    this.controller.add("default","*","Reset",() => { left.theme.reset(); },"CmdOrCtrl+Backspace");
-    this.controller.add("default","*","Quit",() => { left.project.quit(); },"CmdOrCtrl+Q");
+    this.controller.add("default","*","Documentation",() => { client.controller.docs(); },"CmdOrCtrl+Esc");
+    this.controller.add("default","*","Reset",() => {  },"CmdOrCtrl+Backspace");
+    this.controller.add("default","*","Quit",() => {  },"CmdOrCtrl+Q");
 
     this.controller.add_role("default","Edit","undo");
     this.controller.add_role("default","Edit","redo");
@@ -63,13 +63,13 @@ function Client()
         break;
       }      
     }
-    
   }
 
   this.validate = function(value = this.input.value)
   {
+    var q = this.input.value
     this.input.value = "";
-    console.log("VALIDATE",value); 
+    this.update(parade.query(q))
   }
 
   this.query = function(id = 0,q = "")
