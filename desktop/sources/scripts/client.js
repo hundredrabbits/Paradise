@@ -27,6 +27,10 @@ function Client()
     this.controller.add("default","*","Reset",() => { client.reset(); },"CmdOrCtrl+Backspace");
     this.controller.add("default","*","Quit",() => { app.exit(); },"CmdOrCtrl+Q");
 
+    this.controller.add("default","File","New World",() => { client.reset(); },"CmdOrCtrl+Shift+N");
+    this.controller.add("default","File","Export World",() => { client.export(); },"CmdOrCtrl+Shift+S");
+    this.controller.add("default","File","Import World",() => { client.import(); },"CmdOrCtrl+Shift+O");
+
     this.controller.add_role("default","Edit","undo");
     this.controller.add_role("default","Edit","redo");
     this.controller.add_role("default","Edit","cut");
@@ -105,6 +109,26 @@ function Client()
 
     this.id = id;
     setTimeout(()=>{ this.query(); }, 500)
+  }
+
+  // 
+
+  this.reset = function()
+  {
+
+  }
+
+  this.import = function()
+  {
+
+  }
+
+  this.export = function()
+  {
+    dialog.showSaveDialog((fileName) => {
+      if (fileName === undefined){ return; }
+      fs.writeFile(fileName+".teapot", parade.export());
+    });
   }
 
   // Misc

@@ -8,7 +8,6 @@
 - import/export
 - Error for not_found vessels
 - Improve `use` feedback
-- Become
 - Save active vessel in client
 
 ## Patch

@@ -102,17 +102,9 @@ function Vessel(data = basic)
 
   // Formatters
 
-  this.debug = function()
+  this.to_json = function()
   {
     return this.data
-  }
-
-  this.to_h = function()
-  {
-    return {
-      name: this.name,
-      attr: this.attr
-    }
   }
 
   this.to_a = function(action = "enter")

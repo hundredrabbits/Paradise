@@ -2,10 +2,36 @@ const Vessel = require('./vessel')
 
 function Paradise()
 {
-  this.world = [
-    new Vessel({name:"ghost",parent:1,note:"Well, well, hello there."}),
-    new Vessel({name:"library",parent:1,note:"It's raining in the library, as it always did and ever will. "})
-  ]
+  this.reset = function()
+  {
+    this.world = [
+      new Vessel({name:"ghost",parent:1,note:"Well, well, hello there."}),
+      new Vessel({name:"library",parent:1,note:"It's raining in the library, as it always did and ever will. "})
+    ]
+  }
+
+  this.reset();
+
+  this.import = function(json)
+  {
+    var a = []
+    for(id in json){
+      var vessel = new Vessel(json[id])
+      a.push(vessel)
+    }
+    this.world = a;
+  }
+
+  this.export = function()
+  {
+    var a = []
+
+    for(id in this.world){
+      var json = this.world[id].to_json()
+      a.push(json)
+    }
+    return JSON.stringify(a)
+  }
 
   this.add = function(vessel)
   {
