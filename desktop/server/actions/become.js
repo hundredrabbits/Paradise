@@ -9,7 +9,6 @@ function Become(host)
     var target = this.find_target(params,this.host.siblings());
 
     if(target){
-      this.host.cmd(target.data.program)
       return `<p>You became <action>${target}</action>.</p>`
     }
     else{

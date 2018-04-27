@@ -57,10 +57,10 @@ function Client()
 
   this.query = function(id = this.id,q = "")
   {
-    console.info(id,q)
+    console.info(this.id,q)
     this.el.className = "loading"
     setTimeout(()=>{ 
-      this.update(parade.query(id,q))
+      this.update(parade.query(this.id,q))
       this.el.className = "ready" 
     },250)
   }
@@ -97,8 +97,6 @@ function Client()
     this.visibles = response.visibles
 
     this.input.update();
-
-    console.log(response)
   }
 
   this.change_vessel = function(id)

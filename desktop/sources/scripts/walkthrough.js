@@ -2,6 +2,8 @@ function Walkthrough()
 {
   this.benchmark = [
     "warp to 1",
+    "create a red vessel",
+    "become the red vessel",
     "create a teapot",
     "enter the teapot",
     "leave",
