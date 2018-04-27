@@ -149,6 +149,12 @@ function Action(host,name)
     return a
   }
 
+  this.err_NOTARGET = function(params,type = "visible")
+  {
+    var target = remove_articles(params);
+    return `<p>There is no ${type} <action>${target}</action>. Do you need <action data='help with ${this.name}'>help</action>?</p>`
+  }
+
   function remove_articles(str)
   {
     var s = ` ${str} `;

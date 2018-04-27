@@ -13,7 +13,7 @@ function Use(host)
       return `<p>You used <action>${target}</action>.</p>`
     }
     else{
-      console.log(`! missing ${params}`)
+      return this.err_NOTARGET(params,"available")
     }
   }
 }

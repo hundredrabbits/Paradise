@@ -13,7 +13,7 @@ function Enter(host)
       return `<p>You entered the <action>${target.name()}</action>.</p>`
     }
     else{
-      console.log(`! missing ${params}`)
+      return this.err_NOTARGET(params)
     }
   }
 }

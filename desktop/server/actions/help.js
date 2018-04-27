@@ -14,7 +14,7 @@ function Help(host)
     try{
       var a = require(`./${action}`);
       var obj = new a()
-      return `<img src='media/graphics/inspect.png'/><h3>${obj.name}</h3><p>${obj.docs}</p>`
+      return `<img src='media/graphics/${obj.name}.png'/><h3>${obj.name}</h3><p>${obj.docs}</p>`
     }
     catch(err){
       return this.default(action)

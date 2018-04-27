@@ -2,15 +2,18 @@
 
 ## Tasks
 
-- `warp to any ghost`
 - tutorial
-- implement graphics
-- walkthrough
 - icon
 - documentation
 - import/export
 - Error for not_found vessels
 - Improve `use` feedback
+- Become
+- Save active vessel in client
+
+## Patch
+
+- `warp to any ghost`
 
 ## Actions
 

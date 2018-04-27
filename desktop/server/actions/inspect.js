@@ -13,7 +13,7 @@ function Inspect(host)
       return `<p>You are inspecting <action>${target}</action>.</p>`
     }
     else{
-      console.log(`! missing ${target}`)
+      return this.err_NOTARGET(params)
     }
   }
 }

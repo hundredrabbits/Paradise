@@ -2,7 +2,7 @@ function Become(host)
 {
   require(`../action`).call(this,host,"become");
 
-  this.docs = "Become a visible vessel, the target vessel must be present and visible in the current parent vessel. Adding a bookmark with your browser will preserve your vessel id for your return."
+  this.docs = "Become a visible vessel."
   
   this.operate = function(params)
   {
@@ -13,7 +13,7 @@ function Become(host)
       return `<p>You became <action>${this.host}</action>.</p>`
     }
     else{
-      console.log(`! missing ${params}`)
+      return this.err_NOTARGET(params)
     }
   }
 }

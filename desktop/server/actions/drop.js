@@ -13,7 +13,7 @@ function Drop(host)
       return `<p>You dropped ${target.particle()} <action data='take the ${target.name()}'>${target.name()}</action>.</p>`
     }
     else{
-      console.log(`! missing ${target}`)
+      return this.err_NOTARGET(params,"inventory")
     }
   }
 }

@@ -13,7 +13,7 @@ function Take(host)
       return `<p>You took ${target.particle()} <action data='drop the ${target.name()}'>${target.name()}</action>.</p>`
     }
     else{
-      console.log(`! missing ${params}`)
+      return this.err_NOTARGET(params)
     }
   }
 }
