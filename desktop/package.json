@@ -5,19 +5,19 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "clean"        : "rm -r ~/Desktop/Paradise-darwin-x64/ ; rm -r ~/Desktop/Paradise-linux-x64/ ; rm -r ~/Desktop/Paradise-win32-x64/ ; echo 'cleaned build location'",
-    "build_osx"    : "electron-packager . Paradise --platform=darwin --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.icns && echo 'Built for OSX'",
-    "build_linux"  : "electron-packager . Paradise --platform=linux  --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.ico && echo 'Built for LINUX'",
-    "build_win"    : "electron-packager . Paradise --platform=win32  --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.ico && echo 'Built for WIN'",
-    "build_pi"     : "electron-packager . Paradise --platform=linux  --arch=armv7l --out ~/Desktop/ --overwrite --icon=icon.ico ; echo 'Built for PI'",
-    "build"        : "npm run clean ; npm run build_osx ; npm run build_linux ; npm run build_win ; npm run build_pi",
-    "push_osx"     : "~/butler push ~/Desktop/Paradise-darwin-x64/ hundredrabbits/paradise:osx-64",
-    "push_linux"   : "~/butler push ~/Desktop/Paradise-linux-x64/ hundredrabbits/paradise:linux-64",
-    "push_win"     : "~/butler push ~/Desktop/Paradise-win32-x64/ hundredrabbits/paradise:windows-64",
-    "push_pi"      : "~/butler push ~/Desktop/Paradise-linux-armv7l/ hundredrabbits/paradise:linux-pi",
-    "push_theme"   : "~/butler push ~/Github/HundredRabbits/Themes/themes/ hundredrabbits/paradise:themes",
-    "push_status"  : "~/butler status hundredrabbits/paradise",
-    "push"         : "npm run build ; npm run push_theme ; npm run push_osx ; npm run push_pi ; npm run push_linux ; npm run push_win ; npm run clean ; npm run push_status"
+    "clean": "rm -r ~/Desktop/Paradise-darwin-x64/ ; rm -r ~/Desktop/Paradise-linux-x64/ ; rm -r ~/Desktop/Paradise-win32-x64/ ; echo 'cleaned build location'",
+    "build_osx": "electron-packager . Paradise --platform=darwin --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.icns && echo 'Built for OSX'",
+    "build_linux": "electron-packager . Paradise --platform=linux  --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.ico && echo 'Built for LINUX'",
+    "build_win": "electron-packager . Paradise --platform=win32  --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.ico && echo 'Built for WIN'",
+    "build_pi": "electron-packager . Paradise --platform=linux  --arch=armv7l --out ~/Desktop/ --overwrite --icon=icon.ico ; echo 'Built for PI'",
+    "build": "npm run clean ; npm run build_osx ; npm run build_linux ; npm run build_win ; npm run build_pi",
+    "push_osx": "~/butler push ~/Desktop/Paradise-darwin-x64/ hundredrabbits/paradise:osx-64",
+    "push_linux": "~/butler push ~/Desktop/Paradise-linux-x64/ hundredrabbits/paradise:linux-64",
+    "push_win": "~/butler push ~/Desktop/Paradise-win32-x64/ hundredrabbits/paradise:windows-64",
+    "push_pi": "~/butler push ~/Desktop/Paradise-linux-armv7l/ hundredrabbits/paradise:linux-pi",
+    "push_theme": "~/butler push ~/Github/HundredRabbits/Themes/themes/ hundredrabbits/paradise:themes",
+    "push_status": "~/butler status hundredrabbits/paradise",
+    "push": "npm run build ; npm run push_theme ; npm run push_osx ; npm run push_pi ; npm run push_linux ; npm run push_win ; npm run clean ; npm run push_status"
   },
   "devDependencies": {
     "electron": "^1.8.1"
