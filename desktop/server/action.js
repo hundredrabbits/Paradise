@@ -24,9 +24,11 @@ function Action(host,name)
     return h
   }
   
-  this.operate = function()
+  this.operate = function(params)
   {
-    return ""
+    var action = params.split(" ")[0].toLowerCase().trim()
+
+    return `<p>Unknown action, to see a list of available actions, type <action data='help'>help</action>.</p>`
   }
 
   this.change_vessel = function(params)

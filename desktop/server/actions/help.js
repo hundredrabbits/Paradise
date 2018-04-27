@@ -46,7 +46,7 @@ function Help(host)
       list += `<action data='help with ${id}'>${id.capitalize()}</action>${index == count-2 ? ' or ' : (index == count-1 ? '. ' : ', ')} `
       index += 1
     }
-    return `<p>Which action would you like help with? ${list}</p>`
+    return `<img src='media/graphics/default.png'/><p>Which action would you like help with? ${list}</p>`
   }
 }
 

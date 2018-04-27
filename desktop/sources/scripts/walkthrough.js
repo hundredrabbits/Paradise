@@ -23,7 +23,8 @@ function Walkthrough()
     "use the teacup",
 
     "help",
-    "help with drop"
+    "help with drop",
+    ""
   ]
 
   this.index = 0;

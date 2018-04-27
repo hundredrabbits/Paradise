@@ -22,6 +22,16 @@ function Vessel(data = basic)
     return new responder(this).run(params)
   }
 
+  this.response = function(action)
+  {
+    try{
+      return require(`./actions/${action}`);
+    }
+    catch(err){
+      return require(`./action`);
+    } 
+  }
+  
   this.set = function(key,value)
   {
     console.log(`- set ${this.name()} ${key}='${value}'`)
@@ -33,15 +43,6 @@ function Vessel(data = basic)
     this.set("parent",target.id)
   }
 
-  this.response = function(action)
-  {
-    try{
-      return require(`./actions/${action}`);
-    }
-    catch(err){
-      return require(`./action`);
-    } 
-  }
 
   this.parent = function()
   {

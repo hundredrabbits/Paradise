@@ -31,6 +31,8 @@ function Commander(el,hint_el)
 
   this.complete = function()
   {
+    if(this.el.value.length < 2){ return; }
+
     this.el.value += this.autocomplete()
     setTimeout(() => { this.el.focus(); },500)
   }
@@ -55,6 +57,7 @@ function Commander(el,hint_el)
         return name.substr(target.length)
       }      
     }
+    return ""
   }
 
   this.vessel_hint = function()
