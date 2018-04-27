@@ -14,9 +14,9 @@ function Paradise()
     this.update()
   }
 
-  this.query = function(q = "look")
+  this.query = function(id = 0,q = "look")
   {
-    return this.ghost().cmd(q)
+    return this.ghost(id).cmd(q)
   }
 
   this.update = function()
@@ -28,10 +28,10 @@ function Paradise()
     }
   }
 
-  this.ghost = function()
+  this.ghost = function(id)
   {
     this.update()
-    return this.world[0];
+    return this.world[id];
   }
 }
 

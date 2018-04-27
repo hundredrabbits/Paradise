@@ -7,7 +7,7 @@ function Commander(el,hint_el)
   {
     var q = this.el.value
     this.el.value = "";
-    client.query(0,q)
+    client.query(client.id,q)
     this.el.focus();
   }
 

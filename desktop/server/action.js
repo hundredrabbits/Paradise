@@ -15,10 +15,11 @@ function Action(host,name)
         note:this.note(),
         view:this.view(),
         tips:this.tips(),
-        reaction: reaction
+        reaction: reaction,
       },
       docs: this.documentation(),
-      visibles: this.visibles()
+      visibles: this.visibles(),
+      become:this.change_vessel(params)
     }
     return h
   }
@@ -26,6 +27,11 @@ function Action(host,name)
   this.operate = function()
   {
     return ""
+  }
+
+  this.change_vessel = function(params)
+  {
+    return null;
   }
 
   // Parsers

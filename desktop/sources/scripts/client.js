@@ -3,6 +3,8 @@ function Client()
   this.controller = new Controller();
   this.walkthrough = new Walkthrough();
 
+  this.id = 0;
+
   this.el = null;
   this.input = null;
   this.h1   = null;
@@ -53,12 +55,12 @@ function Client()
     this.query();
   }
 
-  this.query = function(id = 0,q = "")
+  this.query = function(id = this.id,q = "")
   {
     console.info(id,q)
     this.el.className = "loading"
     setTimeout(()=>{ 
-      this.update(parade.query(q))
+      this.update(parade.query(id,q))
       this.el.className = "ready" 
     },250)
   }
@@ -78,6 +80,11 @@ function Client()
     this.reaction.className = response.sight.reaction ? 'visible' : 'hidden'
     this.reaction.innerHTML = response.sight.reaction ? response.sight.reaction : ''
 
+    // Become
+    if(response.become){
+      this.change_vessel(response.become)
+    }
+
     // Tips
     var html = ""
     for(id in response.sight.tips){
@@ -92,6 +99,14 @@ function Client()
     this.input.update();
 
     console.log(response)
+  }
+
+  this.change_vessel = function(id)
+  {
+    if(!id || id == this.id){ return; }
+
+    this.id = id;
+    setTimeout(()=>{ this.query(); }, 500)
   }
 
   // Misc
