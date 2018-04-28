@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "clean": "rm -r ~/Desktop/Paradise-darwin-x64/ ; rm -r ~/Desktop/Paradise-linux-x64/ ; rm -r ~/Desktop/Paradise-win32-x64/ ; echo 'cleaned build location'",
-    "build_osx": "electron-packager . Paradise --platform=darwin --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.icns && echo 'Built for OSX'",
+    "clean": "rm -r ~/Desktop/Paradise-darwin-x64/ ; rm -r ~/Desktop/Paradise-linux-x64/ ; rm -r ~/Desktop/Paradise-win32-x64/ ; rm -r ~/Desktop/Paradise-linux-armv7l/ ; echo 'cleaned build location'",
+    "build_osx": "electron-packager . Paradise --platform=darwin --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.ico && echo 'Built for OSX'",
     "build_linux": "electron-packager . Paradise --platform=linux  --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.ico && echo 'Built for LINUX'",
     "build_win": "electron-packager . Paradise --platform=win32  --arch=x64 --out ~/Desktop/ --overwrite --icon=icon.ico && echo 'Built for WIN'",
     "build_pi": "electron-packager . Paradise --platform=linux  --arch=armv7l --out ~/Desktop/ --overwrite --icon=icon.ico ; echo 'Built for PI'",

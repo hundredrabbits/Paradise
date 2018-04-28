@@ -5,8 +5,8 @@ function Paradise()
   this.reset = function()
   {
     this.world = [
-      new Vessel({name:"ghost",parent:1,note:"Well, well, hello there."}),
-      new Vessel({name:"library",parent:1,note:"It's raining in the library, as it always did and ever will. "})
+      new Vessel({name:"ghost",parent:1,owner:0,note:"Well, well, hello there."}),
+      new Vessel({name:"library",parent:1,owner:0,note:"It's raining in the library, as it always did and ever will. "})
     ]
   }
 

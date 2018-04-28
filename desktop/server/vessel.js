@@ -31,7 +31,7 @@ function Vessel(data = basic)
       return require(`./action`);
     } 
   }
-  
+
   this.set = function(key,value)
   {
     console.log(`- set ${this.name()} ${key}='${value}'`)
@@ -43,10 +43,29 @@ function Vessel(data = basic)
     this.set("parent",target.id)
   }
 
-
   this.parent = function()
   {
     return this.parade.world[this.data.parent]
+  }
+
+  this.owner = function()
+  {
+    return this.parade.world[this.data.owner]
+  }
+
+  this.stem = function()
+  {
+    // find Root
+    var v = this.parent()
+    var i = 0
+    while(i < 50){
+      if(v.parent().is_paradox()){
+        return v
+        break;
+      }
+      i += 1
+    }
+    return this;
   }
 
   // Helpers
@@ -128,7 +147,10 @@ function Vessel(data = basic)
 
   this.type = function()
   {
-    return this.data.program ? 'program' : 'location'
+    if(this.data.program){ return `program` }
+    if(this.data.note){ return `location` }
+
+    return `vessel`
   }
 
   this.action = function()

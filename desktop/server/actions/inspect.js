@@ -9,12 +9,24 @@ function Inspect(host)
     var target = this.find_target(params,this.host.siblings());
 
     if(target){
-      console.log(`? target ${target.name()}`)
-      return `<p>You are inspecting <action>${target}</action>.</p>`
+      return `<p>You are inspecting <action>${target}</action>. ${this.make_location(target)}</p>`
     }
     else{
       return this.err_NOTARGET(params)
     }
+  }
+
+  this.make_location = function(target)
+  {
+    var html = ""
+
+    if(target.parent().is_paradox()){
+      return `The ${target.name()} ${target.type()}, located in the ${target.parent().name()} ${target.parent().type()} paradox, was created by ${target.owner()}.`
+    }
+    if(target.is_paradox()){
+      return `The ${target.name()} ${target.type()} paradox was created by ${target.owner()}.`
+    }
+    return `The ${target.name()} ${target.type()}, located in the ${target.parent().name()} ${target.parent().type()}, part of the ${target.stem().name()} constellation, was created by ${target.owner()}.`
   }
 }
 

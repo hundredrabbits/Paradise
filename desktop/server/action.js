@@ -28,6 +28,8 @@ function Action(host,name)
   {
     var action = params.split(" ")[0].toLowerCase().trim()
 
+    if(params == ""){ return ""; }
+
     return `<p>Unknown action, to see a list of available actions, type <action data='help'>help</action>.</p>`
   }
 
@@ -56,6 +58,9 @@ function Action(host,name)
     if(this.host.is_paradox()){
       return `You are the <action data='help with paradoxes'>paradox</action> of ${this.host.particle()} ${this.host.name()}.`  
     }
+    if(this.host.parent().is_paradox()){
+      return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} ${this.host.parent().name()}.`
+    }
     return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} <action data='leave'>${this.host.parent().name()}</action>.`
   }
 
@@ -77,16 +82,7 @@ function Action(host,name)
 
   this.page = function()
   {
-    // find Root
-    var v = this.host.parent()
-    var i = 0
-    while(i < 50){
-      if(v.parent().is_paradox()){
-        v = v.parent()
-        break;
-      }
-      i += 1
-    }
+    var v = this.host.parent().stem()
     return `— <action data='warp to ${v.id}'>${v.name()}</action> —`
   }
 
