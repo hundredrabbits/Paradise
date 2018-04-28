@@ -38,7 +38,6 @@ function Action(host,name)
     }
 
     // Otherwise..
-
     if(params == ""){ return ""; }
     return `<p>Unknown action, to see a list of available actions, type <action data='help'>help</action>.</p>`
   }
@@ -177,22 +176,21 @@ function Action(host,name)
 
   this.err_NOTARGET = function(params,type = "visible")
   {
-    var target = remove_articles(params);
+    var target = this.remove_articles(params);
     return `<p>There is no ${type} <action>${target}</action>. Do you need <action data='help with ${this.name}'>help</action>?</p>`
   }
 
-  function remove_articles(str)
+  this.remove_articles = function(str)
   {
     var s = ` ${str} `;
-    s = s.replace(/ a /g,'')
-    s = s.replace(/ an /g,'')
-    s = s.replace(/ the /g,'')
-    s = s.replace(/ to /g,'')
-    s = s.replace(/ in /g,'')
-    s = s.replace(/ some /g,'')
-    s = s.replace(/ one /g,'')
-    s = s.replace(/ two /g,'')
-    return s
+    s = s.replace(/ a /g,' ')
+    s = s.replace(/ an /g,' ')
+    s = s.replace(/ the /g,' ')
+    s = s.replace(/ of /g,' ')
+    s = s.replace(/ some /g,' ')
+    s = s.replace(/ one /g,' ')
+    s = s.replace(/ two /g,' ')
+    return s.trim()
   }
 
   String.prototype.to_base = function()

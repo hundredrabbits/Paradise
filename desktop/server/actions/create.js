@@ -8,17 +8,21 @@ function Create(host)
   
   this.operate = function(params)
   {
-    var parts = params.split(" ")
-    var name = parts[parts.length-1]
+    var parts = this.remove_articles(params).trim().split(" ")
+    var attr  = parts[0] != parts[1] ? parts[0] : null
+    var name  = parts[1]
 
-    var vessel = new Vessel({
+    var data = {
       name:name,
+      attr:attr,
       owner:this.host.id,
       parent:this.host.data.parent
-    });
+    }
+
+    var vessel = new Vessel(data);
     this.host.parade.add(vessel)
     
-    return `<p>You created <action data='enter the ${vessel.name()}'>${vessel}</action> in the ${this.host.parent().name()}.</p>`
+    return `<p>You created a <action data='enter the ${vessel.name()}'>${vessel.name()}</action> in the ${this.host.parent().name()}.</p>`
   }
 
 }

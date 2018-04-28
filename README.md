@@ -3,39 +3,37 @@
 ## Tasks
 
 - tutorial
-- icon
 - documentation
-- Improve `use` feedback
 - Save active vessel in client
 - Save world across sessions
 - Add logo
 
-## Patch
-
-- `warp to any ghost`
-
 ## Actions
 
 ### Basic
-- `Create`
-- `Become`
-- `Enter`
-- `Leave`
+#### `Create`
+#### `Become`
+#### `Enter`
+#### `Leave`
 
 ### Advanced
-- `Help`
-- `Warp`
-- `Take`
-- `Drop`
+#### `Help`
+#### `Warp`
+- `warp to the red house`
+- `warp in the yellow house`
+- `warp to any house`
+- `warp in any house`
+#### `Take`
+#### `Drop`
 
 ### Narrative
-- `Note`
-- `Inspect`
-- `Take`
-- `Drop`
+#### `Note`
+#### `Inspect`
+#### `Take`
+#### `Drop`
 
 ### Programming
-- `Program`
-- `Use`
-- `Usage`
-- `Call`
+#### `Program`
+#### `Use`
+#### `Usage`
+#### `Call`

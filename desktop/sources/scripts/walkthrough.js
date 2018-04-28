@@ -25,8 +25,19 @@ function Walkthrough()
     "help",
     "help with drop",
 
+    // Test usage
     "enter the teapot",
-    "usage open"
+    "usage open",
+    "leave",
+    "open the teapot"
+  ]
+
+  this.default = [
+    "create a red house",
+    "create a blue house",
+    "create a yellow house",
+    "warp into any house",
+    "warp into the red house",
   ]
 
   this.index = 0;
@@ -39,12 +50,12 @@ function Walkthrough()
     this.run()
   }
 
-  this.run = function()
+  this.run = function(target = this.default)
   {
-    client.query(0,this.benchmark[this.index]);
+    client.query(0,target[this.index]);
     this.index += 1
 
-    if(this.benchmark[this.index]){
+    if(target[this.index]){
       setTimeout(()=>{
         this.run();
       },this.speed)
