@@ -12,6 +12,7 @@ function Client()
   this.note = null;
   this.view = null;
   this.tips = null;
+  this.action = null;
   this.reaction = null;
 
   this.docs = {}
@@ -48,6 +49,7 @@ function Client()
     this.note = document.getElementById("note");
     this.view = document.getElementById("view");
     this.tips = document.getElementById("tips");
+    this.action = document.getElementById("action");
     this.input = new Commander(document.getElementById("input"),document.getElementById("hint"));
     this.reaction = document.getElementById("reaction");
 
@@ -83,6 +85,10 @@ function Client()
     // Reaction
     this.reaction.className = response.sight.reaction ? 'visible' : 'hidden'
     this.reaction.innerHTML = response.sight.reaction ? response.sight.reaction : ''
+
+    // Action
+    this.action.className = response.sight.action ? 'visible' : 'hidden'
+    this.action.innerHTML = response.sight.action ? response.sight.action : ''
 
     // Become
     if(response.become){

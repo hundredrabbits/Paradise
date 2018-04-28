@@ -153,6 +153,13 @@ function Vessel(data = basic)
     return `vessel`
   }
 
+  this.usage = function()
+  {
+    if(!this.is_program()){ return null; }
+
+    return this.data.usage ? this.data.usage : 'use';
+  }
+
   this.action = function()
   {
     return this.data.program ? `use ${this.name()}` : `enter ${this.name()}`

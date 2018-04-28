@@ -16,6 +16,7 @@ function Action(host,name)
         view:this.view(),
         tips:this.tips(),
         reaction: reaction,
+        action: this.action()
       },
       docs: this.documentation(),
       visibles: this.visibles(),
@@ -89,6 +90,18 @@ function Action(host,name)
   this.note = function()
   {
     return this.host.parent().data.note ? this.host.parent().data.note : ''
+  }
+
+  this.action = function()
+  {
+    var siblings = this.host.siblings()
+
+    for(id in siblings){
+      var v = siblings[id];
+      if(!v.is_program()){ continue; }
+      return `Would you like to <action data='${v.usage()} the ${v.name()}'>${v.usage()} the ${v.name()}</action>?`;
+    }
+    return null
   }
 
   this.documentation = function()

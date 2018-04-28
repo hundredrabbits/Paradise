@@ -20,7 +20,8 @@
     "push": "npm run build ; npm run push_theme ; npm run push_osx ; npm run push_pi ; npm run push_linux ; npm run push_win ; npm run clean ; npm run push_status"
   },
   "devDependencies": {
-    "electron": "^1.8.1"
+    "electron": "^1.8.1",
+    "electron-icon-maker": "0.0.4"
   },
   "dependencies": {
     "electron-packager": "^12.0.1"

@@ -8,6 +8,7 @@
 - Improve `use` feedback
 - Save active vessel in client
 - Save world across sessions
+- Add logo
 
 ## Patch
 
