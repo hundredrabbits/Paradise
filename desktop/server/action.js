@@ -4,9 +4,9 @@ function Action(host,name)
   this.host = host;
   this.docs = `No documentation for '${name}'`
 
-  this.run = function(params = "")
+  this.run = function(params = "",action_name = null)
   {
-    var reaction = this.operate(params);
+    var reaction = this.operate(params,action_name);
 
     var h = {
       sight: {
@@ -25,12 +25,21 @@ function Action(host,name)
     return h
   }
   
-  this.operate = function(params)
+  this.operate = function(params,action)
   {
-    var action = params.split(" ")[0].toLowerCase().trim()
+    // Check if is custom action
+    var siblings = this.host.siblings()
+    for(id in siblings){
+      var v = siblings[id];
+      if(!v.is_program()){ continue; }
+      if(v.usage() != action){ continue; }
+      this.host.cmd(v.data.program)
+      return `<p>You used the ${v.name()} to ${v.data.program}.</p>`
+    }
+
+    // Otherwise..
 
     if(params == ""){ return ""; }
-
     return `<p>Unknown action, to see a list of available actions, type <action data='help'>help</action>.</p>`
   }
 
@@ -126,7 +135,7 @@ function Action(host,name)
       inspect:require('./actions/inspect'),
       program:require('./actions/program'),
       use:require('./actions/use'),
-      cast:require('./actions/cast'),
+      usage:require('./actions/usage'),
     }
     for(id in _actions){
       var action = new _actions[id]

@@ -19,12 +19,14 @@ function Walkthrough()
     "enter the teapot",
     "program create a coffee",
     "leave",
-    "inspect the teacup",
-    "use the teacup",
+    "inspect the teapot",
+    "use the teapot",
 
     "help",
     "help with drop",
-    ""
+
+    "enter the teapot",
+    "usage open"
   ]
 
   this.index = 0;

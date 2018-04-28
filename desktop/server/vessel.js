@@ -19,7 +19,7 @@ function Vessel(data = basic)
   this.act = function(action,params)
   {
     const responder = this.response(action)
-    return new responder(this).run(params)
+    return new responder(this).run(params,action)
   }
 
   this.response = function(action)
@@ -162,7 +162,7 @@ function Vessel(data = basic)
 
   this.action = function()
   {
-    return this.data.program ? `use ${this.name()}` : `enter ${this.name()}`
+    return this.data.program ? `${this.usage()} ${this.name()}` : `enter ${this.name()}`
   }
 
   this.toString = function()
