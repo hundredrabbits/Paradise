@@ -6,7 +6,7 @@ function Become(host)
   
   this.operate = function(params)
   {
-    var target = this.find_target(params,this.host.siblings());
+    var target = this.find(params,this.host.siblings());
 
     if(target){
       return `<p>You became <action>${target}</action>.</p>`
@@ -18,7 +18,7 @@ function Become(host)
 
   this.change_vessel = function(params)
   {
-    var target = this.find_target(params,this.host.siblings());
+    var target = this.find(params,this.host.siblings());
 
     return target.id;
   }

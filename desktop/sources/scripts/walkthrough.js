@@ -36,8 +36,10 @@ function Walkthrough()
     "create a red house",
     "create a blue house",
     "create a yellow house",
+    "warp to any house",
     "warp into any house",
-    "warp into the red house",
+    "warp to the red house",
+    "warp into the red house"
   ]
 
   this.index = 0;

@@ -6,7 +6,7 @@ function Drop(host)
 
   this.operate = function(params)
   {
-    var target = this.find_target(params,this.host.children());
+    var target = this.find(params,this.host.children());
 
     if(target){
       target.move(this.host.parent())

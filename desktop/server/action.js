@@ -49,16 +49,46 @@ function Action(host,name)
 
   // Parsers
 
-  this.find_target = function(target,a)
+  this.find = function(params,a = this.host.parade.world)
   {
-    for(id in a){
-      var vessel = a[id];
-      if(vessel.is(target)){
-        return vessel
-      }
-    }
-    return null
+    var parts = this.remove_articles(params).toLowerCase().split(" ")
+    var is_any = parts[0] == "any"
+    var attr  = parts[parts.length-2] != parts[parts.length-1] && !is_any ? parts[parts.length-2] : null
+    var name  = parts[parts.length-1]
+
+    return is_any ? this.find_any(a,attr,name) : this.find_target(a,attr,name);
   } 
+
+  this.find_any = function(a,attr,name)
+  {
+    var candidates = []
+    for(id in a){
+      var v = a[id]
+      if(v.data.name != name){ continue; }
+      candidates.push(v);
+    }
+    var id = Math.floor((Math.random() * candidates.length));
+    return candidates[id]
+  }
+
+  this.find_target = function(a,attr,name)
+  {
+    // With attr
+    for(id in a){
+      var v = a[id]
+      if(v.data.name != name){ continue; } 
+      if(v.data.attr != attr){ continue; } 
+      return v
+    }
+
+    // Without attr
+    var candidates = []
+    for(id in a){
+      var v = a[id]
+      if(v.data.name != name){ continue; }
+      return v
+    }
+  }
 
   // Formatters
 

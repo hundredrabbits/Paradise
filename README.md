@@ -11,29 +11,42 @@
 ## Actions
 
 ### Basic
-#### `Create`
-#### `Become`
-#### `Enter`
-#### `Leave`
+#### Create
+#### Become
+- `become a teacup` Become a visible vessel.
+- `become the red teacup` Become a distant vessel.
+#### Enter
+- `enter the teacup` Enter a visible vessel.
+#### Leave
 
 ### Advanced
-#### `Help`
-#### `Warp`
-- `warp to the red house`
-- `warp in the yellow house`
-- `warp to any house`
-- `warp in any house`
-#### `Take`
-#### `Drop`
+#### Help
+- `help`
+- `help with drop`
+#### Warp
+- `warp to the red teacup`
+- `warp in the yellow teacup`
+- `warp to any teacup`
+- `warp in any teacup`
+#### Take
+- `take the red teacup`
+- `take a teacup`
+- `take any teacup`
+#### Drop
+- `drop the red teacup`
+- `drop a teacup`
+- `drop any teacup`
 
 ### Narrative
-#### `Note`
-#### `Inspect`
-#### `Take`
-#### `Drop`
+#### Note
+#### Inspect
+- `inspect the teacup`
+#### Transform
+
+#### Transmute
 
 ### Programming
-#### `Program`
-#### `Use`
-#### `Usage`
-#### `Call`
+#### Program
+#### Use
+#### Usage
+#### Call

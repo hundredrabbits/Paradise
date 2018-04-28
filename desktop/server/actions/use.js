@@ -6,7 +6,7 @@ function Use(host)
 
   this.operate = function(params)
   {
-    var target = this.find_target(params,this.host.siblings());
+    var target = this.find(params,this.host.siblings());
 
     if(target){
       this.host.cmd(target.data.program)
