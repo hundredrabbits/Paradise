@@ -6,6 +6,8 @@ function Cast(host)
 
   this.operate = function(params)
   {
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to cast, type <action data='help with cast'>help</action>.</p>`; }
+
     var parts = this.remove_articles(params).trim().split(" ")
     var spell_name = `${parts[0]} ${parts[1]}`
     var spell = this.find(spell_name)

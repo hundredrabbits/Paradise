@@ -6,6 +6,8 @@ function Warp(host)
 
   this.operate = function(params)
   {
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to warp, type <action data='help with warp'>help</action>.</p>`; }
+
     var parts = this.remove_articles(params).split(" ")
     var relation = parts[0];
     var target = this.find(parts.length > 1 ? params.replace(relation,'').trim() : params)

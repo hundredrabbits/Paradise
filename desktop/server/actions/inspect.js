@@ -6,6 +6,8 @@ function Inspect(host)
 
   this.operate = function(params)
   {
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to inspect, type <action data='help with inspect'>help</action>.</p>`; }
+
     var target = this.find(params,this.host.siblings());
 
     if(target){

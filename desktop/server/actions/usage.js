@@ -4,6 +4,8 @@ function Usage(host)
 
   this.operate = function(params)
   {
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to set usage, type <action data='help with usage'>help</action>.</p>`; }
+
     var parts = params.split(" ")
     var word = parts[parts.length-1].toLowerCase()
 

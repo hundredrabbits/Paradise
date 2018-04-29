@@ -88,14 +88,14 @@ function Walkthrough()
   this.index = 0;
   this.speed = 500;
 
-  this.start = function(speed = 1000)
+  this.start = function(speed = 50)
   {
     this.speed = speed;
     this.index = 0;
     this.run()
   }
 
-  this.run = function(target = this.spells)
+  this.run = function(target = this.all)
   {
     client.query(0,target[this.index]);
     this.index += 1
