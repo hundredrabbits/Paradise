@@ -15,12 +15,11 @@ function Use(host)
         var cmds = target.data.program.split("@and")
         for(id in cmds){
           var cmd = cmds[id].trim()
-          console.log(cmd)
-          this.host.cmd(cmd)
+          this.host.cmd(new Wildcard(cmd).toString(false))
         }
       }
       else{
-        this.host.cmd(target.data.program)
+        this.host.cmd(new Wildcard(target.data.program).toString(false))
       }
       return `<p>You used <action>${target}</action>.</p>`
     }

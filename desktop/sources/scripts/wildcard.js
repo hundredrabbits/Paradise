@@ -1,9 +1,8 @@
-function Wildcard(parent)
+function Wildcard(str)
 {
-  this.parent = parent
-  this.str = parent.data.note;
+  this.str = str;
 
-  this.toString = function()
+  this.toString = function(convert_vessels = true)
   {
     var s = this.str;
 
@@ -39,19 +38,17 @@ function Wildcard(parent)
     s = s.replace('@__random',`${parade.random().name().toLowerCase()}`)
     s = s.replace('@__Random',`${parade.random().name().capitalize()}`)
 
-    // Make parent clickable
-    s = s.replace(this.parent.name(),this.parent.to_a(false))
-
-    // Make children clickable
-    var known = []
-    var children = this.parent.children();
-    for(id in children){
-      var v = children[id];
-      if(known.indexOf(v.data.name) > -1){ continue; }
-      s = s.replace(v.name(),v.to_a(false))
-      known.push(v.data.name)
+    if(convert_vessels){
+      var known = []
+      var children = parade.ghost().siblings();
+      for(id in children){
+        var v = children[id];
+        if(known.indexOf(v.data.name) > -1){ continue; }
+        s = s.replace(v.name(),v.to_a(false))
+        known.push(v.data.name)
+      }
     }
-
+  
     return s;
   }
 }

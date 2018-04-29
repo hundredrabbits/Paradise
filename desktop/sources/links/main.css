@@ -22,6 +22,7 @@ body wr action:hover { cursor: pointer; }
 #tips ln {  font-size: 12px;  }
 #tips ln action { font-family: 'lora_bold_italic'; border-bottom:0px }
 #tips ln action:hover { text-decoration: underline; }
+#tips ln code { display: inline-block;font-family: 'input_mono_regular';font-size: 90%;background: #efefef;padding: 0px 7.5px;border-radius: 2px; }
 #note { display: block; transition: all 250ms }
 #reaction { line-height: 45px;border-radius: 2px; transition: all 500ms; display: block; }
 #reaction img { display: block; width:100%; }

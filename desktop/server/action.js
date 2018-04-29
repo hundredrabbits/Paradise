@@ -129,7 +129,7 @@ function Action(host,name)
 
   this.note = function()
   {
-    return this.host.parent().data.note ? new Wildcard(this.host.parent()).toString() : ''
+    return this.host.parent().data.note ? new Wildcard(this.host.parent().data.note).toString() : ''
   }
 
   this.action = function()
@@ -193,6 +193,10 @@ function Action(host,name)
     // Note/Program
     if(!this.host.parent().data.note && !this.host.parent().is_program()){
       a.push("This vessel has no description, you should <action data='note '>add one</action>.")
+    }
+    // Note/Program
+    if(this.host.parent().is_program()){
+      a.push(`This vessel has the <code>${this.host.parent().data.program}</code> program.`)
     }
 
     return a

@@ -101,6 +101,8 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@__RANDOM`, random parade vessel.(uppercase)
 - `@__random`, random parade vessel.(lowercase)
 - `@__Random`, random parade vessel.(capitalized)
+- `@__random-name`, random parade vessel name.
+- `@__random-attr`, random parade vessel attribute.
 
 ### Stem
 - `@STEM`, name of current parent stem vessel.(uppercase)
