@@ -9,18 +9,11 @@ function Become(host)
     var target = this.find(params,this.host.siblings());
 
     if(target){
-      return `<p>You became <action>${target}</action>.</p>`
+      client.change_vessel(target.id)
     }
     else{
       return this.err_NOTARGET(params)
     }
-  }
-
-  this.change_vessel = function(params)
-  {
-    var target = this.find(params,this.host.siblings());
-
-    return target.id;
   }
 }
 

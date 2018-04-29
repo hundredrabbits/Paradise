@@ -90,11 +90,6 @@ function Client()
     this.action.className = response.sight.action ? 'visible' : 'hidden'
     this.action.innerHTML = response.sight.action ? response.sight.action : ''
 
-    // Become
-    if(response.become){
-      this.change_vessel(response.become)
-    }
-
     // Tips
     var html = ""
     for(id in response.sight.tips){
@@ -111,10 +106,8 @@ function Client()
 
   this.change_vessel = function(id)
   {
-    if(!id || id == this.id){ return; }
-
     this.id = id;
-    setTimeout(()=>{ this.query(); }, 500)
+    setTimeout(()=>{ this.query(this.id); }, 500)
   }
 
   // 

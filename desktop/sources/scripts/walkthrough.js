@@ -21,12 +21,12 @@ function Walkthrough()
 
     "help",
     "help with drop",
+  ]
 
-    // Test usage
-    "enter the teapot",
-    "usage open",
-    "leave",
-    "open the teapot"
+  this.basics = [
+    "warp to the library",
+    "create a yellow house",
+    "become the yellow house"
   ]
 
   this.warping = [
@@ -67,6 +67,7 @@ function Walkthrough()
   this.all = this.all.concat(this.warping)
   this.all = this.all.concat(this.inventory)
   this.all = this.all.concat(this.programing)
+  this.all = this.all.concat(this.basics)
 
   this.index = 0;
   this.speed = 500;
@@ -78,7 +79,7 @@ function Walkthrough()
     this.run()
   }
 
-  this.run = function(target = this.programing)
+  this.run = function(target = this.basics)
   {
     client.query(0,target[this.index]);
     this.index += 1

@@ -19,8 +19,7 @@ function Action(host,name)
         action: this.action()
       },
       docs: this.documentation(),
-      visibles: this.visibles(),
-      become:this.change_vessel(params)
+      visibles: this.visibles()
     }
     return h
   }
