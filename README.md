@@ -71,7 +71,6 @@
 ## Wildcards
 
 ### Basics
-
 - `@FULL`, display the current vessel attribute and name.(uppercase)
 - `@NAME`, display the current vessel name.(uppercase)
 - `@ATTR`, display the current vessel attribute.(uppercase)
@@ -82,5 +81,7 @@
 - `@Name`, display the current vessel name.(capitalized)
 - `@Attr`, display the current vessel attribute.(capitalized)
 
+### Program Tools
+- `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
 
 

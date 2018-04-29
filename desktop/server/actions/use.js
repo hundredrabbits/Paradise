@@ -11,7 +11,17 @@ function Use(host)
     var target = this.find(params,this.host.siblings());
 
     if(target){
-      this.host.cmd(target.data.program)
+      if(target.data.program.indexOf("@and") > -1){
+        var cmds = target.data.program.split("@and")
+        for(id in cmds){
+          var cmd = cmds[id].trim()
+          console.log(cmd)
+          this.host.cmd(cmd)
+        }
+      }
+      else{
+        this.host.cmd(target.data.program)
+      }
       return `<p>You used <action>${target}</action>.</p>`
     }
     else{

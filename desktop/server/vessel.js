@@ -12,6 +12,7 @@ function Vessel(data = basic)
 
   this.cmd = function(str)
   {
+    console.log(str)
     var parts = str.split(" ")
     return this.act(parts.splice(0,1)[0],parts.join(' '))
   }
