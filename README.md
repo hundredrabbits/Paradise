@@ -6,6 +6,7 @@
 - Save active vessel in client
 - Save world across sessions
 - Add logo
+- Wildcards
 
 ## Actions
 
@@ -75,4 +76,11 @@
 #### Cast
 - `cast the storm scroll at the golden beetle` Trigger a distant vessel's automation as another vessel.
 
+## Wildcards
+
+### Basics
+
+- `@FULL`, display the current vessel attribute and name.
+- `@NAME`, display the current vessel name.
+- `@ATTR`, display the current vessel attribute.
 
