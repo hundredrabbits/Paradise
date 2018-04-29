@@ -64,11 +64,11 @@ function Walkthrough()
 
   this.alchemy = [
     "warp to the library",
-    // "transform into a cat",
-    // "transmute into glass",
     "create a lead teacup",
     "transform the teacup into a house",
-    // "transmute lead into gold"
+    "transmute lead into gold",
+    "transform into a cat",
+    "transmute into glass"
   ]
 
   this.all = []

@@ -8,7 +8,7 @@ function Transform(host)
   {
     var parts = this.remove_articles(params).split(" ")
     var name = parts[parts.length-1].toLowerCase()
-    var target = parts.length > 2 ? this.find(parts[0]) : this.host
+    var target = parts.length > 2 ? this.find(parts[0],this.host.siblings()) : this.host
     var origin = target.data.name
 
     target.set("name",name)
