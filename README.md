@@ -2,6 +2,8 @@
 
 ## Actions
 
+You can input multiple commands using the `&` character to break a command into multiple.
+
 ### Basic
 
 #### Create
@@ -112,9 +114,10 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 ### Program Tools
 - `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
 
-## Casting Tutorial
+## Tutorials
 
-Casting is a form of puppeteering, making other vessels act in your stead.
+### Casting 
+Casting is a form of puppeteering, making a visible vessel act in your stead.
 
 ```
 create a blue spell
@@ -125,3 +128,15 @@ create a cat
 take the blue spell
 cast the blue spell on the cat
 ```
+
+### Wildcard
+This example demonstrates how to use a wildcard in a program.
+
+```
+create a random warp
+enter the random warp
+program warp in @__random
+leave
+use the random warp
+```
+

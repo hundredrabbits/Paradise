@@ -64,10 +64,24 @@ function Client()
 
   this.query = function(id = this.id,q = "")
   {
-    console.info(this.id,q)
+    if(q.indexOf("&") > -1){
+      return this.multi(q.split("&"));
+    }
     this.el.className = "loading"
     setTimeout(()=>{ 
       this.update(parade.query(this.id,q))
+      this.el.className = "ready" 
+    },250)
+  }
+
+  this.multi = function(stack)
+  {
+    this.el.className = "loading"
+    for(id in stack){
+      parade.query(this.id,stack[id].trim())
+    }
+    setTimeout(()=>{ 
+      this.update(parade.query())
       this.el.className = "ready" 
     },250)
   }
