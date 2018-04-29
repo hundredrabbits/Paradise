@@ -2,6 +2,7 @@ function Client()
 {
   this.controller = new Controller();
   this.walkthrough = new Walkthrough();
+  this.speaker = new Speaker();
 
   this.id = 0;
 
@@ -54,9 +55,9 @@ function Client()
     this.reaction = document.getElementById("reaction");
 
     // Events
-    this.input.el.oninput   = (key) => { this.input.update(key); };
+    this.input.el.oninput   = (key) => { this.input.update(key); this.speaker.play("click2"); };
     this.input.el.onkeydown = (key) => { if(key.key == "Tab"){ this.input.complete(); } }
-    this.input.el.onkeyup   = (key) => { if(key.key == "Enter"){ this.input.validate(); } };
+    this.input.el.onkeyup   = (key) => { if(key.key == "Enter"){ this.input.validate(); this.speaker.play("click4"); } };
 
     this.query();
   }
@@ -108,7 +109,7 @@ function Client()
   {
     console.log(`~ change vessel ${this.id} -> ${id}`)
     this.id = id;
-    setTimeout(()=>{ this.query(this.id); }, 250)
+    setTimeout(()=>{ this.query(this.id); this.speaker.play("click1"); }, 250)
   }
 
   // 
