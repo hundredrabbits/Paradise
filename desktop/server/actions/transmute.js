@@ -6,11 +6,14 @@ function Transmute(host)
 
   this.operate = function(params)
   {
-    var parts = params.split(" ")
+    var parts = this.remove_articles(params).split(" ")
     var attr = parts[parts.length-1].toLowerCase()
 
-    this.host.set("attr",attr)
-    return `<p>You transmuted into <action>${this.host}</action>.</p>`
+
+    console.log(parts)
+
+    // this.host.set("attr",attr)
+    // return `<p>You transmuted into <action>${this.host}</action>.</p>`
   }
 }
 

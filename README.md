@@ -39,9 +39,10 @@
 
 ### Narrative
 #### Note
+- `note It is raining. Again.` Add a note to the parent vessel.
 
 #### Inspect
-- `inspect the teacup`
+- `inspect the teacup` Inspect the target visible vessel.
 
 #### Transform
 - `transform into a teacup`
