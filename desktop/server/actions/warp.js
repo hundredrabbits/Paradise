@@ -8,7 +8,7 @@ function Warp(host)
   {
     var parts = this.remove_articles(params).split(" ")
     var relation = parts[0];
-    var target = this.find(params.replace(relation,'').trim())
+    var target = this.find(parts.length > 1 ? params.replace(relation,'').trim() : params)
 
     if(!target){
       return `You cannot warp to this location.`

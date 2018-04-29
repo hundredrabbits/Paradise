@@ -1,11 +1,5 @@
 function Walkthrough()
 {
-  this.benchmark = [
-
-    "transform into a cat",
-    "transmute into gold",
-  ]
-
   this.basics = [
     "warp to the library",
     "create a yellow house",
@@ -24,6 +18,7 @@ function Walkthrough()
     "warp into any house",
     "warp to the red house",
     "warp into the red house",
+    "warp anywhere",
     "leave"
   ]
 
@@ -89,7 +84,7 @@ function Walkthrough()
     this.run()
   }
 
-  this.run = function(target = this.alchemy)
+  this.run = function(target = this.warping)
   {
     client.query(0,target[this.index]);
     this.index += 1

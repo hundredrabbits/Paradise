@@ -55,6 +55,8 @@ function Action(host,name)
     var attr  = parts[parts.length-2] != parts[parts.length-1] && !is_any ? parts[parts.length-2] : null
     var name  = parts[parts.length-1]
 
+    if(name == "anywhere" || name == "anything"){ return this.find_random(a); }
+
     return is_any ? this.find_any(a,attr,name) : this.find_target(a,attr,name);
   } 
 
@@ -87,6 +89,12 @@ function Action(host,name)
       if(v.data.name != name && v.data.attr != attr){ continue; }
       return v
     }
+  }
+
+  this.find_random = function(a)
+  {
+    var id = Math.floor((Math.random() * a.length));
+    return a[id]
   }
 
   // Formatters
