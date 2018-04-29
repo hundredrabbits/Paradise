@@ -80,7 +80,15 @@
 
 ### Basics
 
-- `@FULL`, display the current vessel attribute and name.
-- `@NAME`, display the current vessel name.
-- `@ATTR`, display the current vessel attribute.
+- `@FULL`, display the current vessel attribute and name.(uppercase)
+- `@NAME`, display the current vessel name.(uppercase)
+- `@ATTR`, display the current vessel attribute.(uppercase)
+- `@full`, display the current vessel attribute and name.(lowercase)
+- `@name`, display the current vessel name.(lowercase)
+- `@attr`, display the current vessel attribute.(lowercase)
+- `@Full`, display the current vessel attribute and name.(capitalized)
+- `@Name`, display the current vessel name.(capitalized)
+- `@Attr`, display the current vessel attribute.(capitalized)
+
+
 

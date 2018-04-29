@@ -6,7 +6,7 @@ function Paradise()
   {
     this.world = [
       new Vessel({name:"ghost",parent:1,owner:0,note:"Well, well, hello there."}),
-      new Vessel({name:"library",attr:"ceramic",parent:1,owner:0,note:"Hello @NAME, welcome to the library."})
+      new Vessel({name:"library",attr:"ceramic",parent:1,owner:0,note:"Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type <action data='help'>help</action> to get started."})
     ]
   }
 
