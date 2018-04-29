@@ -8,9 +8,6 @@ function Walkthrough()
     "enter the teapot",
     "leave",
 
-    "take the teapot",
-    "drop the teapot",
-
     "transform into a cat",
     "transmute into gold",
     
@@ -32,15 +29,44 @@ function Walkthrough()
     "open the teapot"
   ]
 
-  this.default = [
+  this.warping = [
+    "warp to the library",
     "create a red house",
     "create a blue house",
     "create a yellow house",
     "warp to any house",
     "warp into any house",
     "warp to the red house",
-    "warp into the red house"
+    "warp into the red house",
+    "leave"
   ]
+
+  this.inventory = [
+    "warp to the library",
+    "create a red house",
+    "create a blue house",
+    "create a yellow house",
+    "take the yellow house",
+    "drop any house",
+  ]
+
+  this.programing = [
+    "warp to the library",
+    "create a red house",
+    "create a blue house",
+    "create a yellow house",
+    "enter the blue house",
+    "program warp into any house",
+    "usage open",
+    "leave",
+    "open the blue house",
+    "leave"
+  ]
+
+  this.all = []
+  this.all = this.all.concat(this.warping)
+  this.all = this.all.concat(this.inventory)
+  this.all = this.all.concat(this.programing)
 
   this.index = 0;
   this.speed = 500;
@@ -52,7 +78,7 @@ function Walkthrough()
     this.run()
   }
 
-  this.run = function(target = this.default)
+  this.run = function(target = this.programing)
   {
     client.query(0,target[this.index]);
     this.index += 1

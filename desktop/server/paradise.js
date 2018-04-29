@@ -35,9 +35,26 @@ function Paradise()
 
   this.add = function(vessel)
   {
+    if(this.exists(vessel)){
+      console.log(`+ duplicate ${vessel.name()}`)
+      return false;
+    }
     console.log(`+ add ${vessel.name()}`)
     this.world.push(vessel)
     this.update()
+    return true;
+  }
+
+  this.exists = function(target)
+  {
+    for(id in this.world){
+      var v = this.world[id]
+      if(v.data.name != target.data.name){ continue; }
+      if(v.data.attr != target.data.attr){ continue; }
+      if(v.data.parent != target.data.parent){ continue; }
+      return true
+    }
+    return false
   }
 
   this.query = function(id = 0,q = "look")

@@ -20,9 +20,9 @@ function Create(host)
     }
 
     var vessel = new Vessel(data);
-    this.host.parade.add(vessel)
+    var success = this.host.parade.add(vessel)
     
-    return `<p>You created a <action data='enter the ${vessel.name()}'>${vessel.name()}</action> in the ${this.host.parent().name()}.</p>`
+    return !success ? `<p>A visible vessel with that name already exists.</p>` : `<p>You created a <action data='enter the ${vessel.name()}'>${vessel.name()}</action> in the ${this.host.parent().name()}.</p>`
   }
 
 }
