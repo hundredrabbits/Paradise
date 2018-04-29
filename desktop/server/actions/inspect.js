@@ -6,7 +6,7 @@ function Inspect(host)
 
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to inspect, type <action data='help with inspect'>help</action>.</p>`; }
+    if(params.trim() == ""){ return this.inspect_parent(); }
 
     var target = this.find(params,this.host.siblings());
 
@@ -18,7 +18,12 @@ function Inspect(host)
     }
   }
 
-  this.make_location = function(target)
+  this.inspect_parent = function()
+  {
+    return `<p>${this.make_location()}</p>${this.make_hidden_vessels()}`
+  }
+
+  this.make_location = function(target = this.host.parent())
   {
     var html = ""
 
@@ -29,6 +34,23 @@ function Inspect(host)
       return `The ${target.name()} ${target.type()} paradox was created by ${target.owner()}.`
     }
     return `The ${target.name()} ${target.type()}, located in the ${target.parent().name()} ${target.parent().type()}, part of the ${target.stem().name()} constellation, was created by ${target.owner()}.`
+  }
+
+  this.make_hidden_vessels = function()
+  {
+    var siblings = this.host.siblings();
+    if(siblings.length < 4){ return ''; }
+
+    var html = "";
+
+    var count = 0;
+    for(id in siblings){
+      var v = siblings[id]
+      html += `<ln>${v.to_a()}</ln>`
+      count += 1
+    }
+
+    return `<list>${html}</list>`
   }
 }
 

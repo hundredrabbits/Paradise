@@ -7,8 +7,8 @@ body wr page h2 { text-align: center; margin-bottom: 30px; font-size:14px; line-
 body wr page h2 action { border-bottom:0px; }
 body wr page h2 action:hover { border-bottom:0px; color:#ccc; }
 body wr page p { font-size: 18px;font-family: 'lora_italic';margin-bottom: 30px;line-height: 24px;}
-body wr page list { border-top:1px solid #efefef; display: block; padding-top:30px; counter-reset: item;list-style-type: decimal; }
-body wr page list ln { font-size: 12px; display: inline; margin-right:5px; }
+body wr page list { display: block; line-height: 22px; margin-bottom:30px; }
+body wr page list ln { display: inline-block; margin-right:5px; }
 body wr page list ln:before { content: counter(item, decimal) '. ';counter-increment: item; color:#999; }
 body wr input { display: block;position: absolute;bottom: 0px;width: calc(100% - 60px);font-family: 'input_mono_regular';font-weight: normal;font-size: 12px;line-height: 30px;left: 30px;padding: 5px 0px;background: transparent;}
 body wr hint { display: block;position: absolute;bottom: 0px;width: calc(100% - 60px);font-family: 'input_mono_regular';font-weight: normal;font-size: 12px;line-height: 30px;left: 30px;padding: 5px 0px;color: #999;height: 30px;overflow: hidden;background: white;border-top: 1px solid #efefef;}
@@ -16,7 +16,8 @@ body wr hint t.ghost { display: inline-block; color:transparent; }
 body wr action { border-bottom:1px solid black; display: inline-block; }
 body wr action:hover { border-bottom:1px solid #ccc; cursor: pointer}
 
-#tips { margin-bottom:30px; }
+#tips { margin-bottom:30px; border-top:1px solid #efefef; display: block; padding-top:30px; counter-reset: item;list-style-type: decimal; }
+#tips ln {  font-size: 12px;  }
 #tips ln action { font-family: 'lora_bold_italic'; border-bottom:0px }
 #tips ln action:hover { text-decoration: underline; }
 #note { display: block; transition: all 250ms }

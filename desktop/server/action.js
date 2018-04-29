@@ -113,16 +113,11 @@ function Action(host,name)
   this.view = function()
   {
     var siblings = this.host.siblings()
-
-    if(siblings.length > 2){
-      return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()} and ${siblings[2].to_a()}.`
-    }
-    if(siblings.length > 1){
-      return `You see ${siblings[0].to_a()} and ${siblings[1].to_a()}.`
-    }
-    if(siblings.length > 0){
-      return `You see ${siblings[0].to_a()}.`
-    }
+    if(siblings.length > 4){ return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()}, ${siblings[2].to_a()} and <action data='inspect'>${siblings.length-3} other vessels</action>.` }
+    if(siblings.length == 4){ return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()}, ${siblings[2].to_a()} and <action data='inspect'>1 other vessel</action>.` }
+    if(siblings.length == 3){ return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()} and ${siblings[2].to_a()}.` }
+    if(siblings.length > 1){ return `You see ${siblings[0].to_a()} and ${siblings[1].to_a()}.` }
+    if(siblings.length > 0){ return `You see ${siblings[0].to_a()}.` }
     return "You see nothing."
   }
 
