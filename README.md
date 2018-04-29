@@ -39,11 +39,17 @@
 
 ### Narrative
 #### Note
+
 #### Inspect
 - `inspect the teacup`
+
 #### Transform
+- `transform into a teacup`
+- `transform the teacup into a cat`
 
 #### Transmute
+- `transmute into glass`
+- `transmute glass into gold`
 
 ### Programming
 #### Program

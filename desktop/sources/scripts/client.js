@@ -106,8 +106,9 @@ function Client()
 
   this.change_vessel = function(id)
   {
+    console.log(`~ change vessel ${this.id} -> ${id}`)
     this.id = id;
-    setTimeout(()=>{ this.query(this.id); }, 500)
+    setTimeout(()=>{ this.query(this.id); }, 250)
   }
 
   // 

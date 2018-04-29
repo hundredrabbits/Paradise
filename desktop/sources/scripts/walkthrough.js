@@ -1,32 +1,18 @@
 function Walkthrough()
 {
   this.benchmark = [
-    "warp to 1",
-    "create a red vessel",
-    "become the red vessel",
-    "create a teapot",
-    "enter the teapot",
-    "leave",
 
     "transform into a cat",
     "transmute into gold",
-    
-    "note it is raining in the teacup.",
-
-    "enter the teapot",
-    "program create a coffee",
-    "leave",
-    "inspect the teapot",
-    "use the teapot",
-
-    "help",
-    "help with drop",
   ]
 
   this.basics = [
     "warp to the library",
     "create a yellow house",
-    "become the yellow house"
+    "become the yellow house",
+    "become the ghost",
+    "enter the yellow house",
+    "leave"
   ]
 
   this.warping = [
@@ -63,11 +49,35 @@ function Walkthrough()
     "leave"
   ]
 
+  this.metas = [
+    "warp to the library",
+    "create a red house",
+    "create a blue house",
+    "create a yellow house",
+    "inspect the red house",
+    "help",
+    "help with program",
+    "help with use",
+    "help with usage",
+    "note It is raining. Again."
+  ]
+
+  this.alchemy = [
+    "warp to the library",
+    "transform into a cat",
+    "transmute into glass",
+    "create a lead teacup",
+    "transform the teacup into a house",
+    "transmute lead into gold"
+  ]
+
   this.all = []
   this.all = this.all.concat(this.warping)
   this.all = this.all.concat(this.inventory)
   this.all = this.all.concat(this.programing)
   this.all = this.all.concat(this.basics)
+  this.all = this.all.concat(this.metas)
+  this.all = this.all.concat(this.alchemy)
 
   this.index = 0;
   this.speed = 500;
@@ -79,7 +89,7 @@ function Walkthrough()
     this.run()
   }
 
-  this.run = function(target = this.basics)
+  this.run = function(target = this.alchemy)
   {
     client.query(0,target[this.index]);
     this.index += 1
