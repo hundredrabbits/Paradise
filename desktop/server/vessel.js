@@ -122,7 +122,7 @@ function Vessel(data = basic)
 
   // Formatters
 
-  this.to_json = function()
+  this.to_h = function()
   {
     return this.data
   }

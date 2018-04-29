@@ -1,13 +1,5 @@
 # Paradise
 
-## Tasks
-
-- tutorial
-- Save active vessel in client
-- Save world across sessions
-- Add logo
-- Wildcards
-
 ## Actions
 
 ### Basic

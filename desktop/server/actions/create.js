@@ -9,8 +9,8 @@ function Create(host)
   this.operate = function(params)
   {
     var parts = this.remove_articles(params).trim().split(" ")
-    var attr  = parts[0] != parts[1] ? parts[0].toLowerCase() : null
-    var name  = parts[1].toLowerCase()
+    var attr  = parts[parts.length-2] && parts[parts.length-2] != parts[parts.length-1] ? parts[parts.length-2].toLowerCase() : null
+    var name  = parts[parts.length-1].toLowerCase()
 
     var data = {
       name:name,

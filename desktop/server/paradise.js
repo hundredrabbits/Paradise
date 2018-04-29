@@ -2,15 +2,28 @@ const Vessel = require('./vessel')
 
 function Paradise()
 {
+  this.game = require('./game')
+
   this.reset = function()
   {
-    this.world = [
-      new Vessel({name:"ghost",parent:1,owner:0,note:"Well, well, hello there."}),
-      new Vessel({name:"library",attr:"ceramic",parent:1,owner:0,note:"Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type <action data='help'>help</action> to get started."})
-    ]
+    this.import([{name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},{name:"library",attr:"ceramic",parent:1,owner:0,note:"Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type <action data='help'>help</action> to get started."}]);
   }
 
-  this.reset();
+  this.load = function()
+  {
+    var previous = this.game.load()
+    
+    if(previous){
+      console.info("Loaded world")
+      this.import(previous)
+    }
+    else{
+      console.info("New world")
+      this.reset();
+    }
+  }
+  
+  // Start
 
   this.import = function(json)
   {
@@ -27,7 +40,7 @@ function Paradise()
     var a = []
 
     for(id in this.world){
-      var json = this.world[id].to_json()
+      var json = this.world[id].to_h()
       a.push(json)
     }
     return JSON.stringify(a)
@@ -59,6 +72,7 @@ function Paradise()
 
   this.query = function(id = 0,q = "look")
   {
+    this.game.save(this)
     return this.ghost(id).cmd(q)
   }
 
@@ -76,6 +90,18 @@ function Paradise()
     this.update()
     return this.world[id];
   }
+
+  this.to_h = function()
+  {
+    var a = []
+    // Connect IDs
+    for(id in this.world){
+      a.push(this.world[id].to_h())
+    }
+    return a
+  }
+
+  this.load();
 }
 
 module.exports = Paradise

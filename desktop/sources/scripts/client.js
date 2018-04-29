@@ -143,7 +143,9 @@ function Client()
 
   this.reset = function()
   {
-    console.warn("ERASE!")
+    console.warn("-- APOCALYPSE --")
+    parade.reset();
+    setTimeout(()=>{ this.query(this.id); this.speaker.play("click1"); }, 250)
   }
 
   document.onclick= function(event)
