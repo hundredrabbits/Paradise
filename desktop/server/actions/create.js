@@ -12,6 +12,8 @@ function Create(host)
     var attr  = parts[parts.length-2] && parts[parts.length-2] != parts[parts.length-1] ? parts[parts.length-2].toLowerCase() : null
     var name  = parts[parts.length-1].toLowerCase()
 
+    if(name == ""){ return `<p>You must give a name to your vessel, for more details on how to create, type <action data='help with create'>help</action>.</p>`; }
+
     var data = {
       name:name,
       attr:attr,
