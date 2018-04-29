@@ -19,7 +19,7 @@ function Warp(host)
       this.host.move(target.parent())
       return `<p>You warped by the <action>${target.name()}</action>, inside the ${target.parent().name()}.</p>`
     }
-    
+
     this.host.move(target)
     return `<p>You warped in <action>${target}</action>.</p>`
   }

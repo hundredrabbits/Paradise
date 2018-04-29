@@ -86,7 +86,7 @@ function Action(host,name)
     var candidates = []
     for(id in a){
       var v = a[id]
-      if(v.data.name != name && v.data.attr != attr){ continue; }
+      if(v.data.name != name){ continue; }
       return v
     }
   }
