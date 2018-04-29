@@ -10,35 +10,42 @@
 ## Actions
 
 ### Basic
+
 #### Create
 - `create a ceramic teacup` Create a new vessel.
+
 #### Become
 - `become a teacup` Become a visible vessel.
 - `become the red teacup` Become a distant vessel.
+
 #### Enter
 - `enter the teacup` Enter a visible vessel.
+
 #### Leave
 - `leave` Leave the current parent vessel.
 
 ### Advanced
+
 #### Help
 - `help` See available help.
 - `help with drop` See help for the **drop** action.
+
 #### Warp
 - `warp to the red teacup` Warp to a distant vessel's parent location.
 - `warp in the yellow teacup` Warp in a distant vessel's location.
 - `warp to any teacup` Warp to a random distant vessel's parent location.
 - `warp in any teacup` Warp in a random distant vessel's location.
 - `warp anywhere` Warp in a random distant vessel's location.
+
 #### Take
-- `take the red teacup`
-- `take a teacup`
-- `take any teacup`
+- `take the red teacup` Move a visible vessel into your vessel.
+- `take any teacup` Move a visible vessel into your vessel.
 - `take anything` Move a random visible vessel into your vessel.
+
 #### Drop
-- `drop the red teacup`
-- `drop a teacup`
-- `drop any teacup`
+- `drop the red teacup` Move a child vessel into the parent vessel.
+- `drop a teacup` Move a child vessel into the parent vessel.
+- `drop any teacup` Move a random child vessel into the parent vessel.
 
 ### Narrative
 #### Note
@@ -48,15 +55,24 @@
 - `inspect the teacup` Inspect the target visible vessel.
 
 #### Transform
-- `transform into a teacup`
-- `transform the teacup into a cat`
+- `transform into a teacup` Rename the current vessel.
+- `transform the teacup into a cat` Rename a visible vessel.
 
 #### Transmute
-- `transmute into glass`
-- `transmute glass into gold`
+- `transmute into glass` Add an adjective to the current vessel.
+- `transmute glass into gold` Add an adjective to a visible vessel.
 
 ### Programming
 #### Program
+- `program warp to the library` Automate a vessel.
+
 #### Use
+- `use the teacup` Trigger the vessel's automation.
+
 #### Usage
-#### Call
+- `usage open` Select the vessel's trigger.
+
+#### Cast
+- `cast the storm scroll at the golden beetle` Trigger a distant vessel's automation as another vessel.
+
+

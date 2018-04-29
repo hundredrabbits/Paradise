@@ -162,8 +162,7 @@ function Action(host,name)
       warp:require('./actions/warp'),
       take:require('./actions/take'),
       drop:require('./actions/drop'),
-
-      move:require('./actions/move'),
+      
       note:require('./actions/note'),
       transform:require('./actions/transform'),
       transmute:require('./actions/transmute'),
@@ -172,6 +171,7 @@ function Action(host,name)
       program:require('./actions/program'),
       use:require('./actions/use'),
       usage:require('./actions/usage'),
+      cast:require('./actions/cast'),
     }
     for(id in _actions){
       var action = new _actions[id]

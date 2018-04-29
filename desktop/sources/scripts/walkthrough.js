@@ -66,6 +66,16 @@ function Walkthrough()
     "transmute into glass"
   ]
 
+  this.spells = [
+    "warp to the library",
+    "create a storm scroll",
+    "enter the scroll",
+    "program warp in the ghost",
+    "leave",
+    "create blue bug",
+    "cast the storm scroll on the blue bug"
+  ]
+
   this.all = []
   this.all = this.all.concat(this.warping)
   this.all = this.all.concat(this.inventory)
@@ -73,6 +83,7 @@ function Walkthrough()
   this.all = this.all.concat(this.basics)
   this.all = this.all.concat(this.metas)
   this.all = this.all.concat(this.alchemy)
+  this.all = this.all.concat(this.spells)
 
   this.index = 0;
   this.speed = 500;
@@ -84,7 +95,7 @@ function Walkthrough()
     this.run()
   }
 
-  this.run = function(target = this.warping)
+  this.run = function(target = this.spells)
   {
     client.query(0,target[this.index]);
     this.index += 1
