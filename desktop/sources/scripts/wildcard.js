@@ -1,11 +1,13 @@
-function Wildcard(str)
+function Wildcard(parent)
 {
-  this.str = str;
+  this.parent = parent
+  this.str = parent.data.note;
 
   this.toString = function()
   {
     var s = this.str;
 
+    // Basics
     s = s.replace('@FULL',`${parade.ghost().name().toUpperCase()}`)
     s = s.replace('@NAME',`${parade.ghost().data.name.toUpperCase()}`)
     s = s.replace('@ATTR',`${parade.ghost().data.attr ? parade.ghost().data.attr.toUpperCase() : ''}`)
@@ -15,7 +17,7 @@ function Wildcard(str)
     s = s.replace('@Full',`${parade.ghost().name().toLowerCase().capitalize()}`)
     s = s.replace('@Name',`${parade.ghost().data.name.toLowerCase().capitalize()}`)
     s = s.replace('@Attr',`${parade.ghost().data.attr ? parade.ghost().data.attr.toLowerCase() : ''.capitalize()}`)
-
+    // Parent
     s = s.replace('@_FULL',`${parade.ghost().parent().name().toUpperCase()}`)
     s = s.replace('@_NAME',`${parade.ghost().parent().data.name.toUpperCase()}`)
     s = s.replace('@_ATTR',`${parade.ghost().parent().data.attr ? parade.ghost().parent().data.attr.toUpperCase() : ''}`)
@@ -25,6 +27,23 @@ function Wildcard(str)
     s = s.replace('@_Full',`${parade.ghost().parent().name().toLowerCase().capitalize()}`)
     s = s.replace('@_Name',`${parade.ghost().parent().data.name.toLowerCase().capitalize()}`)
     s = s.replace('@_Attr',`${parade.ghost().parent().data.attr ? parade.ghost().parent().data.attr.toLowerCase() : ''.capitalize()}`)
+
+    s = s.replace('@size',`${parade.ghost().children().length}`)
+    s = s.replace('@SIZE',`${parade.world.length}`)
+    s = s.replace('@STEM',`${parade.ghost().parent().stem().name()}`)
+
+    // Make parent clickable
+    s = s.replace(this.parent.name(),this.parent.to_a(false))
+
+    // Make children clickable
+    var known = []
+    var children = this.parent.children();
+    for(id in children){
+      var v = children[id];
+      if(known.indexOf(v.data.name) > -1){ continue; }
+      s = s.replace(v.name(),v.to_a(false))
+      known.push(v.data.name)
+    }
 
     return s;
   }

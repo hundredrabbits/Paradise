@@ -129,7 +129,7 @@ function Action(host,name)
 
   this.note = function()
   {
-    return this.host.parent().data.note ? new Wildcard(this.host.parent().data.note).toString() : ''
+    return this.host.parent().data.note ? new Wildcard(this.host.parent()).toString() : ''
   }
 
   this.action = function()

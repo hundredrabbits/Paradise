@@ -57,14 +57,16 @@ function Vessel(data = basic)
   this.stem = function()
   {
     // find Root
+    var known = []
     var v = this.parent()
     var i = 0
     while(i < 50){
-      if(v.parent().is_paradox()){
+      if(v.parent().is_paradox() || known.indexOf(v.id) > -1){
         return v
         break;
       }
       i += 1
+      known.push(v.id)
     }
     return this;
   }
@@ -128,10 +130,10 @@ function Vessel(data = basic)
     return this.data
   }
 
-  this.to_a = function(action = "enter")
+  this.to_a = function(show_particle = true)
   {
-    action = this.is_program() ? "use" : "enter"
-    return `${this.particle()} <action data='${action} the ${this.name()}'>${this.name()}</action>`
+    action = this.is_program() ? `use the ${this.name()}` : `enter the ${this.name()}`
+    return `${show_particle ? this.particle()+" " : ''}<action data='${!this.is_paradox() ? action : ''}'>${this.name()}</action>`
   }
 
   this.particle = function()

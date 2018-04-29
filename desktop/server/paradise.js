@@ -6,7 +6,7 @@ function Paradise()
 
   this.reset = function()
   {
-    this.import([{name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},{name:"library",attr:"ceramic",parent:1,owner:0,note:"Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type <action data='help'>help</action> to get started."}]);
+    this.import([{name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},{name:"library",attr:"ceramic",parent:1,owner:1,note:"Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type <action data='help'>help</action> to get started."}]);
   }
 
   this.load = function()

@@ -81,6 +81,22 @@
 - `@Name`, display the current vessel name.(capitalized)
 - `@Attr`, display the current vessel attribute.(capitalized)
 
+### Parent
+- `_@FULL`, display the parent vessel attribute and name.(uppercase)
+- `_@NAME`, display the parent vessel name.(uppercase)
+- `_@ATTR`, display the parent vessel attribute.(uppercase)
+- `_@full`, display the parent vessel attribute and name.(lowercase)
+- `_@name`, display the parent vessel name.(lowercase)
+- `_@attr`, display the parent vessel attribute.(lowercase)
+- `_@Full`, display the parent vessel attribute and name.(capitalized)
+- `_@Name`, display the parent vessel name.(capitalized)
+- `_@Attr`, display the parent vessel attribute.(capitalized)
+
+### Misc
+- `@size`, size of the current inventory.
+- `@SIZE`, size of paradise.
+- `@STEM`, name of current parent stem vessel.
+
 ### Program Tools
 - `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
 

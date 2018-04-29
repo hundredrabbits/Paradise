@@ -13,6 +13,8 @@ function Create(host)
     var name  = parts[parts.length-1].toLowerCase()
 
     if(name == ""){ return `<p>You must give a name to your vessel, for more details on how to create, type <action data='help with create'>help</action>.</p>`; }
+    if(name.length > 14){ return `<p>The vessel name is too long.</p>` }
+    if(attr && attr.length > 14){ return `<p>The vessel attribute is too long.</p>` }
 
     var data = {
       name:name,
