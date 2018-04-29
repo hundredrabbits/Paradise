@@ -17,6 +17,7 @@ function Wildcard(parent)
     s = s.replace('@Full',`${parade.ghost().name().toLowerCase().capitalize()}`)
     s = s.replace('@Name',`${parade.ghost().data.name.toLowerCase().capitalize()}`)
     s = s.replace('@Attr',`${parade.ghost().data.attr ? parade.ghost().data.attr.toLowerCase() : ''.capitalize()}`)
+    s = s.replace('@size',`${parade.ghost().children().length}`)
     // Parent
     s = s.replace('@_FULL',`${parade.ghost().parent().name().toUpperCase()}`)
     s = s.replace('@_NAME',`${parade.ghost().parent().data.name.toUpperCase()}`)
@@ -27,10 +28,16 @@ function Wildcard(parent)
     s = s.replace('@_Full',`${parade.ghost().parent().name().toLowerCase().capitalize()}`)
     s = s.replace('@_Name',`${parade.ghost().parent().data.name.toLowerCase().capitalize()}`)
     s = s.replace('@_Attr',`${parade.ghost().parent().data.attr ? parade.ghost().parent().data.attr.toLowerCase() : ''.capitalize()}`)
-
-    s = s.replace('@size',`${parade.ghost().children().length}`)
-    s = s.replace('@SIZE',`${parade.world.length}`)
-    s = s.replace('@STEM',`${parade.ghost().parent().stem().name()}`)
+    s = s.replace('@_size',`${parade.ghost().siblings().length}`)
+    // Stem
+    s = s.replace('@STEM',`${parade.ghost().parent().stem().name().toUpperCase()}`)
+    s = s.replace('@stem',`${parade.ghost().parent().stem().name().toLowerCase()}`)
+    s = s.replace('@Stem',`${parade.ghost().parent().stem().name().capitalize()}`)
+    // Paradise
+    s = s.replace('@__size',`${parade.world.length}`)
+    s = s.replace('@__RANDOM',`${parade.random().name().toUpperCase()}`)
+    s = s.replace('@__random',`${parade.random().name().toLowerCase()}`)
+    s = s.replace('@__Random',`${parade.random().name().capitalize()}`)
 
     // Make parent clickable
     s = s.replace(this.parent.name(),this.parent.to_a(false))

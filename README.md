@@ -70,6 +70,8 @@
 
 ## Wildcards
 
+Wildcards are markups created for notes and programs, to make vessels more responsive to their environment. A simple example would be `note Hello @Name.`, rendered as `Hello Ghost`.
+
 ### Basics
 - `@FULL`, display the current vessel attribute and name.(uppercase)
 - `@NAME`, display the current vessel name.(uppercase)
@@ -80,6 +82,7 @@
 - `@Full`, display the current vessel attribute and name.(capitalized)
 - `@Name`, display the current vessel name.(capitalized)
 - `@Attr`, display the current vessel attribute.(capitalized)
+- `@size`, size of the current inventory.
 
 ### Parent
 - `_@FULL`, display the parent vessel attribute and name.(uppercase)
@@ -91,13 +94,32 @@
 - `_@Full`, display the parent vessel attribute and name.(capitalized)
 - `_@Name`, display the parent vessel name.(capitalized)
 - `_@Attr`, display the parent vessel attribute.(capitalized)
+- `@_size`, size of the current inventory.
 
-### Misc
-- `@size`, size of the current inventory.
-- `@SIZE`, size of paradise.
-- `@STEM`, name of current parent stem vessel.
+### Parade
+- `@__size`, size of the parade.
+- `@__RANDOM`, random parade vessel.(uppercase)
+- `@__random`, random parade vessel.(lowercase)
+- `@__Random`, random parade vessel.(capitalized)
+
+### Stem
+- `@STEM`, name of current parent stem vessel.(uppercase)
+- `@stem`, name of current parent stem vessel.(lowercase)
+- `@Stem`, name of current parent stem vessel.(capitalized)
 
 ### Program Tools
 - `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
 
+## Casting Tutorial
 
+Casting is a form of puppeteering, making other vessels act in your stead.
+
+```
+create a blue spell
+enter the blue spell
+program transform into a fish
+leave
+create a cat
+take the blue spell
+cast the blue spell on the cat
+```

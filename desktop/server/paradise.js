@@ -91,6 +91,12 @@ function Paradise()
     return this.world[id];
   }
 
+  this.random = function()
+  {
+    var id = Math.floor((Math.random() * this.world.length));
+    return this.world[id]
+  }
+
   this.to_h = function()
   {
     var a = []
