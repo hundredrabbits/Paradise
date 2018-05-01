@@ -11,7 +11,7 @@ function Inspect(host)
     var target = this.find(params,this.host.siblings());
 
     if(target){
-      return `<p>You are inspecting <action>${target}</action>. ${this.make_location(target)}</p>`
+      return `<p>You are inspecting <action>${target}</action>#${target.id}. ${this.make_location(target)}</p>`
     }
     else{
       return this.err_NOTARGET(params)

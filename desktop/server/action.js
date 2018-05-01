@@ -54,11 +54,24 @@ function Action(host,name)
     var is_any = parts[0] == "any"
     var attr  = parts[parts.length-2] != parts[parts.length-1] && !is_any ? parts[parts.length-2] : null
     var name  = parts[parts.length-1]
+    var is_numeric = parseInt(name) > -1
+
+    if(is_numeric){ return this.find_id(a,id); }
 
     if(name == "anywhere" || name == "anything"){ return this.find_random(a); }
 
     return is_any ? this.find_any(a,attr,name) : this.find_target(a,attr,name);
   } 
+
+  this.find_id = function(a,target)
+  {
+    for(id in a){
+      if(a[id].id == target){
+        return a[id]
+      }
+    }
+    return null
+  }
 
   this.find_any = function(a,attr,name)
   {
