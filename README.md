@@ -140,3 +140,16 @@ leave
 use the random warp
 ```
 
+## Useful Spells
+
+### Discard Spell
+This spell can be fired at unwanted vessels, sending them into a vessel discard bin, to be recycled later.  
+
+```
+create a recycling bin
+create a discard spell
+enter the discard spell
+take the discard spell
+program warp to the recycling bin
+cast the discard spell on the unwanted vessel
+```
