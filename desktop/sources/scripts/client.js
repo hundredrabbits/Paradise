@@ -14,6 +14,8 @@ function Client()
   this.view = null;
   this.tips = null;
   this.action = null;
+  this.inventory = null;
+  this.inventory_toggle = null;
   this.reaction = null;
 
   this.docs = {}
@@ -51,6 +53,8 @@ function Client()
     this.view = document.getElementById("view");
     this.tips = document.getElementById("tips");
     this.action = document.getElementById("action");
+    this.inventory = document.getElementById("inventory");
+    this.inventory_toggle = document.getElementById("inventory_toggle");
     this.input = new Commander(document.getElementById("input"),document.getElementById("hint"));
     this.reaction = document.getElementById("reaction");
 
@@ -113,6 +117,23 @@ function Client()
     }
     this.tips.innerHTML = html
 
+    // Inventory
+    var html = ""
+    for(id in response.sight.inventory){
+      var v = response.sight.inventory[id]
+      html += `<ln>${v.to_a(false)}${v.is_program() ? '('+v.data.program.split(" ")[0]+')' : ''}</ln>`;      
+    }
+    this.inventory.innerHTML = html
+    this.inventory_toggle.innerHTML = `≡${response.sight.inventory.length}`
+
+    if(response.sight.inventory.length < 1){
+      this.hide_inventory();
+      this.inventory_toggle.className = "hidden"
+    }
+    else{
+      this.inventory_toggle.className = "visible"
+    }
+
     this.docs = response.docs
     this.visibles = response.visibles
 
@@ -151,6 +172,26 @@ function Client()
       if (fileName === undefined){ return; }
       fs.writeFile(fileName+".teapot", parade.export());
     });
+  }
+
+  this.toggle_inventory = function()
+  {
+    if(this.inventory.className == "hidden"){
+      this.show_inventory();
+    }
+    else{
+      this.hide_inventory();
+    }
+  }
+
+  this.show_inventory = function()
+  {
+    this.inventory.className = "visible"
+  }
+
+  this.hide_inventory = function()
+  {
+    this.inventory.className = "hidden"
   }
 
   // Misc

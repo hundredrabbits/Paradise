@@ -131,18 +131,8 @@ function Vessel(data = basic)
   }
 
   this.to_a = function(show_particle = true)
-  {
-    var action = `warp into the ${this.name()}`
-    
-    if(this.data.parent == parade.ghost().data.parent){ // Is Visible
-      if(this.is_program()){
-        action = `use the ${this.name()}`
-      }
-      else{
-        action = `enter the ${this.name()}`  
-      }
-    }
-    return `${show_particle ? this.particle()+" " : ''}<action data='${action}'>${this.name()}</action>`
+  {     
+    return `${show_particle ? this.particle()+" " : ''}<action data='${this.action()}'>${this.name()}</action>`
   }
 
   this.particle = function()
@@ -174,7 +164,27 @@ function Vessel(data = basic)
 
   this.action = function()
   {
-    return this.data.program ? `${this.usage()} ${this.name()}` : `enter ${this.name()}`
+    var action = `warp into the ${this.name()}`
+    
+    // Inventory
+    if(this.data.parent == parade.ghost().id){
+      if(this.is_program()){
+        action = `${this.usage()} ${this.name()}`
+      }
+      else{
+        action = `drop the ${this.name()}`        
+      }
+    }
+    else if(this.data.parent == parade.ghost().data.parent){ // Is Visible
+      if(this.is_program()){
+        action = `${this.usage()} ${this.name()}`
+      }
+      else{
+        action = `enter the ${this.name()}`  
+      }
+    }
+
+    return action
   }
 
   this.toString = function()

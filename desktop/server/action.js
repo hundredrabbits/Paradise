@@ -16,7 +16,8 @@ function Action(host,name)
         view:this.view(),
         tips:this.tips(),
         reaction: reaction,
-        action: this.action()
+        action: this.action(),
+        inventory: this.host.children()
       },
       docs: this.documentation(),
       visibles: this.visibles()
