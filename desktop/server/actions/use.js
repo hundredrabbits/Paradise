@@ -21,7 +21,7 @@ function Use(host)
       else{
         this.host.cmd(new Wildcard(target.data.program).toString(false))
       }
-      return `<p>You used <action>${target}</action>.</p>`
+      return target.data.reaction ? `<p>${new Wildcard(target.data.reaction).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
     }
     else{
       return this.err_NOTARGET(params,"available")

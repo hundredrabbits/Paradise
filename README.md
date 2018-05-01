@@ -156,3 +156,16 @@ leave
 take the discard spell
 cast the discard spell on the unwanted vessel
 ```
+
+## Useless Spells
+
+### A Dice
+
+```
+create a dice
+enter the dice
+program look
+usage roll You rolled @random(1 2 3 4 5 6).
+leave
+roll the dice
+```

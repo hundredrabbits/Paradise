@@ -33,7 +33,7 @@ function Action(host,name)
       if(!v.is_program()){ continue; }
       if(v.usage() != action){ continue; }
       this.host.cmd(v.data.program)
-      return `<p>You used the ${v.name()} to ${v.data.program}.</p>`
+      return v.data.reaction ? `<p>${new Wildcard(v.data.reaction).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
 
     // Otherwise..
