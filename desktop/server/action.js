@@ -170,7 +170,8 @@ function Action(host,name)
       warp:require('./actions/warp'),
       take:require('./actions/take'),
       drop:require('./actions/drop'),
-      
+      inventory:require('./actions/inventory'),
+
       note:require('./actions/note'),
       transform:require('./actions/transform'),
       transmute:require('./actions/transmute'),
