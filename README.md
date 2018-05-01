@@ -113,6 +113,8 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 
 ### Program Tools
 - `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
+- `@random(red green blue)`, choose a random word.
+- `@if()`, coming soon. 
 
 ## Tutorials
 

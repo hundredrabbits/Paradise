@@ -38,6 +38,8 @@ function Wildcard(str)
     s = s.replace('@__random',`${parade.random().name().toLowerCase()}`)
     s = s.replace('@__Random',`${parade.random().name().capitalize()}`)
 
+    s = this.parse_complex(s);
+
     if(convert_vessels){
       var known = []
       var children = parade.ghost().siblings();
@@ -51,4 +53,33 @@ function Wildcard(str)
   
     return s;
   }
+
+  this.parse_complex = function(s)
+  {
+    if(s.indexOf("@") < 0){ return s; }
+    if(s.indexOf("(") < 0){ return s; }
+    if(s.indexOf(")") < 0){ return s; }
+
+    var words = s.split(" ")
+    for(id in words){
+      var word = words[id]
+      if(word.substr(0,1) != "@" || word.indexOf("(") < 0){ continue; }
+      var command = word.split("(")[0].replace("@","").trim()
+      var params = s.split(command+"(")[1].split(")")[0].trim()
+      s = s.replace("@"+command+"("+params+")",this.operate(command.toLowerCase(),params))
+    }
+    return s
+  }
+
+  this.operate = function(cmd,params)
+  {
+    return this[cmd] ? this[cmd](params) : "@error(Unknown Method)"
+  }
+
+  this.random = function(params)
+  {
+    var parts = params.split(" ")
+    return parts[Math.floor((Math.random() * parts.length))]
+  }
 }
+
