@@ -149,7 +149,8 @@ This spell can be fired at unwanted vessels, sending them into a vessel discard 
 create a recycling bin
 create a discard spell
 enter the discard spell
-take the discard spell
 program warp to the recycling bin
+leave
+take the discard spell
 cast the discard spell on the unwanted vessel
 ```
