@@ -10,7 +10,15 @@ function Note(host)
 
     this.host.parent().set("note",params)
 
-    return `<p>You ${is_update ? 'updated the' : 'added a'} description to <action>${this.host.parent()}</action>.</p>`
+    var verb = 'added a'
+    if(params == ""){
+      verb = 'removed the'
+    }
+    else if(is_update){
+      verb = 'updated the'
+    }
+
+    return `<p>You ${verb} description to <action>${this.host.parent()}</action>.</p>`
   }
 }
 

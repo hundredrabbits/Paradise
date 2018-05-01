@@ -8,7 +8,7 @@ function Use(host)
   {
     if(params.trim() == ""){ return `<p>Huh?! For more details on how to use, type <action data='help with use'>help</action>.</p>`; }
 
-    var target = this.find(params,this.host.siblings());
+    var target = this.find(params,this.host.usables());
 
     if(target){
       if(target.data.program.indexOf("@and") > -1){

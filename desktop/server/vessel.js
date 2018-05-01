@@ -111,6 +111,14 @@ function Vessel(data = basic)
     return a
   }
 
+  this.usables = function()
+  {
+    var a = []
+    a = a.concat(this.siblings())
+    a = a.concat(this.children())
+    return a
+  }
+
   // Checks
 
   this.is_paradox = function()
@@ -165,7 +173,7 @@ function Vessel(data = basic)
   this.action = function()
   {
     var action = `warp into the ${this.name()}`
-    
+
     // Inventory
     if(this.data.parent == parade.ghost().id){
       if(this.is_program()){
