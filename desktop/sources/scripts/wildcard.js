@@ -73,7 +73,18 @@ function Wildcard(str)
 
   this.operate = function(cmd,params)
   {
+    if(cmd == ''){
+      return this.vessel(params)
+    }
     return this[cmd] ? this[cmd](params) : "@error(Unknown Method)"
+  }
+
+  this.vessel = function(params)
+  {
+    if(parseInt(params) > 0){
+      return parade.world[parseInt(params)] ? parade.world[parseInt(params)].to_a(false) : `@error(Unknown Vessel #${params})`;  
+    }
+    return "?"
   }
 
   this.random = function(params)

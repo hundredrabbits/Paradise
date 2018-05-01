@@ -113,6 +113,7 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@Stem`, name of current parent stem vessel.(capitalized)
 
 ### Program Tools
+- `@(3)`, print the name and action connected with that vessel id. 
 - `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
 - `@random(red green blue)`, choose a random word.
 - `@if()`, coming soon. 

@@ -132,8 +132,17 @@ function Vessel(data = basic)
 
   this.to_a = function(show_particle = true)
   {
-    action = this.is_program() ? `use the ${this.name()}` : `enter the ${this.name()}`
-    return `${show_particle ? this.particle()+" " : ''}<action data='${!this.is_paradox() ? action : ''}'>${this.name()}</action>`
+    var action = `warp into the ${this.name()}`
+    
+    if(this.data.parent == parade.ghost().data.parent){ // Is Visible
+      if(this.is_program()){
+        action = `use the ${this.name()}`
+      }
+      else{
+        action = `enter the ${this.name()}`  
+      }
+    }
+    return `${show_particle ? this.particle()+" " : ''}<action data='${action}'>${this.name()}</action>`
   }
 
   this.particle = function()
