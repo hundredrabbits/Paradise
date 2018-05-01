@@ -66,6 +66,7 @@ You can input multiple commands using the `&` character to break a command into 
 
 #### Usage
 - `usage open` Select the vessel's trigger.
+- `usage roll You rolled @random(1 2 3 4 5 6).` Set a custom reacion.
 
 #### Cast
 - `cast the storm scroll at the golden beetle` Trigger a distant vessel's automation as another vessel.
