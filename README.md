@@ -171,3 +171,8 @@ usage roll You rolled @random(1 2 3 4 5 6).
 leave
 roll the dice
 ```
+
+## Extras
+
+- Support this project through [Patreon](https://patreon.com/100).
+- See the [License](LICENSE.md) file for license rights and limitations (MIT).
