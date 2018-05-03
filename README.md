@@ -123,7 +123,7 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
 - `@query`, access the content of a usage action. ex: `say hello`, `usage @if(@query IS hello THEN hi!)`
 - `@random(red green blue)`, choose a random word.
-- `@if()`, coming soon. 
+- `@if(a IS b THEN c ELSE d)`, a simple conditional function.
 
 ## Tutorials
 
@@ -157,7 +157,7 @@ This example demonstrates how to create a dialog engine.
 ```
 create a character
 enter the character
-usage say You said "@query". @if(@query IS hello THEN The character replied "hi".)
+usage say You said "@query". @if(@query IS hello THEN The character replied "hi". ELSE The character looks confused "huh?".)
 leave
 say hello
 ```

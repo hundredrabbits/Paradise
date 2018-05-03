@@ -39,7 +39,7 @@ function Wildcard(str,query)
     s = s.replace('@__random',`${parade.random().name().toLowerCase()}`)
     s = s.replace('@__Random',`${parade.random().name().capitalize()}`)
     // Custom
-    s = s.replace('@query',this.query ? this.query : '@err(no_query)')
+    s = s.replace(/@query/g,this.query ? this.query : '@err(no_query)')
 
     s = this.parse_complex(s);
 
@@ -80,6 +80,15 @@ function Wildcard(str,query)
       return this.vessel(params)
     }
     return this[cmd] ? this[cmd](params) : "@error(Unknown Method)"
+  }
+
+  this.if = function(params)
+  {
+    var a = params.split("IS")[0].trim()
+    var b = params.split("IS")[1].trim().split("THEN")[0].trim()
+    var c = params.indexOf("ELSE") > -1 ? params.split("THEN")[1].trim().split("ELSE")[0].trim() : params.split("THEN")[1].trim()
+    var d = params.indexOf("ELSE") > -1 ? params.split("ELSE")[1].trim() : null
+    return a == b ? c : d
   }
 
   this.vessel = function(params)
