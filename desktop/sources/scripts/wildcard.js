@@ -89,7 +89,7 @@ function Wildcard(str,query)
     var a = params.split("IS")[0].trim()
     var b = params.split("IS")[1].trim().split("THEN")[0].trim()
     var c = params.indexOf("ELSE") > -1 ? params.split("THEN")[1].trim().split("ELSE")[0].trim() : params.split("THEN")[1].trim()
-    var d = params.indexOf("ELSE") > -1 ? params.split("ELSE")[1].trim() : null
+    var d = params.indexOf("ELSE") > -1 ? params.split("ELSE")[1].trim() : ''
     return a == b ? c : d
   }
 
