@@ -91,6 +91,7 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@Full`, display the current vessel attribute and name.(capitalized)
 - `@Name`, display the current vessel name.(capitalized)
 - `@Attr`, display the current vessel attribute.(capitalized)
+- `@note`, display the current vessel note.
 - `@size`, size of the current inventory.
 
 ### Parent
@@ -103,6 +104,7 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `_@Full`, display the parent vessel attribute and name.(capitalized)
 - `_@Name`, display the parent vessel name.(capitalized)
 - `_@Attr`, display the parent vessel attribute.(capitalized)
+- `@_note`, display the parent vessel note.
 - `@_size`, size of the current inventory.
 
 ### Parade
@@ -180,7 +182,12 @@ cast the discard spell on the unwanted vessel
 ### Append Spell
 
 ```
-//TODO
+create a typewriter
+enter the typewriter
+program note @_note @query
+usage type You typed "@query".
+leave
+use the typewriter
 ```
 
 ## Useless Spells

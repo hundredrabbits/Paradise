@@ -32,7 +32,7 @@ function Action(host,name)
     for(id in siblings){
       var v = siblings[id];
       if(v.usage() != action){ continue; }
-      if(v.is_program()){ this.host.cmd(v.data.program); }
+      if(v.is_program()){ this.host.cmd(new Wildcard(v.data.program,params).toString(false)); }
       return v.data.reaction ? `<p>${new Wildcard(v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
 
@@ -152,7 +152,7 @@ function Action(host,name)
     for(id in siblings){
       var v = siblings[id];
       if(!v.is_program()){ continue; }
-      return `Would you like to <action data='${v.usage()} the ${v.name()}'>${v.usage()} the ${v.name()}</action>?`;
+      return `Would you like to <action data='${v.usage()} the ${v.name()}'>${v.usage()} with the ${v.name()}</action>?`;
     }
     return null
   }
@@ -211,6 +211,17 @@ function Action(host,name)
     // Note/Program
     if(this.host.parent().is_program()){
       a.push(`This vessel has the <code>${this.host.parent().data.program}</code> program.`)
+    }
+    // Note/Program
+    if(this.host.parent().usage()){
+      a.push(`This vessel grants the <action>${this.host.parent().usage()}</action> action.`)
+    }
+
+    //Find custom actions
+    var siblings = this.host.siblings()
+    for(id in siblings){
+      var v = siblings[id];
+      a.push(`The ${v.name()} vessel grants you the <action data='${v.usage()}'>${v.usage()}</action> action.`)
     }
 
     return a

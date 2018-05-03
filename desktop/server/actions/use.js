@@ -15,13 +15,13 @@ function Use(host)
         var cmds = target.data.program.split("@and")
         for(id in cmds){
           var cmd = cmds[id].trim()
-          this.host.cmd(new Wildcard(cmd).toString(false))
+          this.host.cmd(new Wildcard(cmd,params).toString(false))
         }
       }
       else{
-        this.host.cmd(new Wildcard(target.data.program).toString(false))
+        this.host.cmd(new Wildcard(target.data.program,params).toString(false))
       }
-      return target.data.reaction ? `<p>${new Wildcard(target.data.reaction).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
+      return target.data.reaction ? `<p>${new Wildcard(target.data.reaction,params).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
     }
     else{
       return this.err_NOTARGET(params,"available")
