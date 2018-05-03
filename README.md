@@ -154,7 +154,7 @@ use the random warp
 ```
 
 ### Dialog Engine
-This example demonstrates how to create a dialog engine.
+This example demonstrates how to create a vessel with enabled dialog tools.
 
 ```
 create a character

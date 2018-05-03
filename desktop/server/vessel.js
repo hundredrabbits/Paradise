@@ -54,6 +54,22 @@ function Vessel(data = basic)
     return this.parade.world[this.data.owner]
   }
 
+  this.is_circular = function()
+  {
+    // find Root
+    var known = []
+    var v = this.parent()
+    var i = 0
+    while(i < 50){
+      if(known.indexOf(v.id) > -1){
+        return true
+      }
+      i += 1
+      known.push(v.id)
+    }
+    return false;
+  }
+
   this.stem = function()
   {
     // find Root

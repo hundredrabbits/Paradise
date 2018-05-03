@@ -137,7 +137,8 @@ function Action(host,name)
   this.page = function()
   {
     var v = this.host.parent().stem()
-    return `— <action data='warp to ${v.id}'>${v.name()}</action> —`
+
+    return this.host.parent().is_circular() ? `•` : `— <action data='warp to ${v.id}'>${v.name()}</action> —`
   }
 
   this.note = function()
