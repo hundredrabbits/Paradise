@@ -31,10 +31,9 @@ function Action(host,name)
     var siblings = this.host.siblings()
     for(id in siblings){
       var v = siblings[id];
-      if(!v.is_program()){ continue; }
       if(v.usage() != action){ continue; }
-      this.host.cmd(v.data.program)
-      return v.data.reaction ? `<p>${new Wildcard(v.data.reaction).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
+      if(v.is_program()){ this.host.cmd(v.data.program); }
+      return v.data.reaction ? `<p>${new Wildcard(v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
 
     // Otherwise..

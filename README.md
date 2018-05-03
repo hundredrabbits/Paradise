@@ -1,5 +1,11 @@
 # Paradise
 
+## Controls
+
+- `ctrl(cmd)+shift+n` Reset world to a fresh Library.
+- `ctrl(cmd)+shift+o` Open world and replace current.
+- `ctrl(cmd)+shift+s` Save world.
+
 ## Actions
 
 You can input multiple commands using the `&` character to break a command into multiple.
@@ -115,6 +121,7 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 ### Program Tools
 - `@(3)`, print the name and action connected with that vessel id. 
 - `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
+- `@query`, access the content of a usage action. ex: `say hello`, `usage @if(@query IS hello THEN hi!)`
 - `@random(red green blue)`, choose a random word.
 - `@if()`, coming soon. 
 
@@ -144,6 +151,17 @@ leave
 use the random warp
 ```
 
+### Dialog Engine
+This example demonstrates how to create a dialog engine.
+
+```
+create a character
+enter the character
+usage say You said "@query". @if(@query IS hello THEN The character replied "hi".)
+leave
+say hello
+```
+
 ## Useful Spells
 
 ### Discard Spell
@@ -157,6 +175,12 @@ program warp to the recycling bin
 leave
 take the discard spell
 cast the discard spell on the unwanted vessel
+```
+
+### Append Spell
+
+```
+//TODO
 ```
 
 ## Useless Spells

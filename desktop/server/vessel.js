@@ -165,9 +165,7 @@ function Vessel(data = basic)
 
   this.usage = function()
   {
-    if(!this.is_program()){ return null; }
-
-    return this.data.usage ? this.data.usage : 'use';
+    return this.data.usage ? this.data.usage.split(" ") : 'use';
   }
 
   this.action = function()

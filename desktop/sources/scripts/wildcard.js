@@ -1,6 +1,7 @@
-function Wildcard(str)
+function Wildcard(str,query)
 {
   this.str = str;
+  this.query = query;
 
   this.toString = function(convert_vessels = true)
   {
@@ -37,6 +38,8 @@ function Wildcard(str)
     s = s.replace('@__RANDOM',`${parade.random().name().toUpperCase()}`)
     s = s.replace('@__random',`${parade.random().name().toLowerCase()}`)
     s = s.replace('@__Random',`${parade.random().name().capitalize()}`)
+    // Custom
+    s = s.replace('@query',this.query ? this.query : '@err(no_query)')
 
     s = this.parse_complex(s);
 

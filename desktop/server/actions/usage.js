@@ -6,22 +6,15 @@ function Usage(host)
 
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to set usage, type <action data='help with usage'>help</action>.</p>`; }
-
     var parts = params.split(" ")
     var action = parts[0]
     var reaction = params.replace(action,"").trim()
 
-    if(this.host.parent().is_program()){
-      this.host.parent().set("usage",action.toLowerCase())
-      if(reaction){
-        this.host.parent().set("reaction",reaction)
-      }
-      return `<p>You set the usage of ${this.host.parent()} to '${action}'(${reaction}).</p>`
+    this.host.parent().set("usage",action.toLowerCase())
+    if(reaction){
+      this.host.parent().set("reaction",reaction)
     }
-    else{
-      return `<p>The ${this.host.parent().name()} is not a program.</p>`
-    }
+    return params.trim() == "" ? `<p>You removed the usage of ${this.host.parent()}.` : `<p>You set the usage of ${this.host.parent()} to '${action}'${reaction ? ', with the "'+reaction+'" reaction' : ''}.</p>`
   }
 }
 
