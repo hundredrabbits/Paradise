@@ -41,7 +41,7 @@ function Wildcard(str,query)
     s = s.replace('@__random',`${parade.random().name().toLowerCase()}`)
     s = s.replace('@__Random',`${parade.random().name().capitalize()}`)
     // Custom
-    s = s.replace(/@query/g,this.query ? this.query : '@err(no_query)')
+    s = s.replace(/@query/g,this.query ? this.query : '')
 
     s = this.parse_complex(s);
 
@@ -70,7 +70,7 @@ function Wildcard(str,query)
       var word = words[id]
       if(word.substr(0,1) != "@" || word.indexOf("(") < 0){ continue; }
       var command = word.split("(")[0].replace("@","").trim()
-      var params = s.split(command+"(")[1].split(")")[0].trim()
+      var params = s.split(command+"(")[1].split(")")[0]
       s = s.replace("@"+command+"("+params+")",this.operate(command.toLowerCase(),params))
     }
     return s
@@ -81,12 +81,12 @@ function Wildcard(str,query)
     if(cmd == ''){
       return this.vessel(params)
     }
-    return this[cmd] ? this[cmd](params) : `@error(Unknown Method ${cmd})`
+    return this[cmd] ? this[cmd](params.trim()) : `@error(Unknown Method ${cmd})`
   }
 
   this.if = function(params)
   {
-    var a = params.split("IS")[0].trim()
+    var a = params.split("IS")[0].trim(); if(!a){ return ""; }
     var b = params.split("IS")[1].trim().split("THEN")[0].trim()
     var c = params.indexOf("ELSE") > -1 ? params.split("THEN")[1].trim().split("ELSE")[0].trim() : params.split("THEN")[1].trim()
     var d = params.indexOf("ELSE") > -1 ? params.split("ELSE")[1].trim() : ''

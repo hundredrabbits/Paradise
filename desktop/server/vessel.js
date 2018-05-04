@@ -61,11 +61,11 @@ function Vessel(data = basic)
     var v = this.parent()
     var i = 0
     while(i < 50){
-      if(known.indexOf(v.id) > -1){
-        return true
-      }
-      i += 1
+      if(v.is_paradox()){ return false; }
+      if(known.indexOf(v.id) > -1){ return true; }
       known.push(v.id)
+      v = v.parent()
+      i += 1
     }
     return false;
   }
