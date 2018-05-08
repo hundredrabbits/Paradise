@@ -1,5 +1,10 @@
 # Paradise
 
+Paradise plays like a strange interactive fiction novel, in an ever-changing world where you are not an avatar but a force acting upon places, and objects, and puns, words - moving around and into your other selves, threading chaos.
+
+_“I have always imagined that Paradise will be a kind of library.” _ — Jorge Luis Borges
+
+
 ## Controls
 
 - `ctrl(cmd)+shift+n` Reset world to a fresh Library.
