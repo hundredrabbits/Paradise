@@ -108,3 +108,4 @@ function Wildcard(str,query)
   }
 }
 
+module.exports = Wildcard

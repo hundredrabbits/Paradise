@@ -1,3 +1,5 @@
+Wildcard = require('../wildcard')
+
 function Use(host)
 {
   require(`../action`).call(this,host,"use");

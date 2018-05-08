@@ -1,3 +1,5 @@
+Wildcard = require('./wildcard')
+
 function Action(host,name)
 {
   this.name = name;
