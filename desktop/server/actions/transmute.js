@@ -12,7 +12,7 @@ function Transmute(host)
     if(!target){ return this.err_NOTARGET(parts[0]); }
     var origin = target.data.attr
 
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to transform, type <action data='help with transform'>help</action>.</p>`; }
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to transform, type <action data='help with transmute'>help</action>.</p>`; }
     
     target.set("attr",attr != "anything" ? attr : '')
     return `<p>You transmuted ${target.id != this.host.id ? origin : ''} into <action>${attr}</action>.</p>`
