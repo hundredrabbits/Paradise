@@ -92,8 +92,8 @@ function Action(host,name)
     // With attr
     for(id in a){
       var v = a[id]
-      if(v.data.name != name){ continue; } 
-      if(v.data.attr != attr){ continue; } 
+      if(v.data.name != name && v.data.attr != attr){ continue; } 
+      if(attr && v.data.attr != attr){ continue; } 
       return v
     }
 

@@ -2,7 +2,7 @@ function Transmute(host)
 {
   require(`../action`).call(this,host,"transmute");
 
-  this.docs = "Change your current vessel attribute."
+  this.docs = "Change your current vessel's, or a target vessel's, attribute."
 
   this.operate = function(params)
   {
@@ -14,7 +14,7 @@ function Transmute(host)
 
     if(params.trim() == ""){ return `<p>Huh?! For more details on how to transform, type <action data='help with transform'>help</action>.</p>`; }
     
-    target.set("attr",attr)
+    target.set("attr",attr != "anything" ? attr : '')
     return `<p>You transmuted ${target.id != this.host.id ? origin : ''} into <action>${attr}</action>.</p>`
   }
 }

@@ -1,3 +1,5 @@
+Clock = require('./clock')
+
 function Wildcard(str,query)
 {
   this.str = str;
@@ -35,6 +37,10 @@ function Wildcard(str,query)
     s = s.replace('@STEM',`${parade.ghost().parent().stem().name().toUpperCase()}`)
     s = s.replace('@stem',`${parade.ghost().parent().stem().name().toLowerCase()}`)
     s = s.replace('@Stem',`${parade.ghost().parent().stem().name().capitalize()}`)
+    // Time
+    s = s.replace('@time',`${new Clock()}`)  
+    s = s.replace('@time-beat',`${new Clock().beat()}`)  
+    s = s.replace('@time-pulse',`${new Clock().pulse()}`)    
     // Paradise
     s = s.replace('@__size',`${parade.world.length}`)
     s = s.replace('@__RANDOM',`${parade.random().name().toUpperCase()}`)

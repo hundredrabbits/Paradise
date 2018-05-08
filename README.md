@@ -62,6 +62,8 @@ You can input multiple commands using the `&` character to break a command into 
 #### Transmute
 - `transmute into glass` Add an adjective to the current vessel.
 - `transmute glass into gold` Add an adjective to a visible vessel.
+- `transmute into anything` Remove an adjective to the current vessel.
+- `transmute glass into anything` Remove an adjective to a visible vessel.
 
 ### Programming
 #### Program
@@ -119,6 +121,11 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@STEM`, name of current parent stem vessel.(uppercase)
 - `@stem`, name of current parent stem vessel.(lowercase)
 - `@Stem`, name of current parent stem vessel.(capitalized)
+
+### Time
+- `@time`, [Desamber]() time format **830:024**.
+- `@time-beat`, [Desamber]() time format **830**.
+- `@time-pulse`, [Desamber]() time format **024**.
 
 ### Program Tools
 - `@(3)`, print the name and action connected with that vessel id. 
