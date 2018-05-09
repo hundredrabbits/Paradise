@@ -73,7 +73,9 @@ function Paradise()
   this.query = function(id = 0,q = "look")
   {
     this.game.save(this)
-    return this.ghost(id).cmd(q)
+    if(this.ghost(id)){
+      return this.ghost(id).cmd(q)  
+    }
   }
 
   this.update = function()
