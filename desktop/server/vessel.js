@@ -179,9 +179,20 @@ function Vessel(data = basic)
     return `vessel`
   }
 
+  this.usable = function()
+  {
+    return this.usage() !== false;
+  }
+
   this.usage = function()
   {
-    return this.data.usage ? this.data.usage.split(" ") : 'use';
+    if (this.data.usage) {
+      return this.data.usage.split(" ");
+    }
+    if (this.is_program()) {
+      return 'use';
+    }
+    return false;
   }
 
   this.action = function()

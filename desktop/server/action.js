@@ -223,7 +223,10 @@ function Action(host,name)
     var siblings = this.host.siblings()
     for(id in siblings){
       var v = siblings[id];
-      a.push(`The ${v.name()} vessel grants you the <action data='${v.usage()}'>${v.usage()}</action> action.`)
+      if (v.usable())
+      {
+        a.push(`The ${v.name()} vessel grants you the <action data='${v.usage()}'>${v.usage()}</action> action.`)
+      }
     }
 
     return a
