@@ -63,7 +63,7 @@ function Client()
     this.input.el.onkeydown = (key) => { if(key.key == "Tab"){ this.input.complete(); } }
     this.input.el.onkeyup   = (key) => { if(key.key == "Enter"){ this.input.validate(); this.speaker.play("click4"); } };
 
-    this.query();
+    this.query(this.id, "look");
   }
 
   this.query = function(id = this.id,q = "")

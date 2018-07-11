@@ -92,13 +92,12 @@ function Action(host,name)
     // With attr
     for(id in a){
       var v = a[id]
-      if(v.data.name != name && v.data.attr != attr){ continue; } 
+      if(v.data.name != name){ continue; } 
       if(attr && v.data.attr != attr){ continue; } 
       return v
     }
 
     // Without attr
-    var candidates = []
     for(id in a){
       var v = a[id]
       if(v.data.name != name){ continue; }
@@ -224,7 +223,10 @@ function Action(host,name)
     var siblings = this.host.siblings()
     for(id in siblings){
       var v = siblings[id];
-      a.push(`The ${v.name()} vessel grants you the <action data='${v.usage()}'>${v.usage()}</action> action.`)
+      if (v.usable())
+      {
+        a.push(`The ${v.name()} vessel grants you the <action data='${v.usage()}'>${v.usage()}</action> action.`)
+      }
     }
 
     return a
