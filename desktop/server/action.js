@@ -58,7 +58,7 @@ function Action(host,name)
     var name  = parts[parts.length-1]
     var is_numeric = parseInt(name) > -1
 
-    if(is_numeric){ return this.find_id(a,id); }
+    if(is_numeric){ return this.find_id(a,parseInt(name)); }
 
     if(name == "anywhere" || name == "anything"){ return this.find_random(a); }
 
