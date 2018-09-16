@@ -62,7 +62,8 @@
       client.controller.add("default","Edit","Autocomplete",() => { this.input.complete(); },"Tab");
 
       client.controller.commit();
-    
+      
+      client.install(document.body);
       client.start();
       // client.walkthrough.start(500);
 

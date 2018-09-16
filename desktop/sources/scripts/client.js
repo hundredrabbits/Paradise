@@ -31,6 +31,8 @@ function Client()
 
   this.start = function()
   {
+    this.theme.start();
+
     this.el = document.body;
     this.h1 = document.getElementById("h1");
     this.page = document.getElementById("page");
@@ -136,7 +138,7 @@ function Client()
 
   this.reset = function()
   {
-
+    this.theme.reset();
   }
 
   this.import = function()
