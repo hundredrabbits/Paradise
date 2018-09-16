@@ -156,14 +156,16 @@ function Client()
     fs.readFile(paths[0], 'utf-8', (err, data) => {
       if(err){ alert("An error ocurred reading the file :" + err.message); return; }
       parade.import(JSON.parse(data))
+      setTimeout(()=>{ client.query(); client.speaker.play("click1"); }, 500)
     });
   }
 
   this.export = function()
   {
-    dialog.showSaveDialog((fileName) => {
+    dialog.showSaveDialog({title:"Save World",filters: [{name: "Teapot Format", extensions: ["teapot"]}]},(fileName) => {
       if (fileName === undefined){ return; }
-      fs.writeFile(fileName+".teapot", parade.export());
+      fileName = fileName.substr(-5,5) != ".grid" ? fileName+".grid" : fileName;
+      fs.writeFileSync(fileName, parade.export());
     });
   }
 
