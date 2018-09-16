@@ -1,3 +1,5 @@
+"use strict";
+
 Wildcard = require('./wildcard')
 
 function Action(host,name)
@@ -8,9 +10,9 @@ function Action(host,name)
 
   this.run = function(params = "",action_name = null)
   {
-    var reaction = this.operate(params,action_name);
+    let reaction = this.operate(params,action_name);
 
-    var h = {
+    let h = {
       sight: {
         h1:this.header(),
         page:this.page(),
@@ -30,9 +32,9 @@ function Action(host,name)
   this.operate = function(params,action)
   {
     // Check if is custom action
-    var siblings = this.host.siblings()
-    for(id in siblings){
-      var v = siblings[id];
+    let siblings = this.host.siblings()
+    for(let id in siblings){
+      let v = siblings[id];
       if(v.usage() != action){ continue; }
       if(v.is_program()){ this.host.cmd(new Wildcard(v.data.program,params).toString(false)); }
       return v.data.reaction ? `<p>${new Wildcard(v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
@@ -52,11 +54,11 @@ function Action(host,name)
 
   this.find = function(params,a = this.host.parade.world)
   {
-    var parts = this.remove_articles(params).toLowerCase().split(" ")
-    var is_any = parts[0] == "any"
-    var attr  = parts[parts.length-2] != parts[parts.length-1] && !is_any ? parts[parts.length-2] : null
-    var name  = parts[parts.length-1]
-    var is_numeric = parseInt(name) > -1
+    let parts = this.remove_articles(params).toLowerCase().split(" ")
+    let is_any = parts[0] == "any"
+    let attr  = parts[parts.length-2] != parts[parts.length-1] && !is_any ? parts[parts.length-2] : null
+    let name  = parts[parts.length-1]
+    let is_numeric = parseInt(name) > -1
 
     if(is_numeric){ return this.find_id(a,parseInt(name)); }
 
@@ -67,7 +69,7 @@ function Action(host,name)
 
   this.find_id = function(a,target)
   {
-    for(id in a){
+    for(let id in a){
       if(a[id].id == target){
         return a[id]
       }
@@ -77,29 +79,29 @@ function Action(host,name)
 
   this.find_any = function(a,attr,name)
   {
-    var candidates = []
-    for(id in a){
-      var v = a[id]
+    let candidates = []
+    for(let id in a){
+      let v = a[id]
       if(v.data.name != name){ continue; }
       candidates.push(v);
     }
-    var id = Math.floor((Math.random() * candidates.length));
+    let id = Math.floor((Math.random() * candidates.length));
     return candidates[id]
   }
 
   this.find_target = function(a,attr,name)
   {
     // With attr
-    for(id in a){
-      var v = a[id]
+    for(let id in a){
+      let v = a[id]
       if(v.data.name != name){ continue; } 
       if(attr && v.data.attr != attr){ continue; } 
       return v
     }
 
     // Without attr
-    for(id in a){
-      var v = a[id]
+    for(let id in a){
+      let v = a[id]
       if(v.data.name != name){ continue; }
       return v
     }
@@ -107,7 +109,7 @@ function Action(host,name)
 
   this.find_random = function(a)
   {
-    var id = Math.floor((Math.random() * a.length));
+    let id = Math.floor((Math.random() * a.length));
     return a[id]
   }
 
@@ -126,7 +128,7 @@ function Action(host,name)
 
   this.view = function()
   {
-    var siblings = this.host.siblings()
+    let siblings = this.host.siblings()
     if(siblings.length > 4){ return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()}, ${siblings[2].to_a()} and <action data='inspect'>${siblings.length-3} other vessels</action>.` }
     if(siblings.length == 4){ return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()}, ${siblings[2].to_a()} and <action data='inspect'>1 other vessel</action>.` }
     if(siblings.length == 3){ return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()} and ${siblings[2].to_a()}.` }
@@ -137,7 +139,7 @@ function Action(host,name)
 
   this.page = function()
   {
-    var v = this.host.parent().stem()
+    let v = this.host.parent().stem()
 
     return this.host.parent().is_circular() ? `•` : `— <action data='warp to ${v.id}'>${v.name()}</action> —`
   }
@@ -149,10 +151,10 @@ function Action(host,name)
 
   this.action = function()
   {
-    var siblings = this.host.siblings()
+    let siblings = this.host.siblings()
 
-    for(id in siblings){
-      var v = siblings[id];
+    for(let id in siblings){
+      let v = siblings[id];
       if(!v.is_program()){ continue; }
       return `Would you like to <action data='${v.usage()} the ${v.name()}'>${v.usage()} with the ${v.name()}</action>?`;
     }
@@ -161,8 +163,8 @@ function Action(host,name)
 
   this.documentation = function()
   {
-    var actions = {}
-    var _actions = {
+    let actions = {}
+    let _actions = {
       create:require('./actions/create'),
       become:require('./actions/become'),
       enter:require('./actions/enter'),
@@ -184,8 +186,8 @@ function Action(host,name)
       usage:require('./actions/usage'),
       cast:require('./actions/cast'),
     }
-    for(id in _actions){
-      var action = new _actions[id]
+    for(let id in _actions){
+      let action = new _actions[id]
       actions[id] = action.docs
     }
     return actions
@@ -193,7 +195,7 @@ function Action(host,name)
 
   this.tips = function()
   {
-    var a = []
+    let a = []
     // Paradox
     if(this.host.is_paradox()){
       a.push("Your vessel is a <action data='help with paradoxes'>paradox</action>, you cannot leave.")
@@ -220,9 +222,9 @@ function Action(host,name)
     }
 
     //Find custom actions
-    var siblings = this.host.siblings()
-    for(id in siblings){
-      var v = siblings[id];
+    let siblings = this.host.siblings()
+    for(let id in siblings){
+      let v = siblings[id];
       if (v.usable())
       {
         a.push(`The ${v.name()} vessel grants you the <action data='${v.usage()}'>${v.usage()}</action> action.`)
@@ -234,7 +236,7 @@ function Action(host,name)
 
   this.visibles = function()
   {
-    var a = []
+    let a = []
     a = a.concat(this.host.siblings())
     a = a.concat(this.host.children())
     return a
@@ -242,13 +244,13 @@ function Action(host,name)
 
   this.err_NOTARGET = function(params,type = "visible")
   {
-    var target = this.remove_articles(params);
+    let target = this.remove_articles(params);
     return `<p>There is no ${type} <action>${target}</action>. Do you need <action data='help with ${this.name}'>help</action>?</p>`
   }
 
   this.remove_articles = function(str)
   {
-    var s = ` ${str} `;
+    let s = ` ${str} `;
     s = s.replace(/ a /g,' ')
     s = s.replace(/ an /g,' ')
     s = s.replace(/ the /g,' ')

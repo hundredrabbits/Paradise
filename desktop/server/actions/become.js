@@ -1,3 +1,5 @@
+"use strict";
+
 function Become(host)
 {
   require(`../action`).call(this,host,"become");
@@ -6,7 +8,7 @@ function Become(host)
   
   this.operate = function(params)
   {
-    var target = this.find(params,this.host.siblings());
+    let target = this.find(params,this.host.siblings());
 
     if(target){
       client.change_vessel(target.id)

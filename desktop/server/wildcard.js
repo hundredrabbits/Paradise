@@ -1,3 +1,5 @@
+"use strict";
+
 Clock = require('./clock')
 
 function Wildcard(str,query)
@@ -7,7 +9,7 @@ function Wildcard(str,query)
 
   this.toString = function(convert_vessels = true)
   {
-    var s = this.str;
+    let s = this.str;
 
     // Basics
     s = s.replace('@FULL',`${parade.ghost().name().toUpperCase()}`)
@@ -52,10 +54,10 @@ function Wildcard(str,query)
     s = this.parse_complex(s);
 
     if(convert_vessels){
-      var known = []
-      var children = parade.ghost().siblings();
-      for(id in children){
-        var v = children[id];
+      let known = []
+      let children = parade.ghost().siblings();
+      for(let id in children){
+        let v = children[id];
         if(known.indexOf(v.data.name) > -1){ continue; }
         s = s.replace(v.name(),v.to_a(false))
         known.push(v.data.name)
@@ -71,12 +73,12 @@ function Wildcard(str,query)
     if(s.indexOf("(") < 0){ return s; }
     if(s.indexOf(")") < 0){ return s; }
 
-    var words = s.split(" ")
-    for(id in words){
-      var word = words[id]
+    let words = s.split(" ")
+    for(let id in words){
+      let word = words[id]
       if(word.substr(0,1) != "@" || word.indexOf("(") < 0){ continue; }
-      var command = word.split("(")[0].replace("@","").trim()
-      var params = s.split(command+"(")[1].split(")")[0]
+      let command = word.split("(")[0].replace("@","").trim()
+      let params = s.split(command+"(")[1].split(")")[0]
       s = s.replace("@"+command+"("+params+")",this.operate(command.toLowerCase(),params))
     }
     return s
@@ -92,10 +94,10 @@ function Wildcard(str,query)
 
   this.if = function(params)
   {
-    var a = params.split("IS")[0].trim(); if(!a){ return ""; }
-    var b = params.split("IS")[1].trim().split("THEN")[0].trim()
-    var c = params.indexOf("ELSE") > -1 ? params.split("THEN")[1].trim().split("ELSE")[0].trim() : params.split("THEN")[1].trim()
-    var d = params.indexOf("ELSE") > -1 ? params.split("ELSE")[1].trim() : ''
+    let a = params.split("IS")[0].trim(); if(!a){ return ""; }
+    let b = params.split("IS")[1].trim().split("THEN")[0].trim()
+    let c = params.indexOf("ELSE") > -1 ? params.split("THEN")[1].trim().split("ELSE")[0].trim() : params.split("THEN")[1].trim()
+    let d = params.indexOf("ELSE") > -1 ? params.split("ELSE")[1].trim() : ''
     return a == b ? c : d
   }
 
@@ -109,7 +111,7 @@ function Wildcard(str,query)
 
   this.random = function(params)
   {
-    var parts = params.split(" ")
+    let parts = params.split(" ")
     return parts[Math.floor((Math.random() * parts.length))]
   }
 }

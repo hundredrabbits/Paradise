@@ -1,3 +1,5 @@
+"use strict";
+
 function Inventory(host)
 {
   require(`../action`).call(this,host,"inventory");

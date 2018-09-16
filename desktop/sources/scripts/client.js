@@ -1,3 +1,5 @@
+"use strict";
+
 function Client()
 {
   this.controller = new Controller();
@@ -81,7 +83,7 @@ function Client()
   this.multi = function(stack)
   {
     this.el.className = "loading"
-    for(id in stack){
+    for(let id in stack){
       parade.query(this.id,stack[id].trim())
     }
     setTimeout(()=>{ 
@@ -110,17 +112,17 @@ function Client()
     this.action.innerHTML = response.sight.action ? response.sight.action : ''
 
     // Tips
-    var html = ""
-    for(id in response.sight.tips){
-      var tip = response.sight.tips[id];
+    let html = ""
+    for(let id in response.sight.tips){
+      let tip = response.sight.tips[id];
       html += `<ln>${tip}</ln>`;
     }
     this.tips.innerHTML = html
 
     // Inventory
-    var html = ""
-    for(id in response.sight.inventory){
-      var v = response.sight.inventory[id]
+    let html = ""
+    for(let id in response.sight.inventory){
+      let v = response.sight.inventory[id]
       html += `<ln>${v.to_a(false)}${v.is_program() ? '('+v.data.program.split(" ")[0]+')' : ''}</ln>`;      
     }
     this.inventory.innerHTML = html
@@ -156,7 +158,7 @@ function Client()
 
   this.import = function()
   {
-    var paths = dialog.showOpenDialog({properties: ['openFile'],filters:[{name:"Paradise World",extensions:["teapot"]}]});
+    let paths = dialog.showOpenDialog({properties: ['openFile'],filters:[{name:"Paradise World",extensions:["teapot"]}]});
 
     if(!paths){ console.log("Nothing to load"); return; }
 
@@ -206,7 +208,7 @@ function Client()
   document.onclick= function(event)
   {
     if(event===undefined){ event = window.event; }
-    var target = 'target' in event? event.target : event.srcElement;
+    let target = 'target' in event? event.target : event.srcElement;
     if(target.tagName.toLowerCase() == "action"){
       client.input.inject(target.getAttribute("data"))
     }

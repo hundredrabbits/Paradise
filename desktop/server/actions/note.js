@@ -1,3 +1,5 @@
+"use strict";
+
 function Note(host)
 {
   require(`../action`).call(this,host,"note");
@@ -6,11 +8,11 @@ function Note(host)
 
   this.operate = function(params)
   {
-    var is_update = !this.host.parent().data.note ? false : true;
+    let is_update = !this.host.parent().data.note ? false : true;
 
     this.host.parent().set("note",params)
 
-    var verb = 'added a'
+    let verb = 'added a'
     if(params == ""){
       verb = 'removed the'
     }

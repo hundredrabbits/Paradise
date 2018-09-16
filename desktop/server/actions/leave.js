@@ -1,3 +1,5 @@
+"use strict";
+
 function Leave(host)
 {
   require(`../action`).call(this,host,"leave");
@@ -6,7 +8,7 @@ function Leave(host)
 
   this.operate = function(params)
   {
-    var origin = this.host.parent().name()
+    let origin = this.host.parent().name()
     
     if(this.host.is_paradox()){
       return `<p>You cannot leave the <action>${this.host.name()}</action> paradox.</p>`

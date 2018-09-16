@@ -1,3 +1,5 @@
+"use strict";
+
 // Drool.
 
 function Logo(is_looping = false)
@@ -19,7 +21,7 @@ function Logo(is_looping = false)
 
   this.el.appendChild(this.canvas)
 
-  var is_looping = is_looping;
+  let is_looping = is_looping;
 
   this.size = null;
   this.is_playing = true;
@@ -41,7 +43,7 @@ function Logo(is_looping = false)
     this.create_tiles();
     animate();
 
-    var timer = setInterval(this.draw, 17);
+    let timer = setInterval(this.draw, 17);
   }
 
   this.remove = function()
@@ -76,13 +78,13 @@ function Logo(is_looping = false)
     if(override == false && !tiles_still_moving()){ logo.stop(); return; }
 
     logo.clear();
-    var offset = 200;
+    let offset = 200;
     for (i = 0; i < tiles.length; i++) { 
-      var tile = tiles[i];
-      var max_size = (tile.size/2)-2;
-      var progress_toward_end = 1-clamp(tile.distance_from_end()/(max_size*4),0,1);
-      var progress_fade = clamp(logo.frame/10000,0,1)
-      var size = clamp(progress_toward_end * progress_fade,0,1) * max_size;
+      let tile = tiles[i];
+      let max_size = (tile.size/2)-2;
+      let progress_toward_end = 1-clamp(tile.distance_from_end()/(max_size*4),0,1);
+      let progress_fade = clamp(logo.frame/10000,0,1)
+      let size = clamp(progress_toward_end * progress_fade,0,1) * max_size;
       
       logo.frame += 1;
       logo.context().beginPath();
@@ -94,13 +96,13 @@ function Logo(is_looping = false)
     }
   }
 
-  var tiles = [];
+  let tiles = [];
 
   this.create_tiles = function()
   {
     for (x = 0; x < 10; x++) { 
       for (y = 0; y < 10; y++) { 
-        var pos = {x:x,y:y};
+        let pos = {x:x,y:y};
         tiles.push(new Tile(pos,this.size/5));  
       }
     }
@@ -140,7 +142,7 @@ function Logo(is_looping = false)
   function tiles_still_moving()
   {
     for (i = 0; i < tiles.length; i++) { 
-      var tile = tiles[i];
+      let tile = tiles[i];
       if(tile.offset().x != 0 || tile.offset().y != 0){ logo.is_playing = true; return true; }
     }
     return false;
@@ -151,7 +153,7 @@ function Logo(is_looping = false)
     scare_tiles(6);
     return_tiles_to(5);
 
-    var speed = 300;
+    let speed = 300;
 
     setTimeout(function(){ animate_return_to(9,99); }, 0);
     setTimeout(function(){ animate_return_to(8,99); }, 1 * speed);
@@ -203,7 +205,7 @@ function Logo(is_looping = false)
       this.pos.y = target_pos.y;
     }
 
-    var target_pos = null;
+    let target_pos = null;
 
     this.animate_until = function(target_pos)
     {
@@ -211,15 +213,15 @@ function Logo(is_looping = false)
       
       this.target_pos = target_pos;
 
-      var target_el_pos = {x:target_pos.x * this.size,y:target_pos.y * this.size};
+      let target_el_pos = {x:target_pos.x * this.size,y:target_pos.y * this.size};
 
-      var to_move = {x:target_el_pos.x - this.el_pos.x,y:target_el_pos.y - this.el_pos.y};
+      let to_move = {x:target_el_pos.x - this.el_pos.x,y:target_el_pos.y - this.el_pos.y};
 
       if(to_move.x > 0){ this.el_pos.x += 1; } else if(to_move.x < 0){ this.el_pos.x -= 1; }
       if(to_move.y > 0){ this.el_pos.y += 1; } else if(to_move.y < 0){ this.el_pos.y -= 1; }
 
       if(target_el_pos.x != this.el_pos.x || target_el_pos.y != this.el_pos.y){
-        var target = this;
+        let target = this;
         setTimeout(function(){ target.animate_until(target_pos); }, 5);
       }
     }
@@ -232,7 +234,7 @@ function Logo(is_looping = false)
     this.offset = function()
     {
       if(!this.target_pos){ return {x:0,y:0}; }
-      var target_el_pos = {x:this.target_pos.x * this.size,y:this.target_pos.y * this.size};
+      let target_el_pos = {x:this.target_pos.x * this.size,y:this.target_pos.y * this.size};
       return {x:target_el_pos.x - this.el_pos.x,y:target_el_pos.y - this.el_pos.y};
     }
 
@@ -243,14 +245,14 @@ function Logo(is_looping = false)
 
     this.distance_from_end = function()
     {
-      var a = this.origin.x - this.el_pos.x;
-      var b = this.origin.y - this.el_pos.y;
+      let a = this.origin.x - this.el_pos.x;
+      let b = this.origin.y - this.el_pos.y;
       return Math.sqrt( a*a + b*b );
     }
 
     this.flee = function()
     {
-      var random = Math.random();
+      let random = Math.random();
 
       this.history.push({x:this.pos.x,y:this.pos.y});  
 

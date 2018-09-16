@@ -1,3 +1,5 @@
+"use strict";
+
 function Help(host)
 {
   require(`../action`).call(this,host,"help");
@@ -8,12 +10,12 @@ function Help(host)
 
   this.operate = function(params)
   {
-    var parts = params.split(" ")
-    var action = parts[parts.length-1].toLowerCase()
+    let parts = params.split(" ")
+    let action = parts[parts.length-1].toLowerCase()
 
     try{
-      var a = require(`./${action}`);
-      var obj = new a()
+      let a = require(`./${action}`);
+      let obj = new a()
       return `<img src='media/graphics/${obj.name}.png'/><h3>${obj.name}</h3><p>${obj.docs}</p>`
     }
     catch(err){
@@ -38,11 +40,11 @@ function Help(host)
 
   this.general = function()
   {
-    var docs = this.documentation()
-    var count = Object.keys(docs).length
-    var list = ""
-    var index = 0
-    for(id in docs){
+    let docs = this.documentation()
+    let count = Object.keys(docs).length
+    let list = ""
+    let index = 0
+    for(let id in docs){
       list += `<action data='help with ${id}'>${id.capitalize()}</action>${index == count-2 ? ' or ' : (index == count-1 ? '. ' : ', ')} `
       index += 1
     }

@@ -6,7 +6,9 @@
     <link rel="stylesheet" type="text/css" href="links/reset.css"/>
     <link rel="stylesheet" type="text/css" href="links/fonts.css"/>
     <link rel="stylesheet" type="text/css" href="links/main.css"/>
+    <link rel="stylesheet" type="text/css" href="links/theme.css"/>
     <script src="scripts/lib/controller.js"></script>
+    <script src="scripts/lib/theme.js"></script>
     <script src="scripts/lib/logo.js"></script>
     <script src="scripts/client.js"></script>
     <script src="scripts/commander.js"></script>
@@ -40,7 +42,7 @@
       client.start();
       // client.walkthrough.start(500);
 
-      var logo = new Logo();
+      let logo = new Logo();
       logo.install(120);
       setTimeout(function(){ logo.remove(); }, 5500);
     </script>

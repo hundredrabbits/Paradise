@@ -1,3 +1,5 @@
+"use strict";
+
 function Take(host)
 {
   require(`../action`).call(this,host,"take");
@@ -8,7 +10,7 @@ function Take(host)
   {
     if(params.trim() == ""){ return `<p>Huh?! For more details on how to take, type <action data='help with take'>help</action>.</p>`; }
 
-    var target = this.find(params,this.host.siblings());
+    let target = this.find(params,this.host.siblings());
 
     if(target){
       target.move(this.host)

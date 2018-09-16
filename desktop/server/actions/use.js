@@ -1,3 +1,5 @@
+"use strict";
+
 Wildcard = require('../wildcard')
 
 function Use(host)
@@ -10,7 +12,7 @@ function Use(host)
   {
     if(params.trim() == ""){ return `<p>Huh?! For more details on how to use, type <action data='help with use'>help</action>.</p>`; }
 
-    var target = this.find(params,this.host.usables());
+    let target = this.find(params,this.host.usables());
 
     if (!target) {
       return this.err_NOTARGET(params,"available")
@@ -21,9 +23,9 @@ function Use(host)
     }
 
     if(target.data.program.indexOf("@and") > -1){
-      var cmds = target.data.program.split("@and")
-      for(id in cmds){
-        var cmd = cmds[id].trim()
+      let cmds = target.data.program.split("@and")
+      for(let id in cmds){
+        let cmd = cmds[id].trim()
         this.host.cmd(new Wildcard(cmd,params).toString(false))
       }
     }

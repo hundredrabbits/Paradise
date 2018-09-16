@@ -1,3 +1,5 @@
+"use strict";
+
 const Vessel = require('./vessel')
 
 function Paradise()
@@ -11,7 +13,7 @@ function Paradise()
 
   this.load = function()
   {
-    var previous = this.game.load()
+    let previous = this.game.load()
     
     if(previous){
       console.info("Loaded world")
@@ -27,9 +29,9 @@ function Paradise()
 
   this.import = function(json)
   {
-    var a = []
-    for(id in json){
-      var vessel = new Vessel(json[id])
+    let a = []
+    for(let id in json){
+      let vessel = new Vessel(json[id])
       a.push(vessel)
     }
     this.world = a;
@@ -37,10 +39,10 @@ function Paradise()
 
   this.export = function()
   {
-    var a = []
+    let a = []
 
-    for(id in this.world){
-      var json = this.world[id].to_h()
+    for(let id in this.world){
+      let json = this.world[id].to_h()
       a.push(json)
     }
     return JSON.stringify(a)
@@ -60,8 +62,8 @@ function Paradise()
 
   this.exists = function(target)
   {
-    for(id in this.world){
-      var v = this.world[id]
+    for(let id in this.world){
+      let v = this.world[id]
       if(v.data.name != target.data.name){ continue; }
       if(v.data.attr != target.data.attr){ continue; }
       if(v.data.parent != target.data.parent){ continue; }
@@ -81,7 +83,7 @@ function Paradise()
   this.update = function()
   {
     // Connect IDs
-    for(id in this.world){
+    for(let id in this.world){
       this.world[id].parade = this
       this.world[id].id = parseInt(id)
     }
@@ -95,15 +97,15 @@ function Paradise()
 
   this.random = function()
   {
-    var id = Math.floor((Math.random() * this.world.length));
+    let id = Math.floor((Math.random() * this.world.length));
     return this.world[id]
   }
 
   this.to_h = function()
   {
-    var a = []
+    let a = []
     // Connect IDs
-    for(id in this.world){
+    for(let id in this.world){
       a.push(this.world[id].to_h())
     }
     return a

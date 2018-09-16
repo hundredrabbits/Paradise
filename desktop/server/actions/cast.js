@@ -1,3 +1,5 @@
+"use strict";
+
 function Cast(host)
 {
   require(`../action`).call(this,host,"cast");
@@ -8,14 +10,14 @@ function Cast(host)
   {
     if(params.trim() == ""){ return `<p>Huh?! For more details on how to cast, type <action data='help with cast'>help</action>.</p>`; }
 
-    var parts = this.remove_articles(params).trim().split(" ")
-    var spell_name = `${parts[0]} ${parts[1]}`
-    var spell = this.find(spell_name)
+    let parts = this.remove_articles(params).trim().split(" ")
+    let spell_name = `${parts[0]} ${parts[1]}`
+    let spell = this.find(spell_name)
 
     if(!spell){ return `<p>Unknown spell ${spell_name}.</p>`; }
     if(!spell.is_program()){ return `<p>The ${spell.name()} is not a program.</p>`; }
 
-    var target = this.find(parts[parts.length-1],this.host.siblings())
+    let target = this.find(parts[parts.length-1],this.host.siblings())
 
     target.cmd(spell.data.program);
 

@@ -1,3 +1,5 @@
+"use strict";
+
 function Transmute(host)
 {
   require(`../action`).call(this,host,"transmute");
@@ -6,11 +8,11 @@ function Transmute(host)
 
   this.operate = function(params)
   {
-    var parts = this.remove_articles(params).split(" ")
-    var attr = parts[parts.length-1].toLowerCase()
-    var target = parts.length > 2 ? this.find_target(this.host.siblings(),parts[0],null) : this.host
+    let parts = this.remove_articles(params).split(" ")
+    let attr = parts[parts.length-1].toLowerCase()
+    let target = parts.length > 2 ? this.find_target(this.host.siblings(),parts[0],null) : this.host
     if(!target){ return this.err_NOTARGET(parts[0]); }
-    var origin = target.data.attr
+    let origin = target.data.attr
 
     if(params.trim() == ""){ return `<p>Huh?! For more details on how to transform, type <action data='help with transmute'>help</action>.</p>`; }
     

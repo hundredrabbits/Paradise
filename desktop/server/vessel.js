@@ -1,3 +1,5 @@
+"use strict";
+
 let basic = {
   name: "ghost",
   attr: "hungry",
@@ -13,7 +15,7 @@ function Vessel(data = basic)
   this.cmd = function(str)
   {
     console.log(str)
-    var parts = str.split(" ")
+    let parts = str.split(" ")
     return this.act(parts.splice(0,1)[0],parts.join(' '))
   }
 
@@ -57,9 +59,9 @@ function Vessel(data = basic)
   this.is_circular = function()
   {
     // find Root
-    var known = []
-    var v = this.parent()
-    var i = 0
+    let known = []
+    let v = this.parent()
+    let i = 0
     while(i < 50){
       if(v.is_paradox()){ return false; }
       if(known.indexOf(v.id) > -1){ return true; }
@@ -73,9 +75,9 @@ function Vessel(data = basic)
   this.stem = function()
   {
     // find Root
-    var known = []
-    var v = this.parent()
-    var i = 0
+    let known = []
+    let v = this.parent()
+    let i = 0
     while(i < 50){
       if(v.parent().is_paradox() || known.indexOf(v.id) > -1){
         return v
@@ -91,8 +93,8 @@ function Vessel(data = basic)
 
   this.is = function(str)
   {
-    var parts = str.split(" ")
-    var last_word = parts[parts.length-1].toLowerCase();
+    let parts = str.split(" ")
+    let last_word = parts[parts.length-1].toLowerCase();
 
     if(last_word == this.data.name){
       return true;
@@ -102,9 +104,9 @@ function Vessel(data = basic)
 
   this.siblings = function()
   {
-    var a = []
-    for(id in this.parade.world){
-      var vessel = this.parade.world[id];
+    let a = []
+    for(let id in this.parade.world){
+      let vessel = this.parade.world[id];
       if(vessel.is_paradox()){
         continue;
       }
@@ -117,9 +119,9 @@ function Vessel(data = basic)
 
   this.children = function()
   {
-    var a = []
-    for(id in this.parade.world){
-      var vessel = this.parade.world[id];
+    let a = []
+    for(let id in this.parade.world){
+      let vessel = this.parade.world[id];
       if(vessel.parent().id == this.id && vessel.id != this.id){
         a.push(vessel)
       }
@@ -129,7 +131,7 @@ function Vessel(data = basic)
 
   this.usables = function()
   {
-    var a = []
+    let a = []
     a = a.concat(this.siblings())
     a = a.concat(this.children())
     return a
@@ -162,7 +164,7 @@ function Vessel(data = basic)
   this.particle = function()
   {
     if(this.data.attr){ return "the"; }
-    var letter = this.data.name.substr(0,1).toLowerCase();
+    let letter = this.data.name.substr(0,1).toLowerCase();
     return letter == "a" || letter == "e" || letter == "i" || letter == "o" || letter == "u" ? "an" : "a"
   }
 
@@ -197,7 +199,7 @@ function Vessel(data = basic)
 
   this.action = function()
   {
-    var action = `warp into the ${this.name()}`
+    let action = `warp into the ${this.name()}`
 
     // Inventory
     if(this.data.parent == parade.ghost().id){

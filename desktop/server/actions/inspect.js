@@ -1,3 +1,5 @@
+"use strict";
+
 function Inspect(host)
 {
   require(`../action`).call(this,host,"inspect");
@@ -8,7 +10,7 @@ function Inspect(host)
   {
     if(params.trim() == ""){ return this.inspect_parent(); }
 
-    var target = this.find(params,this.host.siblings());
+    let target = this.find(params,this.host.siblings());
 
     if(target){
       return `<p>You are inspecting <action>${target}</action>#${target.id}. ${this.make_location(target)}</p>`
@@ -25,7 +27,7 @@ function Inspect(host)
 
   this.make_location = function(target = this.host.parent())
   {
-    var html = ""
+    let html = ""
 
     if(target.parent().is_paradox()){
       return `The ${target.name()} ${target.type()}, located in the ${target.parent().name()} ${target.parent().type()} paradox, was created by ${target.owner()}.`
@@ -38,14 +40,14 @@ function Inspect(host)
 
   this.make_hidden_vessels = function()
   {
-    var siblings = this.host.siblings();
+    let siblings = this.host.siblings();
     if(siblings.length < 4){ return ''; }
 
-    var html = "";
+    let html = "";
 
-    var count = 0;
-    for(id in siblings){
-      var v = siblings[id]
+    let count = 0;
+    for(let id in siblings){
+      let v = siblings[id]
       html += `<ln>${v.to_a()}</ln>`
       count += 1
     }

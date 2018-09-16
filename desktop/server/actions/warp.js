@@ -1,3 +1,5 @@
+"use strict";
+
 function Warp(host)
 {
   require(`../action`).call(this,host,"warp");
@@ -8,9 +10,9 @@ function Warp(host)
   {
     if(params.trim() == ""){ return `<p>Huh?! For more details on how to warp, type <action data='help with warp'>help</action>.</p>`; }
 
-    var parts = this.remove_articles(params).split(" ")
-    var relation = parts[0];
-    var target = this.find(parts.length > 1 ? params.replace(relation,'').trim() : params)
+    let parts = this.remove_articles(params).split(" ")
+    let relation = parts[0];
+    let target = this.find(parts.length > 1 ? params.replace(relation,'').trim() : params)
 
     if(!target){
       return `You cannot warp to this location.`

@@ -1,3 +1,5 @@
+"use strict";
+
 function Commander(el,hint_el)
 {
   this.el = el;
@@ -5,7 +7,7 @@ function Commander(el,hint_el)
 
   this.validate = function(value = this.el.value)
   {
-    var q = this.el.value
+    let q = this.el.value
     this.el.value = "";
     client.query(client.id,q)
     this.el.focus();
@@ -49,10 +51,10 @@ function Commander(el,hint_el)
 
   this.action_hint = function()
   {
-    var target = this.action()
+    let target = this.action()
 
     for(name in client.docs){
-      var action = client.docs[name]
+      let action = client.docs[name]
       if(name.substr(0,target.length) == target){
         return name.substr(target.length)
       }      
@@ -62,13 +64,13 @@ function Commander(el,hint_el)
 
   this.vessel_hint = function()
   {
-    var param = this.el.value.replace(this.action(),"").trim()
-    var article = param.split(" ")[0]
-    var target = param.split(" ")[1]
+    let param = this.el.value.replace(this.action(),"").trim()
+    let article = param.split(" ")[0]
+    let target = param.split(" ")[1]
 
     if(article == "the" && target && target != article){
-      for(id in client.visibles){
-        var name = client.visibles[id].data.name
+      for(let id in client.visibles){
+        let name = client.visibles[id].data.name
         if(name.substr(0,target.length) == target){
           return name.substr(target.length)
         }      

@@ -1,3 +1,5 @@
+"use strict";
+
 function Usage(host)
 {
   require(`../action`).call(this,host,"usage");
@@ -6,9 +8,9 @@ function Usage(host)
 
   this.operate = function(params)
   {
-    var parts = params.split(" ")
-    var action = parts[0]
-    var reaction = params.replace(action,"").trim()
+    let parts = params.split(" ")
+    let action = parts[0]
+    let reaction = params.replace(action,"").trim()
 
     this.host.parent().set("usage",action.toLowerCase())
     if(reaction){
