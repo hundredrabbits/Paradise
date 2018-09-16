@@ -39,12 +39,36 @@
       const Paradise = require('../server/paradise')
       const parade = new Paradise()
       const client = new Client();
+
+      client.controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Left'); },"CmdOrCtrl+,");
+      client.controller.add("default","*","Fullscreen",() => { app.toggle_fullscreen(); },"CmdOrCtrl+Enter");
+      client.controller.add("default","*","Hide",() => { app.toggle_visible(); },"CmdOrCtrl+H");
+      client.controller.add("default","*","Inspect",() => { app.inspect(); },"CmdOrCtrl+.");
+      client.controller.add("default","*","Documentation",() => { client.controller.docs(); },"CmdOrCtrl+Esc");
+      client.controller.add("default","*","Reset",() => { client.reset(); },"CmdOrCtrl+Backspace");
+      client.controller.add("default","*","Quit",() => { app.exit(); },"CmdOrCtrl+Q");
+
+      client.controller.add("default","File","New World",() => { client.reset(); },"CmdOrCtrl+Shift+N");
+      client.controller.add("default","File","Import World",() => { client.import(); },"CmdOrCtrl+Shift+O");
+      client.controller.add("default","File","Export World",() => { client.export(); },"CmdOrCtrl+Shift+S");
+      
+      client.controller.add_role("default","Edit","undo");
+      client.controller.add_role("default","Edit","redo");
+      client.controller.add_role("default","Edit","cut");
+      client.controller.add_role("default","Edit","copy");
+      client.controller.add_role("default","Edit","paste");
+      client.controller.add_role("default","Edit","delete");
+      client.controller.add_role("default","Edit","selectall");
+      client.controller.add("default","Edit","Autocomplete",() => { this.input.complete(); },"Tab");
+
+      client.controller.commit();
+    
       client.start();
       // client.walkthrough.start(500);
 
-      let logo = new Logo();
-      logo.install(120);
-      setTimeout(function(){ logo.remove(); }, 5500);
+      // let logo = new Logo();
+      // logo.install(120);
+      // setTimeout(function(){ logo.remove(); }, 5500);
     </script>
   </body>
 </html>

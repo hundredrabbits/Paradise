@@ -1,6 +1,6 @@
 "use strict";
 
-let Vessel = require('../vessel')
+const Vessel = require('../vessel')
 
 function Create(host)
 {

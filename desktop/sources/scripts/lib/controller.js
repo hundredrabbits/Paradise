@@ -36,9 +36,9 @@ function Controller()
   {
     let f = [];
     let m = this.menu[this.mode];
-    for(cat in m){
+    for(let cat in m){
       let submenu = [];
-      for(name in m[cat]){
+      for(let name in m[cat]){
         let option = m[cat][name];
         if(option.role){
           submenu.push({role:option.role})
@@ -92,7 +92,7 @@ function Controller()
 
     txt += this.documentation_for_mode("default",this.menu.default);
 
-    for(name in this.menu){
+    for(let name in this.menu){
       if(name == "default"){ continue; }
       txt += this.documentation_for_mode(name,this.menu[name]);
     }
@@ -106,7 +106,7 @@ function Controller()
     for(let id in mode){
       if(id == "*" || id == "Edit"){ continue; }
       txt += `### ${id}\n`;
-      for(name in mode[id]){
+      for(let name in mode[id]){
         let option = mode[id][name];
         txt += `- ${name}: \`${option.accelerator}\`\n`;
       }
@@ -119,7 +119,7 @@ function Controller()
   this.accelerator_for_key = function(key,menu)
   {
     let acc = {basic:null,ctrl:null}
-    for(cat in menu){
+    for(let cat in menu){
       let options = menu[cat];
       for(let id in options.submenu){
         let option = options.submenu[id]; if(option.role){ continue; }

@@ -5,36 +5,22 @@ const shell = require('electron').shell;
 
 let is_shown = true;
 
-app.inspect = function()
-{
-  app.win.toggleDevTools();
-}
-
-app.toggle_fullscreen = function()
-{
-  app.win.setFullScreen(app.win.isFullScreen() ? false : true);
-}
-
-app.toggle_visible = function()
-{
-  if(is_shown){ app.win.hide(); } else{ app.win.show(); }
-}
-
-app.inject_menu = function(m)
-{
-  if(process.platform == "win32"){ return; }
-  
-  Menu.setApplicationMenu(Menu.buildFromTemplate(m));
-}
-
-app.win = null;
-
 app.on('ready', () => 
 {
-  app.win = new BrowserWindow({width: 550, height: 720, backgroundColor:"#efefef", minWidth: 540, minHeight: 540, frame:false, autoHideMenuBar: true, icon: __dirname + '/icon.ico'})
+  app.win = new BrowserWindow({
+    width: 550, 
+    height: 720, 
+    backgroundColor:"#efefef", 
+    minWidth: 540, 
+    minHeight: 540, 
+    frame:false, 
+    autoHideMenuBar: true, 
+    icon: __dirname + '/icon.ico'
+  })
   
   app.win.loadURL(`file://${__dirname}/sources/index.html`)
-  
+  app.inspect();
+
   app.win.on('closed', () => {
     win = null
     app.quit()
@@ -47,15 +33,45 @@ app.on('ready', () =>
   app.win.on('show',function() {
     is_shown = true;
   })
+
+  app.on('window-all-closed', () => 
+  {
+    app.quit()
+  })
+
+  app.on('activate', () => {
+    if (app.win === null) {
+      createWindow()
+    }
+  })
 })
 
-app.on('window-all-closed', () => 
+app.inspect = function()
 {
-  app.quit()
-})
+  app.win.toggleDevTools();
+}
 
-app.on('activate', () => {
-  if (app.win === null) {
-    createWindow()
+app.toggle_fullscreen = function()
+{
+  app.win.setFullScreen(app.win.isFullScreen() ? false : true);
+}
+
+app.toggle_visible = function()
+{
+  if(process.platform == "win32"){
+    if(!app.win.isMinimized()){ app.win.minimize(); } else{ app.win.restore(); }
   }
-})
+  else{
+    if(is_shown && !app.win.isFullScreen()){ app.win.hide(); } else{ app.win.show(); }
+  }
+}
+
+app.inject_menu = function(menu)
+{
+  try{
+    Menu.setApplicationMenu(Menu.buildFromTemplate(menu));
+  }
+  catch(err){
+    console.warn("Cannot inject menu.")
+  }  
+}

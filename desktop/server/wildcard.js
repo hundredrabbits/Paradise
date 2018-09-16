@@ -1,6 +1,6 @@
 "use strict";
 
-Clock = require('./clock')
+const Clock = require('./clock')
 
 function Wildcard(str,query)
 {

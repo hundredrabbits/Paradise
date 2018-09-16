@@ -1,6 +1,6 @@
 "use strict";
 
-Wildcard = require('../wildcard')
+const Wildcard = require('../wildcard')
 
 function Use(host)
 {

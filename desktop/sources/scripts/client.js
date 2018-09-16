@@ -2,6 +2,7 @@
 
 function Client()
 {
+  this.theme = new Theme();
   this.controller = new Controller();
   this.walkthrough = new Walkthrough();
   this.speaker = new Speaker();
@@ -23,31 +24,13 @@ function Client()
   this.docs = {}
   this.visibles = []
 
+  this.install = function(host)
+  {
+    this.theme.install(document.body)
+  }
+
   this.start = function()
   {
-    this.controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Left'); },"CmdOrCtrl+,");
-    this.controller.add("default","*","Fullscreen",() => { app.toggle_fullscreen(); },"CmdOrCtrl+Enter");
-    this.controller.add("default","*","Hide",() => { app.toggle_visible(); },"CmdOrCtrl+H");
-    this.controller.add("default","*","Inspect",() => { app.inspect(); },"CmdOrCtrl+.");
-    this.controller.add("default","*","Documentation",() => { client.controller.docs(); },"CmdOrCtrl+Esc");
-    this.controller.add("default","*","Reset",() => { client.reset(); },"CmdOrCtrl+Backspace");
-    this.controller.add("default","*","Quit",() => { app.exit(); },"CmdOrCtrl+Q");
-
-    this.controller.add("default","File","New World",() => { client.reset(); },"CmdOrCtrl+Shift+N");
-    this.controller.add("default","File","Import World",() => { client.import(); },"CmdOrCtrl+Shift+O");
-    this.controller.add("default","File","Export World",() => { client.export(); },"CmdOrCtrl+Shift+S");
-    
-    this.controller.add_role("default","Edit","undo");
-    this.controller.add_role("default","Edit","redo");
-    this.controller.add_role("default","Edit","cut");
-    this.controller.add_role("default","Edit","copy");
-    this.controller.add_role("default","Edit","paste");
-    this.controller.add_role("default","Edit","delete");
-    this.controller.add_role("default","Edit","selectall");
-    this.controller.add("default","Edit","Autocomplete",() => { this.input.complete(); },"Tab");
-
-    this.controller.commit();
-
     this.el = document.body;
     this.h1 = document.getElementById("h1");
     this.page = document.getElementById("page");
@@ -120,7 +103,7 @@ function Client()
     this.tips.innerHTML = html
 
     // Inventory
-    let html = ""
+    html = ""
     for(let id in response.sight.inventory){
       let v = response.sight.inventory[id]
       html += `<ln>${v.to_a(false)}${v.is_program() ? '('+v.data.program.split(" ")[0]+')' : ''}</ln>`;      
