@@ -30,9 +30,9 @@ body wr action:hover { cursor: pointer; }
 #reaction p { font-size: 18px;margin: 0px auto 30px;min-width: 240px; font-family: 'lora_regular' }
 #action { position: relative; }
 #action::before { content:"•"; position: absolute; margin-left: -15px; color:#ccc; }
-#inventory { background: transparent;position: absolute;bottom: 40px;left: 30px;width: calc(100% - 90px);padding: 15px;font-size: 12px; overflow:hidden; transition:all 250ms; font-family: 'input_mono_regular'; columns:2; color:#999;}
-#inventory.hidden { opacity: 1; bottom:10px; }
-#inventory ln { display: block }
+#inventory { background: transparent;position: absolute;bottom: 40px;left: 30px;width: calc(100% - 90px);padding: 0px 15px;font-size: 12px; overflow:hidden; transition:all 250ms; font-family: 'input_mono_regular'; columns:2; color:#999; overflow: hidden; height:120px;}
+#inventory.hidden { opacity: 1; height:0px; }
+#inventory ln { display: block; line-height: 40px }
 #inventory ln action { color:black; }
 #inventory ln action:hover { text-decoration: underline; }
 #inventory_toggle { position: absolute;bottom: 5px;right: 30px;font-family: 'input_mono_regular';font-size: 12px;line-height: 30px;z-index: 900;color: #ccc; transition:all 250ms;}
