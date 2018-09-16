@@ -101,6 +101,7 @@ function Theme(default_theme = {background: "#222", f_high: "#fff", f_med: "#ccc
 
   this.reset = function()
   {
+    console.log("Theme","Resetting..")
     this.load(this.collection.default);
   }
 

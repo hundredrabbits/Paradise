@@ -2,7 +2,18 @@
 
 function Client()
 {
-  this.theme = new Theme();
+  this.theme = new Theme({
+    background: "#efefef",
+    f_high: "#000000",
+    f_med: "#999999",
+    f_low: "#cccccc",
+    f_inv: "#000000",
+    b_high: "#999999",
+    b_med: "#cccccc",
+    b_low: "#ffffff",
+    b_inv: "#ffffff"
+  });
+
   this.controller = new Controller();
   this.walkthrough = new Walkthrough();
   this.speaker = new Speaker();
@@ -136,11 +147,6 @@ function Client()
 
   // 
 
-  this.reset = function()
-  {
-    this.theme.reset();
-  }
-
   this.import = function()
   {
     let paths = dialog.showOpenDialog({properties: ['openFile'],filters:[{name:"Paradise World",extensions:["teapot"]}]});
@@ -186,6 +192,7 @@ function Client()
   this.reset = function()
   {
     console.warn("-- APOCALYPSE --")
+    this.theme.reset();
     parade.reset();
     setTimeout(()=>{ this.query(this.id); this.speaker.play("click1"); }, 250)
   }

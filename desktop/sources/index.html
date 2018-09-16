@@ -40,7 +40,7 @@
       const parade = new Paradise()
       const client = new Client();
 
-      client.controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Left'); },"CmdOrCtrl+,");
+      client.controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Paradise'); },"CmdOrCtrl+,");
       client.controller.add("default","*","Fullscreen",() => { app.toggle_fullscreen(); },"CmdOrCtrl+Enter");
       client.controller.add("default","*","Hide",() => { app.toggle_visible(); },"CmdOrCtrl+H");
       client.controller.add("default","*","Inspect",() => { app.inspect(); },"CmdOrCtrl+.");
@@ -60,6 +60,12 @@
       client.controller.add_role("default","Edit","delete");
       client.controller.add_role("default","Edit","selectall");
       client.controller.add("default","Edit","Autocomplete",() => { this.input.complete(); },"Tab");
+
+
+      client.controller.add("default","Theme","Noir",() => { client.theme.noir(); },"CmdOrCtrl+Shift+1");
+      client.controller.add("default","Theme","Pale",() => { client.theme.pale(); },"CmdOrCtrl+Shift+2");
+      client.controller.add("default","Theme","Invert",() => { client.theme.invert(); },"CmdOrCtrl+Shift+I");
+      client.controller.add("default","Theme","Install",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Themes'); });
 
       client.controller.commit();
       
