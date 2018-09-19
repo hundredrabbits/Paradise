@@ -8,7 +8,7 @@ function Enter(host)
   
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to move, type <action data='help with enter'>help</action>.</p>`; }
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to move, type <action data='learn to enter'>learn</action>.</p>`; }
 
     let target = this.find(params,this.host.siblings(true));
 

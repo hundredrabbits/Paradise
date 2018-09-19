@@ -52,10 +52,10 @@ function Walkthrough()
     "create a blue house",
     "create a yellow house",
     "inspect the red house",
-    "help",
-    "help with program",
-    "help with use",
-    "help with usage",
+    "learn",
+    "learn to program",
+    "learn to use",
+    "learn to usage",
     "note It is raining. Again."
   ]
 

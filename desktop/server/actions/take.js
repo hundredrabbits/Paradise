@@ -8,7 +8,7 @@ function Take(host)
 
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to take, type <action data='help with take'>help</action>.</p>`; }
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to take, type <action data='learn to take'>learn</action>.</p>`; }
 
     let target = this.find(params,this.host.siblings());
 

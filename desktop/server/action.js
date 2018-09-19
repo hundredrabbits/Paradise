@@ -42,7 +42,7 @@ function Action(host,name)
 
     // Otherwise..
     if(params == ""){ return ""; }
-    return `<p>Unknown action, to see a list of available actions, type <action data='help'>help</action>.</p>`
+    return `<p>Unknown action, to see a list of available actions, type <action data='learn'>learn</action>.</p>`
   }
 
   this.change_vessel = function(params)
@@ -119,7 +119,7 @@ function Action(host,name)
   this.header = function()
   {
     if(this.host.is_paradox()){
-      return `You are the <action data='help with paradoxes'>paradox</action> of ${this.host.particle()} ${this.host.name()}.`  
+      return `You are the <action data='learn about paradoxes'>paradox</action> of ${this.host.particle()} ${this.host.name()}.`  
     }
     if(this.host.parent().is_paradox()){
       return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} ${this.host.parent().name()}.`
@@ -166,26 +166,29 @@ function Action(host,name)
   {
     let actions = {}
     let _actions = {
+      learn:require('./actions/learn'),
+
+      inventory:require('./actions/inventory'),
+
       create:require('./actions/create'),
       become:require('./actions/become'),
       enter:require('./actions/enter'),
       leave:require('./actions/leave'),
 
-      help:require('./actions/help'),
       warp:require('./actions/warp'),
       take:require('./actions/take'),
       drop:require('./actions/drop'),
       move:require('./actions/move'),
-      inventory:require('./actions/inventory'),
 
       note:require('./actions/note'),
       transform:require('./actions/transform'),
       transmute:require('./actions/transmute'),
 
+      usage:require('./actions/usage'),
       inspect:require('./actions/inspect'),
+
       program:require('./actions/program'),
       use:require('./actions/use'),
-      usage:require('./actions/usage'),
       cast:require('./actions/cast'),
     }
     for(let id in _actions){
@@ -200,11 +203,11 @@ function Action(host,name)
     let a = []
     // Paradox
     if(this.host.is_paradox()){
-      a.push("Your vessel is a <action data='help with paradoxes'>paradox</action>, you cannot leave.")
+      a.push("Your vessel is a <action data='learn about paradoxes'>paradox</action>, you cannot leave.")
     }
     // Paradox
     if(this.host.parent().is_paradox()){
-      a.push(`The ${this.host.parent().name()} vessel is a <action data='help with paradoxes'>paradox</action>, you cannot leave.`)
+      a.push(`The ${this.host.parent().name()} vessel is a <action data='learn about paradoxes'>paradox</action>, you cannot leave.`)
     }
     // Empty
     if(this.host.siblings().length < 1){
@@ -247,7 +250,7 @@ function Action(host,name)
   this.err_NOTARGET = function(params,type = "visible")
   {
     let target = this.remove_articles(params);
-    return `<p>There is no ${type} <action>${target}</action>. Do you need <action data='help with ${this.name}'>help</action>?</p>`
+    return `<p>There is no ${type} <action>${target}</action>. <action data='learn to ${this.name}'>Learn to ${this.name}</action>?</p>`
   }
 
   this.remove_articles = function(str)

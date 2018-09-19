@@ -8,7 +8,7 @@ function Warp(host)
 
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to warp, type <action data='help with warp'>help</action>.</p>`; }
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to warp, type <action data='learn to warp'>learn</action>.</p>`; }
 
     let parts = this.remove_articles(params).split(" ")
     let relation = parts[0];

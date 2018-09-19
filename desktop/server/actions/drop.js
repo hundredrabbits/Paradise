@@ -8,7 +8,7 @@ function Drop(host)
 
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to drop, type <action data='help with drop'>help</action>.</p>`; }
+    if(params.trim() == ""){ return `<p>Huh?! For more details on how to drop, type <action data='learn to drop'>learn</action>.</p>`; }
 
     let target = this.find(params,this.host.children());
 

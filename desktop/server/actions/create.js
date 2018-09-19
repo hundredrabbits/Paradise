@@ -15,7 +15,7 @@ function Create(host)
     let name  = parts[parts.length-1].toLowerCase()
 
     if(parseInt(name) > -1){ return `<p>Vessel names cannot be numbers.</p>` }
-    if(name == ""){ return `<p>You must give a name to your vessel, for more details on how to create, type <action data='help with create'>help</action>.</p>`; }
+    if(name == ""){ return `<p>You must give a name to your vessel, for more details on how to create, type <action data='learn to create'>learn</action>.</p>`; }
     if(name.length < 3 || name.length > 14){ return `<p>The vessel name must be between 3 and 14 characters long.</p>` }
     if(attr && attr.length > 14){ return `<p>The vessel attribute is too long.</p>` }
 

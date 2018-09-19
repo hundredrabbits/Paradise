@@ -1,8 +1,8 @@
 "use strict";
 
-function Help(host)
+function Learn(host)
 {
-  require(`../action`).call(this,host,"help");
+  require(`../action`).call(this,host,"learn");
 
   this.knowledge = {
     paradoxes: "Paradoxes are vessels folded onto themselves, existing within their own space. One could argue that Paradise itself is a paradox."
@@ -43,13 +43,14 @@ function Help(host)
     let docs = this.documentation()
     let count = Object.keys(docs).length
     let list = ""
-    let index = 0
+    let index = 2
     for(let id in docs){
-      list += `<action data='help with ${id}'>${id.capitalize()}</action>${index == count-2 ? ' or ' : (index == count-1 ? '. ' : ', ')} `
+      if(id == "learn"){ continue; }
+      list += `<action data='learn to ${id}'>${id.capitalize()}</action>${index == count-1 ? ' or ' : (index == count ? '. ' : ', ')} `
       index += 1
     }
-    return `<img src='media/graphics/default.png'/><p>Which action would you like help with? ${list}</p>`
+    return `<img src='media/graphics/default.png'/><p>Which action would you like to <aciton data='learn'>learn</action>? ${list}</p>`
   }
 }
 
-module.exports = Help
+module.exports = Learn
