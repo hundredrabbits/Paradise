@@ -1,6 +1,6 @@
 # Paradise
 
-[Paradise](http://wiki.xxiivv.com/paradise) plays like a strange [interactive fiction novel](https://www.youtube.com/watch?v=9gmMVjHJ6cU), in an ever-changing world where you are not an avatar but a force acting upon places, and objects, and puns, words - moving around and into your other selves, threading through chaos.
+[Paradise](http://wiki.xxiivv.com/paradise) plays like a strange [interactive fiction novel](https://www.youtube.com/watch?v=9gmMVjHJ6cU), in an ever-changing world where you are not an avatar but a force acting upon places, and objects, and puns, words - moving around and into your other selves, threading through chaos. See also [Paradise OS](https://github.com/neauoire/ParadiseOS).
 
 _“I have always imagined that Paradise will be a kind of library.”_ — Jorge Luis Borges
 
@@ -90,43 +90,23 @@ You can queue multiple actions using the `&` character, for example `create a te
 Wildcards are markups created for notes and programs, to make vessels more responsive to their environment. A simple example would be `note Hello @Name.`, rendered as `Hello Ghost`.
 
 ### Basics
-- `@FULL`, display the current vessel attribute and name.(uppercase)
-- `@NAME`, display the current vessel name.(uppercase)
-- `@ATTR`, display the current vessel attribute.(uppercase)
-- `@full`, display the current vessel attribute and name.(lowercase)
-- `@name`, display the current vessel name.(lowercase)
-- `@attr`, display the current vessel attribute.(lowercase)
-- `@Full`, display the current vessel attribute and name.(capitalized)
-- `@Name`, display the current vessel name.(capitalized)
-- `@Attr`, display the current vessel attribute.(capitalized)
-- `@note`, display the current vessel note.
-- `@size`, size of the current inventory.
+- `@FULL`, `@full`, `@Full` display the current vessel attribute and name.(uppercase)
+- `@NAME`, `@name`, `@Name` display the current vessel name.(uppercase)
+- `@ATTR`, `@attr`, `@Attr` display the current vessel attribute.(uppercase)
+- `@STEM`, `@stem`, `@Stem` name of current parent stem vessel.(uppercase)
+- `@size`, number of children vessels.
 
 ### Parent
-- `_@FULL`, display the parent vessel attribute and name.(uppercase)
-- `_@NAME`, display the parent vessel name.(uppercase)
-- `_@ATTR`, display the parent vessel attribute.(uppercase)
-- `_@full`, display the parent vessel attribute and name.(lowercase)
-- `_@name`, display the parent vessel name.(lowercase)
-- `_@attr`, display the parent vessel attribute.(lowercase)
-- `_@Full`, display the parent vessel attribute and name.(capitalized)
-- `_@Name`, display the parent vessel name.(capitalized)
-- `_@Attr`, display the parent vessel attribute.(capitalized)
-- `@_note`, display the parent vessel note.
-- `@_size`, size of the current inventory.
+- `@_FULL`, `@_full`, `@_Full` display the parent vessel attribute and name.(uppercase)
+- `@_NAME`, `@_name`, `@_Name` display the parent vessel name.(uppercase)
+- `@_ATTR`, `@_attr`, `@_Attr` display the parent vessel attribute.(uppercase)
+- `@_size`, number of sibling vessels.
 
 ### Parade
-- `@__size`, size of the parade.
-- `@__RANDOM`, random parade vessel.(uppercase)
-- `@__random`, random parade vessel.(lowercase)
-- `@__Random`, random parade vessel.(capitalized)
+- `@__RANDOM`, `@__random`, `@__Random` random parade vessel.(uppercase)
 - `@__random-name`, random parade vessel name.
 - `@__random-attr`, random parade vessel attribute.
-
-### Stem
-- `@STEM`, name of current parent stem vessel.(uppercase)
-- `@stem`, name of current parent stem vessel.(lowercase)
-- `@Stem`, name of current parent stem vessel.(capitalized)
+- `@__size`, size of the entire parade.
 
 ### Time
 - `@time`, [Desamber](https://wiki.xxiivv.com/#clock) time format **830:024**.
@@ -135,7 +115,6 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 
 ### Program Tools
 - `@(3)`, print the name and action connected with that vessel id. 
-- `@and`, chain commands in programs. ex: `program create a vessel @and enter the vessel`.
 - `@query`, access the content of a usage action. ex: `say hello`, `usage @if(@query IS hello THEN hi!)`
 - `@random(red green blue)`, choose a random word.
 - `@if(a IS b THEN c ELSE d)`, a simple conditional function.

@@ -22,7 +22,7 @@ function Wildcard(str,query)
     s = s.replace('@Name',`${parade.ghost().data.name.toLowerCase().capitalize()}`)
     s = s.replace('@Attr',`${parade.ghost().data.attr ? parade.ghost().data.attr.toLowerCase() : ''.capitalize()}`)
     s = s.replace('@size',`${parade.ghost().children().length}`)
-    s = s.replace('@note',`${parade.ghost().data.note}`)
+
     // Parent
     s = s.replace('@_FULL',`${parade.ghost().parent().name().toUpperCase()}`)
     s = s.replace('@_NAME',`${parade.ghost().parent().data.name.toUpperCase()}`)
@@ -34,7 +34,6 @@ function Wildcard(str,query)
     s = s.replace('@_Name',`${parade.ghost().parent().data.name.toLowerCase().capitalize()}`)
     s = s.replace('@_Attr',`${parade.ghost().parent().data.attr ? parade.ghost().parent().data.attr.toLowerCase() : ''.capitalize()}`)
     s = s.replace('@_size',`${parade.ghost().siblings().length}`)
-    s = s.replace('@_note',`${parade.ghost().parent().data.note}`)
     // Stem
     s = s.replace('@STEM',`${parade.ghost().parent().stem().name().toUpperCase()}`)
     s = s.replace('@stem',`${parade.ghost().parent().stem().name().toLowerCase()}`)
