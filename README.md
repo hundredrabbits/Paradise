@@ -6,8 +6,7 @@ _“I have always imagined that Paradise will be a kind of library.”_ — Jorg
 
 ## Actions
 
-There are 16 base actions(excl. Learn). 
-You can queue multiple actions using the `&` character, for example `create a teapot & enter the teapot`.
+There are 16 base actions, you can queue multiple actions using the `&` character, for example `create a teapot & enter the teapot`.
 
 ### Default
 
@@ -18,72 +17,72 @@ You can queue multiple actions using the `&` character, for example `create a te
 ### Basic
 
 #### Create
-- `create a ceramic teacup` Create a new vessel.
+- `create a ceramic teacup` Create a **new vessel**.
 
 #### Become
-- `become a teacup` Become a visible vessel.
-- `become the red teacup` Become a distant vessel.
+- `become a teacup` Become a **visible vessel**.
+- `become the red teacup` Become a **distant vessel**.
 
 #### Enter
-- `enter the teacup` Enter a visible vessel.
+- `enter the teacup` Enter a **visible vessel**.
 
 #### Leave
-- `leave` Leave the current parent vessel.
+- `leave` Leave the current **parent vessel**.
 
 ### Advanced
 
 #### Warp
-- `warp to the red teacup` Warp to a distant vessel's parent location.
-- `warp in the yellow teacup` Warp in a distant vessel's location.
-- `warp to any teacup` Warp to a random distant vessel's parent location.
-- `warp in any teacup` Warp in a random distant vessel's location.
-- `warp anywhere` Warp in a random distant vessel's location.
+- `warp to the red teacup` Warp to a **distant vessel**'s parent location.
+- `warp in the yellow teacup` Warp in a **distant vessel**'s location.
+- `warp to any teacup` Warp to a random **distant vessel**'s parent location.
+- `warp in any teacup` Warp in a random **distant vessel**'s location.
+- `warp anywhere` Warp in a random **distant vessel**'s location.
 
 #### Take
-- `take the red teacup` Move a visible vessel into your vessel.
-- `take any teacup` Move a visible vessel into your vessel.
-- `take anything` Move a random visible vessel into your vessel.
+- `take the red teacup` Move a **visible vessel** into your vessel.
+- `take any teacup` Move a **visible vessel** into your vessel.
+- `take anything` Move a random **visible vessel** into your vessel.
 
 #### Drop
-- `drop the red teacup` Move a child vessel into the parent vessel.
-- `drop a teacup` Move a child vessel into the parent vessel.
-- `drop any teacup` Move a random child vessel into the parent vessel.
+- `drop the red teacup` Move a **child vessel** into the **parent vessel**.
+- `drop a teacup` Move a **child vessel** into the **parent vessel**.
+- `drop any teacup` Move a random **child vessel** into the **parent vessel**.
 
 #### Move
-- `move the red teacup in the blue teacup` Move a visible vessel into another visible vessel.
+- `move the red teacup in the blue teacup` Move a **visible vessel** into another **visible vessel**.
 
 ### Narrative
 
 #### Note
-- `note It is raining. Again.` Add a note to the parent vessel.
+- `note It is raining. Again.` Add a note to the **parent vessel**.
 
 #### Inspect
-- `inspect the teacup` Inspect the target visible vessel.
+- `inspect the teacup` Inspect the target **visible vessel**.
 
 #### Transform
-- `transform into a teacup` Rename the current vessel.
-- `transform the teacup into a cat` Rename a visible vessel.
+- `transform into a teacup` Rename the **current vessel**.
+- `transform the teacup into a cat` Rename a **visible vessel**.
 
 #### Transmute
-- `transmute into glass` Add an adjective to the current vessel.
-- `transmute glass into gold` Add an adjective to a visible vessel.
-- `transmute into anything` Remove an adjective to the current vessel.
-- `transmute glass into anything` Remove an adjective to a visible vessel.
+- `transmute into glass` Add an adjective to the **current vessel**.
+- `transmute glass into gold` Add an adjective to a **visible vessel**.
+- `transmute into anything` Remove an adjective to the **current vessel**.
+- `transmute glass into anything` Remove an adjective to a **visible vessel**.
 
 ### Programming
 
 #### Program
-- `program warp to the library` Automate a vessel.
+- `program warp to the library` Automate the **parent vessel**.
 
 #### Use
-- `use the teacup` Trigger the vessel's automation.
+- `use the teacup` Trigger the **visible vessel**'s automation.
 
 #### Usage
-- `usage open` Select the vessel's trigger.
-- `usage roll You rolled @random(1 2 3 4 5 6).` Set a custom reacion.
+- `usage open` Set the **parent vessel**'s trigger.
+- `usage roll You rolled @random(1 2 3 4 5 6).` Set a custom reaction to the **parent vessel**.
 
 #### Cast
-- `cast the storm scroll at the golden beetle` Trigger a distant vessel's automation as another vessel.
+- `cast the storm scroll at the golden beetle` Trigger a **distant vessel**'s automation as another vessel.
 
 ## Wildcards
 
