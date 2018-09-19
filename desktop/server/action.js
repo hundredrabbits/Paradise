@@ -31,6 +31,8 @@ function Action(host,name)
   
   this.operate = function(params,action)
   {
+    if(!action){ return ""; }
+  
     // Check if is custom action
     let siblings = this.host.siblings()
     for(let id in siblings){

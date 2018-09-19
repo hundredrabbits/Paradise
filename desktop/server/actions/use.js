@@ -14,11 +14,11 @@ function Use(host)
 
     let target = this.find(params,this.host.usables());
 
-    if (!target) {
+    if(!target){
       return this.err_NOTARGET(params,"available")
     }
 
-    if (!target.usable()) {
+    if(!target.usable()){
       return `<p><action>${target}</action> cannot be used.</p>`
     }
 
@@ -32,6 +32,7 @@ function Use(host)
     else{
       this.host.cmd(new Wildcard(target.data.program,params).toString(false))
     }
+
     return target.data.reaction ? `<p>${new Wildcard(target.data.reaction,params).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
   }
 }
