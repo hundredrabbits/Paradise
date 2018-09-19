@@ -13,6 +13,7 @@ function Usage(host)
     let reaction = params.replace(action,"").trim()
 
     this.host.parent().set("usage",action.toLowerCase())
+    
     if(reaction){
       this.host.parent().set("reaction",reaction)
     }

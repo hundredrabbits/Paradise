@@ -10,7 +10,7 @@ function Enter(host)
   {
     if(params.trim() == ""){ return `<p>Huh?! For more details on how to move, type <action data='help with enter'>help</action>.</p>`; }
 
-    let target = this.find(params,this.host.siblings());
+    let target = this.find(params,this.host.siblings(true));
 
     if(target){
       this.host.move(target)

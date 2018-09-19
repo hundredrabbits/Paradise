@@ -13,6 +13,7 @@ function Note(host)
     this.host.parent().set("note",params)
 
     let verb = 'added a'
+    
     if(params == ""){
       verb = 'removed the'
     }

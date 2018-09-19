@@ -63,6 +63,7 @@ function Action(host,name)
     if(is_numeric){ return this.find_id(a,parseInt(name)); }
 
     if(name == "anywhere" || name == "anything"){ return this.find_random(a); }
+    if(name == "myself" || name == "self"){ return this.host; }
 
     return is_any ? this.find_any(a,attr,name) : this.find_target(a,attr,name);
   } 
@@ -174,6 +175,7 @@ function Action(host,name)
       warp:require('./actions/warp'),
       take:require('./actions/take'),
       drop:require('./actions/drop'),
+      move:require('./actions/move'),
       inventory:require('./actions/inventory'),
 
       note:require('./actions/note'),

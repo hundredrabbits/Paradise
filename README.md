@@ -52,7 +52,11 @@ You can input multiple commands using the `&` character to break a command into 
 - `drop a teacup` Move a child vessel into the parent vessel.
 - `drop any teacup` Move a random child vessel into the parent vessel.
 
+#### Move
+- `move the red teacup in the blue teacup` Move a visible vessel into another visible vessel.
+
 ### Narrative
+
 #### Note
 - `note It is raining. Again.` Add a note to the parent vessel.
 
@@ -70,6 +74,7 @@ You can input multiple commands using the `&` character to break a command into 
 - `transmute glass into anything` Remove an adjective to a visible vessel.
 
 ### Programming
+
 #### Program
 - `program warp to the library` Automate a vessel.
 

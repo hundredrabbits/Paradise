@@ -4,7 +4,7 @@ function Take(host)
 {
   require(`../action`).call(this,host,"take");
 
-  this.take = "Move a visible vessel into a child vessel."
+  this.docs = "Move a visible vessel into a child vessel."
 
   this.operate = function(params)
   {
