@@ -6,7 +6,11 @@ _“I have always imagined that Paradise will be a kind of library.”_ — Jorg
 
 ## Actions
 
-You can input multiple commands using the `&` character, for example `create a teapot & enter the teapot`.
+There are 16 action primitives(excl. Learn), you can queue multiple actions using the `&` character, for example `create a teapot & enter the teapot`.
+
+#### Learn
+- `learn` See available actions.
+- `learn to drop` See the documentation for the **drop** action.
 
 ### Basic
 
@@ -24,10 +28,6 @@ You can input multiple commands using the `&` character, for example `create a t
 - `leave` Leave the current parent vessel.
 
 ### Advanced
-
-#### Learn
-- `learn` See available actions.
-- `learn to drop` See the documentation for the **drop** action.
 
 #### Warp
 - `warp to the red teacup` Warp to a distant vessel's parent location.
