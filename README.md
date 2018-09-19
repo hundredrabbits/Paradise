@@ -6,7 +6,10 @@ _“I have always imagined that Paradise will be a kind of library.”_ — Jorg
 
 ## Actions
 
-There are 16 action primitives(excl. Learn), you can queue multiple actions using the `&` character, for example `create a teapot & enter the teapot`.
+There are 16 base actions(excl. Learn). 
+You can queue multiple actions using the `&` character, for example `create a teapot & enter the teapot`.
+
+### Default
 
 #### Learn
 - `learn` See available actions.
