@@ -1,18 +1,12 @@
 # Paradise
 
-[Paradise](http://wiki.xxiivv.com/paradise) plays like a strange [interactive fiction novel](https://www.youtube.com/watch?v=9gmMVjHJ6cU), in an ever-changing world where you are not an avatar but a force acting upon places, and objects, and puns, words - moving around and into your other selves, threading chaos.
+[Paradise](http://wiki.xxiivv.com/paradise) plays like a strange [interactive fiction novel](https://www.youtube.com/watch?v=9gmMVjHJ6cU), in an ever-changing world where you are not an avatar but a force acting upon places, and objects, and puns, words - moving around and into your other selves, threading through chaos.
 
 _“I have always imagined that Paradise will be a kind of library.”_ — Jorge Luis Borges
 
-## Controls
-
-- `ctrl(cmd)+shift+n` Reset world to a fresh Library.
-- `ctrl(cmd)+shift+o` Open world and replace current.
-- `ctrl(cmd)+shift+s` Save world.
-
 ## Actions
 
-You can input multiple commands using the `&` character to break a command into multiple.
+You can input multiple commands using the `&` character, for example `create a teapot & enter the teapot`.
 
 ### Basic
 
@@ -31,9 +25,9 @@ You can input multiple commands using the `&` character to break a command into 
 
 ### Advanced
 
-#### Help
-- `help` See available help.
-- `help with drop` See help for the **drop** action.
+#### Learn
+- `learn` See available actions.
+- `learn to drop` See the documentation for the **drop** action.
 
 #### Warp
 - `warp to the red teacup` Warp to a distant vessel's parent location.
