@@ -109,9 +109,9 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@__size`, size of the entire parade.
 
 ### Time
-- `@time`, [Desamber](https://wiki.xxiivv.com/#clock) time format **830:024**.
-- `@time-beat`, [Desamber](https://wiki.xxiivv.com/#clock) time format **830**.
-- `@time-pulse`, [Desamber](https://wiki.xxiivv.com/#clock) time format **024**.
+- `@time`, [Desamber](https://wiki.xxiivv.com/Desamber) time format **830:024**.
+- `@time-beat`, [Desamber](https://wiki.xxiivv.com/Desamber) time format **830**.
+- `@time-pulse`, [Desamber](https://wiki.xxiivv.com/Desamber) time format **024**.
 
 ### Program Tools
 - `@(3)`, print the name and action connected with that vessel id. 
