@@ -6,10 +6,10 @@ function Enter(host)
 
   this.docs = "Enter a visible vessel."
   
+  this.requires_params = true;
+  
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to move, type <action data='learn to enter'>learn</action>.</p>`; }
-
     let target = this.find(params,this.host.siblings(true));
 
     if(target){

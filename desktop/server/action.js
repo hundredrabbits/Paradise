@@ -8,9 +8,11 @@ function Action(host,name)
   this.host = host;
   this.docs = `No documentation for '${name}'`
 
+  this.requires_params = false;
+
   this.run = function(params = "",action_name = null)
   {
-    let reaction = this.operate(params,action_name);
+    let reaction = !this.requires_params || (this.requires_params && params != "") ? this.operate(params) : `<p>Huh?! For more details on how to ${this.name}, type <action data='learn to ${this.name}'>learn</action>.</p>`;
 
     let h = {
       sight: {

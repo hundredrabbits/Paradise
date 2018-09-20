@@ -14,15 +14,15 @@ function Vessel(data = basic)
 
   this.cmd = function(str)
   {
-    console.log(str)
     let parts = str.split(" ")
     return this.act(parts.splice(0,1)[0],parts.join(' '))
   }
 
-  this.act = function(action,params)
+  this.act = function(a,p)
   {
-    const responder = this.response(action)
-    return new responder(this).run(params,action)
+    const responder = this.response(a)
+    const action = new responder(this)    
+    return action.run(p,a)
   }
 
   this.response = function(action)

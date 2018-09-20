@@ -85,8 +85,6 @@ function Walkthrough()
     "create",
     "drop",
     "enter",
-    "inspect",
-    "learn",
     "move",
     "note",
     "program",
@@ -106,6 +104,7 @@ function Walkthrough()
   this.all = this.all.concat(this.metas)
   this.all = this.all.concat(this.alchemy)
   this.all = this.all.concat(this.spells)
+  this.all = this.all.concat(this.errors)
 
   this.index = 0;
   this.speed = 500;
@@ -114,10 +113,11 @@ function Walkthrough()
   {
     this.speed = speed;
     this.index = 0;
+    client.reset();
     this.run()
   }
 
-  this.run = function(target = this.errors)
+  this.run = function(target = this.all)
   {
     client.query(0,target[this.index]);
     this.index += 1

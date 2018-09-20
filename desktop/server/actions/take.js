@@ -6,10 +6,10 @@ function Take(host)
 
   this.docs = "Move a visible vessel into a child vessel."
 
+  this.requires_params = true;
+  
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to take, type <action data='learn to take'>learn</action>.</p>`; }
-
     let target = this.find(params,this.host.siblings());
 
     if(target){

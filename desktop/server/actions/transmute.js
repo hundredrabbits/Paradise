@@ -6,10 +6,10 @@ function Transmute(host)
 
   this.docs = "Change your current vessel's, or a target vessel's, attribute."
 
+  this.requires_params = true;
+  
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to transmute, type <action data='learn to transmute'>learn</action>.</p>`; }
-
     let parts = this.remove_articles(params).split(" ")
     let attr = parts[parts.length-1].toLowerCase()
     let target = parts.length > 2 ? this.find_target(this.host.siblings(),parts[0],null) : this.host

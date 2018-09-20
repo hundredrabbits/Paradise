@@ -8,10 +8,10 @@ function Use(host)
 
   this.docs = "Trigger a vessel's program."
 
+  this.requires_params = true;
+  
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on how to use, type <action data='learn to use'>learn</action>.</p>`; }
-
     let target = this.find(params,this.host.usables());
 
     if(!target){
