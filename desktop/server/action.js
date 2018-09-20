@@ -11,7 +11,6 @@ function Action(host,name)
   this.run = function(params = "",action_name = null)
   {
     let _reaction = this.operate(params);
-
     let _header = this._header();
     let _page = this._page();
     let _note = this._note();
@@ -40,9 +39,7 @@ function Action(host,name)
   }
   
   this.operate = function(params,action)
-  {
-    if(!action){ return ""; }
-  
+  {  
     // Check if is custom action
     let siblings = this.host.siblings()
     for(let id in siblings){
@@ -51,9 +48,6 @@ function Action(host,name)
       if(v.is_program()){ this.host.cmd(new Wildcard(this.host,v.data.program,params).toString(false)); }
       return v.data.reaction ? `<p>${new Wildcard(this.host,v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
-
-    // Otherwise..
-    if(params == ""){ return ""; }
     return `<p>Unknown action, to see a list of available actions, type <action data='learn'>learn</action>.</p>`
   }
 

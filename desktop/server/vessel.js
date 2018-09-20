@@ -20,12 +20,12 @@ function Vessel(data = basic)
 
   this.act = function(a,p)
   {
-    const responder = this.response(a)
+    const responder = this.response(a ? a : "look")
     const action = new responder(this)    
     return action.run(p,a)
   }
 
-  this.response = function(action)
+  this.response = function(action = "look")
   {
     try{
       return require(`./actions/${action}`);
