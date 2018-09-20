@@ -19,7 +19,8 @@ function Action(host,name)
     let _note = this._note();
     let _view = this._view();
 
-    let cli = _reaction ? _reaction : `${_header}\n\n${_note}\n\n> ${_view}`;
+    let cli = _reaction ? _reaction : `${_header ? _header+'\n\n' : ''}${_note ? _note+'\n\n' : ''}${_view ? '> '+_view : ''}`;
+    let passive = this._passive();
 
     let h = {
       sight: {
@@ -31,7 +32,8 @@ function Action(host,name)
         reaction: _reaction ? _reaction : `<p>Huh?! For more details on how to ${this.name}, type <action data='learn to ${this.name}'>learn</action>.</p>`,
         action: this.action(),
         inventory: this.host.children(),
-        cli: cli.replace(/(<([^>]+)>)/ig,'')
+        cli: cli.replace(/(<([^>]+)>)/ig,''),
+        passive: passive
       },
       docs: this.documentation(),
       visibles: this.visibles()
@@ -160,6 +162,20 @@ function Action(host,name)
     if(siblings.length > 1){ return `You see ${siblings[0].to_a()} and ${siblings[1].to_a()}.` }
     if(siblings.length > 0){ return `You see ${siblings[0].to_a()}.` }
     return "You see nothing."
+  }
+
+  this._passive = function()
+  {
+    let html = ''
+
+    let children = this.host.children()
+    for(let id in children){
+      let v = children[id];
+      let p = v.passive();
+      html += p ? `${new Wildcard(this.host,p).toString(false)} | ` : ''
+    }
+
+    return html.substr(0,html.length-2).trim();
   }
 
   this.action = function()

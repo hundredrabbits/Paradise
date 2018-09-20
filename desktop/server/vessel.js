@@ -184,13 +184,21 @@ function Vessel(data = basic)
 
   this.trigger = function()
   {
-    if (this.data.trigger) {
-      return this.data.trigger.split(" ");
+    if(this.data.trigger) {
+      return this.data.trigger.indexOf(" ") > -1 ? this.data.trigger.split(" ")[0] : this.data.trigger;
     }
-    if (this.is_program()) {
+    if(this.is_program()) {
       return 'use';
     }
     return false;
+  }
+
+  this.passive = function()
+  {
+    if(this.trigger() != "passive"){ return; }
+    if(!this.data.reaction){ return; }
+
+    return this.data.reaction;
   }
 
   this.action = function()
