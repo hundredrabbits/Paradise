@@ -6,7 +6,7 @@ function Transmute(host)
 
   this.docs = "Change your current vessel's, or a target vessel's, attribute."
   
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(!params){ return this.err_NOPARAM(); }
     

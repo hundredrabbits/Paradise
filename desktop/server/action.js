@@ -8,13 +8,13 @@ function Action(host,name)
   this.host = host;
   this.docs = `No documentation for '${name}'`
 
-  this.run = function(params = "",action_name = null)
+  this.run = function(action = this.name,params = null)
   {
-    let _reaction = this.operate(params);
+    let _reaction = this.operate(action,params);
     let _header = this._header();
-    let _page = this._page();
     let _note = this._note();
     let _view = this._view();
+    let _tips = this.tips();
 
     let cli = _reaction ? _reaction : `${_header ? _header+'\n\n' : ''}${_note ? _note+'\n\n' : ''}${_view ? '> '+_view : ''}`;
     let passive = this._passive();
@@ -22,13 +22,11 @@ function Action(host,name)
     let h = {
       sight: {
         h1:_header,
-        page:_page,
         note:_note,
         view:_view,
-        tips:this.tips(),
+        tips:_tips,
         reaction: _reaction,
         action: this.action(),
-        inventory: this.host.children(),
         cli: cli.replace(/(<([^>]+)>)/ig,''),
         passive: passive
       },
@@ -38,7 +36,7 @@ function Action(host,name)
     return h
   }
   
-  this.operate = function(params,action)
+  this.operate = function(action,params)
   {  
     // Check if is custom action
     let siblings = this.host.siblings()
@@ -131,13 +129,6 @@ function Action(host,name)
       return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} ${this.host.parent().name()}.`
     }
     return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} <action data='leave'>${this.host.parent().name()}</action>.`
-  }
-
-  this._page = function()
-  {
-    let v = this.host.parent().stem()
-
-    return this.host.parent().is_circular() ? `•` : `— <action data='warp to ${v.id}'>${v.name()}</action> —`
   }
 
   this._note = function()

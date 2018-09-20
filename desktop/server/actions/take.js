@@ -6,7 +6,7 @@ function Take(host)
 
   this.docs = "Move a visible vessel into a child vessel."
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(!params){ return this.err_NOPARAM(); }
     

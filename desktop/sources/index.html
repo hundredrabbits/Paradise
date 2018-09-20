@@ -20,17 +20,15 @@
     <wr>
       <page>
         <h1 id='h1'></h1>
-        <h2 id='page'></h2>
+        <h2 id='passive'></h2>
         <div id='reaction'></div>
         <p id='note'></p>
         <p id='action'></p>
         <p id='view'></p>
         <list id='tips'></list>
       </page>
-      <div id='inventory' class='hidden'></div>
       <hint id='hint'></hint>
       <input id='input' placeholder="What would you like to do?"/>
-      <a id='inventory_toggle' onclick="client.toggle_inventory()"></a>
     </wr>
     <script>
       const {dialog,app} = require('electron').remote;

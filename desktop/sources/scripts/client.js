@@ -3,14 +3,14 @@
 function Client()
 {
   this.theme = new Theme({
-    background: "#efefef",
+    background: "#ffffff",
     f_high: "#000000",
     f_med: "#999999",
     f_low: "#cccccc",
     f_inv: "#000000",
     b_high: "#999999",
     b_med: "#cccccc",
-    b_low: "#ffffff",
+    b_low: "#efefef",
     b_inv: "#ffffff"
   });
 
@@ -23,13 +23,11 @@ function Client()
   this.el = null;
   this.input = null;
   this.h1   = null;
-  this.page = null;
+  this.passive = null;
   this.note = null;
   this.view = null;
   this.tips = null;
   this.action = null;
-  this.inventory = null;
-  this.inventory_toggle = null;
   this.reaction = null;
 
   this.docs = {}
@@ -46,13 +44,11 @@ function Client()
 
     this.el = document.body;
     this.h1 = document.getElementById("h1");
-    this.page = document.getElementById("page");
+    this.passive = document.getElementById("passive");
     this.note = document.getElementById("note");
     this.view = document.getElementById("view");
     this.tips = document.getElementById("tips");
     this.action = document.getElementById("action");
-    this.inventory = document.getElementById("inventory");
-    this.inventory_toggle = document.getElementById("inventory_toggle");
     this.input = new Commander(document.getElementById("input"),document.getElementById("hint"));
     this.reaction = document.getElementById("reaction");
 
@@ -91,7 +87,7 @@ function Client()
   this.update = function(response)
   {
     this.h1.innerHTML = response.sight.h1
-    this.page.innerHTML = response.sight.page
+    this.passive.innerHTML = response.sight.passive ? response.sight.passive : '<action data="learn about passive">Learn</action>'
     this.view.innerHTML = response.sight.view
 
     // Note
@@ -114,23 +110,6 @@ function Client()
       html += `<ln>${tip}</ln>`;
     }
     this.tips.innerHTML = html
-
-    // Inventory
-    html = ""
-    for(let id in response.sight.inventory){
-      let v = response.sight.inventory[id]
-      html += `<ln>${v.to_a(false)}${v.is_program() ? '('+v.data.program.split(" ")[0]+')' : ''}</ln>`;      
-    }
-    this.inventory.innerHTML = html
-    this.inventory_toggle.innerHTML = `≡${response.sight.inventory.length}`
-
-    if(response.sight.inventory.length < 1){
-      this.hide_inventory();
-      this.inventory_toggle.className = "hidden"
-    }
-    else{
-      this.inventory_toggle.className = "visible"
-    }
 
     this.docs = response.docs
     this.visibles = response.visibles
@@ -167,26 +146,6 @@ function Client()
       fileName = fileName.substr(-5,5) != ".grid" ? fileName+".grid" : fileName;
       fs.writeFileSync(fileName, paradise.export());
     });
-  }
-
-  this.toggle_inventory = function()
-  {
-    if(this.inventory.className == "hidden"){
-      this.show_inventory();
-    }
-    else{
-      this.hide_inventory();
-    }
-  }
-
-  this.show_inventory = function()
-  {
-    this.inventory.className = "visible"
-  }
-
-  this.hide_inventory = function()
-  {
-    this.inventory.className = "hidden"
   }
 
   // Misc

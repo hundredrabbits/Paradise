@@ -8,7 +8,7 @@ function Create(host)
 
   this.docs = "Create a new vessel at your current location. Vessel names and attributes must include less than 14 characters and be unique. "
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(!params){ return this.err_NOPARAM(); }
     

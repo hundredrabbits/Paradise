@@ -6,7 +6,7 @@ function Enter(host)
 
   this.docs = "Enter a visible vessel."
   
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(!params){ return this.err_NOPARAM(); }
     

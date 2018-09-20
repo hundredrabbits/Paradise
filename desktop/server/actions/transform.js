@@ -6,7 +6,7 @@ function Transform(host)
 
   this.docs = "Change your current vessel name."
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(!params){ return this.err_NOPARAM(); }
     

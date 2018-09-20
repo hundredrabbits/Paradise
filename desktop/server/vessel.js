@@ -22,7 +22,7 @@ function Vessel(data = basic)
   {
     const responder = this.response(a ? a : "look")
     const action = new responder(this)    
-    return action.run(p,a)
+    return action.run(a,p)
   }
 
   this.response = function(action = "look")

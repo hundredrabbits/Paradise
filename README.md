@@ -81,6 +81,7 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 #### Trigger
 - `trigger open` Set the **parent vessel**'s trigger.
 - `trigger roll You rolled @random(1 2 3 4 5 6).` Set a custom reaction to the **parent vessel**.
+- `trigger passive hello` Displays **hello** in the UI when carried.
 
 #### Cast
 - `cast the storm scroll at the golden beetle` Trigger a **distant vessel**'s automation as another vessel.
@@ -192,6 +193,16 @@ program note @_note @query
 trigger type You typed "@query".
 leave
 use the typewriter
+```
+
+### A pocket watch
+
+```
+create a clock
+enter the clock
+trigger passive @time
+leave
+take the clock
 ```
 
 ## Extras

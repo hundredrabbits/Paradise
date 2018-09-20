@@ -8,7 +8,7 @@ function Use(host)
 
   this.docs = "Trigger a vessel's program."
   
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(!params){ return this.err_NOPARAM(); }
 

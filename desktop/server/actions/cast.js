@@ -6,7 +6,7 @@ function Cast(host)
 
   this.docs = "Move a child vessel into the parent vessel."
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(!params){ return this.err_NOPARAM(); }
     
