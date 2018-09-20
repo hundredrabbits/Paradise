@@ -5,21 +5,22 @@ function Learn(host)
   require(`../action`).call(this,host,"learn");
 
   this.knowledge = {
-    paradoxes: "Paradoxes are vessels folded onto themselves, existing within their own space. One could argue that Paradise itself is a paradox."
+    paradoxes: "<b>Paradoxes</b> are vessels folded onto themselves, existing within their own space. One could argue that Paradise itself is a paradox.",
+    passive: "The <b>Passive</b> <action data='learn to trigger'>trigger</action>, is used to add dynamic content to the interface."
   }
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     let parts = params.split(" ")
-    let action = parts[parts.length-1].toLowerCase()
+    let target = parts[parts.length-1].toLowerCase()
 
     try{
-      let a = require(`./${action}`);
+      let a = require(`./${target}`);
       let obj = new a()
       return `<img src='media/graphics/${obj.name}.png'/><h3>${obj.name}</h3><p>${obj.docs}</p>`
     }
     catch(err){
-      return this.default(action)
+      return this.default(target)
     }
   }
 

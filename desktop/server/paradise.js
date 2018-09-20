@@ -8,7 +8,12 @@ function Paradise()
 
   this.reset = function()
   {
-    this.import([{name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},{name:"library",attr:"ceramic",parent:1,owner:1,note:"Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type <action data='learn'>learn</action> to get started."}]);
+    // Default World
+    this.import([
+      {name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},
+      {name:"library",attr:"ceramic",parent:1,owner:1,note:`Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type "<action data='learn'>learn</action>" to get started.`},
+      {name:"map",parent:0,owner:0,note:"A basic map", trigger:`passive`, reaction:'THE @STEM'},
+    ]);
   }
 
   this.load = function()
@@ -51,10 +56,8 @@ function Paradise()
   this.add = function(vessel)
   {
     if(this.exists(vessel)){
-      console.log(`+ duplicate ${vessel.name()}`)
       return false;
     }
-    console.log(`+ add ${vessel.name()}`)
     this.world.push(vessel)
     this.update()
     return true;
@@ -75,6 +78,7 @@ function Paradise()
   this.query = function(id = 0,q = "look")
   {
     this.game.save(this)
+
     if(this.ghost(id)){
       return this.ghost(id).cmd(q)  
     }
@@ -84,12 +88,12 @@ function Paradise()
   {
     // Connect IDs
     for(let id in this.world){
-      this.world[id].parade = this
+      this.world[id].paradise = this
       this.world[id].id = parseInt(id)
     }
   }
 
-  this.ghost = function(id = client.id)
+  this.ghost = function(id = 0)
   {
     this.update()
     return this.world[id];

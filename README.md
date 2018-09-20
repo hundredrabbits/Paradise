@@ -81,6 +81,7 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 #### Trigger
 - `trigger open` Set the **parent vessel**'s trigger.
 - `trigger roll You rolled @random(1 2 3 4 5 6).` Set a custom reaction to the **parent vessel**.
+- `trigger passive hello` Displays **hello** in the UI when carried.
 
 #### Cast
 - `cast the storm scroll at the golden beetle` Trigger a **distant vessel**'s automation as another vessel.
@@ -102,11 +103,11 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@_ATTR`, `@_attr`, `@_Attr` display the parent vessel attribute.(uppercase)
 - `@_size`, number of sibling vessels.
 
-### Parade
-- `@__RANDOM`, `@__random`, `@__Random` random parade vessel.(uppercase)
-- `@__random-name`, random parade vessel name.
-- `@__random-attr`, random parade vessel attribute.
-- `@__size`, size of the entire parade.
+### Paradise
+- `@__RANDOM`, `@__random`, `@__Random` random paradise vessel.(uppercase)
+- `@__random-name`, random paradise vessel name.
+- `@__random-attr`, random paradise vessel attribute.
+- `@__size`, size of the entire paradise.
 
 ### Time
 - `@time`, [Desamber](https://wiki.xxiivv.com/Desamber) time format **830:024**.
@@ -192,6 +193,16 @@ program note @_note @query
 trigger type You typed "@query".
 leave
 use the typewriter
+```
+
+### A pocket watch
+
+```
+create a clock
+enter the clock
+trigger passive @time
+leave
+take the clock
 ```
 
 ## Extras

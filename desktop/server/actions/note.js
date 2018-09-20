@@ -6,7 +6,7 @@ function Note(host)
 
   this.docs = "Add a description to the current parent vessel."
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(!this.host.parent().data.note && params.trim() == ""){ return `<p>Huh?! For more details on note, type <action data='learn to note'>learn</action>.</p>`; }
 

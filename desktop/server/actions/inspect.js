@@ -6,7 +6,7 @@ function Inspect(host)
 
   this.docs = `Inspect a vessel to see its program, precise location and various details. An excellent tool to find issues with vessels.`;
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     if(params.trim() == ""){ return this.inspect_parent(); }
 

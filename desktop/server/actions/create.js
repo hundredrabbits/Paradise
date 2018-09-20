@@ -7,11 +7,11 @@ function Create(host)
   require(`../action`).call(this,host,"create");
 
   this.docs = "Create a new vessel at your current location. Vessel names and attributes must include less than 14 characters and be unique. "
-  
-  this.requires_params = true;
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+    
     let parts = this.remove_articles(params).trim().split(" ")
     let attr  = parts[parts.length-2] && parts[parts.length-2] != parts[parts.length-1] ? parts[parts.length-2].toLowerCase() : null
     let name  = parts[parts.length-1].toLowerCase()
@@ -29,7 +29,7 @@ function Create(host)
     }
 
     let vessel = new Vessel(data);
-    let success = this.host.parade.add(vessel)
+    let success = this.host.paradise.add(vessel)
     
     return !success ? `<p>A visible vessel with that name already exists.</p>` : `<p>You created a <action data='enter the ${vessel.name()}'>${vessel.name()}</action> in the ${this.host.parent().name()}.</p>`
   }

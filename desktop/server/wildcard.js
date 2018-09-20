@@ -2,51 +2,53 @@
 
 const Clock = require('./clock')
 
-function Wildcard(str,query)
+function Wildcard(host,str,query)
 {
+  this.host = host;
   this.str = str;
   this.query = query;
 
   this.toString = function(convert_vessels = true)
   {
     let s = this.str;
+    let paradise = this.host.paradise;
 
     // Basics
-    s = s.replace('@FULL',`${parade.ghost().name().toUpperCase()}`)
-    s = s.replace('@NAME',`${parade.ghost().data.name.toUpperCase()}`)
-    s = s.replace('@ATTR',`${parade.ghost().data.attr ? parade.ghost().data.attr.toUpperCase() : ''}`)
-    s = s.replace('@full',`${parade.ghost().name().toLowerCase()}`)
-    s = s.replace('@name',`${parade.ghost().data.name.toLowerCase()}`)
-    s = s.replace('@attr',`${parade.ghost().data.attr ? parade.ghost().data.attr.toLowerCase() : ''}`)
-    s = s.replace('@Full',`${parade.ghost().name().toLowerCase().capitalize()}`)
-    s = s.replace('@Name',`${parade.ghost().data.name.toLowerCase().capitalize()}`)
-    s = s.replace('@Attr',`${parade.ghost().data.attr ? parade.ghost().data.attr.toLowerCase() : ''.capitalize()}`)
-    s = s.replace('@size',`${parade.ghost().children().length}`)
+    s = s.replace('@FULL',`${paradise.ghost().name().toUpperCase()}`)
+    s = s.replace('@NAME',`${paradise.ghost().data.name.toUpperCase()}`)
+    s = s.replace('@ATTR',`${paradise.ghost().data.attr ? paradise.ghost().data.attr.toUpperCase() : ''}`)
+    s = s.replace('@full',`${paradise.ghost().name().toLowerCase()}`)
+    s = s.replace('@name',`${paradise.ghost().data.name.toLowerCase()}`)
+    s = s.replace('@attr',`${paradise.ghost().data.attr ? paradise.ghost().data.attr.toLowerCase() : ''}`)
+    s = s.replace('@Full',`${paradise.ghost().name().toLowerCase().capitalize()}`)
+    s = s.replace('@Name',`${paradise.ghost().data.name.toLowerCase().capitalize()}`)
+    s = s.replace('@Attr',`${paradise.ghost().data.attr ? paradise.ghost().data.attr.toLowerCase() : ''.capitalize()}`)
+    s = s.replace('@size',`${paradise.ghost().children().length}`)
 
     // Parent
-    s = s.replace('@_FULL',`${parade.ghost().parent().name().toUpperCase()}`)
-    s = s.replace('@_NAME',`${parade.ghost().parent().data.name.toUpperCase()}`)
-    s = s.replace('@_ATTR',`${parade.ghost().parent().data.attr ? parade.ghost().parent().data.attr.toUpperCase() : ''}`)
-    s = s.replace('@_full',`${parade.ghost().parent().name().toLowerCase()}`)
-    s = s.replace('@_name',`${parade.ghost().parent().data.name.toLowerCase()}`)
-    s = s.replace('@_attr',`${parade.ghost().parent().data.attr ? parade.ghost().parent().data.attr.toLowerCase() : ''}`)
-    s = s.replace('@_Full',`${parade.ghost().parent().name().toLowerCase().capitalize()}`)
-    s = s.replace('@_Name',`${parade.ghost().parent().data.name.toLowerCase().capitalize()}`)
-    s = s.replace('@_Attr',`${parade.ghost().parent().data.attr ? parade.ghost().parent().data.attr.toLowerCase() : ''.capitalize()}`)
-    s = s.replace('@_size',`${parade.ghost().siblings().length}`)
+    s = s.replace('@_FULL',`${paradise.ghost().parent().name().toUpperCase()}`)
+    s = s.replace('@_NAME',`${paradise.ghost().parent().data.name.toUpperCase()}`)
+    s = s.replace('@_ATTR',`${paradise.ghost().parent().data.attr ? paradise.ghost().parent().data.attr.toUpperCase() : ''}`)
+    s = s.replace('@_full',`${paradise.ghost().parent().name().toLowerCase()}`)
+    s = s.replace('@_name',`${paradise.ghost().parent().data.name.toLowerCase()}`)
+    s = s.replace('@_attr',`${paradise.ghost().parent().data.attr ? paradise.ghost().parent().data.attr.toLowerCase() : ''}`)
+    s = s.replace('@_Full',`${paradise.ghost().parent().name().toLowerCase().capitalize()}`)
+    s = s.replace('@_Name',`${paradise.ghost().parent().data.name.toLowerCase().capitalize()}`)
+    s = s.replace('@_Attr',`${paradise.ghost().parent().data.attr ? paradise.ghost().parent().data.attr.toLowerCase() : ''.capitalize()}`)
+    s = s.replace('@_size',`${paradise.ghost().siblings().length}`)
     // Stem
-    s = s.replace('@STEM',`${parade.ghost().parent().stem().name().toUpperCase()}`)
-    s = s.replace('@stem',`${parade.ghost().parent().stem().name().toLowerCase()}`)
-    s = s.replace('@Stem',`${parade.ghost().parent().stem().name().capitalize()}`)
+    s = s.replace('@STEM',`${paradise.ghost().parent().stem().name().toUpperCase()}`)
+    s = s.replace('@stem',`${paradise.ghost().parent().stem().name().toLowerCase()}`)
+    s = s.replace('@Stem',`${paradise.ghost().parent().stem().name().capitalize()}`)
     // Time
     s = s.replace('@time',`${new Clock()}`)  
     s = s.replace('@time-beat',`${new Clock().beat()}`)  
     s = s.replace('@time-pulse',`${new Clock().pulse()}`)    
     // Paradise
-    s = s.replace('@__size',`${parade.world.length}`)
-    s = s.replace('@__RANDOM',`${parade.random().name().toUpperCase()}`)
-    s = s.replace('@__random',`${parade.random().name().toLowerCase()}`)
-    s = s.replace('@__Random',`${parade.random().name().capitalize()}`)
+    s = s.replace('@__size',`${paradise.world.length}`)
+    s = s.replace('@__RANDOM',`${paradise.random().name().toUpperCase()}`)
+    s = s.replace('@__random',`${paradise.random().name().toLowerCase()}`)
+    s = s.replace('@__Random',`${paradise.random().name().capitalize()}`)
     // Custom
     s = s.replace(/@query/g,this.query ? this.query : '')
 
@@ -54,7 +56,7 @@ function Wildcard(str,query)
 
     if(convert_vessels){
       let known = []
-      let children = parade.ghost().siblings();
+      let children = paradise.ghost().siblings();
       for(let id in children){
         let v = children[id];
         if(known.indexOf(v.data.name) > -1){ continue; }
@@ -100,7 +102,7 @@ function Wildcard(str,query)
   this.vessel = function(params)
   {
     if(parseInt(params) > 0){
-      return parade.world[parseInt(params)] ? parade.world[parseInt(params)].to_a(false) : `@error(Unknown Vessel #${params})`;  
+      return paradise.world[parseInt(params)] ? paradise.world[parseInt(params)].to_a(false) : `@error(Unknown Vessel #${params})`;  
     }
     return "?"
   }

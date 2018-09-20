@@ -9,7 +9,7 @@ let basic = {
 
 function Vessel(data = basic)
 {
-  this.parade = null
+  this.paradise = null
   this.data = data;
 
   this.cmd = function(str)
@@ -20,12 +20,12 @@ function Vessel(data = basic)
 
   this.act = function(a,p)
   {
-    const responder = this.response(a)
+    const responder = this.response(a ? a : "look")
     const action = new responder(this)    
-    return action.run(p,a)
+    return action.run(a,p)
   }
 
-  this.response = function(action)
+  this.response = function(action = "look")
   {
     try{
       return require(`./actions/${action}`);
@@ -37,7 +37,6 @@ function Vessel(data = basic)
 
   this.set = function(key,value)
   {
-    console.log(`- set ${this.name()} ${key}='${value}'`)
     this.data[key] = value;
   }
 
@@ -48,12 +47,12 @@ function Vessel(data = basic)
 
   this.parent = function()
   {
-    return this.parade.world[this.data.parent]
+    return this.paradise.world[this.data.parent]
   }
 
   this.owner = function()
   {
-    return this.parade.world[this.data.owner]
+    return this.paradise.world[this.data.owner]
   }
 
   this.is_circular = function()
@@ -105,8 +104,8 @@ function Vessel(data = basic)
   this.siblings = function()
   {
     let a = []
-    for(let id in this.parade.world){
-      let vessel = this.parade.world[id];
+    for(let id in this.paradise.world){
+      let vessel = this.paradise.world[id];
       if(vessel.parent().id == this.parent().id && vessel.id != this.id){
         a.push(vessel)
       }
@@ -117,8 +116,8 @@ function Vessel(data = basic)
   this.children = function()
   {
     let a = []
-    for(let id in this.parade.world){
-      let vessel = this.parade.world[id];
+    for(let id in this.paradise.world){
+      let vessel = this.paradise.world[id];
       if(vessel.parent().id == this.id && vessel.id != this.id){
         a.push(vessel)
       }
@@ -185,13 +184,21 @@ function Vessel(data = basic)
 
   this.trigger = function()
   {
-    if (this.data.trigger) {
-      return this.data.trigger.split(" ");
+    if(this.data.trigger) {
+      return this.data.trigger.indexOf(" ") > -1 ? this.data.trigger.split(" ")[0] : this.data.trigger;
     }
-    if (this.is_program()) {
+    if(this.is_program()) {
       return 'use';
     }
     return false;
+  }
+
+  this.passive = function()
+  {
+    if(this.trigger() != "passive"){ return; }
+    if(!this.data.reaction){ return; }
+
+    return this.data.reaction;
   }
 
   this.action = function()
@@ -199,7 +206,7 @@ function Vessel(data = basic)
     let action = `warp into the ${this.name()}`
 
     // Inventory
-    if(this.data.parent == parade.ghost().id){
+    if(this.data.parent == this.paradise.ghost().id){
       if(this.is_program()){
         action = `${this.trigger()} ${this.name()}`
       }
@@ -207,7 +214,7 @@ function Vessel(data = basic)
         action = `drop the ${this.name()}`        
       }
     }
-    else if(this.data.parent == parade.ghost().data.parent){ // Is Visible
+    else if(this.data.parent == this.paradise.ghost().data.parent){ // Is Visible
       if(this.is_program()){
         action = `${this.trigger()} ${this.name()}`
       }

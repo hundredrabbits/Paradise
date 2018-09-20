@@ -4,13 +4,22 @@ function Game()
 {
   this.load = function()
   {
-    return JSON.parse(localStorage.getItem("world"));
+    try{
+      return JSON.parse(localStorage.getItem("world"));
+    }
+    catch(err){
+
+    }
   }
 
-  this.save = function(parade)
+  this.save = function(paradise)
   {
-    console.log("save")
-    localStorage.setItem("world", JSON.stringify(parade.to_h()));
+    try{
+      localStorage.setItem("world", JSON.stringify(paradise.to_h()));  
+    }
+    catch(err){
+
+    }
   }  
 }
 

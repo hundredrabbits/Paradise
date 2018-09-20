@@ -6,7 +6,7 @@ function Leave(host)
 
   this.docs = "Exit the parent vessel."
 
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
     let origin = this.host.parent().name()
     

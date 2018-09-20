@@ -6,10 +6,10 @@ function Cast(host)
 
   this.docs = "Move a child vessel into the parent vessel."
 
-  this.requires_params = true;
-
-  this.operate = function(params)
+  this.operate = function(action,params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+    
     let parts = this.remove_articles(params).trim().split(" ")
     let spell_name = `${parts[0]} ${parts[1]}`
     let spell = this.find(spell_name)
