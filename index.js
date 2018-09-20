@@ -1,7 +1,7 @@
 const Paradise = require('./desktop/server/paradise')
 const parade   = new Paradise()
+const blessed  = require('blessed');
 
-const blessed = require('blessed');
 
 var screen = blessed.screen();
 
@@ -12,12 +12,6 @@ var body = blessed.box({
   width: '100%-10',
   keys: true,
   mouse: true,
-  alwaysScroll: true,
-  scrollable: true,
-  scrollbar: {
-    ch: ' ',
-    bg: 'red'
-  }
 });
 
 var icon = blessed.box({
@@ -25,9 +19,7 @@ var icon = blessed.box({
   left: 4,
   height: 1,
   width: 1,
-  style: {
-    fg: '#fff',
-  }
+  style: { fg: '#fff' }
 });
 
 var inputBar = blessed.textbox({
@@ -38,9 +30,7 @@ var inputBar = blessed.textbox({
   keys: true,
   mouse: true,
   inputOnFocus: true,
-  style: {
-    fg: '#fff',
-  }
+  style: { fg: '#fff' }
 });
 
 var status = blessed.box({
@@ -48,22 +38,16 @@ var status = blessed.box({
   left: 4,
   height: 1,
   width: '100%-10',
-  style: {
-    fg: '#000',
-    bg: '#fff'
-  }
+  style: { fg: '#000', bg: '#fff' }
 });
 
-// Add body to blessed screen
 screen.append(body);
 screen.append(inputBar);
 screen.append(icon);
 screen.append(status);
 
-// Close the example on Escape, Q, or Ctrl+C
 screen.key(['escape', 'q', 'C-c'], (ch, key) => (process.exit(0)));
 
-// Handle submitting data
 inputBar.on('submit', (text) => {
   icon.setContent(":");
   log(text);
@@ -80,7 +64,6 @@ inputBar.on("keypress", (text) => {
 const log = (input) => {
   let response = parade.query(0,input)
   let sight = response.sight
-
   body.setContent(sight.cli);
   status.setContent(sight.passive)
   screen.render();
