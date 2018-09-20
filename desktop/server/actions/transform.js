@@ -6,10 +6,10 @@ function Transform(host)
 
   this.docs = "Change your current vessel name."
 
-  this.requires_params = true;
-
   this.operate = function(params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+    
     let parts = this.remove_articles(params).split(" ")
     let name = parts[parts.length-1].toLowerCase()
     let target = parts.length > 2 ? this.find(parts[0],this.host.siblings()) : this.host

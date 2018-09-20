@@ -6,10 +6,10 @@ function Take(host)
 
   this.docs = "Move a visible vessel into a child vessel."
 
-  this.requires_params = true;
-  
   this.operate = function(params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+    
     let target = this.find(params,this.host.siblings());
 
     if(target){

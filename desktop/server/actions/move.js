@@ -6,10 +6,10 @@ function Move(host)
 
   this.docs = "Move a visible vessel into another visible vessel."
 
-  this.requires_params = true;
-
   this.operate = function(params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+
     if(params.indexOf(" in ") < 0){ return `<p>You must use the word <action data='move the vessel1 in the vessel2'>in</action>.</p>`; }
     
     let parts = params.replace(" into "," in ").split(" in ");

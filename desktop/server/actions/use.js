@@ -7,11 +7,11 @@ function Use(host)
   require(`../action`).call(this,host,"use");
 
   this.docs = "Trigger a vessel's program."
-
-  this.requires_params = true;
   
   this.operate = function(params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+
     let target = this.find(params,this.host.usables());
 
     if(!target){

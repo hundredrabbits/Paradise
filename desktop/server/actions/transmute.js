@@ -5,11 +5,11 @@ function Transmute(host)
   require(`../action`).call(this,host,"transmute");
 
   this.docs = "Change your current vessel's, or a target vessel's, attribute."
-
-  this.requires_params = true;
   
   this.operate = function(params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+    
     let parts = this.remove_articles(params).split(" ")
     let attr = parts[parts.length-1].toLowerCase()
     let target = parts.length > 2 ? this.find_target(this.host.siblings(),parts[0],null) : this.host

@@ -8,11 +8,9 @@ function Action(host,name)
   this.host = host;
   this.docs = `No documentation for '${name}'`
 
-  this.requires_params = false;
-
   this.run = function(params = "",action_name = null)
   {
-    let _reaction = !this.requires_params || (this.requires_params && params != "") ? this.operate(params) : null;
+    let _reaction = this.operate(params);
 
     let _header = this._header();
     let _page = this._page();
@@ -29,7 +27,7 @@ function Action(host,name)
         note:_note,
         view:_view,
         tips:this.tips(),
-        reaction: _reaction ? _reaction : `<p>Huh?! For more details on how to ${this.name}, type <action data='learn to ${this.name}'>learn</action>.</p>`,
+        reaction: _reaction,
         action: this.action(),
         inventory: this.host.children(),
         cli: cli.replace(/(<([^>]+)>)/ig,''),
@@ -277,6 +275,11 @@ function Action(host,name)
   {
     let target = this.remove_articles(params);
     return `<p>There is no ${type} <action>${target}</action>. <action data='learn to ${this.name}'>Learn to ${this.name}</action>?</p>`
+  }
+
+  this.err_NOPARAM = function()
+  {
+    return `<p>The ${this.name} action requires more information. For more details on how to ${this.name}, type <action data='learn to ${this.name}'>learn</action>.</p>`
   }
 
   this.remove_articles = function(str)

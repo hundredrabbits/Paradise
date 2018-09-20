@@ -7,11 +7,11 @@ function Create(host)
   require(`../action`).call(this,host,"create");
 
   this.docs = "Create a new vessel at your current location. Vessel names and attributes must include less than 14 characters and be unique. "
-  
-  this.requires_params = true;
 
   this.operate = function(params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+    
     let parts = this.remove_articles(params).trim().split(" ")
     let attr  = parts[parts.length-2] && parts[parts.length-2] != parts[parts.length-1] ? parts[parts.length-2].toLowerCase() : null
     let name  = parts[parts.length-1].toLowerCase()

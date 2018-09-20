@@ -6,10 +6,10 @@ function Become(host)
 
   this.docs = "Become a visible vessel."
   
-  this.requires_params = true;
-  
   this.operate = function(params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+
     let target = this.find(params,this.host.siblings());
 
     if(target){

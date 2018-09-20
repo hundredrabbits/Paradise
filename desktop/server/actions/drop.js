@@ -5,11 +5,11 @@ function Drop(host)
   require(`../action`).call(this,host,"drop");
 
   this.docs = "Move a child vessel into the parent vessel."
-  
-  this.requires_params = true;
 
   this.operate = function(params)
   {
+    if(!params){ return this.err_NOPARAM(); }
+    
     let target = this.find(params,this.host.children());
 
     if(target){
