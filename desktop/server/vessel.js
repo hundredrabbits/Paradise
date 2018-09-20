@@ -37,7 +37,6 @@ function Vessel(data = basic)
 
   this.set = function(key,value)
   {
-    console.log(`- set ${this.name()} ${key}='${value}'`)
     this.data[key] = value;
   }
 
@@ -199,7 +198,7 @@ function Vessel(data = basic)
     let action = `warp into the ${this.name()}`
 
     // Inventory
-    if(this.data.parent == parade.ghost().id){
+    if(this.data.parent == this.parade.ghost().id){
       if(this.is_program()){
         action = `${this.trigger()} ${this.name()}`
       }
@@ -207,7 +206,7 @@ function Vessel(data = basic)
         action = `drop the ${this.name()}`        
       }
     }
-    else if(this.data.parent == parade.ghost().data.parent){ // Is Visible
+    else if(this.data.parent == this.parade.ghost().data.parent){ // Is Visible
       if(this.is_program()){
         action = `${this.trigger()} ${this.name()}`
       }

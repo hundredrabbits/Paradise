@@ -12,18 +12,26 @@ function Action(host,name)
 
   this.run = function(params = "",action_name = null)
   {
-    let reaction = !this.requires_params || (this.requires_params && params != "") ? this.operate(params) : `<p>Huh?! For more details on how to ${this.name}, type <action data='learn to ${this.name}'>learn</action>.</p>`;
+    let _reaction = !this.requires_params || (this.requires_params && params != "") ? this.operate(params) : null;
+
+    let _header = this._header();
+    let _page = this._page();
+    let _note = this._note();
+    let _view = this._view();
+
+    let cli = _reaction ? _reaction : `${_header}\n\n${_note}\n\n> ${_view}`;
 
     let h = {
       sight: {
-        h1:this.header(),
-        page:this.page(),
-        note:this.note(),
-        view:this.view(),
+        h1:_header,
+        page:_page,
+        note:_note,
+        view:_view,
         tips:this.tips(),
-        reaction: reaction,
+        reaction: _reaction ? _reaction : `<p>Huh?! For more details on how to ${this.name}, type <action data='learn to ${this.name}'>learn</action>.</p>`,
         action: this.action(),
-        inventory: this.host.children()
+        inventory: this.host.children(),
+        cli: cli.replace(/(<([^>]+)>)/ig,'')
       },
       docs: this.documentation(),
       visibles: this.visibles()
@@ -40,8 +48,8 @@ function Action(host,name)
     for(let id in siblings){
       let v = siblings[id];
       if(v.trigger() != action){ continue; }
-      if(v.is_program()){ this.host.cmd(new Wildcard(v.data.program,params).toString(false)); }
-      return v.data.reaction ? `<p>${new Wildcard(v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
+      if(v.is_program()){ this.host.cmd(new Wildcard(this.host,v.data.program,params).toString(false)); }
+      return v.data.reaction ? `<p>${new Wildcard(this.host,v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
 
     // Otherwise..
@@ -120,7 +128,7 @@ function Action(host,name)
 
   // Formatters
 
-  this.header = function()
+  this._header = function()
   {
     if(this.host.is_paradox()){
       return `You are the <action data='learn about paradoxes'>paradox</action> of ${this.host.particle()} ${this.host.name()}.`  
@@ -131,7 +139,19 @@ function Action(host,name)
     return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} <action data='leave'>${this.host.parent().name()}</action>.`
   }
 
-  this.view = function()
+  this._page = function()
+  {
+    let v = this.host.parent().stem()
+
+    return this.host.parent().is_circular() ? `•` : `— <action data='warp to ${v.id}'>${v.name()}</action> —`
+  }
+
+  this._note = function()
+  {
+    return this.host.parent().data.note ? new Wildcard(this.host,this.host.parent().data.note).toString() : ''
+  }
+
+  this._view = function()
   {
     let siblings = this.host.siblings()
     if(siblings.length > 4){ return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()}, ${siblings[2].to_a()} and <action data='inspect'>${siblings.length-3} other vessels</action>.` }
@@ -140,18 +160,6 @@ function Action(host,name)
     if(siblings.length > 1){ return `You see ${siblings[0].to_a()} and ${siblings[1].to_a()}.` }
     if(siblings.length > 0){ return `You see ${siblings[0].to_a()}.` }
     return "You see nothing."
-  }
-
-  this.page = function()
-  {
-    let v = this.host.parent().stem()
-
-    return this.host.parent().is_circular() ? `•` : `— <action data='warp to ${v.id}'>${v.name()}</action> —`
-  }
-
-  this.note = function()
-  {
-    return this.host.parent().data.note ? new Wildcard(this.host.parent().data.note).toString() : ''
   }
 
   this.action = function()

@@ -2,14 +2,16 @@
 
 const Clock = require('./clock')
 
-function Wildcard(str,query)
+function Wildcard(host,str,query)
 {
+  this.host = host;
   this.str = str;
   this.query = query;
 
   this.toString = function(convert_vessels = true)
   {
     let s = this.str;
+    let parade = this.host.parade;
 
     // Basics
     s = s.replace('@FULL',`${parade.ghost().name().toUpperCase()}`)

@@ -26,14 +26,14 @@ function Use(host)
       let cmds = target.data.program.split("@and")
       for(let id in cmds){
         let cmd = cmds[id].trim()
-        this.host.cmd(new Wildcard(cmd,params).toString(false))
+        this.host.cmd(new Wildcard(this.host,cmd,params).toString(false))
       }
     }
     else{
-      this.host.cmd(new Wildcard(target.data.program,params).toString(false))
+      this.host.cmd(new Wildcard(this.host,target.data.program,params).toString(false))
     }
 
-    return target.data.reaction ? `<p>${new Wildcard(target.data.reaction,params).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
+    return target.data.reaction ? `<p>${new Wildcard(this.host,target.data.reaction,params).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
   }
 }
 

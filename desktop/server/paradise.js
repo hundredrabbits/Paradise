@@ -8,7 +8,7 @@ function Paradise()
 
   this.reset = function()
   {
-    this.import([{name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},{name:"library",attr:"ceramic",parent:1,owner:1,note:"Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type <action data='learn'>learn</action> to get started."}]);
+    this.import([{name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},{name:"library",attr:"ceramic",parent:1,owner:1,note:`Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type "<action data='learn'>learn</action>" to get started.`}]);
   }
 
   this.load = function()
@@ -51,10 +51,8 @@ function Paradise()
   this.add = function(vessel)
   {
     if(this.exists(vessel)){
-      console.log(`+ duplicate ${vessel.name()}`)
       return false;
     }
-    console.log(`+ add ${vessel.name()}`)
     this.world.push(vessel)
     this.update()
     return true;
@@ -89,7 +87,7 @@ function Paradise()
     }
   }
 
-  this.ghost = function(id = client.id)
+  this.ghost = function(id = 0)
   {
     this.update()
     return this.world[id];
