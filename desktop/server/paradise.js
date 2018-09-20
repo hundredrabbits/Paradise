@@ -82,7 +82,7 @@ function Paradise()
   {
     // Connect IDs
     for(let id in this.world){
-      this.world[id].parade = this
+      this.world[id].paradise = this
       this.world[id].id = parseInt(id)
     }
   }

@@ -37,7 +37,7 @@
       const fs = require('fs');
       const app_path = app.getAppPath();
       const Paradise = require('../server/paradise')
-      const parade = new Paradise()
+      const paradise = new Paradise()
       const client = new Client();
 
       client.controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Paradise'); },"CmdOrCtrl+,");

@@ -12,10 +12,10 @@ function Game()
     }
   }
 
-  this.save = function(parade)
+  this.save = function(paradise)
   {
     try{
-      localStorage.setItem("world", JSON.stringify(parade.to_h()));  
+      localStorage.setItem("world", JSON.stringify(paradise.to_h()));  
     }
     catch(err){
 

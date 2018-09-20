@@ -71,7 +71,7 @@ function Client()
     }
     this.el.className = "loading"
     setTimeout(()=>{ 
-      this.update(parade.query(this.id,q))
+      this.update(paradise.query(this.id,q))
       this.el.className = "ready" 
     },250)
   }
@@ -80,10 +80,10 @@ function Client()
   {
     this.el.className = "loading"
     for(let id in stack){
-      parade.query(this.id,stack[id].trim())
+      paradise.query(this.id,stack[id].trim())
     }
     setTimeout(()=>{ 
-      this.update(parade.query())
+      this.update(paradise.query())
       this.el.className = "ready" 
     },250)
   }
@@ -155,7 +155,7 @@ function Client()
 
     fs.readFile(paths[0], 'utf-8', (err, data) => {
       if(err){ alert("An error ocurred reading the file :" + err.message); return; }
-      parade.import(JSON.parse(data))
+      paradise.import(JSON.parse(data))
       setTimeout(()=>{ client.query(); client.speaker.play("click1"); }, 500)
     });
   }
@@ -165,7 +165,7 @@ function Client()
     dialog.showSaveDialog({title:"Save World",filters: [{name: "Teapot Format", extensions: ["teapot"]}]},(fileName) => {
       if (fileName === undefined){ return; }
       fileName = fileName.substr(-5,5) != ".grid" ? fileName+".grid" : fileName;
-      fs.writeFileSync(fileName, parade.export());
+      fs.writeFileSync(fileName, paradise.export());
     });
   }
 
@@ -195,7 +195,7 @@ function Client()
   {
     console.warn("-- APOCALYPSE --")
     this.theme.reset();
-    parade.reset();
+    paradise.reset();
     setTimeout(()=>{ this.query(this.id); this.speaker.play("click1"); }, 250)
   }
 

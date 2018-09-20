@@ -66,7 +66,7 @@ function Action(host,name)
 
   // Parsers
 
-  this.find = function(params,a = this.host.parade.world)
+  this.find = function(params,a = this.host.paradise.world)
   {
     let parts = this.remove_articles(params).toLowerCase().split(" ")
     let is_any = parts[0] == "any"
