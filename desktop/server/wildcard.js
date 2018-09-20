@@ -85,9 +85,6 @@ function Wildcard(str,query)
 
   this.operate = function(cmd,params)
   {
-    if(cmd == ''){
-      return this.vessel(params)
-    }
     return this[cmd] ? this[cmd](params.trim()) : `@error(Unknown Method ${cmd})`
   }
 

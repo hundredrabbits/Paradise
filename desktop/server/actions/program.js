@@ -8,7 +8,7 @@ function Program(host)
 
   this.operate = function(params)
   {
-    if(params.trim() == ""){ return `<p>Huh?! For more details on programming, type <action data='learn to program'>learn</action>.</p>`; }
+    if(!this.host.parent().data.program && params.trim() == ""){ return `<p>Huh?! For more details on programming, type <action data='learn to program'>learn</action>.</p>`; }
 
     let is_update = !this.host.parent().data.program ? false : true;
 

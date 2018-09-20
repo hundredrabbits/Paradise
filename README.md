@@ -73,13 +73,14 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 
 #### Program
 - `program warp to the library` Automate the **parent vessel**.
+- `program` Remove the program of the **parent vessel**.
 
 #### Use
 - `use the teacup` Trigger the **visible vessel**'s automation.
 
-#### Usage
-- `usage open` Set the **parent vessel**'s trigger.
-- `usage roll You rolled @random(1 2 3 4 5 6).` Set a custom reaction to the **parent vessel**.
+#### Trigger
+- `trigger open` Set the **parent vessel**'s trigger.
+- `trigger roll You rolled @random(1 2 3 4 5 6).` Set a custom reaction to the **parent vessel**.
 
 #### Cast
 - `cast the storm scroll at the golden beetle` Trigger a **distant vessel**'s automation as another vessel.
@@ -113,8 +114,10 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@time-pulse`, [Desamber](https://wiki.xxiivv.com/Desamber) time format **024**.
 
 ### Program Tools
-- `@(3)`, print the name and action connected with that vessel id. 
-- `@query`, access the content of a usage action. ex: `say hello`, `usage @if(@query IS hello THEN hi!)`
+- `@query`, access the content of a trigger action. ex: `say hello`, `trigger @if(@query IS hello THEN hi!)`
+
+### Functions
+- `@vessel(3)`, print the name and action connected with that vessel id. 
 - `@random(red green blue)`, choose a random word.
 - `@if(a IS b THEN c ELSE d)`, a simple conditional function.
 
@@ -133,7 +136,30 @@ take the blue spell
 cast the blue spell on the cat
 ```
 
-### Wildcard
+### Dialog Engine
+
+This example demonstrates how to create a vessel with enabled dialog tools.
+
+```
+create a character
+enter the character
+trigger say You said "@query". 
+leave
+say hello
+```
+
+### Wildcards
+
+```
+create a dice
+enter the dice
+program look
+trigger roll You rolled @random(1 2 3 4 5 6).
+leave
+roll the dice
+```
+
+### Random Warp
 This example demonstrates how to use a wildcard in a program.
 
 ```
@@ -143,19 +169,6 @@ program warp in @__random
 leave
 use the random warp
 ```
-
-### Dialog Engine
-This example demonstrates how to create a vessel with enabled dialog tools.
-
-```
-create a character
-enter the character
-usage say You said "@query". @if(@query IS hello THEN The character replied "hi". ELSE The character looks confused "huh?".)
-leave
-say hello
-```
-
-## Useful Spells
 
 ### Discard Spell
 This spell can be fired at unwanted vessels, sending them into a vessel discard bin, to be recycled later.  
@@ -176,22 +189,9 @@ cast the discard spell on the unwanted vessel
 create a typewriter
 enter the typewriter
 program note @_note @query
-usage type You typed "@query".
+trigger type You typed "@query".
 leave
 use the typewriter
-```
-
-## Useless Spells
-
-### A Dice
-
-```
-create a dice
-enter the dice
-program look
-usage roll You rolled @random(1 2 3 4 5 6).
-leave
-roll the dice
 ```
 
 ## Extras

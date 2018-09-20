@@ -40,7 +40,7 @@ function Walkthrough()
     "create a yellow house",
     "enter the blue house",
     "program warp into any house",
-    "usage open",
+    "trigger open",
     "leave",
     "open the blue house",
     "leave"
@@ -55,7 +55,7 @@ function Walkthrough()
     "learn",
     "learn to program",
     "learn to use",
-    "learn to usage",
+    "learn to trigger",
     "note It is raining. Again."
   ]
 
@@ -78,6 +78,26 @@ function Walkthrough()
     "cast the storm scroll on the blue bug"
   ]
 
+
+  this.errors = [
+    "become",
+    "cast",
+    "create",
+    "drop",
+    "enter",
+    "inspect",
+    "learn",
+    "move",
+    "note",
+    "program",
+    "take",
+    "transform",
+    "transmute",
+    "trigger",
+    "use",
+    "warp",
+  ]
+
   this.all = []
   this.all = this.all.concat(this.warping)
   this.all = this.all.concat(this.inventory)
@@ -97,15 +117,13 @@ function Walkthrough()
     this.run()
   }
 
-  this.run = function(target = this.all)
+  this.run = function(target = this.errors)
   {
     client.query(0,target[this.index]);
     this.index += 1
 
     if(target[this.index]){
-      setTimeout(()=>{
-        this.run();
-      },this.speed)
+      setTimeout(()=>{ this.run(); },this.speed)
     }
   }
 

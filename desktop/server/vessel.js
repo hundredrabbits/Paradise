@@ -180,13 +180,13 @@ function Vessel(data = basic)
 
   this.usable = function()
   {
-    return this.usage() !== false;
+    return this.trigger() !== false;
   }
 
-  this.usage = function()
+  this.trigger = function()
   {
-    if (this.data.usage) {
-      return this.data.usage.split(" ");
+    if (this.data.trigger) {
+      return this.data.trigger.split(" ");
     }
     if (this.is_program()) {
       return 'use';
@@ -201,7 +201,7 @@ function Vessel(data = basic)
     // Inventory
     if(this.data.parent == parade.ghost().id){
       if(this.is_program()){
-        action = `${this.usage()} ${this.name()}`
+        action = `${this.trigger()} ${this.name()}`
       }
       else{
         action = `drop the ${this.name()}`        
@@ -209,7 +209,7 @@ function Vessel(data = basic)
     }
     else if(this.data.parent == parade.ghost().data.parent){ // Is Visible
       if(this.is_program()){
-        action = `${this.usage()} ${this.name()}`
+        action = `${this.trigger()} ${this.name()}`
       }
       else{
         action = `enter the ${this.name()}`  

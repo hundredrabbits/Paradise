@@ -37,7 +37,7 @@ function Action(host,name)
     let siblings = this.host.siblings()
     for(let id in siblings){
       let v = siblings[id];
-      if(v.usage() != action){ continue; }
+      if(v.trigger() != action){ continue; }
       if(v.is_program()){ this.host.cmd(new Wildcard(v.data.program,params).toString(false)); }
       return v.data.reaction ? `<p>${new Wildcard(v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
@@ -159,7 +159,7 @@ function Action(host,name)
     for(let id in siblings){
       let v = siblings[id];
       if(!v.is_program()){ continue; }
-      return `Would you like to <action data='${v.usage()} the ${v.name()}'>${v.usage()} with the ${v.name()}</action>?`;
+      return `Would you like to <action data='${v.trigger()} the ${v.name()}'>${v.trigger()} with the ${v.name()}</action>?`;
     }
     return null
   }
@@ -169,8 +169,6 @@ function Action(host,name)
     let actions = {}
     let _actions = {
       learn:require('./actions/learn'),
-
-      inventory:require('./actions/inventory'),
 
       create:require('./actions/create'),
       become:require('./actions/become'),
@@ -186,7 +184,7 @@ function Action(host,name)
       transform:require('./actions/transform'),
       transmute:require('./actions/transmute'),
 
-      usage:require('./actions/usage'),
+      trigger:require('./actions/trigger'),
       inspect:require('./actions/inspect'),
 
       program:require('./actions/program'),
@@ -224,8 +222,8 @@ function Action(host,name)
       a.push(`This vessel has the <code>${this.host.parent().data.program}</code> program.`)
     }
     // Note/Program
-    if(this.host.parent().usage()){
-      a.push(`This vessel grants the <action>${this.host.parent().usage()}</action> action.`)
+    if(this.host.parent().trigger()){
+      a.push(`This vessel grants the <action>${this.host.parent().trigger()}</action> action.`)
     }
 
     //Find custom actions
@@ -234,7 +232,7 @@ function Action(host,name)
       let v = siblings[id];
       if (v.usable())
       {
-        a.push(`The ${v.name()} vessel grants you the <action data='${v.usage()}'>${v.usage()}</action> action.`)
+        a.push(`The ${v.name()} vessel grants you the <action data='${v.trigger()}'>${v.trigger()}</action> action.`)
       }
     }
 
