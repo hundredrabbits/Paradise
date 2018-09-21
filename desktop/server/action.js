@@ -26,7 +26,7 @@ function Action(host,name)
       tips:_tips,
       reaction: _reaction,
       action: this.action(),
-      cli: cli.replace(/(<([^>]+)>)/ig,''),
+      cli: cli.replace(/\<br \/\>/g,"\n").replace(/(<([^>]+)>)/ig,''),
       passive: passive
     }
     return h
@@ -140,7 +140,7 @@ function Action(host,name)
     if(siblings.length == 3){ return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()} and ${siblings[2].to_a()}.` }
     if(siblings.length > 1){ return `You see ${siblings[0].to_a()} and ${siblings[1].to_a()}.` }
     if(siblings.length > 0){ return `You see ${siblings[0].to_a()}.` }
-    return "You see nothing."
+    return
   }
 
   this._passive = function()

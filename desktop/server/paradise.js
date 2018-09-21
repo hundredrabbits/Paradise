@@ -11,7 +11,7 @@ function Paradise()
     // Default World
     this.import([
       {name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},
-      {name:"library",attr:"ceramic",parent:1,owner:1,note:`Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type "<action data='learn'>learn</action>" to get started.`},
+      {name:"library",attr:"ceramic",parent:1,owner:1,note:`Dear @full,--Welcome to Paradise. Type "<action data='learn'>learn</action>" to get started.`},
       {name:"map",parent:0,owner:0,note:"A basic map", trigger:`passive`, reaction:'THE @STEM'},
     ]);
   }
@@ -89,10 +89,9 @@ function Paradise()
     return this.world[id]
   }
 
-  this.to_h = function()
+  this.to_a = function()
   {
     let a = []
-    // Connect IDs
     for(let id in this.world){
       a.push(this.world[id].to_h())
     }

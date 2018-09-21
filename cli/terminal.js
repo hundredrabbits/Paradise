@@ -21,11 +21,12 @@ function Terminal(paradise)
 
   this.start = function()
   {
+    paradise.reset();
     this._screen.key(['escape', 'q', 'C-c'], (ch, key) => (process.exit(0)));
     this._input.on('submit', (text)=>{ this.on_submit(text) });
     this._input.on('keypress', (text)=>{ this.on_keypress(text) });
     this._input.focus();
-    this.query("");
+    this.query();
   }
 
   this.update = function(sight)

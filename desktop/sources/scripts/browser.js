@@ -71,7 +71,9 @@ function Browser(paradise)
     this.el.className = "loading"
     this.h1.innerHTML = sight.header
     this.passive.innerHTML = sight.passive ? sight.passive : '<action data="learn about passive">Learn</action>'
-    this.view.innerHTML = sight.view
+
+    this.view.className = sight.view ? 'visible' : 'hidden'
+    this.view.innerHTML = sight.view ? sight.view : ''
 
     this.reaction.className = sight.reaction ? 'visible' : 'hidden'
     this.reaction.innerHTML = sight.reaction ? sight.reaction : ''
@@ -118,29 +120,30 @@ function Browser(paradise)
     });
   }
 
-  this.save = function(paradise)
+  this.save = function()
   {
-    // localStorage.setItem("world", JSON.stringify(paradise.to_h()));  
+    localStorage.setItem("world", JSON.stringify(paradise.to_a()));  
   }  
 
   this.load = function()
   {
-    // return JSON.parse(localStorage.getItem("world"));
+    return JSON.parse(localStorage.getItem("world"));
   }
 
   this.resume = function()
   {
     this.reset();
-    // let previous = this.load()
+
+    let previous = this.load()
     
-    // if(previous){
-    //   console.info("Loaded world")
-    //   this.import(previous)
-    // }
-    // else{
-    //   console.info("New world")
-    //   this.reset();
-    // }
+    if(previous){
+      console.info("Loaded world")
+      paradise.import(previous)
+    }
+    else{
+      console.info("New world")
+      paradise.reset();
+    }
   }
 
   // Misc
@@ -158,7 +161,7 @@ function Browser(paradise)
     if(event===undefined){ event = window.event; }
     let target = 'target' in event? event.target : event.srcElement;
     if(target.tagName.toLowerCase() == "action"){
-      client.input.inject(target.getAttribute("data"))
+      browser.input.inject(target.getAttribute("data"))
     }
   };
 }

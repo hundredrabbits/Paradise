@@ -117,6 +117,12 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@random(red green blue)`, choose a random word.
 - `@if(a IS b THEN c ELSE d)`, a simple conditional function.
 
+## Templating
+
+- `&`, to do multiple queries at once.
+- `&&`, to make a program do multiple queries at once.
+- `--`, to add a linebreak in a note.
+
 ## Tutorials
 
 ### Casting 

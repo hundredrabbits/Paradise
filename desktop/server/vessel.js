@@ -104,8 +104,10 @@ function Vessel(data = basic)
   this.siblings = function()
   {
     let a = []
+    let parent = this.parent();
     for(let id in this.paradise.world){
       let vessel = this.paradise.world[id];
+      if(parent.is_paradox() && vessel.id == parent.id){ continue; } // Don' show paradoxes
       if(vessel.parent().id == this.parent().id && vessel.id != this.id){
         a.push(vessel)
       }
