@@ -9,7 +9,7 @@ function Terminal(paradise)
   this._body = blessed.box({ top: 2, left: 2, height: '100%-4', width: 54, keys: true, mouse: true });
   this._icon = blessed.box({ bottom: 2, left: 2, height: 1, width: 1, style: { fg: '#fff' } });
   this._input = blessed.textbox({ bottom: 2, left: 4, height: 1, width: '100%-6', keys: true, mouse: true, inputOnFocus: true, style: { fg: '#fff' }});
-  this._status = blessed.box({ bottom: 1, left: 2, height: 1, width: '100%-4', style: { fg: '#000', bg: '#333' }});
+  this._status = blessed.box({ bottom: 1, left: 2, height: 1, width: '100%-4', style: { fg: '#fff', bg: '#333' }});
   this._tips = blessed.box({ bottom: 4, left: 2, height: 5, width: '100%-4', valign:'bottom', style: { fg: '#333' }});
 
   this.install = function()
@@ -51,7 +51,7 @@ function Terminal(paradise)
     this._screen.render();
   }
 
-  this.on_keypress = function(text)
+  this.on_keypress = function(text = "")
   {
     this._icon.setContent(text.trim() == "" ? ":" : ">");
     this._screen.render();
