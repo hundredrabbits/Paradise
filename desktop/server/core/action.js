@@ -164,7 +164,7 @@ function Action(host,name)
     for(let id in siblings){
       let v = siblings[id];
       if(!v.is_program()){ continue; }
-      return `Would you like to <action data='${v.trigger()} the ${v.name()}'>${v.trigger()} with the ${v.name()}</action>?`;
+      return `Would you like to <action data='${v.trigger()} the ${v.name()}'>${v.trigger()} the ${v.name()}</action>?`;
     }
     return null
   }

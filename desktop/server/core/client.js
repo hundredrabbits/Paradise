@@ -46,11 +46,7 @@ function Client(paradise)
 
   this.query = function(input = "", on_query = this.update)
   {
-    let sight;
-    let lines = `${input}`.split(" & ");
-    for(let id in lines){
-      sight = this.paradise.query(this.id,lines[id])  
-    }
+    let sight = this.paradise.query(this.id,input)  
     this.update(sight)
   }
 

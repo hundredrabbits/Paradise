@@ -14,6 +14,7 @@ function Wildcard(host,str,query)
     let paradise = this.host.paradise;
 
     s = s.replace(/\-\-/g,`<br />`)
+    s = s.replace(/ \&\& /g,` & `)
 
     // Basics
     s = s.replace('@FULL',`${paradise.ghost().name().toUpperCase()}`)

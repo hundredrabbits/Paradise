@@ -89,7 +89,6 @@ function Walkthrough()
     "program",
     "take",
     "transform",
-    "transmute",
     "trigger",
     "use",
     "warp",
@@ -118,7 +117,7 @@ function Walkthrough()
 
   this.run = function(target = this.all)
   {
-    browser.query(0,target[this.index]);
+    browser.query(target[this.index]);
     this.index += 1
 
     if(target[this.index]){

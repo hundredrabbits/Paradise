@@ -12,16 +12,27 @@ function Vessel(data = basic)
   this.paradise = null
   this.data = data;
 
-  this.cmd = function(str)
+  this.cmd = function(q = "")
   {
-    let parts = str.split(" ")
-    return this.act(parts.splice(0,1)[0],parts.join(' '))
+    let lines = `${q}`.indexOf(" & ") > -1 ? `${q}`.split(" & ") : [`${q}`];
+
+    if(!lines){ return this.act(); }
+
+    let output;
+    for(let id in lines){
+      let line = lines[id]
+      let parts = line.split(" ")
+      let action = parts.splice(0,1)[0]
+      let params = parts.join(' ').trim()
+      output = this.act(action,params)
+    }
+    return output
   }
 
   this.act = function(a,p)
   {
     const responder = this.response(a ? a : "look")
-    const action = new responder(this)    
+    const action = new responder(this)
     return action.run(a,p)
   }
 

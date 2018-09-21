@@ -63,9 +63,8 @@ function Paradise()
 
   this.query = function(id = 0,q = "look")
   {
-    if(this.ghost(id)){
-      return this.ghost(id).cmd(q)  
-    }
+    if(!this.ghost(id)){ return "error"; }
+    return this.ghost(id).cmd(q)
   }
 
   this.update = function()
