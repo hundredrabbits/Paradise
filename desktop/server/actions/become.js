@@ -13,7 +13,8 @@ function Become(host)
     let target = this.find(params,this.host.siblings());
 
     if(target){
-      client.change_vessel(target.id)
+      this.host.paradise.client.change_vessel(target.id);
+      return `<p>You became ${target}.</p>`
     }
     else{
       return this.err_NOTARGET(params)

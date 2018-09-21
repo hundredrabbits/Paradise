@@ -3,7 +3,6 @@ body { background:var(--background) !important; }
 body wr { background:var(--background) !important; border-color:var(--b_med) !important;  }
 body wr page { color:var(--f_high) !important;  }
 body wr page h1 *:first-child { border-color:var(--b_med) !important;  }
-body wr page #action::before { color:var(--f_low) !important;  }
 body wr page #passive::before { color:var(--f_med) !important;  }
 body wr page #passive::after { color:var(--f_med) !important;  }
 body wr page list ln:before { color:var(--f_low) !important;  }

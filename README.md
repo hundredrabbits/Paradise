@@ -10,10 +10,6 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 
 ### Default
 
-#### Learn
-- `learn` See available actions.
-- `learn to drop` See the documentation for the **drop** action.
-
 ### Basic
 
 #### Create
@@ -53,6 +49,10 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 
 ### Narrative
 
+#### Learn
+- `learn` See available actions.
+- `learn to drop` See the documentation for the **drop** action.
+
 #### Note
 - `note It is raining. Again.` Add a note to the **parent vessel**.
 
@@ -61,13 +61,8 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 
 #### Transform
 - `transform into a teacup` Rename the **current vessel**.
-- `transform the teacup into a cat` Rename a **visible vessel**.
-
-#### Transmute
-- `transmute into glass` Add an adjective to the **current vessel**.
-- `transmute glass into gold` Add an adjective to a **visible vessel**.
-- `transmute into anything` Remove an adjective to the **current vessel**.
-- `transmute glass into anything` Remove an adjective to a **visible vessel**.
+- `transform the teacup into a crystal cat` Rename a **visible vessel**.
+- `transform into a foggy bat` Rename the **current vessel**.
 
 ### Programming
 

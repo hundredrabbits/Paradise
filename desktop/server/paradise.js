@@ -5,6 +5,7 @@ const Vessel = require('./vessel')
 function Paradise()
 {
   this.game = require('./game')
+  this.client = null;
 
   this.reset = function()
   {
@@ -93,7 +94,7 @@ function Paradise()
     }
   }
 
-  this.ghost = function(id = 0)
+  this.ghost = function(id = this.client.id)
   {
     this.update()
     return this.world[id];

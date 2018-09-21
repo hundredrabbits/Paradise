@@ -10,15 +10,27 @@ function Transform(host)
   {
     if(!params){ return this.err_NOPARAM(); }
     
-    let parts = this.remove_articles(params).split(" ")
-    let name = parts[parts.length-1].toLowerCase()
-    let target = parts.length > 2 ? this.find(parts[0],this.host.siblings()) : this.host
-    let origin = target.data.name
+    let sides = ` ${params} `.replace(" into "," in ").split(" in ")
+    let target = sides[0].trim() ? this.find(sides[0],this.host.siblings()) : this.host;
 
-    if(name == ""){ return `<p>Huh?! For more details on how to transform, type <action data='learn to transform'>learn</action>.</p>`; }
+    if(!target){ return this.err_NOTARGET(sides[0]); }
 
-    target.set("name",name)
-    return `<p>You transformed the ${target.id != this.host.id ? origin : ''} into a <action>${name}</action>.</p>`
+    let parts = this.remove_articles(sides[1]).trim().split(" ")
+    let origin = `${target}`;
+
+    if(!parts[0]){ return this.err_NOVALID(); }
+
+    if(parts.length == 2){
+      target.set("name",parts[1])
+      target.set("attr",parts[0])
+      return `<p>You transformed ${target.id != this.host.id ? origin+' ' : ''}into ${target}.</p>`
+    }
+    else if(parts.length == 1){
+      target.set("name",parts[0]);
+      return `<p>You transformed ${target.id != this.host.id ? origin+' ' : ''}into ${target}.</p>`
+    }
+
+    return this.err_NOVALID();
   }
 }
 

@@ -63,9 +63,9 @@ function Walkthrough()
     "warp to the library",
     "create a lead teacup",
     "transform the teacup into a house",
-    "transmute lead into gold",
-    "transform into a cat",
-    "transmute into glass"
+    "transform into a foggy bat",
+    "transform into glass",
+    "transform the house into a golden cat",
   ]
 
   this.spells = [
@@ -77,7 +77,6 @@ function Walkthrough()
     "create blue bug",
     "cast the storm scroll on the blue bug"
   ]
-
 
   this.errors = [
     "become",

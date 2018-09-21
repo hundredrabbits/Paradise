@@ -8,7 +8,7 @@ function Note(host)
 
   this.operate = function(action,params)
   {
-    if(!this.host.parent().data.note && params.trim() == ""){ return `<p>Huh?! For more details on note, type <action data='learn to note'>learn</action>.</p>`; }
+    if(!this.host.parent().data.note && params.trim() == ""){ return this.err_NOVALID(); }
 
     let is_update = !this.host.parent().data.note ? false : true;
 

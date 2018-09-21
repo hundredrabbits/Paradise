@@ -17,7 +17,7 @@ function Create(host)
     let name  = parts[parts.length-1].toLowerCase()
 
     if(parseInt(name) > -1){ return `<p>Vessel names cannot be numbers.</p>` }
-    if(name == ""){ return `<p>You must give a name to your vessel, for more details on how to create, type <action data='learn to create'>learn</action>.</p>`; }
+    if(name == ""){ return this.err_NOVALID();; }
     if(name.length < 3 || name.length > 14){ return `<p>The vessel name must be between 3 and 14 characters long.</p>` }
     if(attr && attr.length > 14){ return `<p>The vessel attribute is too long.</p>` }
 
@@ -33,7 +33,6 @@ function Create(host)
     
     return !success ? `<p>A visible vessel with that name already exists.</p>` : `<p>You created a <action data='enter the ${vessel.name()}'>${vessel.name()}</action> in the ${this.host.parent().name()}.</p>`
   }
-
 }
 
 module.exports = Create

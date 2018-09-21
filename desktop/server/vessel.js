@@ -228,7 +228,7 @@ function Vessel(data = basic)
 
   this.toString = function()
   {
-    return `${this.particle()} ${this.name()}`;
+    return `${this.particle()} ${this.name()}`.trim();
   }
 }
 

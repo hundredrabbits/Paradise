@@ -30,7 +30,6 @@ function Action(host,name)
         cli: cli.replace(/(<([^>]+)>)/ig,''),
         passive: passive
       },
-      docs: this.documentation(),
       visibles: this.visibles()
     }
     return h
@@ -46,7 +45,7 @@ function Action(host,name)
       if(v.is_program()){ this.host.cmd(new Wildcard(this.host,v.data.program,params).toString(false)); }
       return v.data.reaction ? `<p>${new Wildcard(this.host,v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
-    return `<p>Unknown action, to see a list of available actions, type <action data='learn'>learn</action>.</p>`
+    return this.err_UNKNOWN();
   }
 
   this.change_vessel = function(params)
@@ -173,40 +172,6 @@ function Action(host,name)
     return null
   }
 
-  this.documentation = function()
-  {
-    let actions = {}
-    let _actions = {
-      learn:require('./actions/learn'),
-
-      create:require('./actions/create'),
-      become:require('./actions/become'),
-      enter:require('./actions/enter'),
-      leave:require('./actions/leave'),
-
-      warp:require('./actions/warp'),
-      take:require('./actions/take'),
-      drop:require('./actions/drop'),
-      move:require('./actions/move'),
-
-      note:require('./actions/note'),
-      transform:require('./actions/transform'),
-      transmute:require('./actions/transmute'),
-
-      trigger:require('./actions/trigger'),
-      inspect:require('./actions/inspect'),
-
-      program:require('./actions/program'),
-      use:require('./actions/use'),
-      cast:require('./actions/cast'),
-    }
-    for(let id in _actions){
-      let action = new _actions[id]
-      actions[id] = action.docs
-    }
-    return actions
-  }
-
   this.tips = function()
   {
     let a = []
@@ -256,17 +221,6 @@ function Action(host,name)
     return a
   }
 
-  this.err_NOTARGET = function(params,type = "visible")
-  {
-    let target = this.remove_articles(params);
-    return `<p>There is no ${type} <action>${target}</action>. <action data='learn to ${this.name}'>Learn to ${this.name}</action>?</p>`
-  }
-
-  this.err_NOPARAM = function()
-  {
-    return `<p>The ${this.name} action requires more information. For more details on how to ${this.name}, type <action data='learn to ${this.name}'>learn</action>.</p>`
-  }
-
   this.remove_articles = function(str)
   {
     let s = ` ${str} `;
@@ -280,15 +234,38 @@ function Action(host,name)
     return s.trim()
   }
 
-  String.prototype.to_base = function()
+  // Errors
+  
+  this.err_NOTARGET = function(params,type = "visible")
   {
-    return this.toLowerCase().replace(/ /g,"_").replace(/[^0-9a-z\+]/gi,"").trim();
+    let target = this.remove_articles(params);
+    return `<p>There is no ${type} vessel "${target}". ${this.err_LEARN()}</p>`
   }
 
-  String.prototype.capitalize = function()
+  this.err_NOPARAM = function()
   {
-    return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase();
+    return `<p>The ${this.name} action requires more information. ${this.err_LEARN()}</p>`
   }
+
+  this.err_NOVALID = function()
+  {
+    return `<p>Invalid use of the "${this.name}" action. ${this.err_LEARN()}</p>`
+  }
+
+  this.err_UNKNOWN = function()
+  {
+    return `<p>Unknown action, to see a list of available actions, type "<action data='learn'>learn</action>".</p>`
+  }
+
+  this.err_LEARN = function()
+  {
+    return `For more details on how to ${this.name}, type "<action data='learn to ${this.name}'>learn to ${this.name}</action>".`
+  }
+
+  // Helpers
+
+  String.prototype.to_base = function(){ return this.toLowerCase().replace(/ /g,"_").replace(/[^0-9a-z\+]/gi,"").trim(); }
+  String.prototype.capitalize = function(){ return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase(); }
 }
 
 module.exports = Action

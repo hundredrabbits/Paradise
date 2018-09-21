@@ -17,7 +17,7 @@ function Learn(host)
     try{
       let a = require(`./${target}`);
       let obj = new a()
-      return `<img src='media/graphics/${obj.name}.png'/><h3>${obj.name}</h3><p>${obj.docs}</p>`
+      return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs}</p>`
     }
     catch(err){
       return this.default(target)
@@ -51,6 +51,38 @@ function Learn(host)
       index += 1
     }
     return `<img src='media/graphics/default.png'/><p>Which action would you like to <aciton data='learn'>learn</action>? ${list}</p>`
+  }
+
+  this.documentation = function()
+  {
+    let actions = {}
+    let _actions = {
+
+      create:require('./actions/create'),
+      become:require('./actions/become'),
+      enter:require('./actions/enter'),
+      leave:require('./actions/leave'),
+
+      warp:require('./actions/warp'),
+      take:require('./actions/take'),
+      drop:require('./actions/drop'),
+      move:require('./actions/move'),
+
+      learn:require('./actions/learn'),
+      note:require('./actions/note'),
+      transform:require('./actions/transform'),
+      inspect:require('./actions/inspect'),
+
+      trigger:require('./actions/trigger'),
+      program:require('./actions/program'),
+      use:require('./actions/use'),
+      cast:require('./actions/cast'),
+    }
+    for(let id in _actions){
+      let action = new _actions[id]
+      actions[id] = action.docs
+    }
+    return actions
   }
 }
 

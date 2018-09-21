@@ -8,7 +8,7 @@ function Trigger(host)
 
   this.operate = function(action,params)
   {
-    if(!this.host.parent().data.trigger && params.trim() == ""){ return `<p>Huh?! For more details on how to trigger, type <action data='learn to trigger'>learn</action>.</p>`; }
+    if(!this.host.parent().data.trigger && params.trim() == ""){ return this.err_NOVALID() }
 
     let parts = params.split(" ")
     let target = parts[0]

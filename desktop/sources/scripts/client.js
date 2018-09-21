@@ -30,11 +30,11 @@ function Client()
   this.action = null;
   this.reaction = null;
 
-  this.docs = {}
   this.visibles = []
 
   this.install = function(host)
   {
+    paradise.client = this;
     this.theme.install(document.body)
   }
 
@@ -90,16 +90,12 @@ function Client()
     this.passive.innerHTML = response.sight.passive ? response.sight.passive : '<action data="learn about passive">Learn</action>'
     this.view.innerHTML = response.sight.view
 
-    // Note
-
+    this.reaction.className = response.sight.reaction ? 'visible' : 'hidden'
+    this.reaction.innerHTML = response.sight.reaction ? response.sight.reaction : ''
+    
     this.note.className = response.sight.note ? 'visible' : 'hidden'
     this.note.innerHTML = response.sight.note ? response.sight.note : ''
 
-    // Reaction
-    this.reaction.className = response.sight.reaction ? 'visible' : 'hidden'
-    this.reaction.innerHTML = response.sight.reaction ? response.sight.reaction : ''
-
-    // Action
     this.action.className = response.sight.action ? 'visible' : 'hidden'
     this.action.innerHTML = response.sight.action ? response.sight.action : ''
 
@@ -111,7 +107,6 @@ function Client()
     }
     this.tips.innerHTML = html
 
-    this.docs = response.docs
     this.visibles = response.visibles
 
     this.input.update();
@@ -119,7 +114,6 @@ function Client()
 
   this.change_vessel = function(id)
   {
-    console.log(`~ change vessel ${this.id} -> ${id}`)
     this.id = id;
     setTimeout(()=>{ this.query(this.id); this.speaker.play("click1"); }, 250)
   }
