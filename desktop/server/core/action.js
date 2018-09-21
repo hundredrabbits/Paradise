@@ -174,37 +174,35 @@ function Action(host,name)
     let a = []
     // Paradox
     if(this.host.is_paradox()){
-      a.push("Your vessel is a <action data='learn about paradoxes'>paradox</action>, you cannot leave.")
+      a.push("Your vessel is a paradox, you may not leave.")
     }
     // Paradox
     if(this.host.parent().is_paradox()){
-      a.push(`The ${this.host.parent().name()} vessel is a <action data='learn about paradoxes'>paradox</action>, you cannot leave.`)
+      a.push(`The ${this.host.parent().name()} is a paradox, you may not leave.`)
     }
     // Empty
     if(this.host.siblings().length < 1){
-      a.push("This vessel is empty, why don't you <action data='create '>create</action> something.")
+      a.push(`The ${this.host.parent().name()} is empty, why don't you create something.`)
     }
     // Note/Program
     if(!this.host.parent().data.note && !this.host.parent().is_program()){
-      a.push("This vessel has no description, you should <action data='note '>add one</action>.")
+      a.push(`The ${this.host.parent().name()} has no description, you should add a note.`)
     }
     // Note/Program
     if(this.host.parent().is_program()){
-      a.push(`This vessel has the <code>${this.host.parent().data.program}</code> program.`)
+      a.push(`The ${this.host.parent().name()} has the "${this.host.parent().data.program}" program.`)
     }
     // Note/Program
     if(this.host.parent().trigger()){
-      a.push(`This vessel grants the <action>${this.host.parent().trigger()}</action> action.`)
+      a.push(`The ${this.host.parent().name()} grants the "${this.host.parent().trigger()}"" action.`)
     }
 
     //Find custom actions
     let siblings = this.host.siblings()
     for(let id in siblings){
       let v = siblings[id];
-      if (v.usable())
-      {
-        a.push(`The ${v.name()} vessel grants you the <action data='${v.trigger()}'>${v.trigger()}</action> action.`)
-      }
+      if(!v.usable()){ continue; }
+      a.push(`The ${v.name()} grants you the "${v.trigger()}" action.`)
     }
 
     return a

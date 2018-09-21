@@ -10,6 +10,7 @@ function Terminal(paradise)
   this._icon = blessed.box({ bottom: 2, left: 2, height: 1, width: 1, style: { fg: '#fff' } });
   this._input = blessed.textbox({ bottom: 2, left: 4, height: 1, width: '100%-6', keys: true, mouse: true, inputOnFocus: true, style: { fg: '#fff' }});
   this._status = blessed.box({ bottom: 1, left: 2, height: 1, width: '100%-4', style: { fg: '#000', bg: '#333' }});
+  this._tips = blessed.box({ bottom: 4, left: 2, height: 5, width: '100%-4', valign:'bottom', style: { fg: '#333' }});
 
   this.install = function()
   {
@@ -17,6 +18,7 @@ function Terminal(paradise)
     this._screen.append(this._input);
     this._screen.append(this._icon);
     this._screen.append(this._status);
+    this._screen.append(this._tips);
   }
 
   this.start = function()
@@ -31,6 +33,7 @@ function Terminal(paradise)
 
   this.update = function(sight)
   {
+    this._tips.setContent(`${sight.tips.join("\n").trim()}`);
     this._body.setContent(sight.cli);
     this._status.setContent('- '+sight.passive)
     this._icon.setContent(">");
