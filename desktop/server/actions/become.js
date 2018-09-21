@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Become(host)
 {
-  require(`../action`).call(this,host,"become");
+  Action.call(this,host,"become");
 
   this.docs = "Become a visible vessel."
   

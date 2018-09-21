@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Transform(host)
 {
-  require(`../action`).call(this,host,"transform");
+  Action.call(this,host,"transform");
 
   this.docs = "Change your current vessel name."
 

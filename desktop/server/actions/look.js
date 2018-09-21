@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Look(host)
 {
-  require(`../action`).call(this,host,"look");
+  Action.call(this,host,"look");
 
   this.operate = function()
   {

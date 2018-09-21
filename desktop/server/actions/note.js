@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Note(host)
 {
-  require(`../action`).call(this,host,"note");
+  Action.call(this,host,"note");
 
   this.docs = "Add a description to the current parent vessel."
 

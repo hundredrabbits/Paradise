@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Learn(host)
 {
-  require(`../action`).call(this,host,"learn");
+  Action.call(this,host,"learn");
 
   this.knowledge = {
     paradoxes: "There are two types of <b>Paradoxes</b> in Paradise. The first kind, is vessels folded onto themselves, existing within their own space. The second type, is vessels organized in a loop, where there are no real beginning to a space, a deeply nested vessel might become the parent of a first type paradox and create this kind of shape.",

@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Take(host)
 {
-  require(`../action`).call(this,host,"take");
+  Action.call(this,host,"take");
 
   this.docs = "Move a visible vessel into a child vessel."
 

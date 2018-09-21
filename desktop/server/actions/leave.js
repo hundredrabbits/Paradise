@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Leave(host)
 {
-  require(`../action`).call(this,host,"leave");
+  Action.call(this,host,"leave");
 
   this.docs = "Exit the parent vessel."
 

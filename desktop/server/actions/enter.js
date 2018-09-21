@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Enter(host)
 {
-  require(`../action`).call(this,host,"enter");
+  Action.call(this,host,"enter");
 
   this.docs = "Enter a visible vessel."
   

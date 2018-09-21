@@ -1,10 +1,11 @@
 "use strict";
 
-const Vessel = require('../vessel')
+const Action = require(`../core/action`)
+const Vessel = require(`../core/vessel`)
 
 function Create(host)
 {
-  require(`../action`).call(this,host,"create");
+  Action.call(this,host,"create");
 
   this.docs = "Create a new vessel at your current location. Vessel names and attributes must include less than 14 characters and be unique. "
 

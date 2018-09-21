@@ -1,10 +1,11 @@
 "use strict";
 
+const Action = require(`../core/action`)
 const Wildcard = require('../wildcard')
 
 function Use(host)
 {
-  require(`../action`).call(this,host,"use");
+  Action.call(this,host,"use");
 
   this.docs = "Trigger a vessel's program."
   

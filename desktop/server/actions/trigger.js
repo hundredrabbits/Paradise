@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Trigger(host)
 {
-  require(`../action`).call(this,host,"trigger");
+  Action.call(this,host,"trigger");
 
   this.docs = 'Trigger sets an action word to a program vessel. You can also set a custom reaction to a program use by adding a short sentence after the trigger action word.'
 

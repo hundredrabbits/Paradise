@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Move(host)
 {
-  require(`../action`).call(this,host,"move");
+  Action.call(this,host,"move");
 
   this.docs = "Move a visible vessel into another visible vessel."
 

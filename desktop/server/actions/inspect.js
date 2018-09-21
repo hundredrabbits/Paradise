@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Inspect(host)
 {
-  require(`../action`).call(this,host,"inspect");
+  Action.call(this,host,"inspect");
 
   this.docs = `Inspect a vessel to see its program, precise location and various details. An excellent tool to find issues with vessels.`;
 

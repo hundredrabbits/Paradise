@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Warp(host)
 {
-  require(`../action`).call(this,host,"warp");
+  Action.call(this,host,"warp");
 
   this.docs = "Enter a distant vessel by either its name, or its warp id. The vessel must be visible. Use <action data='warp to'>warp to</action> to move at a vessel's parent location."
 

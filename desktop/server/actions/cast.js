@@ -1,8 +1,10 @@
 "use strict";
 
+const Action = require(`../core/action`)
+
 function Cast(host)
 {
-  require(`../action`).call(this,host,"cast");
+  Action.call(this,host,"cast");
 
   this.docs = "Move a child vessel into the parent vessel."
 

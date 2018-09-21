@@ -1,4 +1,4 @@
-const Paradise = require('./desktop/server/paradise')
+const Paradise = require('./desktop/server/core/paradise')
 const Terminal = require('./cli/terminal')
 
 const paradise = new Paradise()

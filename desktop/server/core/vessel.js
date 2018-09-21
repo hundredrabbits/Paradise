@@ -28,7 +28,7 @@ function Vessel(data = basic)
   this.response = function(action = "look")
   {
     try{
-      return require(`./actions/${action}`);
+      return require(`../actions/${action}`);
     }
     catch(err){
       return require(`./action`);
