@@ -4,7 +4,6 @@ const Vessel = require('./vessel')
 
 function Paradise()
 {
-  this.game = require('./game')
   this.client = null;
 
   this.reset = function()
@@ -15,20 +14,6 @@ function Paradise()
       {name:"library",attr:"ceramic",parent:1,owner:1,note:`Hi @full, welcome to the @_full, a persistent vessel and stem to this world. Type "<action data='learn'>learn</action>" to get started.`},
       {name:"map",parent:0,owner:0,note:"A basic map", trigger:`passive`, reaction:'THE @STEM'},
     ]);
-  }
-
-  this.load = function()
-  {
-    let previous = this.game.load()
-    
-    if(previous){
-      console.info("Loaded world")
-      this.import(previous)
-    }
-    else{
-      console.info("New world")
-      this.reset();
-    }
   }
   
   // Start
@@ -78,8 +63,6 @@ function Paradise()
 
   this.query = function(id = 0,q = "look")
   {
-    this.game.save(this)
-
     if(this.ghost(id)){
       return this.ghost(id).cmd(q)  
     }
@@ -115,8 +98,6 @@ function Paradise()
     }
     return a
   }
-
-  this.load();
 }
 
 module.exports = Paradise

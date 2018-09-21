@@ -112,13 +112,13 @@ function Walkthrough()
   {
     this.speed = speed;
     this.index = 0;
-    client.reset();
+    browser.reset();
     this.run()
   }
 
   this.run = function(target = this.all)
   {
-    client.query(0,target[this.index]);
+    browser.query(0,target[this.index]);
     this.index += 1
 
     if(target[this.index]){

@@ -20,17 +20,14 @@ function Action(host,name)
     let passive = this._passive();
 
     let h = {
-      sight: {
-        h1:_header,
-        note:_note,
-        view:_view,
-        tips:_tips,
-        reaction: _reaction,
-        action: this.action(),
-        cli: cli.replace(/(<([^>]+)>)/ig,''),
-        passive: passive
-      },
-      visibles: this.visibles()
+      header:_header,
+      note:_note,
+      view:_view,
+      tips:_tips,
+      reaction: _reaction,
+      action: this.action(),
+      cli: cli.replace(/(<([^>]+)>)/ig,''),
+      passive: passive
     }
     return h
   }

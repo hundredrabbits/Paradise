@@ -9,7 +9,7 @@ function Commander(el,hint_el)
   {
     let q = this.el.value
     this.el.value = "";
-    client.query(client.id,q)
+    browser.query(q)
     this.el.focus();
   }
 
@@ -53,8 +53,8 @@ function Commander(el,hint_el)
   {
     let target = this.action()
 
-    for(name in client.docs){
-      let action = client.docs[name]
+    for(name in browser.docs){
+      let action = browser.docs[name]
       if(name.substr(0,target.length) == target){
         return name.substr(target.length)
       }      
@@ -69,8 +69,8 @@ function Commander(el,hint_el)
     let target = param.split(" ")[1]
 
     if(article == "the" && target && target != article){
-      for(let id in client.visibles){
-        let name = client.visibles[id].data.name
+      for(let id in browser.visibles){
+        let name = browser.visibles[id].data.name
         if(name.substr(0,target.length) == target){
           return name.substr(target.length)
         }      

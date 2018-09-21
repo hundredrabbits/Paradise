@@ -6,7 +6,7 @@ function Learn(host)
 
   this.knowledge = {
     paradoxes: "<b>Paradoxes</b> are vessels folded onto themselves, existing within their own space. One could argue that Paradise itself is a paradox.",
-    passive: "The <b>Passive</b> <action data='learn to trigger'>trigger</action>, is used to add dynamic content to the interface."
+    passive: "The <b>Passive</b> <action data='learn to trigger'>trigger</action>, is used to add dynamic content to the browser."
   }
 
   this.operate = function(action,params)

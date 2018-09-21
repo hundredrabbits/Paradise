@@ -1,7 +1,11 @@
 "use strict";
 
-function Client()
+const Client  = require('../../desktop/server/core/client');
+
+function Browser(paradise)
 {
+  Client.call(this,paradise)
+
   this.theme = new Theme({
     background: "#ffffff",
     f_high: "#000000",
@@ -18,8 +22,6 @@ function Client()
   this.walkthrough = new Walkthrough();
   this.speaker = new Speaker();
 
-  this.id = 0;
-
   this.el = null;
   this.input = null;
   this.h1   = null;
@@ -34,7 +36,6 @@ function Client()
 
   this.install = function(host)
   {
-    paradise.client = this;
     this.theme.install(document.body)
   }
 
@@ -57,65 +58,40 @@ function Client()
     this.input.el.onkeydown = (key) => { if(key.key == "Tab"){ this.input.complete(); } }
     this.input.el.onkeyup   = (key) => { if(key.key == "Enter"){ this.input.validate(); this.speaker.play("click4"); } };
 
-    this.query(this.id, "look");
+    // Resume?
+
+    this.resume();
+    this.query();
   }
 
-  this.query = function(id = this.id,q = "")
+  this.update = function(sight)
   {
-    if(q.indexOf("&") > -1){
-      return this.multi(q.split("&"));
-    }
+    this.save();
+
     this.el.className = "loading"
-    setTimeout(()=>{ 
-      this.update(paradise.query(this.id,q))
-      this.el.className = "ready" 
-    },250)
-  }
+    this.h1.innerHTML = sight.header
+    this.passive.innerHTML = sight.passive ? sight.passive : '<action data="learn about passive">Learn</action>'
+    this.view.innerHTML = sight.view
 
-  this.multi = function(stack)
-  {
-    this.el.className = "loading"
-    for(let id in stack){
-      paradise.query(this.id,stack[id].trim())
-    }
-    setTimeout(()=>{ 
-      this.update(paradise.query())
-      this.el.className = "ready" 
-    },250)
-  }
-
-  this.update = function(response)
-  {
-    this.h1.innerHTML = response.sight.h1
-    this.passive.innerHTML = response.sight.passive ? response.sight.passive : '<action data="learn about passive">Learn</action>'
-    this.view.innerHTML = response.sight.view
-
-    this.reaction.className = response.sight.reaction ? 'visible' : 'hidden'
-    this.reaction.innerHTML = response.sight.reaction ? response.sight.reaction : ''
+    this.reaction.className = sight.reaction ? 'visible' : 'hidden'
+    this.reaction.innerHTML = sight.reaction ? sight.reaction : ''
     
-    this.note.className = response.sight.note ? 'visible' : 'hidden'
-    this.note.innerHTML = response.sight.note ? response.sight.note : ''
+    this.note.className = sight.note ? 'visible' : 'hidden'
+    this.note.innerHTML = sight.note ? sight.note : ''
 
-    this.action.className = response.sight.action ? 'visible' : 'hidden'
-    this.action.innerHTML = response.sight.action ? response.sight.action : ''
+    this.action.className = sight.action ? 'visible' : 'hidden'
+    this.action.innerHTML = sight.action ? sight.action : ''
 
     // Tips
     let html = ""
-    for(let id in response.sight.tips){
-      let tip = response.sight.tips[id];
+    for(let id in sight.tips){
+      let tip = sight.tips[id];
       html += `<ln>${tip}</ln>`;
     }
     this.tips.innerHTML = html
 
-    this.visibles = response.visibles
-
     this.input.update();
-  }
-
-  this.change_vessel = function(id)
-  {
-    this.id = id;
-    setTimeout(()=>{ this.query(this.id); this.speaker.play("click1"); }, 250)
+    setTimeout(()=>{ this.el.className = "ready" },250)
   }
 
   // 
@@ -142,6 +118,31 @@ function Client()
     });
   }
 
+  this.save = function(paradise)
+  {
+    // localStorage.setItem("world", JSON.stringify(paradise.to_h()));  
+  }  
+
+  this.load = function()
+  {
+    // return JSON.parse(localStorage.getItem("world"));
+  }
+
+  this.resume = function()
+  {
+    this.reset();
+    // let previous = this.load()
+    
+    // if(previous){
+    //   console.info("Loaded world")
+    //   this.import(previous)
+    // }
+    // else{
+    //   console.info("New world")
+    //   this.reset();
+    // }
+  }
+
   // Misc
 
   this.reset = function()
@@ -149,7 +150,7 @@ function Client()
     console.warn("-- APOCALYPSE --")
     this.theme.reset();
     paradise.reset();
-    setTimeout(()=>{ this.query(this.id); this.speaker.play("click1"); }, 250)
+    setTimeout(()=>{ this.query(); this.speaker.play("click1"); }, 250)
   }
 
   document.onclick= function(event)

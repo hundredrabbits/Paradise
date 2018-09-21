@@ -2,7 +2,7 @@ function Client(paradise)
 {
   this.paradise = paradise;
   this.paradise.client = this;
-  
+
   this.id = 0;
 
   this.install = function()
@@ -15,7 +15,7 @@ function Client(paradise)
 
   }
 
-  this.update = function()
+  this.update = function(sight)
   {
 
   }
@@ -44,15 +44,14 @@ function Client(paradise)
 
   //
 
-  this.query = function(input, on_query = this.update)
+  this.query = function(input = "", on_query = this.update)
   {
-    let lines = input.split(" & ");
+    let sight;
+    let lines = `${input}`.split(" & ");
     for(let id in lines){
-      this.paradise.query(this.id,lines[id])  
+      sight = this.paradise.query(this.id,lines[id])  
     }
-    if(on_query){
-      on_query();
-    }
+    this.update(sight)
   }
 
   this.change_vessel = function(id)

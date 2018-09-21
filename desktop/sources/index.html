@@ -10,7 +10,7 @@
     <script src="scripts/lib/controller.js"></script>
     <script src="scripts/lib/theme.js"></script>
     <script src="scripts/lib/logo.js"></script>
-    <script src="scripts/client.js"></script>
+    <script src="scripts/browser.js"></script>
     <script src="scripts/commander.js"></script>
     <script src="scripts/walkthrough.js"></script>
     <script src="scripts/speaker.js"></script>
@@ -36,44 +36,40 @@
       const app_path = app.getAppPath();
       const Paradise = require('../server/paradise')
       const paradise = new Paradise()
-      const client = new Client();
+      const browser = new Browser(paradise);
 
-      client.controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Paradise'); },"CmdOrCtrl+,");
-      client.controller.add("default","*","Fullscreen",() => { app.toggle_fullscreen(); },"CmdOrCtrl+Enter");
-      client.controller.add("default","*","Hide",() => { app.toggle_visible(); },"CmdOrCtrl+H");
-      client.controller.add("default","*","Inspect",() => { app.inspect(); },"CmdOrCtrl+.");
-      client.controller.add("default","*","Documentation",() => { client.controller.docs(); },"CmdOrCtrl+Esc");
-      client.controller.add("default","*","Reset",() => { client.reset(); },"CmdOrCtrl+Backspace");
-      client.controller.add("default","*","Quit",() => { app.exit(); },"CmdOrCtrl+Q");
+      browser.controller.add("default","*","About",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Paradise'); },"CmdOrCtrl+,");
+      browser.controller.add("default","*","Fullscreen",() => { app.toggle_fullscreen(); },"CmdOrCtrl+Enter");
+      browser.controller.add("default","*","Hide",() => { app.toggle_visible(); },"CmdOrCtrl+H");
+      browser.controller.add("default","*","Inspect",() => { app.inspect(); },"CmdOrCtrl+.");
+      browser.controller.add("default","*","Documentation",() => { browser.controller.docs(); },"CmdOrCtrl+Esc");
+      browser.controller.add("default","*","Reset",() => { browser.reset(); },"CmdOrCtrl+Backspace");
+      browser.controller.add("default","*","Quit",() => { app.exit(); },"CmdOrCtrl+Q");
 
-      client.controller.add("default","File","New World",() => { client.reset(); },"CmdOrCtrl+Shift+N");
-      client.controller.add("default","File","Import World",() => { client.import(); },"CmdOrCtrl+Shift+O");
-      client.controller.add("default","File","Export World",() => { client.export(); },"CmdOrCtrl+Shift+S");
+      browser.controller.add("default","File","New World",() => { browser.reset(); },"CmdOrCtrl+Shift+N");
+      browser.controller.add("default","File","Import World",() => { browser.import(); },"CmdOrCtrl+Shift+O");
+      browser.controller.add("default","File","Export World",() => { browser.export(); },"CmdOrCtrl+Shift+S");
       
-      client.controller.add_role("default","Edit","undo");
-      client.controller.add_role("default","Edit","redo");
-      client.controller.add_role("default","Edit","cut");
-      client.controller.add_role("default","Edit","copy");
-      client.controller.add_role("default","Edit","paste");
-      client.controller.add_role("default","Edit","delete");
-      client.controller.add_role("default","Edit","selectall");
-      client.controller.add("default","Edit","Autocomplete",() => { this.input.complete(); },"Tab");
+      browser.controller.add_role("default","Edit","undo");
+      browser.controller.add_role("default","Edit","redo");
+      browser.controller.add_role("default","Edit","cut");
+      browser.controller.add_role("default","Edit","copy");
+      browser.controller.add_role("default","Edit","paste");
+      browser.controller.add_role("default","Edit","delete");
+      browser.controller.add_role("default","Edit","selectall");
+      browser.controller.add("default","Edit","Autocomplete",() => { this.input.complete(); },"Tab");
 
 
-      client.controller.add("default","Theme","Noir",() => { client.theme.noir(); },"CmdOrCtrl+Shift+1");
-      client.controller.add("default","Theme","Pale",() => { client.theme.pale(); },"CmdOrCtrl+Shift+2");
-      client.controller.add("default","Theme","Invert",() => { client.theme.invert(); },"CmdOrCtrl+Shift+I");
-      client.controller.add("default","Theme","Install",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Themes'); });
+      browser.controller.add("default","Theme","Noir",() => { browser.theme.noir(); },"CmdOrCtrl+Shift+1");
+      browser.controller.add("default","Theme","Pale",() => { browser.theme.pale(); },"CmdOrCtrl+Shift+2");
+      browser.controller.add("default","Theme","Invert",() => { browser.theme.invert(); },"CmdOrCtrl+Shift+I");
+      browser.controller.add("default","Theme","Install",() => { require('electron').shell.openExternal('https://github.com/hundredrabbits/Themes'); });
 
-      client.controller.commit();
+      browser.controller.commit();
       
-      client.install(document.body);
-      client.start();
-      // client.walkthrough.start(500);
-
-      // let logo = new Logo();
-      // logo.install(120);
-      // setTimeout(function(){ logo.remove(); }, 5500);
+      browser.install(document.body);
+      browser.start();
+      // browser.walkthrough.start(500);
     </script>
   </body>
 </html>

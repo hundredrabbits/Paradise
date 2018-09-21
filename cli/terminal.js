@@ -13,8 +13,6 @@ function Terminal(paradise)
 
   this.install = function()
   {
-    this.paradise.client = this;
-
     this._screen.append(this._body);
     this._screen.append(this._input);
     this._screen.append(this._icon);
@@ -24,33 +22,18 @@ function Terminal(paradise)
   this.start = function()
   {
     this._screen.key(['escape', 'q', 'C-c'], (ch, key) => (process.exit(0)));
-
     this._input.on('submit', (text)=>{ this.on_submit(text) });
     this._input.on('keypress', (text)=>{ this.on_keypress(text) });
     this._input.focus();
-    this.query();
+    this.query("");
   }
 
-  this.update = function()
+  this.update = function(sight)
   {
-    this._screen.render();
-  }
-
-  this.query = function(input = "")
-  {
-    let response = this.paradise.query(this.id,input)
-    this._body.setContent(response.sight.cli);
-    this._status.setContent('- '+response.sight.passive)
+    this._body.setContent(sight.cli);
+    this._status.setContent('- '+sight.passive)
     this._icon.setContent(">");
     this._screen.render();
-  }
-
-  // Methods
-
-  this.change_vessel = function(id)
-  {
-    this.id = id;
-    this.query();
   }
 
   // Events
@@ -61,13 +44,13 @@ function Terminal(paradise)
     this._icon.setContent(":");
     this._input.clearValue();
     this._input.focus();
-    this.update();
+    this._screen.render();
   }
 
   this.on_keypress = function(text)
   {
     this._icon.setContent(text.trim() == "" ? ":" : ">");
-    this.update();
+    this._screen.render();
   }
 }
 
