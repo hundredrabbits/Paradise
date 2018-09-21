@@ -1,9 +1,9 @@
 const blessed  = require('blessed');
+const Client  = require('../desktop/server/core/client');
 
 function Terminal(paradise)
 {
-  this.paradise = paradise;
-  this.id = 0;
+  Client.call(this,paradise);
   
   this._screen = blessed.screen();
   this._body = blessed.box({ top: 2, left: 2, height: '100%-4', width: 54, keys: true, mouse: true });

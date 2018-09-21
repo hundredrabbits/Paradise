@@ -57,26 +57,25 @@ function Learn(host)
   {
     let actions = {}
     let _actions = {
+      create:require('./create'),
+      become:require('./become'),
+      enter:require('./enter'),
+      leave:require('./leave'),
 
-      create:require('./actions/create'),
-      become:require('./actions/become'),
-      enter:require('./actions/enter'),
-      leave:require('./actions/leave'),
+      warp:require('./warp'),
+      take:require('./take'),
+      drop:require('./drop'),
+      move:require('./move'),
 
-      warp:require('./actions/warp'),
-      take:require('./actions/take'),
-      drop:require('./actions/drop'),
-      move:require('./actions/move'),
+      learn:require('./learn'),
+      note:require('./note'),
+      transform:require('./transform'),
+      inspect:require('./inspect'),
 
-      learn:require('./actions/learn'),
-      note:require('./actions/note'),
-      transform:require('./actions/transform'),
-      inspect:require('./actions/inspect'),
-
-      trigger:require('./actions/trigger'),
-      program:require('./actions/program'),
-      use:require('./actions/use'),
-      cast:require('./actions/cast'),
+      trigger:require('./trigger'),
+      program:require('./program'),
+      use:require('./use'),
+      cast:require('./cast'),
     }
     for(let id in _actions){
       let action = new _actions[id]
