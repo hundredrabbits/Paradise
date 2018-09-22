@@ -8,10 +8,11 @@ function Wildcard(host,str,query)
   this.str = str;
   this.query = query;
 
+  let paradise = this.host.paradise;
+
   this.toString = function(convert_vessels = true)
   {
     let s = this.str;
-    let paradise = this.host.paradise;
 
     s = s.replace(/\-\-/g,`<br />`)
     s = s.replace(/ \&\& /g,` & `)
@@ -104,6 +105,17 @@ function Wildcard(host,str,query)
 
   this.vessel = function(params)
   {
+    let parts = params.split(" ")
+    let id = parts.length > 0 ? parseInt(parts[0]) : null
+    let field = parts.length > 1 ? parts[1] : null;
+
+    if(!id){ return `@error(Unknown Vessel #${id})`; }
+
+    let target = paradise.world[id];
+
+    if(field && paradise.world[id].data[field]){
+      return paradise.world[id].data[field];
+    }
     if(parseInt(params) > 0){
       return paradise.world[parseInt(params)] ? paradise.world[parseInt(params)].to_a(false) : `@error(Unknown Vessel #${params})`;  
     }

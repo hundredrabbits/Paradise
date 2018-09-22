@@ -113,7 +113,8 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 - `@query`, access the content of a trigger action. ex: `say hello`, `trigger @if(@query IS hello THEN hi!)`
 
 ### Functions
-- `@vessel(3)`, print the name and action connected with that vessel id. 
+- `@vessel(3)`, print the name and action connected to the vessel `#3`. 
+- `@vessel(3 note)`, print the note connected to the vessel `#3`. 
 - `@random(red green blue)`, choose a random word.
 - `@if(a IS b THEN c ELSE d)`, a simple conditional function.
 
@@ -129,12 +130,12 @@ Wildcards are markups created for notes and programs, to make vessels more respo
 Casting is a form of puppeteering, making a visible vessel act in your stead.
 
 ```
-create a blue spell
-enter the blue spell
-program transform into a fish
-leave
-create a cat
-take the blue spell
+create a blue spell &
+enter the blue spell &
+program transform into a fish &
+leave &
+create a cat &
+take the blue spell &
 cast the blue spell on the cat
 ```
 
@@ -143,21 +144,21 @@ cast the blue spell on the cat
 This example demonstrates how to create a vessel with enabled dialog tools.
 
 ```
-create a character
-enter the character
-trigger say You said "@query". 
-leave
+create a character &
+enter the character &
+trigger say You said "@query".  &
+leave &
 say hello
 ```
 
 ### Wildcards
 
 ```
-create a dice
-enter the dice
-program look
-trigger roll You rolled @random(1 2 3 4 5 6).
-leave
+create a dice & 
+enter the dice & 
+program look & 
+trigger roll You rolled @random(1 2 3 4 5 6). & 
+leave & 
 roll the dice
 ```
 
@@ -165,10 +166,10 @@ roll the dice
 This example demonstrates how to use a wildcard in a program.
 
 ```
-create a random warp
-enter the random warp
-program warp in @__random
-leave
+create a random warp &
+enter the random warp &
+program warp in @__random &
+leave &
 use the random warp
 ```
 
@@ -176,33 +177,33 @@ use the random warp
 This spell can be fired at unwanted vessels, sending them into a vessel discard bin, to be recycled later.  
 
 ```
-create a recycling bin
-create a discard spell
-enter the discard spell
-program warp to the recycling bin
-leave
-take the discard spell
+create a recycling bin & 
+create a discard spell & 
+enter the discard spell & 
+program warp to the recycling bin & 
+leave & 
+take the discard spell & 
 cast the discard spell on the unwanted vessel
 ```
 
 ### Append Spell
 
 ```
-create a typewriter
-enter the typewriter
-program note @_note @query
-trigger type You typed "@query".
-leave
+create a typewriter &
+enter the typewriter &
+program note @_note @query &
+trigger type You typed "@query". &
+leave &
 use the typewriter
 ```
 
 ### A pocket watch
 
 ```
-create a clock
-enter the clock
-trigger passive @time
-leave
+create a clock &
+enter the clock &
+trigger passive @time &
+leave &
 take the clock
 ```
 
