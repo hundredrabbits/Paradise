@@ -39,8 +39,8 @@ function Action(host,name)
     for(let id in siblings){
       let v = siblings[id];
       if(v.trigger() != action){ continue; }
-      if(v.is_program()){ this.host.cmd(new Wildcard(this.host,v.data.program,params).toString(false)); }
-      return v.data.reaction ? `<p>${new Wildcard(this.host,v.data.reaction,params).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
+      if(v.is_program()){ this.host.cmd(new Wildcard(this.host,v.data.program,params,v).toString(false)); }
+      return v.data.reaction ? `<p>${new Wildcard(this.host,v.data.reaction,params,v).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
     return this.err_UNKNOWN();
   }
@@ -129,7 +129,8 @@ function Action(host,name)
 
   this._note = function()
   {
-    return this.host.parent().data.note ? new Wildcard(this.host,this.host.parent().data.note).toString() : ''
+    let parent = this.host.parent()
+    return parent.data.note ? new Wildcard(this.host,parent.data.note).toString() : ''
   }
 
   this._view = function()

@@ -18,9 +18,9 @@ function Use(host)
     if(!target){ return this.err_NOTARGET(params,"available"); }
     if(!target.usable()){ return `<p>${target} cannot be used.</p>`; }
 
-    this.host.cmd(new Wildcard(this.host,target.data.program,params).toString(false))
+    this.host.cmd(new Wildcard(this.host,target.data.program,params,target).toString(false))
 
-    return target.data.reaction ? `<p>${new Wildcard(this.host,target.data.reaction,params).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
+    return target.data.reaction ? `<p>${new Wildcard(this.host,target.data.reaction,params,target).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
   }
 }
 

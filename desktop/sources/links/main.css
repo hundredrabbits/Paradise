@@ -38,5 +38,5 @@ body wr action:hover { cursor: pointer; }
 .hidden { opacity: 0; height:0px; }
 .visible { opacity: 1; height:auto; }
 
-body.loading page { opacity: 0; }
+body.loading page { transition: all 0ms; opacity: 0; }
 body.ready page { opacity: 1 }

@@ -2,11 +2,12 @@
 
 const Clock = require('./clock')
 
-function Wildcard(host,str,query)
+function Wildcard(host,str,query,responder)
 {
   this.host = host;
   this.str = str;
   this.query = query;
+  this.responder = responder;
 
   let paradise = this.host.paradise;
 
@@ -55,6 +56,8 @@ function Wildcard(host,str,query)
     s = s.replace('@__Random',`${paradise.random().name().capitalize()}`)
     // Custom
     s = s.replace(/@query/g,this.query ? this.query : '')
+    s = s.replace(/@responder/g,this.responder ? this.responder.id : '')
+    s = s.replace(/@parent/g,this.host.parent() ? this.host.parent().id : '')
 
     s = this.parse_complex(s);
 
