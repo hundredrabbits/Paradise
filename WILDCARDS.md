@@ -1,6 +1,50 @@
-## Wildcards
+## WildcardLISP
 
-The wildcards are being phased out in exchange for [ParadiseLISP](LISP.md).
+The wildcardLISP is a collection of tools to create more dynamic vessels, using the LISP formatting. You can see the implementation [here](./desktop/server/core/wildcard.js).
+
+### Self/Parent/Stem
+
+-'Your id is @(self)', to get your vessel id.
+-'Your parent vessel is @(parent)', to get your parent id.
+-'You are in the @(stem) paradox', to get the stem id.
+
+### Vessel
+
+The vessel wildcard is the most commonly used wildcard, it allows to get a vessel data by its ID.
+
+- 'In the beginning, there was the @(vessel 0 "name").'
+- 'You are the @(vessel self "name").'
+- 'You are inside the @(vessel parent "name").'
+
+### If
+
+The 'if' method allows to do basic logic tests, it basically does '@(if a b c)', or if a then b, else c.
+
+- 'The vessel @(if (equal (vessel parent "name") "house") "is a house" "is not a house")'
+
+### Random
+
+The random wildcard picks a random items.
+
+- 'Your favourite color is (random "cyan" "magenta" "yellow")'
+- 'You rolled a @(random 1 2 3 4 5 6).'
+
+### lc/cc/uc
+
+To transform a value to an uppercased, lowercased or capitalized string, use the 'lc', 'cc' and 'uc' functions.
+
+- '@(uc (vessel parent "name"))'
+
+### equal
+
+Tests values to see if they are equal.
+
+- '@(equal 1 1 1)', true.
+- '@(equal "blue" "blue" "red")', false.
+
+### greater/lesser
+
+- '4 is @(if (greater 4 3) "greater" "lesser") than 3.'
 
 Wildcards are markups created for notes and programs, to make vessels more responsive to their environment. A simple example would be `note Hello @Name.`, rendered as `Hello Ghost`.
 

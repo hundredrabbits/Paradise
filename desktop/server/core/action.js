@@ -239,7 +239,7 @@ function Action(host,name)
     while(str.indexOf("@(") > -1){
       let segment = this.extract(str);
       try{
-        str = str.replace(`@${segment}`,`${new Wildcard(segment,query,responder)}`);
+        str = str.replace(`@${segment}`,`${new Wildcard(this.host,segment,query,responder)}`);
       }
       catch(err){
         str = str.replace(`@${segment}`,segment);
