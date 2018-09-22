@@ -1,7 +1,6 @@
 "use strict";
 
 const Action = require(`../core/action`)
-const Wildcard = require('../core/wildcard')
 
 function Use(host)
 {
@@ -18,9 +17,15 @@ function Use(host)
     if(!target){ return this.err_NOTARGET(params,"available"); }
     if(!target.usable()){ return `<p>${target} cannot be used.</p>`; }
 
-    this.host.cmd(new Wildcard(this.host,target.data.program,params,target).toString(false))
+    let cmd_rendered = this.render(target.data.program,params,target);
+    this.host.cmd(cmd_rendered)
 
-    return target.data.reaction ? `<p>${new Wildcard(this.host,target.data.reaction,params,target).toString(false)}</p>` : `<p>You used <action>${target}</action>.</p>`
+    if(target.data.reaction){
+      let reaction_rendered = this.render(target.data.reaction,params,target);
+      return `<p>${reaction_rendered}</p>`
+    }
+    
+    return `<p>You used <action>${target}</action>.</p>`
   }
 }
 

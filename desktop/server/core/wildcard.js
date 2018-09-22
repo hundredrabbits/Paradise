@@ -13,6 +13,8 @@ function Wildcard(host,str,query,responder)
 
   this.toString = function(convert_vessels = true)
   {
+    return this.str;
+    
     let s = this.str;
 
     s = s.replace(/\-\-/g,`<br />`)

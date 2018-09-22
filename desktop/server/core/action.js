@@ -1,6 +1,6 @@
 "use strict";
 
-const Wildcard = require('./wildcard')
+const Lisp = require('./lisp')
 
 function Action(host,name)
 {
@@ -39,8 +39,10 @@ function Action(host,name)
     for(let id in siblings){
       let v = siblings[id];
       if(v.trigger() != action){ continue; }
-      if(v.is_program()){ this.host.cmd(new Wildcard(this.host,v.data.program,params,v).toString(false)); }
-      return v.data.reaction ? `<p>${new Wildcard(this.host,v.data.reaction,params,v).toString(false)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
+      if(v.is_program()){ 
+        this.host.cmd(this.render(v.data.program,params,v));
+      }
+      return v.data.reaction ? `<p>${this.render(v.data.reaction,params,v)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
     return this.err_UNKNOWN();
   }
@@ -130,7 +132,7 @@ function Action(host,name)
   this._note = function()
   {
     let parent = this.host.parent()
-    return parent.data.note ? new Wildcard(this.host,parent.data.note).toString() : ''
+    return parent.data.note ? this.render(parent.data.note) : ''
   }
 
   this._view = function()
@@ -152,7 +154,7 @@ function Action(host,name)
     for(let id in children){
       let v = children[id];
       let p = v.passive();
-      html += p ? `${new Wildcard(this.host,p).toString(false)} | ` : ''
+      html += p ? `${this.render(p).toString(false)} | ` : ''
     }
 
     return html.substr(0,html.length-2).trim();
@@ -228,6 +230,44 @@ function Action(host,name)
     s = s.replace(/ one /g,' ')
     s = s.replace(/ two /g,' ')
     return s.trim()
+  }
+
+  this.render = function(str,query = null,responder = null)
+  {
+    if(str.indexOf("@(") < 0){ return str; } // No Templating
+
+    while(str.indexOf("@(") > -1){
+      let segment = this.extract(str);
+      try{
+        str = str.replace(`@${segment}`,`${new Lisp(segment)}`);
+      }
+      catch(err){
+        str = str.replace(`@${segment}`,segment);
+      }
+    }
+
+    return str
+  }
+
+  this.extract = function(str)
+  {
+    let from = str.indexOf("@(")
+    let segment = str.substr(from,str.length-from)
+
+    let i = 0
+    let opening = 0
+    let closing = 0
+
+    while(i < segment.length){
+      let ch = segment[i]
+      if(ch == "("){ opening++; }
+      if(ch == ")"){ closing++; }
+      if(opening > 0 && closing > 0 && opening == closing){
+        return str.substr(from+1,i)
+      }
+      i++;
+    }
+    return str
   }
 
   // Errors
