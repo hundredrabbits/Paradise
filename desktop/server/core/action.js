@@ -239,10 +239,11 @@ function Action(host,name)
     while(str.indexOf("@(") > -1){
       let segment = this.extract(str);
       try{
-        str = str.replace(`@${segment}`,`${new Lisp(segment)}`);
+        str = str.replace(`@${segment}`,`${new Lisp(segment,query,responder)}`);
       }
       catch(err){
         str = str.replace(`@${segment}`,segment);
+        console.warn(err)
       }
     }
 

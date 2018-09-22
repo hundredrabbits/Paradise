@@ -1,3 +1,5 @@
+"use strict";
+
 function Lisp(input)
 {
   this.input = input;
@@ -6,8 +8,11 @@ function Lisp(input)
     first: function(x) {
       return x[0];
     },
-    add: function(x){
-      return x[0]+x[1];
+    add: function(...items){
+      return items.reduce((acc,value) => { return acc + value; },0);
+    },
+    random: function(...items){
+      return items[Math.floor((Math.random() * items.length))]
     },
     rest: function(x) {
       return x.slice(1);
@@ -143,7 +148,7 @@ function Lisp(input)
 
   this.toString = function()
   {
-    return interpret(this.parse(this.input));
+    return `${interpret(this.parse(this.input))}`;
   }
 }
 

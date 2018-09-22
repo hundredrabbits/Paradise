@@ -1,5 +1,7 @@
 ## Wildcards
 
+The wildcards are being phased out in exchange for [ParadiseLISP](LISP.md).
+
 Wildcards are markups created for notes and programs, to make vessels more responsive to their environment. A simple example would be `note Hello @Name.`, rendered as `Hello Ghost`.
 
 ### Basics
