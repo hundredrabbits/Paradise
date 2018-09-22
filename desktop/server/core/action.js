@@ -1,6 +1,6 @@
 "use strict";
 
-const Lisp = require('./lisp')
+const Wildcard = require('./wildcard')
 
 function Action(host,name)
 {
@@ -239,14 +239,13 @@ function Action(host,name)
     while(str.indexOf("@(") > -1){
       let segment = this.extract(str);
       try{
-        str = str.replace(`@${segment}`,`${new Lisp(segment,query,responder)}`);
+        str = str.replace(`@${segment}`,`${new Wildcard(segment,query,responder)}`);
       }
       catch(err){
         str = str.replace(`@${segment}`,segment);
         console.warn(err)
       }
     }
-
     return str
   }
 

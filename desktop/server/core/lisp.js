@@ -1,27 +1,8 @@
 "use strict";
 
-function Lisp(input)
+function Lisp(input,lib)
 {
   this.input = input;
-
-  const library = {
-    first: function(x) {
-      return x[0];
-    },
-    add: function(...items){
-      return items.reduce((acc,value) => { return acc + value; },0);
-    },
-    random: function(...items){
-      return items[Math.floor((Math.random() * items.length))]
-    },
-    rest: function(x) {
-      return x.slice(1);
-    },
-    print: function(x) {
-      console.log(x);
-      return x;
-    }
-  };
 
   const Context = function(scope, parent) 
   {
@@ -86,7 +67,7 @@ function Lisp(input)
   const interpret = function(input, context)
   {
     if(context === undefined){
-      return interpret(input, new Context(library));
+      return interpret(input, new Context(lib));
     } 
     else if(input instanceof Array){
       return interpretList(input, context);
