@@ -16,15 +16,17 @@ function Paradise()
       self=@(self)--
       parent=@(parent)--
       stem=@(stem)--
+      vessel 0 name=@(vessel 0)--
       vessel 0 name=@(vessel 0 "name")--
-      vessel 0 attr=@(vessel 0 "attr")--
-      random1 @(random "cyan" "magenta" "yellow")--
-      random2 @(random 1 2 3 4 5 6)--
-      lc=@(uc (vessel parent "name"))--
-      cc=@(uc (vessel parent "name"))--
-      uc=@(uc (vessel parent "name"))--
-      true=@(equal 1 1 1)--
-      @(equal "blue" "blue" "red")--
+      vessel self name=@(vessel self "name")--
+      vessel parent name=@(vessel parent)--
+      random_word @(random "cyan" "magenta" "yellow")--
+      random_number @(random 1 2 3 4 5 6)--
+      lc=@(lc (vessel 0 "name"))--
+      cc=@(cc (vessel 0 "name"))--
+      uc=@(uc (vessel 0 "name"))--
+      equal numbers=@(equal 1 1 1)--
+      equal words=@(equal "blue" "blue" "red")--
       .`},
       {name:"map",parent:0,owner:0,note:"A basic map", trigger:`passive`, reaction:'THE @STEM'},
     ]);

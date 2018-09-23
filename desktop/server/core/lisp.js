@@ -23,8 +23,7 @@ function Lisp(input,lib)
   const special = {
     let: function(input, context)
     {
-      const letContext = input[1].reduce(function(acc, x) 
-      {
+      const letContext = input[1].reduce(function(acc, x) {
         acc.scope[x[0].value] = interpret(x[1], context);
         return acc;
       }, new Context({}, context));
@@ -37,8 +36,7 @@ function Lisp(input,lib)
       return function()
       {
         const lambdaArguments = arguments;
-        const lambdaScope = input[1].reduce(function(acc, x, i) 
-        {
+        const lambdaScope = input[1].reduce(function(acc, x, i) {
           acc[x.value] = lambdaArguments[i];
           return acc;
         }, {});

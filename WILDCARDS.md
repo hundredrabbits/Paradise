@@ -2,16 +2,25 @@
 
 The wildcardLISP is a collection of tools to create more dynamic vessels, using the LISP formatting. You can see the implementation [here](./desktop/server/core/wildcard.js).
 
-### Self/Parent/Stem
+### Sights
+
+#### Self
 
 - `Your id is @(self)`, to get your vessel id.
+
+#### Parent
+
 - `Your parent vessel is @(parent)`, to get your parent id.
+
+#### Stem
+
 - `You are in the @(stem) paradox`, to get the stem id.
 
 ### Vessel
 
 The vessel wildcard is the most commonly used wildcard, it allows to get a vessel data by its ID.
 
+- `You see @(vessel 0).`
 - `In the beginning, there was the @(vessel 0 "name").`
 - `You are the @(vessel self "name").`
 - `You are inside the @(vessel parent "name").`

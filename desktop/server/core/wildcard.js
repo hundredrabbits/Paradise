@@ -6,30 +6,39 @@ const Clock = require('./clock')
 function Wildcard(host,input,query,responder)
 {
   let lib = {
-    first: function(x) {
-      return x[0];
+    // Sights
+    self: function(){
+      return host.id;
     },
-    add: function(...items){
-      return items.reduce((acc,value) => { return acc + value; },0);
+    parent: function(){
+      return host.parent().id;
+    },
+    stem: function(){
+      return host.stem().id;
+    },
+    // Transform
+    lc: function(str)
+    {
+      return str ? str.toLowerCase() : ''
+    },
+    cc: function(str)
+    {
+      return str ? `${str.charAt(0).toUpperCase()}${str.slice(1).toLowerCase()}` : ''
+    },
+    uc: function(str)
+    {
+      return str ? str.toUpperCase() : ''
+    },
+    // Main
+    vessel: function(id,field){
+      if(typeof id === "function"){ id = id(); }
+      if(typeof id != 'number'){ return '(error:misformated function)'; }
+      let target = host.paradise.world[id]
+      if(!target){ return `(error:unknown vessel-${id})`; }
+      return field && target.data[field] ? target.data[field] : target
     },
     random: function(...items){
       return items[Math.floor((Math.random() * items.length))]
-    },
-    vessel: function(...items){
-      if(!items[0]){ return 'error(misformated)'; }
-      let id = parseInt(items[0])
-      let target = host.paradise.world[id]
-      if(!target){ return 'error(unknown vessel)'; }
-      let field = items[1]
-      if(!target.data[field]){ return 'error(unknown '+field+' field)'; }
-      return target.data[field]
-    },
-    rest: function(x) {
-      return x.slice(1);
-    },
-    print: function(x) {
-      console.log(x);
-      return x;
     }
   }
   Lisp.call(this,input,lib)

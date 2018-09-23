@@ -89,10 +89,7 @@ function Vessel(data = basic)
     let v = this.parent()
     let i = 0
     while(i < 50){
-      if(v.parent().is_paradox() || known.indexOf(v.id) > -1){
-        return v
-        break;
-      }
+      if(v.parent().is_paradox() || known.indexOf(v.id) > -1){ return v; }
       i += 1
       known.push(v.id)
     }
