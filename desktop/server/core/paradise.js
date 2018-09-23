@@ -12,21 +12,7 @@ function Paradise()
     this.import([
       {name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},
       {name:"library",attr:"ceramic",parent:1,owner:1,note:`Dear @full,--Welcome to Paradise. Type "learn" to get started. 
-      6=@(add 3 3)--
-      self=@(self)--
-      parent=@(parent)--
-      stem=@(stem)--
-      vessel 0 name=@(vessel 0)--
-      vessel 0 name=@(vessel 0 "name")--
-      vessel self name=@(vessel self "name")--
-      vessel parent name=@(vessel parent)--
-      random_word @(random "cyan" "magenta" "yellow")--
-      random_number @(random 1 2 3 4 5 6)--
-      lc=@(lc (vessel 0 "name"))--
-      cc=@(cc (vessel 0 "name"))--
-      uc=@(uc (vessel 0 "name"))--
-      equal numbers=@(equal 1 1 1)--
-      equal words=@(equal "blue" "blue" "red")--
+      
       .`},
       {name:"map",parent:0,owner:0,note:"A basic map", trigger:`passive`, reaction:'THE @STEM'},
     ]);

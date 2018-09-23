@@ -6,6 +6,7 @@ const Clock = require('./clock')
 function Wildcard(host,input,query,responder)
 {
   let lib = {
+
     // Sights
     self: function(){
       return host.id;
@@ -16,6 +17,7 @@ function Wildcard(host,input,query,responder)
     stem: function(){
       return host.stem().id;
     },
+
     // Transform
     lc: function(str)
     {
@@ -29,6 +31,17 @@ function Wildcard(host,input,query,responder)
     {
       return str ? str.toUpperCase() : ''
     },
+
+    // Logic
+    equal: function(...items)
+    {
+      return items.every((val, i, arr) => val === arr[0]);
+    },
+    if: function(i,t,e)
+    {
+      return i ? t : e;
+    },
+
     // Main
     vessel: function(id,field){
       if(typeof id === "function"){ id = id(); }

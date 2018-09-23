@@ -43,11 +43,6 @@ function Lisp(input,lib)
 
         return interpret(input[2], new Context(lambdaScope, context));
       };
-    },
-
-    if: function(input, context)
-    {
-      return interpret(input[1], context) ? interpret(input[2], context) : interpret(input[3], context);
     }
   };
 
