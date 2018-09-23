@@ -55,13 +55,11 @@ function Lisp(input,lib)
 
   const interpretList = function(input, context)
   {
-    if (input.length > 0 && input[0].value in special){
+    if(input.length > 0 && input[0].value in special){
       return special[input[0].value](input, context);
     } 
-    else {
-      const list = input.map(function(x) { return interpret(x, context); });
-      return list[0] instanceof Function ? list[0].apply(undefined, list.slice(1)) : list;
-    }
+    const list = input.map(function(x) { return interpret(x, context); });
+    return list[0] instanceof Function ? list[0].apply(undefined, list.slice(1)) : list;
   };
 
   const interpret = function(input, context)
@@ -95,26 +93,24 @@ function Lisp(input,lib)
 
   const parenthesize = function(input, list)
   {
-    if(list === undefined){
-      return parenthesize(input, []);
+    if(list === undefined){ return parenthesize(input, []); } 
+    
+    const token = input.shift();
+
+    if(token === undefined){
+      return list.pop();
+    } 
+    else if(token === "("){
+      list.push(parenthesize(input, []));
+      return parenthesize(input, list);
+    } 
+    else if(token === ")"){
+      return list;
     } 
     else {
-      const token = input.shift();
-
-      if(token === undefined){
-        return list.pop();
-      } 
-      else if(token === "("){
-        list.push(parenthesize(input, []));
-        return parenthesize(input, list);
-      } 
-      else if(token === ")"){
-        return list;
-      } 
-      else {
-        return parenthesize(input, list.concat(categorize(token)));
-      }
+      return parenthesize(input, list.concat(categorize(token)));
     }
+    
   };
 
   const tokenize = function(input)

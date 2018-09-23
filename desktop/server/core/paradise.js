@@ -11,7 +11,21 @@ function Paradise()
     // Default World
     this.import([
       {name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},
-      {name:"library",attr:"ceramic",parent:1,owner:1,note:`Dear @full,--Welcome to Paradise. Type "learn" to get started. @(add (1 2)) @(add (3 5)).`},
+      {name:"library",attr:"ceramic",parent:1,owner:1,note:`Dear @full,--Welcome to Paradise. Type "learn" to get started. 
+      6=@(add 3 3)--
+      self=@(self)--
+      parent=@(parent)--
+      stem=@(stem)--
+      vessel 0 name=@(vessel 0 "name")--
+      vessel 0 attr=@(vessel 0 "attr")--
+      random1 @(random "cyan" "magenta" "yellow")--
+      random2 @(random 1 2 3 4 5 6)--
+      lc=@(uc (vessel parent "name"))--
+      cc=@(uc (vessel parent "name"))--
+      uc=@(uc (vessel parent "name"))--
+      true=@(equal 1 1 1)--
+      @(equal "blue" "blue" "red")--
+      .`},
       {name:"map",parent:0,owner:0,note:"A basic map", trigger:`passive`, reaction:'THE @STEM'},
     ]);
   }

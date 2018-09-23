@@ -234,6 +234,8 @@ function Action(host,name)
 
   this.render = function(str,query = null,responder = null)
   {
+    str = str.replace(/\-\-/g,"<br />").replace(/ \&\& /g," & ");
+    
     if(str.indexOf("@(") < 0){ return str; } // No Templating
 
     while(str.indexOf("@(") > -1){

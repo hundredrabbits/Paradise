@@ -1,3 +1,0 @@
-## LISP
-
-In development.
