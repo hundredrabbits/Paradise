@@ -1,6 +1,6 @@
 # WildcardLISP
 
-The wildcardLISP is a collection of tools to create more [dynamic vessels](TUTORIALS.md), using the LISP formatting. You can see the implementation [here](./desktop/server/core/wildcard.js).
+The wildcardLISP is a collection of tools to create more [dynamic vessels](TUTORIALS.md), using a tiny implementation of LISP. You can see the specs [here](./desktop/server/core/wildcard.js). The goal is to allow for more complex behaviours, the WildcardLISP project is part of the [ParadiseOS](https://github.com/neauoire/ParadiseOS) targets.
 
 ## Sights
 
