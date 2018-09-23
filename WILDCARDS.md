@@ -1,6 +1,6 @@
 # WildcardLISP
 
-The wildcardLISP is a collection of tools to create more dynamic vessels, using the LISP formatting. You can see the implementation [here](./desktop/server/core/wildcard.js).
+The wildcardLISP is a collection of tools to create more [dynamic vessels](TUTORIALS.md), using the LISP formatting. You can see the implementation [here](./desktop/server/core/wildcard.js).
 
 ## Sights
 
@@ -22,8 +22,8 @@ The wildcardLISP is a collection of tools to create more dynamic vessels, using 
 
 Tests values to see if they are equal.
 
-- `@(equal 1 1 1)`, true.
-- `@(equal "blue" "blue" "red")`, false.
+- `@(equal 1 1)`, true.
+- `@(equal "blue" "red")`, false.
 
 ### If
 
@@ -68,6 +68,12 @@ The vessel wildcard is the most commonly used wildcard, it allows to get a vesse
 - `You are the @(vessel self "name").`
 - `You are inside the @(vessel parent "name").`
 
+## Programming
+
+The programming wildcards are used with [triggers and programs](TUTORIALS.md).
+
+- `trigger say You said "@(query)" to vessel #@(responder).`
+
 ## Benchmark
 
 ```
@@ -86,11 +92,15 @@ random_number=@(random 1 2 3 4 5 6)--
 
 yes=@(if 1 "yes" "no")--
 no=@(if 0 "yes" "no")--
-true=@(equal 1 1 1)--
-false=@(equal "blue" "blue" "red")--
+true=@(equal 1 1)--
+false=@(equal "blue" "red")--
 
 ghost=@(lc (vessel 0 "name"))--
 Ghost=@(cc (vessel 0 "name"))--
 GHOST=@(uc (vessel 0 "name"))--
+
+false=@(carry self "axe")
+
+@(if (equal query "hello") "yes" "no")
 ```
 

@@ -8,20 +8,23 @@ function Wildcard(host,input,query,responder)
   let lib = {
 
     // Sights
-    self: function(){
+    self: function()
+    {
       return host.id;
     },
-    parent: function(){
+    parent: function()
+    {
       return host.parent().id;
     },
-    stem: function(){
+    stem: function()
+    {
       return host.stem().id;
     },
 
     // Transform
     lc: function(str)
     {
-      return str ? str.toLowerCase() : ''
+      return str ? `${str}`.toLowerCase() : ''
     },
     cc: function(str)
     {
@@ -29,17 +32,27 @@ function Wildcard(host,input,query,responder)
     },
     uc: function(str)
     {
-      return str ? str.toUpperCase() : ''
+      return str ? `${str}`.toUpperCase() : ''
+    },
+
+    // Programming
+    query: function()
+    {
+      return query;
+    },
+    responder: function()
+    {
+      return responder.id;
     },
 
     // Logic
-    equal: function(...items)
+    equal: function(a,b)
     {
-      return items.every((val, i, arr) => val === arr[0]);
+      return (typeof a === "function" ? a() : a) == (typeof b === "function" ? b() : b)
     },
     if: function(i,t,e)
     {
-      return i ? t : e;
+      return typeof id === "function" ? i() : i ? t : e;
     },
 
     // Main
@@ -49,6 +62,14 @@ function Wildcard(host,input,query,responder)
       let target = host.paradise.world[id]
       if(!target){ return `(error:unknown vessel-${id})`; }
       return field && target.data[field] ? target.data[field] : target
+    },
+    carry: function(id,target){
+      if(typeof id === "function"){ id = id(); }
+      let children = host.children()
+      for(let i in children){
+        if(children[i].is(target)){ return true; }
+      }
+      return false;
     },
     random: function(...items){
       return items[Math.floor((Math.random() * items.length))]

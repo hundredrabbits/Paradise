@@ -195,10 +195,6 @@ function Action(host,name)
     if(this.host.parent().is_program()){
       a.push(`The ${this.host.parent().name()} has the "${this.host.parent().data.program}" program.`)
     }
-    // Note/Program
-    if(this.host.parent().trigger()){
-      a.push(`The ${this.host.parent().name()} grants the "${this.host.parent().trigger()}"" action.`)
-    }
 
     //Find custom actions
     let siblings = this.host.siblings()
