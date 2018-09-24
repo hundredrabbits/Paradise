@@ -6,6 +6,16 @@ As an experiment, this project now includes a LISP-like language, called [Wildca
 
 _“I have always imagined that Paradise will be a kind of library.”_ — Jorge Luis Borges
 
+## Install
+
+```
+npm install
+npm start # Will start cli mode
+cd desktop
+npm install
+npm start # Will start graphical mode
+```
+
 ## Learn More
 
 - [Actions](ACTIONS.md), the Actions documentation.
@@ -15,5 +25,7 @@ _“I have always imagined that Paradise will be a kind of library.”_ — Jorg
 
 ## Extras
 
+- This application supports the [Ecosystem Theme](https://github.com/hundredrabbits/Themes).
 - Support this project through [Patreon](https://patreon.com/100).
 - See the [License](LICENSE.md) file for license rights and limitations (MIT).
+- Pull Requests are welcome!
