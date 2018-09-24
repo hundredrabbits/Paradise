@@ -45,25 +45,18 @@
     font-style: normal;
 }
 
-/* Lora */
+/* Playfair */
 
 @font-face {
-  font-family: 'frank_ruhl_light';
-  src: url('../media/fonts/frank_ruhl_light.ttf') format('truetype');
+  font-family: 'playfair_regular';
+  src: url('../media/fonts/playfair_regular.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
-  font-family: 'frank_ruhl_regular';
-  src: url('../media/fonts/frank_ruhl_regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'frank_ruhl_medium';
-  src: url('../media/fonts/frank_ruhl_medium.ttf') format('truetype');
+  font-family: 'playfair_bold';
+  src: url('../media/fonts/playfair_bold.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }

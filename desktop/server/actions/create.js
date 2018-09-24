@@ -7,7 +7,7 @@ function Create(host)
 {
   Action.call(this,host,"create");
 
-  this.docs = "Create a new vessel at your current location. Vessel names and attributes must include less than 14 characters and be unique. "
+  this.docs = "Create a new vessel at your current location. Vessel names and attributes must include <b>less than 14 characters and be unique</b>. "
 
   this.operate = function(action,params)
   {

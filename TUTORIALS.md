@@ -1,6 +1,13 @@
 ## Tutorials
 
+### Templating
+
+- `&`, to do multiple queries at once.
+- `&&`, to make a program do multiple queries at once.
+- `--`, to add a linebreak in a note.
+
 ### Casting 
+
 Casting is a form of puppeteering, making a visible vessel act in your stead.
 
 ```

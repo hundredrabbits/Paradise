@@ -2,9 +2,9 @@ html { background: #efefef; padding: 30px; overflow: hidden; -webkit-app-region:
 body { background: #fff;padding: 30px; max-width: 420px; min-width: 420px; margin:0px auto; font-family: 'lora_regular'; overflow: hidden; -webkit-app-region: drag;}
 body wr { display: block;background: #fff;height: calc(100vh - 180px);margin: 0px auto;width: calc(100% - 60px);position: relative;min-height: 500px;-webkit-app-region: no-drag;transition: all 250ms;padding: 30px;border: 1px solid #efefef;}
 body wr page { display: block;overflow-y: scroll;height: calc(100vh - 190px);transition: all 250ms;width: calc(100% - 0px);padding: 30px 30px 0px;margin-left: -30px;margin-top: -30px;}
-body wr page h1 { font-family: 'frank_ruhl_light'; font-size: 40px;text-transform: uppercase;text-align: center;line-height: 50px;margin-bottom: 30px;margin-top: 30px; font-weight: normal; }
-body wr page h1 *:first-child { border-bottom:1px solid black; }
-body wr page h2#passive { text-align: center; margin-bottom: 30px; font-size:14px; line-height: 20px; text-transform: uppercase; font-family: 'frank_ruhl_regular';  }
+body wr page h1 { font-family: 'playfair_regular'; font-size: 40px;text-transform: uppercase;text-align: center;line-height: 50px;margin-bottom: 30px;margin-top: 30px; font-weight: normal; }
+body wr page h1 *:first-child { font-family: 'playfair_bold'; }
+body wr page h2#passive { text-align: center; margin-bottom: 30px; font-size:16px; line-height: 20px; text-transform: uppercase; font-family: 'playfair_regular';  }
 body wr page h2#passive:before { content:'– '; }
 body wr page h2#passive:after { content:' –'; }
 body wr page h2#passive action { border-bottom:0px; }
@@ -12,6 +12,7 @@ body wr page h2#passive action:hover { border-bottom:0px; color:#ccc; }
 body wr page p { font-size: 18px;font-family: 'lora_italic';margin-bottom: 30px;line-height: 26px;}
 body wr page p action { border-bottom:0px; font-family: 'lora_bold_italic' }
 body wr page p action:hover { border-bottom:1px solid #ccc; cursor: pointer;}
+body wr page p b { font-family: 'lora_bold' }
 body wr page list { display: block; line-height: 22px; margin-bottom:30px; }
 body wr page list ln { display: inline-block; margin-right:5px; }
 body wr page list ln:before { content: counter(item, decimal) '. ';counter-increment: item; color:#999; }
@@ -28,7 +29,6 @@ body wr action:hover { cursor: pointer; }
 #note { display: block; transition: all 250ms }
 #reaction { line-height: 45px;border-radius: 2px; transition: all 500ms; display: block; }
 #reaction img { display: block; width:100%; }
-#reaction h3 { text-align: center; font-family: 'frank_ruhl_regular'; text-transform: uppercase; font-size:22px; margin-bottom:15px; line-height: 30px }
 #reaction p { font-size: 18px;margin: 0px auto 30px;min-width: 240px; font-family: 'lora_regular' }
 #action { position: relative; }
 #action::before { content:"•"; position: absolute; margin-left: -15px; font-size:14px; line-height: 30px }

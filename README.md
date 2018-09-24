@@ -6,15 +6,8 @@ As an experiment, this project now includes a LISP-like language, called [Wildca
 
 _“I have always imagined that Paradise will be a kind of library.”_ — Jorge Luis Borges
 
-### Basics
+## Learn More
 
-#### Templating
-
-- `&`, to do multiple queries at once.
-- `&&`, to make a program do multiple queries at once.
-- `--`, to add a linebreak in a note.
-
-### Learn More
 - [Actions](ACTIONS.md), the Actions documentation.
 - [Wildcards](WILDCARDS.md), the Wildcard documentation.
 - [Tutorials](TUTORIALS.md), a collection of programming examples.

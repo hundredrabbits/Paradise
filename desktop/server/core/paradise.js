@@ -11,7 +11,7 @@ function Paradise()
     // Default World
     this.import([
       {name:"ghost",parent:1,owner:0,note:"Well, well, hello there."},
-      {name:"library",attr:"ceramic",parent:1,owner:1,note:`Dear @(vessel self "name"),--Welcome to Paradise. Type "learn" to get started.`},
+      {name:"library",attr:"ceramic",parent:1,owner:1,note:`Hello @(vessel self "name"), and welcome to the @(cc (vessel parent "name")). --Type "learn" to get started.`},
       {name:"map",parent:0,owner:0,note:"A basic map", trigger:`passive`, reaction:'@(uc (vessel parent))'}
     ]);
   }
