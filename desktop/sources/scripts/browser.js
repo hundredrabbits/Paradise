@@ -1,7 +1,5 @@
 "use strict";
 
-const Client  = require('../../desktop/server/core/client');
-
 function Browser(paradise)
 {
   Client.call(this,paradise)
