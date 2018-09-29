@@ -46,7 +46,7 @@ function Client(paradise)
 
   this.query = function(input = "", on_query = this.update)
   {
-    let sight = this.paradise.query(this.id,input)  
+    const sight = this.paradise.query(this.id,input)  
     this.update(sight)
   }
 

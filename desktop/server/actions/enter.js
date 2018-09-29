@@ -12,7 +12,7 @@ function Enter(host)
   {
     if(!params){ return this.err_NOPARAM(); }
     
-    let target = this.find(params,this.host.siblings(true));
+    const target = this.find(params,this.host.siblings(true));
 
     if(target){
       this.host.move(target)

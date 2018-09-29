@@ -12,13 +12,13 @@ function Transform(host)
   {
     if(!params){ return this.err_NOPARAM(); }
     
-    let sides = ` ${params} `.replace(" into "," in ").split(" in ")
-    let target = sides[0].trim() ? this.find(sides[0],this.host.siblings()) : this.host;
+    const sides = ` ${params} `.replace(" into "," in ").split(" in ")
+    const target = sides[0].trim() ? this.find(sides[0],this.host.siblings()) : this.host;
 
     if(!target){ return this.err_NOTARGET(sides[0]); }
 
-    let parts = this.remove_articles(sides[1]).trim().split(" ")
-    let origin = `${target}`;
+    const parts = this.remove_articles(sides[1]).trim().split(" ")
+    const origin = `${target}`;
 
     if(!parts[0]){ return this.err_NOVALID(); }
 

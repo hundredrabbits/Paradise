@@ -82,13 +82,7 @@ function Browser(paradise)
     this.action.className = sight.action ? 'visible' : 'hidden'
     this.action.innerHTML = sight.action ? sight.action : ''
 
-    // Tips
-    let html = ""
-    for(let id in sight.tips){
-      let tip = sight.tips[id];
-      html += `<ln>${tip}</ln>`;
-    }
-    this.tips.innerHTML = html
+    this.tips.innerHTML = sight.tips.reduce((acc,val) => { return `${acc}<ln>${val}</ln>`},"")
 
     this.input.update();
     setTimeout(()=>{ this.el.className = "ready" },250)
@@ -98,7 +92,7 @@ function Browser(paradise)
 
   this.import = function()
   {
-    let paths = dialog.showOpenDialog({properties: ['openFile'],filters:[{name:"Paradise World",extensions:["teapot"]}]});
+    const paths = dialog.showOpenDialog({properties: ['openFile'],filters:[{name:"Paradise World",extensions:["teapot"]}]});
 
     if(!paths){ console.log("Nothing to load"); return; }
 
@@ -132,7 +126,7 @@ function Browser(paradise)
   {
     this.reset();
 
-    let previous = this.load()
+    const previous = this.load()
     
     if(previous){
       console.info("Loaded world")
@@ -157,7 +151,7 @@ function Browser(paradise)
   document.onclick= function(event)
   {
     if(event===undefined){ event = window.event; }
-    let target = 'target' in event? event.target : event.srcElement;
+    const target = 'target' in event? event.target : event.srcElement;
     if(target.tagName.toLowerCase() == "action"){
       browser.input.inject(target.getAttribute("data"))
     }

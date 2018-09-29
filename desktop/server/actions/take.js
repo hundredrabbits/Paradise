@@ -12,7 +12,7 @@ function Take(host)
   {
     if(!params){ return this.err_NOPARAM(); }
     
-    let target = this.find(params,this.host.siblings());
+    const target = this.find(params,this.host.siblings());
 
     if(target){
       target.move(this.host)

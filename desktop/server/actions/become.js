@@ -12,7 +12,7 @@ function Become(host)
   {
     if(!params){ return this.err_NOPARAM(); }
 
-    let target = this.find(params,this.host.siblings());
+    const target = this.find(params,this.host.siblings());
 
     if(target){
       this.host.paradise.client.change_vessel(target.id);

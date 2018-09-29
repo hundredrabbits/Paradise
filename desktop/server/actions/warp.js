@@ -12,9 +12,9 @@ function Warp(host)
   {
     if(!params){ return this.err_NOPARAM(); }
     
-    let parts = this.remove_articles(params).split(" ")
-    let relation = parts[0];
-    let target = this.find(parts.length > 1 ? params.replace(relation,'').trim() : params)
+    const parts = this.remove_articles(params).split(" ")
+    const relation = parts[0];
+    const target = this.find(parts.length > 1 ? params.replace(relation,'').trim() : params)
 
     if(!target){
       return `You cannot warp to this location.`

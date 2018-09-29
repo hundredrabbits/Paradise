@@ -12,7 +12,7 @@ function Inspect(host)
   {
     if(params.trim() == ""){ return this.inspect_parent(); }
 
-    let target = this.find(params,this.host.siblings());
+    const target = this.find(params,this.host.siblings());
 
     if(target){
       return `<p>You are inspecting <action>${target}</action>#${target.id}. ${this.make_location(target)}</p>`
@@ -24,13 +24,11 @@ function Inspect(host)
 
   this.inspect_parent = function()
   {
-    return `<p>${this.make_location()}</p>${this.make_hidden_vessels()}`
+    return `<p>${this.make_location()}</p>`
   }
 
   this.make_location = function(target = this.host.parent())
   {
-    let html = ""
-
     if(target.parent().is_paradox()){
       return `The ${target.name()} ${target.type()}, located in the ${target.parent().name()} ${target.parent().type()} paradox, was created by ${target.owner()}.`
     }
@@ -38,23 +36,6 @@ function Inspect(host)
       return `The ${target.name()} ${target.type()} paradox was created by ${target.owner()}.`
     }
     return `The ${target.name()} ${target.type()}, located in the ${target.parent().name()} ${target.parent().type()}, part of the ${target.stem().name()} constellation, was created by ${target.owner()}.`
-  }
-
-  this.make_hidden_vessels = function()
-  {
-    let siblings = this.host.siblings();
-    if(siblings.length < 4){ return ''; }
-
-    let html = "";
-
-    let count = 0;
-    for(let id in siblings){
-      let v = siblings[id]
-      html += `<ln>${v.to_a()}</ln>`
-      count += 1
-    }
-
-    return `<list>${html}</list>`
   }
 }
 

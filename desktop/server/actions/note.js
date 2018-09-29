@@ -12,20 +12,11 @@ function Note(host)
   {
     if(!this.host.parent().data.note && params.trim() == ""){ return this.err_NOVALID(); }
 
-    let is_update = !this.host.parent().data.note ? false : true;
+    const is_update = !this.host.parent().data.note ? false : true;
 
     this.host.parent().set("note",params)
 
-    let verb = 'added a'
-    
-    if(params == ""){
-      verb = 'removed the'
-    }
-    else if(is_update){
-      verb = 'updated the'
-    }
-
-    return `<p>You ${verb} description to <action>${this.host.parent()}</action>.</p>`
+    return `<p>You ${params == "" ? 'removed the' : is_update ? 'updated the' : 'added a'} description to <action>${this.host.parent()}</action>.</p>`
   }
 }
 

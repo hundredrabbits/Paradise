@@ -5,7 +5,7 @@ const Clock = require('./clock')
 
 function Wildcard(host,input,query,responder)
 {
-  let lib = {
+  const lib = {
 
     // Sights
     self: function()
@@ -59,14 +59,14 @@ function Wildcard(host,input,query,responder)
     vessel: function(id,field){
       if(typeof id === "function"){ id = id(); }
       if(typeof id != 'number'){ return '(error:misformated function)'; }
-      let target = host.paradise.world[id]
+      const target = host.paradise.world[id]
       if(!target){ return `(error:unknown vessel-${id})`; }
       return field && target.data[field] ? target.data[field] : target
     },
     carry: function(id,target){
       if(typeof id === "function"){ id = id(); }
-      let children = host.children()
-      for(let i in children){
+      const children = host.children()
+      for(const i in children){
         if(children[i].is(target)){ return true; }
       }
       return false;

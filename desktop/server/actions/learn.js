@@ -13,12 +13,12 @@ function Learn(host)
 
   this.operate = function(action,params)
   {
-    let parts = params.split(" ")
-    let target = parts[parts.length-1].toLowerCase()
+    const parts = params.split(" ")
+    const target = parts[parts.length-1].toLowerCase()
 
     try{
-      let a = require(`./${target}`);
-      let obj = new a()
+      const a = require(`./${target}`);
+      const obj = new a()
       return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs}</p>`
     }
     catch(err){
@@ -43,22 +43,23 @@ function Learn(host)
 
   this.general = function()
   {
-    let docs = this.documentation()
-    let count = Object.keys(docs).length
-    let list = ""
+    const docs = this.documentation()
+    const count = Object.keys(docs).length
+    
     let index = 2
-    for(let id in docs){
+    let _list = ""
+    for(const id in docs){
       if(id == "learn"){ continue; }
-      list += `<action data='learn to ${id}'>${id.capitalize()}</action>${index == count-1 ? ' or ' : (index == count ? '. ' : ', ')} `
+      _list += `<action data='learn to ${id}'>${id.capitalize()}</action>${index == count-1 ? ' or ' : (index == count ? '. ' : ', ')} `
       index += 1
     }
-    return `<img src='media/graphics/default.png'/><p>Which action would you like to <aciton data='learn'>learn</action>? ${list}</p>`
+    return `<img src='media/graphics/default.png'/><p>Which action would you like to <aciton data='learn'>learn</action>? ${_list}</p>`
   }
 
   this.documentation = function()
   {
-    let actions = {}
-    let _actions = {
+    const actions = {}
+    const _actions = {
       create:require('./create'),
       become:require('./become'),
       enter:require('./enter'),
@@ -79,8 +80,8 @@ function Learn(host)
       use:require('./use'),
       cast:require('./cast'),
     }
-    for(let id in _actions){
-      let action = new _actions[id]
+    for(const id in _actions){
+      const action = new _actions[id]
       actions[id] = action.docs
     }
     return actions

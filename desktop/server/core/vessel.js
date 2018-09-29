@@ -1,6 +1,6 @@
 "use strict";
 
-let basic = {
+const basic = {
   name: "ghost",
   attr: "hungry",
   parent: 0,
@@ -14,16 +14,16 @@ function Vessel(data = basic)
 
   this.cmd = function(q = "")
   {
-    let lines = `${q}`.indexOf(" & ") > -1 ? `${q}`.split(" & ") : [`${q}`];
+    const lines = `${q}`.indexOf(" & ") > -1 ? `${q}`.split(" & ") : [`${q}`];
 
     if(!lines){ return this.act(); }
 
     let output;
-    for(let id in lines){
-      let line = lines[id]
-      let parts = line.split(" ")
-      let action = parts.splice(0,1)[0]
-      let params = parts.join(' ').trim()
+    for(const id in lines){
+      const line = lines[id]
+      const parts = line.split(" ")
+      const action = parts.splice(0,1)[0]
+      const params = parts.join(' ').trim()
       output = this.act(action,params)
     }
     return output
@@ -69,9 +69,9 @@ function Vessel(data = basic)
   this.is_circular = function()
   {
     // find Root
-    let known = []
-    let v = this.parent()
-    let i = 0
+    const known = []
+    const v = this.parent()
+    const i = 0
     while(i < 50){
       if(v.is_paradox()){ return false; }
       if(known.indexOf(v.id) > -1){ return true; }
@@ -85,9 +85,9 @@ function Vessel(data = basic)
   this.stem = function()
   {
     // find Root
-    let known = []
-    let v = this.parent()
-    let i = 0
+    const known = []
+    const v = this.parent()
+    const i = 0
     while(i < 50){
       if(v.parent().is_paradox() || known.indexOf(v.id) > -1){ return v; }
       i += 1
@@ -100,8 +100,8 @@ function Vessel(data = basic)
 
   this.is = function(str)
   {
-    let parts = str.split(" ")
-    let last_word = parts[parts.length-1].toLowerCase();
+    const parts = str.split(" ")
+    const last_word = parts[parts.length-1].toLowerCase();
 
     if(last_word == this.data.name){
       return true;
@@ -111,10 +111,10 @@ function Vessel(data = basic)
 
   this.siblings = function()
   {
-    let a = []
-    let parent = this.parent();
-    for(let id in this.paradise.world){
-      let vessel = this.paradise.world[id];
+    const a = []
+    const parent = this.parent();
+    for(const id in this.paradise.world){
+      const vessel = this.paradise.world[id];
       if(parent.is_paradox() && vessel.id == parent.id){ continue; } // Don' show paradoxes
       if(vessel.parent().id == this.parent().id && vessel.id != this.id){
         a.push(vessel)
@@ -125,9 +125,9 @@ function Vessel(data = basic)
 
   this.children = function()
   {
-    let a = []
-    for(let id in this.paradise.world){
-      let vessel = this.paradise.world[id];
+    const a = []
+    for(const id in this.paradise.world){
+      const vessel = this.paradise.world[id];
       if(vessel.parent().id == this.id && vessel.id != this.id){
         a.push(vessel)
       }
@@ -137,7 +137,7 @@ function Vessel(data = basic)
 
   this.usables = function()
   {
-    let a = []
+    const a = []
     a = a.concat(this.siblings())
     a = a.concat(this.children())
     return a
@@ -170,7 +170,7 @@ function Vessel(data = basic)
   this.particle = function()
   {
     if(this.data.attr){ return "the"; }
-    let letter = this.data.name.substr(0,1).toLowerCase();
+    const letter = this.data.name.substr(0,1).toLowerCase();
     return letter == "a" || letter == "e" || letter == "i" || letter == "o" || letter == "u" ? "an" : "a"
   }
 

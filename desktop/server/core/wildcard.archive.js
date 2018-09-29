@@ -9,13 +9,13 @@ function Wildcard(host,str,query,responder)
   this.query = query;
   this.responder = responder;
 
-  let paradise = this.host.paradise;
+  const paradise = this.host.paradise;
 
   this.toString = function(convert_vessels = true)
   {
     return this.str;
     
-    let s = this.str;
+    const s = this.str;
 
     s = s.replace(/\-\-/g,`<br />`)
     s = s.replace(/ \&\& /g,` & `)
@@ -64,10 +64,10 @@ function Wildcard(host,str,query,responder)
     s = this.parse_complex(s);
 
     if(convert_vessels){
-      let known = []
-      let children = paradise.ghost().siblings();
-      for(let id in children){
-        let v = children[id];
+      const known = []
+      const children = paradise.ghost().siblings();
+      for(const id in children){
+        const v = children[id];
         if(known.indexOf(v.data.name) > -1){ continue; }
         s = s.replace(v.name(),v.to_a(false))
         known.push(v.data.name)
@@ -83,12 +83,12 @@ function Wildcard(host,str,query,responder)
     if(s.indexOf("(") < 0){ return s; }
     if(s.indexOf(")") < 0){ return s; }
 
-    let words = s.split(" ")
-    for(let id in words){
-      let word = words[id]
+    const words = s.split(" ")
+    for(const id in words){
+      const word = words[id]
       if(word.substr(0,1) != "@" || word.indexOf("(") < 0){ continue; }
-      let command = word.split("(")[0].replace("@","").trim()
-      let params = s.split(command+"(")[1].split(")")[0]
+      const command = word.split("(")[0].replace("@","").trim()
+      const params = s.split(command+"(")[1].split(")")[0]
       s = s.replace("@"+command+"("+params+")",this.operate(command.toLowerCase(),params))
     }
     return s
@@ -101,22 +101,22 @@ function Wildcard(host,str,query,responder)
 
   this.if = function(params)
   {
-    let a = params.split("IS")[0].trim(); if(!a){ return ""; }
-    let b = params.split("IS")[1].trim().split("THEN")[0].trim()
-    let c = params.indexOf("ELSE") > -1 ? params.split("THEN")[1].trim().split("ELSE")[0].trim() : params.split("THEN")[1].trim()
-    let d = params.indexOf("ELSE") > -1 ? params.split("ELSE")[1].trim() : ''
+    const a = params.split("IS")[0].trim(); if(!a){ return ""; }
+    const b = params.split("IS")[1].trim().split("THEN")[0].trim()
+    const c = params.indexOf("ELSE") > -1 ? params.split("THEN")[1].trim().split("ELSE")[0].trim() : params.split("THEN")[1].trim()
+    const d = params.indexOf("ELSE") > -1 ? params.split("ELSE")[1].trim() : ''
     return a == b ? c : d
   }
 
   this.vessel = function(params)
   {
-    let parts = params.split(" ")
-    let id = parts.length > 0 ? parseInt(parts[0]) : null
-    let field = parts.length > 1 ? parts[1] : null;
+    const parts = params.split(" ")
+    const id = parts.length > 0 ? parseInt(parts[0]) : null
+    const field = parts.length > 1 ? parts[1] : null;
 
     if(!id){ return `@error(Unknown Vessel #${id})`; }
 
-    let target = paradise.world[id];
+    const target = paradise.world[id];
 
     if(field && paradise.world[id].data[field]){
       return paradise.world[id].data[field];
@@ -129,7 +129,7 @@ function Wildcard(host,str,query,responder)
 
   this.random = function(params)
   {
-    let parts = params.split(" ")
+    const parts = params.split(" ")
     return parts[Math.floor((Math.random() * parts.length))]
   }
 }

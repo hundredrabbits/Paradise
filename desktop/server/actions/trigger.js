@@ -12,9 +12,9 @@ function Trigger(host)
   {
     if(!this.host.parent().data.trigger && params.trim() == ""){ return this.err_NOVALID() }
 
-    let parts = params.split(" ")
-    let target = parts[0]
-    let reaction = params.replace(target,"").trim()
+    const parts = params.split(" ")
+    const target = parts[0]
+    const reaction = params.replace(target,"").trim()
 
     this.host.parent().set("trigger",target.toLowerCase())
     

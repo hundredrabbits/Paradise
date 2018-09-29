@@ -10,7 +10,7 @@ function Leave(host)
 
   this.operate = function(action,params)
   {
-    let origin = this.host.parent().name()
+    const origin = this.host.parent().name()
     
     if(this.host.is_paradox()){
       return `<p>You cannot leave the <action>${this.host.name()}</action> paradox.</p>`

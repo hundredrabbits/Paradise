@@ -12,16 +12,16 @@ function Use(host)
   {
     if(!params){ return this.err_NOPARAM(); }
 
-    let target = this.find(params,this.host.usables());
+    const target = this.find(params,this.host.usables());
 
     if(!target){ return this.err_NOTARGET(params,"available"); }
     if(!target.usable()){ return `<p>${target} cannot be used.</p>`; }
 
-    let cmd_rendered = this.render(target.data.program,params,target);
+    const cmd_rendered = this.render(target.data.program,params,target);
     this.host.cmd(cmd_rendered)
 
     if(target.data.reaction){
-      let reaction_rendered = this.render(target.data.reaction,params,target);
+      const reaction_rendered = this.render(target.data.reaction,params,target);
       return `<p>${reaction_rendered}</p>`
     }
     

@@ -1,3 +1,5 @@
+"use strict";
+
 const blessed  = require('blessed');
 const Client  = require('../desktop/server/core/client');
 

@@ -20,9 +20,9 @@ function Paradise()
 
   this.import = function(json)
   {
-    let a = []
-    for(let id in json){
-      let vessel = new Vessel(json[id])
+    const a = []
+    for(const id in json){
+      const vessel = new Vessel(json[id])
       a.push(vessel)
     }
     this.world = a;
@@ -30,10 +30,10 @@ function Paradise()
 
   this.export = function()
   {
-    let a = []
+    const a = []
 
-    for(let id in this.world){
-      let json = this.world[id].to_h()
+    for(const id in this.world){
+      const json = this.world[id].to_h()
       a.push(json)
     }
     return JSON.stringify(a)
@@ -51,8 +51,8 @@ function Paradise()
 
   this.exists = function(target)
   {
-    for(let id in this.world){
-      let v = this.world[id]
+    for(const id in this.world){
+      const v = this.world[id]
       if(v.data.name != target.data.name){ continue; }
       if(v.data.attr != target.data.attr){ continue; }
       if(v.data.parent != target.data.parent){ continue; }
@@ -70,7 +70,7 @@ function Paradise()
   this.update = function()
   {
     // Connect IDs
-    for(let id in this.world){
+    for(const id in this.world){
       this.world[id].paradise = this
       this.world[id].id = parseInt(id)
     }
@@ -84,14 +84,14 @@ function Paradise()
 
   this.random = function()
   {
-    let id = Math.floor((Math.random() * this.world.length));
+    const id = Math.floor((Math.random() * this.world.length));
     return this.world[id]
   }
 
   this.to_a = function()
   {
-    let a = []
-    for(let id in this.world){
+    const a = []
+    for(const id in this.world){
       a.push(this.world[id].to_h())
     }
     return a
