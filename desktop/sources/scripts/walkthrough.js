@@ -117,6 +117,7 @@ function Walkthrough()
 
   this.run = function(target = this.all)
   {
+    console.log(target[this.index]);
     browser.query(target[this.index]);
     this.index += 1
 
