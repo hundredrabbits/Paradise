@@ -148,12 +148,15 @@ function Browser(paradise)
     setTimeout(()=>{ this.query(); this.speaker.play("click1"); }, 250)
   }
 
-  document.onclick= function(event)
+  document.onclick = function(event)
   {
     if(event===undefined){ event = window.event; }
+
     const target = 'target' in event? event.target : event.srcElement;
+
     if(target.tagName.toLowerCase() == "action"){
-      browser.input.inject(target.getAttribute("data"))
+      const action = target.getAttribute("data") ? target.getAttribute("data") : target.textContent;
+      browser.input.inject(action)
     }
   };
 }

@@ -34,6 +34,9 @@ function Wildcard(host,input,query,responder)
     {
       return str ? `${str}`.toUpperCase() : ''
     },
+    format: function(word,settings){
+      return settings ? `<action data='${settings}'>${word}</action>` : `<action>${word}</action>`
+    },
 
     // Programming
     query: function()

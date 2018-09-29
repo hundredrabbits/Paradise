@@ -7,8 +7,8 @@ function Learn(host)
   Action.call(this,host,"learn");
 
   this.knowledge = {
-    paradoxes: "There are two types of <b>Paradoxes</b> in Paradise. The first kind, is vessels folded onto themselves, existing within their own space. The second type, is vessels organized in a loop, where there are no real beginning to a space, a deeply nested vessel might become the parent of a first type paradox and create this kind of shape.",
-    passive: "The <b>Passive</b> <action data='learn to trigger'>trigger</action>, is used to add dynamic content to the browser."
+    paradoxes: "There are two types of <b>Paradoxes</b> in Patradise. The first kind, is vessels folded onto themselves, existing within their own space. The second type, is vessels organized in a loop, where there are no real beginning to a space, a deeply nested vessel might become the parent of a first type paradox and create this kind of shape.",
+    passive: "The <b>Passive</b> <action data='learn to trigger'>rigger</action>, is used to add dynamic content to the browser."
   }
 
   this.operate = function(action,params)
@@ -19,7 +19,7 @@ function Learn(host)
     try{
       const a = require(`./${target}`);
       const obj = new a()
-      return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs}</p>`
+      return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs} Type <action>learn</action> again to see the available actions.</p>`
     }
     catch(err){
       return this.default(target)
@@ -45,7 +45,7 @@ function Learn(host)
   {
     const docs = this.documentation()
     const count = Object.keys(docs).length
-    
+
     let index = 2
     let _list = ""
     for(const id in docs){

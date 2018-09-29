@@ -14,10 +14,9 @@ function Action(host,name)
     const _header = this._header();
     const _note = this._note();
     const _view = this._view();
-    const _tips = this.tips();
-
+    const _tips = this._tips();
+    const _passive = this._passive();
     const cli = _reaction ? _reaction : `${_header ? _header+'\n\n' : ''}${_note ? _note+'\n\n' : ''}${_view ? '> '+_view : ''}`;
-    const passive = this._passive();
 
     const h = {
       header:_header,
@@ -27,7 +26,7 @@ function Action(host,name)
       reaction: _reaction,
       action: this.action(),
       cli: cli.replace(/\<br \/\>/g,"\n").replace(/(<([^>]+)>)/ig,''),
-      passive: passive
+      passive: _passive
     }
     return h
   }
@@ -170,7 +169,7 @@ function Action(host,name)
     return null
   }
 
-  this.tips = function()
+  this._tips = function()
   {
     const a = []
     // Paradox
@@ -183,11 +182,11 @@ function Action(host,name)
     }
     // Empty
     if(this.host.siblings().length < 1){
-      a.push(`The ${this.host.parent().name()} is empty, why don't you create something.`)
+      a.push(`The ${this.host.parent().name()} is empty, why don't you <action>create</action> something.`)
     }
     // Note/Program
     if(!this.host.parent().data.note && !this.host.parent().is_program()){
-      a.push(`The ${this.host.parent().name()} has no description, you should add a note.`)
+      a.push(`The ${this.host.parent().name()} has no description, you should add a <action>note</action>.`)
     }
     // Note/Program
     if(this.host.parent().is_program()){
@@ -199,7 +198,7 @@ function Action(host,name)
     for(const id in siblings){
       const v = siblings[id];
       if(!v.usable()){ continue; }
-      a.push(`The ${v.name()} grants you the "${v.trigger()}" action.`)
+      a.push(`The ${v.name()} grants you the "<action>${v.trigger()}</action>" action.`)
     }
 
     return a

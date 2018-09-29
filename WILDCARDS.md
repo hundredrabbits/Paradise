@@ -59,6 +59,13 @@ Transform a string to lowercase.
 
 - `@(uc "hello")`, will print `HELLO`.
 
+### format
+
+Transform a string into an action.
+
+- `@(format "take")`, will print a clickable `take` trigger.
+- `@(format "learn" "learn to move")`, will print a clickable `take` trigger.
+
 ## Vessel
 
 The vessel wildcard is the most commonly used wildcard, it allows to get a vessel data by its ID.
