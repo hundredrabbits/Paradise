@@ -1,24 +1,21 @@
-"use strict";
+'use strict'
 
 const Action = require(`../core/action`)
 
-function Become(host)
-{
-  Action.call(this,host,"become");
+function Become (host) {
+  Action.call(this, host, 'become')
 
-  this.docs = "Become a visible vessel."
-  
-  this.operate = function(action,params)
-  {
-    if(!params){ return this.err_NOPARAM(); }
+  this.docs = 'Become a visible vessel.'
 
-    const target = this.find(params,this.host.siblings());
+  this.operate = function (action, params) {
+    if (!params) { return this.err_NOPARAM() }
 
-    if(target){
-      this.host.paradise.client.change_vessel(target.id);
+    const target = this.find(params, this.host.siblings())
+
+    if (target) {
+      this.host.paradise.client.change_vessel(target.id)
       return `<p>You became ${target}.</p>`
-    }
-    else{
+    } else {
       return this.err_NOTARGET(params)
     }
   }

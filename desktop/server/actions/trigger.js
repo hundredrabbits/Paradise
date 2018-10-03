@@ -1,27 +1,25 @@
-"use strict";
+'use strict'
 
 const Action = require(`../core/action`)
 
-function Trigger(host)
-{
-  Action.call(this,host,"trigger");
+function Trigger (host) {
+  Action.call(this, host, 'trigger')
 
   this.docs = 'Trigger sets an action word to a program vessel. You can also set a custom reaction to a program use by adding a short sentence after the trigger action word.'
 
-  this.operate = function(action,params)
-  {
-    if(!this.host.parent().data.trigger && params.trim() == ""){ return this.err_NOVALID() }
+  this.operate = function (action, params) {
+    if (!this.host.parent().data.trigger && params.trim() == '') { return this.err_NOVALID() }
 
-    const parts = params.split(" ")
+    const parts = params.split(' ')
     const target = parts[0]
-    const reaction = params.replace(target,"").trim()
+    const reaction = params.replace(target, '').trim()
 
-    this.host.parent().set("trigger",target.toLowerCase())
-    
-    if(reaction){
-      this.host.parent().set("reaction",reaction)
+    this.host.parent().set('trigger', target.toLowerCase())
+
+    if (reaction) {
+      this.host.parent().set('reaction', reaction)
     }
-    return params.trim() == "" ? `<p>You removed the trigger of ${this.host.parent()}.` : `<p>You set the trigger of ${this.host.parent()} to '${target}'${reaction ? ', with the "'+reaction+'" reaction' : ''}.</p>`
+    return params.trim() == '' ? `<p>You removed the trigger of ${this.host.parent()}.` : `<p>You set the trigger of ${this.host.parent()} to '${target}'${reaction ? ', with the "' + reaction + '" reaction' : ''}.</p>`
   }
 }
 

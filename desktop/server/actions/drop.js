@@ -1,20 +1,18 @@
-"use strict";
+'use strict'
 
 const Action = require(`../core/action`)
 
-function Drop(host)
-{
-  Action.call(this,host,"drop");
+function Drop (host) {
+  Action.call(this, host, 'drop')
 
-  this.docs = "Move a child vessel into the parent vessel."
+  this.docs = 'Move a child vessel into the parent vessel.'
 
-  this.operate = function(action,params)
-  {
-    if(!params){ return this.err_NOPARAM(); }
-    
-    const target = this.find(params,this.host.children());
+  this.operate = function (action, params) {
+    if (!params) { return this.err_NOPARAM() }
 
-    if(!target){ return this.err_NOTARGET(params,"child vessel") }
+    const target = this.find(params, this.host.children())
+
+    if (!target) { return this.err_NOTARGET(params, 'child vessel') }
 
     target.move(this.host.parent())
 

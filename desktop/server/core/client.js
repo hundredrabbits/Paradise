@@ -1,59 +1,49 @@
-function Client(paradise)
-{
-  this.paradise = paradise;
-  this.paradise.client = this;
+function Client (paradise) {
+  this.paradise = paradise
+  this.paradise.client = this
 
-  this.id = 0;
+  this.id = 0
 
-  this.install = function()
-  {
+  this.install = function () {
 
   }
 
-  this.start = function()
-  {
+  this.start = function () {
 
   }
 
-  this.update = function(sight)
-  {
+  this.update = function (sight) {
 
   }
 
   // I/O
 
-  this.import = function(JSON)
-  {
+  this.import = function (JSON) {
 
   }
 
-  this.export = function()
-  {
+  this.export = function () {
 
   }
 
-  this.save = function()
-  {
+  this.save = function () {
 
   }
 
-  this.load = function()
-  {
+  this.load = function () {
 
   }
 
   //
 
-  this.query = function(input = "", on_query = this.update)
-  {
-    const sight = this.paradise.query(this.id,input)  
+  this.query = function (input = '', on_query = this.update) {
+    const sight = this.paradise.query(this.id, input)
     this.update(sight)
   }
 
-  this.change_vessel = function(id)
-  {
-    this.id = id;
-    this.query();
+  this.change_vessel = function (id) {
+    this.id = id
+    this.query()
   }
 }
 

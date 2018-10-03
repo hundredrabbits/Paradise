@@ -1,21 +1,19 @@
-"use strict";
+'use strict'
 
 const Action = require(`../core/action`)
 
-function Leave(host)
-{
-  Action.call(this,host,"leave");
+function Leave (host) {
+  Action.call(this, host, 'leave')
 
-  this.docs = "Exit the parent vessel."
+  this.docs = 'Exit the parent vessel.'
 
-  this.operate = function(action,params)
-  {
+  this.operate = function (action, params) {
     const origin = this.host.parent().name()
-    
-    if(this.host.is_paradox()){
+
+    if (this.host.is_paradox()) {
       return `<p>You cannot leave the <action>${this.host.name()}</action> paradox.</p>`
     }
-    if(this.host.parent().is_paradox()){
+    if (this.host.parent().is_paradox()) {
       return `<p>You cannot leave the <action>${this.host.parent().name()}</action> paradox.</p>`
     }
 
