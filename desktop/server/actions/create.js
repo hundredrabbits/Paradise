@@ -30,7 +30,7 @@ function Create (host) {
     const vessel = new Vessel(data)
     const success = this.host.paradise.add(vessel)
 
-    return !success ? `<p>A visible vessel with that name already exists.</p>` : `<p>You created a <action data='enter the ${vessel.name()}'>${vessel.name()}</action> in the ${this.host.parent().name()}.</p>`
+    return !success ? `<p>A visible vessel with that name already exists.</p>` : `<p>You created <action data='enter the ${vessel.name()}'>${vessel.to_a()}</action> in the ${this.host.parent().name()}.</p>`
   }
 }
 
