@@ -123,13 +123,48 @@ function Action (host, name) {
     return parent.data.note ? this.render(parent.data.note) : ''
   }
 
-  this._view = function () {
+  this._view = function (maximum_viewable = 5) {
+    const oxford_comma = true
+
     const siblings = this.host.siblings()
-    if (siblings.length > 4) { return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()}, ${siblings[2].to_a()} and <action data='inspect'>${siblings.length - 3} other vessels</action>.` }
-    if (siblings.length == 4) { return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()}, ${siblings[2].to_a()} and <action data='inspect'>1 other vessel</action>.` }
-    if (siblings.length == 3) { return `You see ${siblings[0].to_a()}, ${siblings[1].to_a()} and ${siblings[2].to_a()}.` }
-    if (siblings.length > 1) { return `You see ${siblings[0].to_a()} and ${siblings[1].to_a()}.` }
-    if (siblings.length > 0) { return `You see ${siblings[0].to_a()}.` }
+    let text_pieces = []
+
+    if (siblings.length > 0) {
+      if (siblings.length > maximum_viewable) {
+        const siblings_to_view = siblings.slice(0, maximum_viewable - 1)
+        const number_of_others = siblings.length - maximum_viewable
+        for (const id in siblings_to_view) {
+          text_pieces.push(siblings_to_view[id].to_a())
+        }
+        text_pieces.push(`${number_of_others} other vessel${(number_of_others == 1) ? '' : 's' }`)
+      } else {
+        const siblings_to_view = siblings
+        for (const id in siblings_to_view) {
+          text_pieces.push(siblings_to_view[id].to_a())
+        }
+      }
+
+      let output = 'You see '
+
+      for (var id in text_pieces) {
+        if (id == 0) {
+          output += text_pieces[id]
+        } else if (id < text_pieces.length - 1) {
+          output += `, ${text_pieces[id]}`
+        } else {
+          if (id != 1 && oxford_comma) {
+            output += ', and '
+          } else {
+            output += ' and '
+          }
+          output += text_pieces[id]
+        }
+      }
+
+      output += '.'
+
+      return output
+    }
   }
 
   this._passive = function () {
