@@ -16,7 +16,7 @@ function Inventory (host) {
       return 'You are not carrying any vessels.'
     }
 
-    let output = 'You are carrying '
+    let output = '<p>You are carrying '
 
     for (var id in children) {
       if (id == 0) {
@@ -33,7 +33,7 @@ function Inventory (host) {
       }
     }
 
-    output += '.'
+    output += '.</p>'
     return output
   }
 }
