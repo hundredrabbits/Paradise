@@ -51,7 +51,10 @@ function Learn (host) {
 
   this.documentation = function () {
     const actions = {}
+
     const _actions = {
+      look: require('./look'),
+
       create: require('./create'),
       become: require('./become'),
       enter: require('./enter'),
@@ -60,6 +63,7 @@ function Learn (host) {
       warp: require('./warp'),
       take: require('./take'),
       drop: require('./drop'),
+      inventory: require('./inventory'),
       move: require('./move'),
 
       learn: require('./learn'),
