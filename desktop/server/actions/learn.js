@@ -6,8 +6,8 @@ function Learn (host) {
   Action.call(this, host, 'learn')
 
   this.knowledge = {
-    paradoxes: 'There are two types of <b>Paradoxes</b> in Patradise. The first kind, is vessels folded onto themselves, existing within their own space. The second type, is vessels organized in a loop, where there are no real beginning to a space, a deeply nested vessel might become the parent of a first type paradox and create this kind of shape.',
-    passive: "The <b>Passive</b> <action data='learn to trigger'>rigger</action>, is used to add dynamic content to the browser."
+    paradoxes: 'There are two types of <b>Paradoxes</b> in Paradise. The first kind, is vessels folded onto themselves, existing within their own space. The second type, is vessels organized in a loop, where there are no real beginning to a space, a deeply nested vessel might become the parent of a first type paradox and create this kind of shape.',
+    passive: "The <b>Passive</b> <action data='learn to trigger'>trigger</action>, is used to add dynamic content to the browser."
   }
 
   this.operate = function (action, params) {
@@ -46,7 +46,7 @@ function Learn (host) {
       _list += `<action data='learn to ${id}'>${id.capitalize()}</action>${index == count - 1 ? ' or ' : (index == count ? '. ' : ', ')} `
       index += 1
     }
-    return `<img src='media/graphics/default.png'/><p>Which action would you like to <aciton data='learn'>learn</action>? ${_list}</p>`
+    return `<img src='media/graphics/default.png'/><p>Which action would you like to <action data='learn'>learn</action>? ${_list}</p>`
   }
 
   this.documentation = function () {
