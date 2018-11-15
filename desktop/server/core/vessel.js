@@ -146,8 +146,7 @@ function Vessel (data = basic) {
   }
 
   this.particle = function () {
-    if (this.data.attr) { return 'the' }
-    const letter = this.data.name.substr(0, 1).toLowerCase()
+    const letter = this.data.attr ? this.data.attr.substr(0, 1).toLowerCase() : this.data.name.substr(0, 1).toLowerCase()
     return letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u' ? 'an' : 'a'
   }
 
