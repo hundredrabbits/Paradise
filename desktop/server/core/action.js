@@ -1,6 +1,7 @@
 'use strict'
 
 const Wildcard = require('./wildcard')
+const pluralize = require('pluralize')
 
 function Action (host, name) {
   this.name = name
@@ -123,48 +124,96 @@ function Action (host, name) {
     return parent.data.note ? this.render(parent.data.note) : ''
   }
 
-  this._view = function (maximum_viewable = 5) {
+  // Pretty-print the current view.
+  //
+  // Brevity thresholds:
+  // [threshold_1, threshold_2]
+  // For a number of visible objects, if below threshold_1, output like so:
+  //   You see a teapot, a ceramic mug, a green saucer, and a blue saucer.
+  // Else if below threshold_2:
+  //   You see a ceramic mug, a green saucer, a teapot, and a blue saucer. (Randomised order each time)
+  // Else:
+  //   You see a teapot, a mug, and 2 saucers. (Removed attributes and combines similar objects, as well as randomised order)
+  //
+  this._view = function (brevity_thresholds = [5, 10]) {
     const oxford_comma = true
 
-    const siblings = this.host.siblings()
+    let siblings = this.host.siblings().slice()
     let text_pieces = []
 
-    if (siblings.length > 0) {
-      if (siblings.length > maximum_viewable) {
-        const siblings_to_view = siblings.slice(0, maximum_viewable - 1)
-        const number_of_others = siblings.length - maximum_viewable
-        for (const id in siblings_to_view) {
-          text_pieces.push(siblings_to_view[id].to_a())
-        }
-        text_pieces.push(`${number_of_others} other vessel${(number_of_others == 1) ? '' : 's' }`)
-      } else {
-        const siblings_to_view = siblings
-        for (const id in siblings_to_view) {
-          text_pieces.push(siblings_to_view[id].to_a())
-        }
-      }
-
-      let output = 'You see '
-
-      for (var id in text_pieces) {
-        if (id == 0) {
-          output += text_pieces[id]
-        } else if (id < text_pieces.length - 1) {
-          output += `, ${text_pieces[id]}`
-        } else {
-          if (id != 1 && oxford_comma) {
-            output += ', and '
-          } else {
-            output += ' and '
-          }
-          output += text_pieces[id]
-        }
-      }
-
-      output += '.'
-
-      return output
+    let brevity_level = null
+    if (siblings.length == 0) {
+      return
+    } else if (siblings.length < brevity_thresholds[0]) {
+      brevity_level = "detailed"
+    } else if (siblings.length < brevity_thresholds[1]) {
+      brevity_level = "glance"
+    } else {
+      brevity_level = "brief"
     }
+
+    /**
+     * Shuffles array in place.
+     * @param {Array} a items An array containing the items.
+     *
+     * TODO: Move somewhere reasonable
+     */
+    function shuffle(a) {
+      var j, x, i;
+      for (i = a.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        x = a[i];
+        a[i] = a[j];
+        a[j] = x;
+      }
+      return a;
+    }
+
+    if (brevity_level != "detailed") {
+      siblings = shuffle(siblings)
+    }
+
+    if (brevity_level == "brief") {
+      let obj_types = {}
+      for (const id in siblings) {
+        if (!!obj_types[siblings[id].data.name]) {
+          obj_types[siblings[id].data.name] += 1
+        } else {
+          obj_types[siblings[id].data.name] = 1
+        }
+      }
+      for (var obj in obj_types) {
+        if (obj_types[obj] == 1) {
+          text_pieces.push("aeiou".indexOf(obj.substr(0, 1).toLowerCase()) > -1 ? `an ${obj}` : `a ${obj}`)
+        } else {
+          text_pieces.push(pluralize(obj, obj_types[obj], true)) // eg. 5 saucers
+        }
+      }
+    } else {
+      for (const id in siblings) {
+        text_pieces.push(siblings[id].to_a())
+      }
+    }
+
+    let output = 'You see '
+
+    for (var id in text_pieces) {
+      if (id == 0) {
+        output += text_pieces[id]
+      } else if (id < text_pieces.length - 1) {
+        output += `, ${text_pieces[id]}`
+      } else {
+        if (id != 1 && oxford_comma) {
+          output += ', and '
+        } else {
+          output += ' and '
+        }
+        output += text_pieces[id]
+      }
+    }
+
+    output += '.'
+    return output
   }
 
   this._passive = function () {
