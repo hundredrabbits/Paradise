@@ -20,8 +20,8 @@ function Wildcard (host, input, query, responder) {
     },
 
     // Transform
-    concat: function (seperator = '', ...items) {
-      return items.reduce((a, b) => a.toString() + seperator + b.toString())
+    concat: function (separator = '', ...items) {
+      return items.reduce((a, b) => a.toString() + separator + b.toString())
     },
     lc: function (str) {
       return str ? `${str}`.toLowerCase() : ''
@@ -67,8 +67,8 @@ function Wildcard (host, input, query, responder) {
     sub: function (a, b) {
       return a - b
     },
-    mult: function (a, b) {
-      return a * b
+    mult: function (...items) {
+      return items.reduce((a, b) => a * b, 1)
     },
     div: function (a, b) {
       return a / b
