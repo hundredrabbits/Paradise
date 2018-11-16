@@ -45,19 +45,26 @@ The random wildcard picks a random items.
 
 Transform a string to lowercase.
 
-- `@(lc (vessel parent "name"))`, will make the parent name lowercaase.
+- `@(lc (vessel parent "name"))`, will make the parent name lowercase.
+- `@(lc "Hello WORLD")`, will print `hello world`
 
 ### cc
 
-Transform a string to lowercase.
+Transform a string to sentence case.
 
-- `@(cc "hello")`, will print `Hello`.
+- `@(cc "hello world")`, will print `Hello world`.
 
 ### uc
 
 Transform a string to lowercase.
 
-- `@(uc "hello")`, will print `HELLO`.
+- `@(uc "hello world")`, will print `HELLO WORLD`.
+
+### tc
+
+Transform a string to title case.
+
+- `@(uc "hello world")`, will print `Hello World`
 
 ### format
 
@@ -80,6 +87,52 @@ The vessel wildcard is the most commonly used wildcard, it allows to get a vesse
 The programming wildcards are used with [triggers and programs](TUTORIALS.md).
 
 - `trigger say You said "@(query)" to vessel #@(responder).`
+
+### query
+
+The query passed to `trigger`
+
+### responder
+
+The vessel that responded to `trigger`
+
+## Errors
+
+### success
+
+Whether or not the previous command succeeded.
+
+```
+create
+echo @(success)
+```
+
+Because `create` failed, the output is `false`.
+
+```
+create teapot
+echo @(success)
+```
+
+Because `create teapot` succeeded, the output is `true`.
+
+### error
+
+The technical name of the error output by the previous command.
+
+```
+create
+echo @(success)
+```
+
+Because `create` failed due to a lack of parameters, the output is `NOPARAM`.
+
+```
+create teapot
+echo @(success)
+```
+
+Because `create teapot` succeeded, the output is `none` - note the lowercase.
 
 ## Benchmark
 
