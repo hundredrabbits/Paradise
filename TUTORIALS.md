@@ -138,13 +138,13 @@ This program demonstrates the ability to append text to a note. It is currently 
 
     create a typewriter &
     enter the typewriter &
-    program note @_note @(query) &
+    program note @( vessel parent "note" ) @(query) &
     trigger type You typed "@(query)". &
     leave &
     use the typewriter
 
 Copyable:
-`create a typewriter & enter the typewriter & program note @_note @(query) & trigger type You typed "@(query)". & leave & use the typewriter`
+`create a typewriter & enter the typewriter & program note @( vessel parent "note" ) @(query) & trigger type You typed "@(query)". & leave & use the typewriter`
 
 ### A Coffee Machine
 
