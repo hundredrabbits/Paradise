@@ -1,7 +1,5 @@
 'use strict'
 
-const yaml = require('js-yaml')
-
 function Browser (paradise) {
   Client.call(this, paradise)
 
@@ -89,30 +87,22 @@ function Browser (paradise) {
   //
 
   this.import = function () {
-    const paths = dialog.showOpenDialog({ properties: ['openFile'], filters: [{ name: 'Teapot JSON', extensions: ['teapot.json', 'teapot'] }, { name: 'Teapot YAML', extensions: ['teapot.yaml'] }] })
+    const paths = dialog.showOpenDialog({ properties: ['openFile'], filters: [{ name: 'Paradise World', extensions: ['teapot'] }] })
 
     if (!paths) { console.log('Nothing to load'); return }
 
     fs.readFile(paths[0], 'utf-8', (err, data) => {
       if (err) { alert('An error ocurred reading the file :' + err.message); return }
-      if (paths[0].endsWith('.yaml')) {
-        paradise.importYAML(yaml.safeLoad(data))
-      } else {
-        paradise.import(JSON.parse(data))
-      }
+      paradise.import(JSON.parse(data))
       setTimeout(() => { client.query(); client.speaker.play('click1') }, 500)
     })
   }
 
   this.export = function () {
-    dialog.showSaveDialog({ title: 'Save World', filters: [{ name: 'Teapot JSON', extensions: ['teapot.json', 'teapot'] }, { name: 'Teapot YAML', extensions: ['teapot.yaml'] }] }, (fileName) => {
+    dialog.showSaveDialog({ title: 'Save World', filters: [{ name: 'Teapot Format', extensions: ['teapot'] }] }, (fileName) => {
       if (fileName === undefined) { return }
-      //fileName = fileName.substr(-5, 5) != '.grid' ? fileName + '.grid' : fileName
-      if (fileName.endsWith('.yaml')) {
-        fs.writeFileSync(fileName, paradise.exportYAML()) // YAML format
-      } else {
-        fs.writeFileSync(fileName, paradise.export()) // JSON format
-      }
+      fileName = fileName.substr(-5, 5) != '.grid' ? fileName + '.grid' : fileName
+      fs.writeFileSync(fileName, paradise.export())
     })
   }
 
