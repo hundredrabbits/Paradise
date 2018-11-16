@@ -14,6 +14,7 @@
 
 ### WildcardLISP
 
+-   Implement nil values
 -   Implement lists
     -   Random from list
 -   Implement addition, multiplication, subtraction, division, powers, logarithms, increment, decrement, etc.
