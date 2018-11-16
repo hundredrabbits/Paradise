@@ -36,15 +36,6 @@ function Paradise () {
     return JSON.stringify(a)
   }
 
-  this.importYAML = function (yml) {
-    const a = []
-    for (const id in yml) {
-      const vessel = new Vessel(yml[id])
-      a.push(vessel)
-    }
-    this.world = a
-  }
-
   this.exportYAML = function () {
     const a = []
 
