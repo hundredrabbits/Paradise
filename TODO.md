@@ -15,18 +15,18 @@
 
 ### WildcardLISP
 
--   Implement lists
+-   Implement lists - do we already have these?
     -   Random from list
--   Implement logarithms, and any other maths operators I can think of.
+    -   Various functions need to support lists
+-   Implement logarithms (?), and any other maths operators I can think of.
 -   Loops
--   Lambdas?
--   Functions?
+-   Functions
     -   `mapcar`-like utility to apply function to each element in list
--   Variables?
+    -   Lambdas
+-   Variables
 -   Add the rest of the (as-of-yet) untransferred wildcards.
-    -   `__random`
+    -   `__random` - implement as random from list of vessels
     -   `time`, `beat`, `pulse`
-    -   `_note`
     -   Obtain lists of vessels
 
 ### Save / Load
