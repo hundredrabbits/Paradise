@@ -8,7 +8,7 @@ function Paradise () {
 
   this.reset = function () {
     // Default World
-    _world = `
+    const _world = `
     - name: ghost
       parent: 1
       owner: 0
