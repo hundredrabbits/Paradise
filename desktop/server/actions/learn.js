@@ -28,6 +28,7 @@ function Learn (host) {
       if (this.knowledge[key]) {
         return `<p>${this.knowledge[key]}</p>`
       } else {
+        // TODO: Transform these into Errors
         return `Unknown term '${key}'.`
       }
     } else {

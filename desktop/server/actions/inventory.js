@@ -12,6 +12,7 @@ function Inventory (host) {
 
     const children = this.host.children()
 
+    // TODO: Transform these into Errors
     if (children.length == 0) {
       return 'You are not carrying any vessels.'
     }

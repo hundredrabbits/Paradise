@@ -63,6 +63,20 @@ function Wildcard (host, input, query, responder) {
       return typeof id === 'function' ? i() : i ? t : e
     },
 
+    // Clock
+    // BUG: keeps returning undefined
+    // time:  function () {
+    //   return clock.time
+    // },
+    // beat:  function () {
+    //   return clock.beat
+    // },
+    // pulse: function () {
+    //   return clock.pulse
+    // },
+
+    // create clock & enter clock & trigger time The time is @( time ) & leave & time
+
     // Main
     vessel: function (id, field) {
       if (typeof id === 'function') { id = id() }

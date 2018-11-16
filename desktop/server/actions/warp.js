@@ -15,6 +15,7 @@ function Warp (host) {
     const target = this.find(parts.length > 1 ? params.replace(relation, '').trim() : params)
 
     if (!target) {
+      // TODO: Transform these into Errors
       return `You cannot warp to this location.`
     }
     if (relation == 'at' || relation == 'by' || relation == 'to') {

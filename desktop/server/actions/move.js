@@ -10,6 +10,7 @@ function Move (host) {
   this.operate = function (action, params) {
     if (!params) { return this.err_NOPARAM() }
 
+    // TODO: Transform these into Errors
     if (params.indexOf(' in ') < 0) { return `<p>You must use the word <action data='move the vessel1 in the vessel2'>in</action>.</p>` }
 
     const parts = params.replace(' into ', ' in ').split(' in ')

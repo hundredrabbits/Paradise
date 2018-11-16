@@ -14,6 +14,7 @@ function Cast (host) {
     const spell_name = `${parts[0]} ${parts[1]}`
     const spell = this.find(spell_name)
 
+    // TODO: Transform these into Errors
     if (!spell) { return `<p>Unknown spell ${spell_name}.</p>` }
     if (!spell.is_program()) { return `<p>The ${spell.name()} is not a program.</p>` }
 
