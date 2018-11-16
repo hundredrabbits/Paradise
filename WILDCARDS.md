@@ -18,21 +18,49 @@ The wildcardLISP is a collection of tools to create more [dynamic vessels](TUTOR
 
 ## Logic
 
-### Equal
+### equal
 
-Tests values to see if they are equal.
+Tests values to see if they are equal. Returns `"true"` if yes, `nil` if no.
 
 -   `@(equal 1 1)`, true.
 -   `@(equal "blue" "red")`, false.
 
-### If
+### if
 
-The 'if' method allows to do basic logic tests, it basically does '@(if a b c)', or if a then b, else c.
+The 'if' method allows to do basic logic tests, it basically does '@(if a b c)', or if a then b, else c. The 'truth' of a is judjed on whether it is not `nil`.
 
--   `@(if 1 "yes" "no")` will print `yes`.
+-   `@(if "true" "yes" "no")` will print `yes`.
+-   `@(if nil "yes" "no")` will print `no`.
 -   `The vessel @(if (equal (vessel parent "name") "house") "is a house" "is not a house")`, will print `is a house`, if parent vessel is a house.
 
-### Random
+### and
+
+Returns the first non-`nil` value it is given if all values are non-`nil`. If one or more values are `nil`, it returns `nil`.
+
+-   `@(and "true" "teapot" "yes")`, will print `yes`.
+-   `@(and "true" nil "yes")`, will print `nil`.
+
+### or
+
+Returns the first non-`nil` value it is given, or `nil` if all values are `nil`.
+
+-   `@(or "true" "yes" "teapot")`, will print `true`.
+-   `@(or nil "true" nil)`, will print `true`.
+-   `@(or nil nil nil)`, will print `nil`.
+
+## Mathematics
+
+### Basic Arithmetic
+
+-   `add a b c ...`, adds numbers.
+-   `sub a b`, subtracts b from a (a - b).
+-   `mult a b c ...`, multiplies numbers.
+-   `div a b`, divides a by b.
+-   `pow a b`, returns a to the power of b (a ** b).
+-   `inc a`, returns a + 1.
+-   `dec a`, returns a - 1.
+
+## random
 
 The random wildcard picks a random items.
 
@@ -40,6 +68,13 @@ The random wildcard picks a random items.
 -   `You rolled a @(random 1 2 3 4 5 6).`
 
 ## Strings
+
+### concat
+
+Concatenate strings with a separator.
+
+-   `@(concat " " "Hello" "World")`, will print "Hello World"
+-   `@(concat "" "a" "b")`, will print "ab"
 
 ### lc
 
@@ -73,7 +108,7 @@ Transform a string into an action.
 -   `@(format "take")`, will print a clickable `take` trigger.
 -   `@(format "learn" "learn to move")`, will print a clickable `learn` trigger.
 
-## Vessel
+## vessel
 
 The vessel wildcard is the most commonly used wildcard, it allows to get a vessel data by its ID.
 
@@ -141,16 +176,16 @@ Because `create teapot` succeeded, the output is `none` - note the lowercase.
     random_word=@(random "cyan" "magenta" "yellow")--
     random_number=@(random 1 2 3 4 5 6)--
 
-    yes=@(if 1 "yes" "no")--
-    no=@(if 0 "yes" "no")--
+    yes=@(if "true" "yes" "no")--
+    no=@(if nil "yes" "no")--
     true=@(equal 1 1)--
-    false=@(equal "blue" "red")--
+    nil=@(equal "blue" "red")--
 
     ghost=@(lc (vessel 0 "name"))--
     Ghost=@(cc (vessel 0 "name"))--
     GHOST=@(uc (vessel 0 "name"))--
     Ghost=@(tc (vessel 0 "name"))
 
-    false=@(carry self "axe")
+    nil=@(carry self "axe")
 
     @(if (equal query "hello") "yes" "no")
