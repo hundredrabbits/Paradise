@@ -15,16 +15,23 @@ function Warp (host) {
     const target = this.find(parts.length > 1 ? params.replace(relation, '').trim() : params)
 
     if (!target) {
-      // TODO: Transform these into Errors
       return `You cannot warp to this location.`
     }
     if (relation == 'at' || relation == 'by' || relation == 'to') {
-      this.host.move(target.parent())
-      return `<p>You warped by the <action>${target.name()}</action>, inside the ${target.parent().name()}.</p>`
+      let result = this.host.move(target.parent())
+      if (result) {
+        return `<p>You warped by the <action>${target.name()}</action>, inside the ${target.parent().name()}.</p>`
+      } else {
+        return this.err_NOCHANGE()
+      }
     }
 
-    this.host.move(target)
-    return `<p>You warped in <action>${target}</action>.</p>`
+    let result = this.host.move(target)
+    if (result) {
+      return `<p>You warped in <action>${target}</action>.</p>`
+    } else {
+      return this.err_NOCHANGE()
+    }
   }
 }
 

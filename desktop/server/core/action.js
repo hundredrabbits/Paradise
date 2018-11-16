@@ -328,7 +328,7 @@ function Action (host, name) {
   }
 
   // Errors
-  // TODO: Move to errors.js
+  // TODO: Move to errors.js?
 
   this.err_NOTARGET = function (params, type = 'visible') {
     const target = this.remove_articles(params)
@@ -343,12 +343,20 @@ function Action (host, name) {
     return new Error('err_NOVALID', `<p>Invalid use of the "${this.name}" action. ${this.err_LEARN()}</p>`)
   }
 
-  this.err_UNKNOWN = function () {
-    return new Error('err_UNKNOWN', `<p>Unknown action, to see a list of available actions, type "<action data='learn'>learn</action>".</p>`)
+  this.err_UNKNOWN = function (target = null, usage = 'action', learn = true) {
+    return new Error('err_UNKNOWN', `<p>Unknown ${usage}${target ? ` '${target}'` : ''}${learn ? `, to see a list of available ${pluralise(usage)}, type "<action data='learn'>learn</action>"` : ''}.</p>`)
   }
 
   this.err_LEARN = function () {
     return new Error('err_LEARN', `For more details on how to ${this.name}, type "<action data='learn to ${this.name}'>learn to ${this.name}</action>".`)
+  }
+
+  this.err_NOPROGRAM = function (target, usage = "program") {
+    return new Error('err_NOPROGRAM', `<p>The ${target} is not a ${usage}.</p>`)
+  }
+
+  this.err_NOCHANGE = function (text = `<p>Nothing changed.</p>`) {
+    return new Error('err_NOCHANGE', text)
   }
 
   // Helpers

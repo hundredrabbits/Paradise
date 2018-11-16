@@ -21,12 +21,20 @@ function Transform (host) {
     if (!parts[0]) { return this.err_NOVALID() }
 
     if (parts.length == 2) {
-      target.set('name', parts[1])
-      target.set('attr', parts[0])
-      return `<p>You transformed ${target.id != this.host.id ? origin + ' ' : ''}into ${target}.</p>`
+      const name_success = target.set('name', parts[1])
+      const attr_success = target.set('attr', parts[0])
+      if (name_success && attr_success) {
+        return `<p>You transformed ${target.id != this.host.id ? origin + ' ' : ''}into ${target}.</p>`
+      } else {
+        return this.err_NOCHANGE()
+      }
     } else if (parts.length == 1) {
-      target.set('name', parts[0])
-      return `<p>You transformed ${target.id != this.host.id ? origin + ' ' : ''}into ${target}.</p>`
+      const name_success = target.set('name', parts[0])
+      if (name_success) {
+        return `<p>You transformed ${target.id != this.host.id ? origin + ' ' : ''}into ${target}.</p>`
+      } else {
+        return this.err_NOCHANGE()
+      }
     }
 
     return this.err_NOVALID()

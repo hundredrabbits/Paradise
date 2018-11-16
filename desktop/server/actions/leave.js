@@ -12,10 +12,10 @@ function Leave (host) {
 
     // TODO: Transform these into Errors
     if (this.host.is_paradox()) {
-      return `<p>You cannot leave the <action>${this.host.name()}</action> paradox.</p>`
+      return this.err_NOCHANGE(`<p>You cannot leave the <action>${this.host.name()}</action> paradox.</p>`)
     }
     if (this.host.parent().is_paradox()) {
-      return `<p>You cannot leave the <action>${this.host.parent().name()}</action> paradox.</p>`
+      return this.err_NOCHANGE(`<p>You cannot leave the <action>${this.host.parent().name()}</action> paradox.</p>`)
     }
 
     this.host.move(this.host.parent().parent())

@@ -13,7 +13,7 @@ function Use (host) {
     const target = this.find(params, this.host.usables())
 
     if (!target) { return this.err_NOTARGET(params, 'available') }
-    if (!target.usable()) { return `<p>${target} cannot be used.</p>` }
+    if (!target.usable()) { return this.err_NOPROGRAM(target) }
 
     const cmd_rendered = this.render(target.data.program, params, target)
     this.host.cmd(cmd_rendered)

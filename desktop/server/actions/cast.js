@@ -5,6 +5,7 @@ const Action = require(`../core/action`)
 function Cast (host) {
   Action.call(this, host, 'cast')
 
+  // TODO: Make this documentation clearer
   this.docs = 'Move a child vessel into the parent vessel.'
 
   this.operate = function (action, params) {
@@ -14,9 +15,8 @@ function Cast (host) {
     const spell_name = `${parts[0]} ${parts[1]}`
     const spell = this.find(spell_name)
 
-    // TODO: Transform these into Errors
-    if (!spell) { return `<p>Unknown spell ${spell_name}.</p>` }
-    if (!spell.is_program()) { return `<p>The ${spell.name()} is not a program.</p>` }
+    if (!spell) { return this.err_UNKNOWN(spell_name, 'spell', false) }
+    if (!spell.is_program()) { return this.err_NOPROGRAM(spell.name()) }
 
     const target = this.find(parts[parts.length - 1], this.host.siblings())
 

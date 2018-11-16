@@ -12,7 +12,9 @@ function Become (host) {
 
     const target = this.find(params, this.host.siblings())
 
-    if (target) {
+    if (target && target == this.host) {
+      return this.err_NOCHANGE()
+    } else if (target) {
       this.host.paradise.client.change_vessel(target.id)
       return `<p>You became ${target}.</p>`
     } else {

@@ -55,11 +55,16 @@ function Vessel (data = basic) {
   }
 
   this.set = function (key, value) {
-    this.data[key] = value
+    if (this.data[key] != value) {
+      this.data[key] = value
+      return true
+    } else {
+      return false
+    }
   }
 
   this.move = function (target) {
-    this.set('parent', target.id)
+    return this.set('parent', target.id)
   }
 
   this.parent = function () {
