@@ -6,6 +6,9 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 
 ### Basic
 
+#### Look
+- `look` List all **visible vessels**.
+
 #### Create
 - `create a ceramic teacup` Create a **new vessel**.
 
@@ -37,6 +40,9 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 - `drop the red teacup` Move a **child vessel** into the **parent vessel**.
 - `drop a teacup` Move a **child vessel** into the **parent vessel**.
 - `drop any teacup` Move a random **child vessel** into the **parent vessel**.
+
+#### Inventory
+- `inventory` List all **child vessels**.
 
 #### Move
 - `move the red teacup in the blue teacup` Move a **visible vessel** into another **visible vessel**.

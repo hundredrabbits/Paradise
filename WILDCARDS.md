@@ -64,7 +64,7 @@ Transform a string to lowercase.
 Transform a string into an action.
 
 - `@(format "take")`, will print a clickable `take` trigger.
-- `@(format "learn" "learn to move")`, will print a clickable `take` trigger.
+- `@(format "learn" "learn to move")`, will print a clickable `learn` trigger.
 
 ## Vessel
 
@@ -110,4 +110,3 @@ false=@(carry self "axe")
 
 @(if (equal query "hello") "yes" "no")
 ```
-
