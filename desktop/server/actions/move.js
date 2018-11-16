@@ -11,12 +11,17 @@ function Move (host) {
     if (!params) { return this.err_NOPARAM() }
 
     // TODO: Transform these into Errors
-    if (params.indexOf(' in ') < 0) { return `<p>You must use the word <action data='move the vessel1 in the vessel2'>in</action>.</p>` }
+    if (params.indexOf(' in ') < 0 && params.indexOf(' into ') < 0) { return `<p>You must use the words <action data='move the vessel1 into the vessel2'>in or into</action>.</p>` }
 
     const parts = params.replace(' into ', ' in ').split(' in ')
 
     const target_a = this.find(parts[0], this.host.siblings())
-    const target_b = this.find(parts[1], this.host.siblings())
+    let target_b
+    if (parts[1] === "itself") {
+      target_b = target_a
+    } else {
+      target_b = this.find(parts[1], this.host.siblings())
+    }
 
     if (target_a && target_b) {
       target_a.move(target_b)
