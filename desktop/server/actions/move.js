@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Move (host) {
   Action.call(this, host, 'move')
@@ -8,7 +9,7 @@ function Move (host) {
   this.docs = 'Move a visible vessel into another visible vessel.'
 
   this.operate = function (action, params) {
-    if (!params) { return this.err_NOPARAM() }
+    if (!params) { return errors.NOPARAM() }
 
     // TODO: Transform these into Errors
     if (params.indexOf(' in ') < 0 && params.indexOf(' into ') < 0) { return `<p>You must use the words <action data='move the vessel1 into the vessel2'>in or into</action>.</p>` }
@@ -27,7 +28,7 @@ function Move (host) {
       target_a.move(target_b)
       return `<p>You moved the ${target_a.name()} in the <action data='enter the ${target_b.name()}'>${target_b.name()}</action>.</p>`
     } else {
-      return this.err_NOTARGET(params)
+      return errors.NOTARGET(params)
     }
   }
 }

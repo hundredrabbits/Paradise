@@ -1,7 +1,7 @@
 'use strict'
 
 const Wildcard = require('./wildcard')
-const Error = require('./error')
+const errors = require('./errors')
 const pluralize = require('pluralize')
 
 function Action (host, name) {
@@ -42,7 +42,7 @@ function Action (host, name) {
       }
       return v.data.reaction ? `<p>${this.render(v.data.reaction, params, v)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
-    return this.err_UNKNOWN()
+    return errors.UNKNOWN()
   }
 
   this.change_vessel = function (params) {
@@ -325,38 +325,6 @@ function Action (host, name) {
       i++
     }
     return str
-  }
-
-  // Errors
-  // TODO: Move to errors.js?
-
-  this.err_NOTARGET = function (params, type = 'visible') {
-    const target = this.remove_articles(params)
-    return new Error('err_NOTARGET', `<p>There is no ${type} vessel "${target}". ${this.err_LEARN()}</p>`)
-  }
-
-  this.err_NOPARAM = function () {
-    return new Error('err_NOPARAM', `<p>The ${this.name} action requires more information. ${this.err_LEARN()}</p>`)
-  }
-
-  this.err_NOVALID = function () {
-    return new Error('err_NOVALID', `<p>Invalid use of the "${this.name}" action. ${this.err_LEARN()}</p>`)
-  }
-
-  this.err_UNKNOWN = function (target = null, usage = 'action', learn = true) {
-    return new Error('err_UNKNOWN', `<p>Unknown ${usage}${target ? ` '${target}'` : ''}${learn ? `, to see a list of available ${pluralize(usage)}, type "<action data='learn'>learn</action>"` : ''}.</p>`)
-  }
-
-  this.err_LEARN = function () {
-    return new Error('err_LEARN', `For more details on how to ${this.name}, type "<action data='learn to ${this.name}'>learn to ${this.name}</action>".`)
-  }
-
-  this.err_NOPROGRAM = function (target, usage = "program") {
-    return new Error('err_NOPROGRAM', `<p>The ${target} is not a ${usage}.</p>`)
-  }
-
-  this.err_NOCHANGE = function (text = `<p>Nothing changed.</p>`) {
-    return new Error('err_NOCHANGE', text)
   }
 
   // Helpers

@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Echo (host) {
   Action.call(this, host, 'echo')
@@ -9,7 +10,7 @@ function Echo (host) {
 
   this.operate = function (action, params) {
     if (!params) {
-      return this.err_NOPARAM()
+      return errors.NOPARAM()
     }
 
     const reaction_rendered = this.render(params, params, host)

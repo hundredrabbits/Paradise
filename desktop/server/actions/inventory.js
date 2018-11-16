@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Inventory (host) {
   Action.call(this, host, 'inventory')

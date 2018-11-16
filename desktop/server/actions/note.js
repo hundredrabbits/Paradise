@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Note (host) {
   Action.call(this, host, 'note')
@@ -8,7 +9,7 @@ function Note (host) {
   this.docs = 'Add a description to the current parent vessel.'
 
   this.operate = function (action, params) {
-    if (!this.host.parent().data.note && params.trim() == '') { return this.err_NOVALID() }
+    if (!this.host.parent().data.note && params.trim() == '') { return errors.NOVALID() }
 
     const is_update = !!this.host.parent().data.note
 

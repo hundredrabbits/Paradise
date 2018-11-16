@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Inspect (host) {
   Action.call(this, host, 'inspect')
@@ -15,7 +16,7 @@ function Inspect (host) {
     if (target) {
       return `<p>You are inspecting the <action>${target.name()}</action>#${target.id}. ${this.make_location(target)}</p>`
     } else {
-      return this.err_NOTARGET(params)
+      return errors.NOTARGET(params)
     }
   }
 

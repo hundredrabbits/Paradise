@@ -100,7 +100,7 @@ function Vessel (data = basic) {
       i += 1
       known.push(v.id)
     }
-    return this
+    return this // REVIEW: Should this be null?
   }
 
   // Helpers

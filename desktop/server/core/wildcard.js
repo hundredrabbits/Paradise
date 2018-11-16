@@ -2,7 +2,8 @@
 
 const Lisp = require('./lisp')
 const clock = require('./clock')
-const helpers = require('./helpers');
+const helpers = require('./helpers')
+const errors = require('./errors')
 
 
 function Wildcard (host, input, query, responder) {
@@ -18,6 +19,47 @@ function Wildcard (host, input, query, responder) {
     stem: function () {
       return host.stem().id
     },
+    // TODO: siblings
+    // TODO: children
+    // TODO: usables
+
+    // TODO: clean up the id checks; put in helpers.js
+
+    is_paradox: function (id) {
+      if (typeof id === 'function') { id = id() }
+      if (typeof id !== 'number') { return '(error:misformated function)' }
+      const target = host.paradise.world[id]
+      if (!target) { return `(error:unknown vessel-${id})` }
+      return target.is_paradox() ? 'true' : helpers.nil
+    },
+
+    is_program: function (id) {
+      if (typeof id === 'function') { id = id() }
+      if (typeof id !== 'number') { return '(error:misformated function)' }
+      const target = host.paradise.world[id]
+      if (!target) { return `(error:unknown vessel-${id})` }
+      return target.is_program() ? 'true' : helpers.nil
+    },
+
+    is_usable: function (id) {
+      if (typeof id === 'function') { id = id() }
+      if (typeof id !== 'number') { return '(error:misformated function)' }
+      const target = host.paradise.world[id]
+      if (!target) { return `(error:unknown vessel-${id})` }
+      return target.usable() ? 'true' : helpers.nil
+    }
+
+    is_passive: function (id) {
+      if (typeof id === 'function') { id = id() }
+      if (typeof id !== 'number') { return '(error:misformated function)' }
+      const target = host.paradise.world[id]
+      if (!target) { return `(error:unknown vessel-${id})` }
+      return target.passive() ? 'true' : helpers.nil
+    }
+
+    // TODO?: to_a
+    // TODO?: toString
+    // TODO?: particle, name, type
 
     // Transform
     concat: function (separator = '', ...items) {
@@ -139,6 +181,8 @@ function Wildcard (host, input, query, responder) {
     // create clock & enter clock & trigger time The time is @( time ) & leave & time
 
     // Main
+
+    // TODO: Convert to Errors
     vessel: function (id, field) {
       if (typeof id === 'function') { id = id() }
       if (typeof id !== 'number') { return '(error:misformated function)' }

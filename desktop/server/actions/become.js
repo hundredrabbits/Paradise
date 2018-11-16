@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Become (host) {
   Action.call(this, host, 'become')
@@ -8,17 +9,17 @@ function Become (host) {
   this.docs = 'Become a visible vessel.'
 
   this.operate = function (action, params) {
-    if (!params) { return this.err_NOPARAM() }
+    if (!params) { return errors.NOPARAM() }
 
     const target = this.find(params, this.host.siblings())
 
     if (target && target == this.host) {
-      return this.err_NOCHANGE()
+      return errors.NOCHANGE()
     } else if (target) {
       this.host.paradise.client.change_vessel(target.id)
       return `<p>You became ${target}.</p>`
     } else {
-      return this.err_NOTARGET(params)
+      return errors.NOTARGET(params)
     }
   }
 }

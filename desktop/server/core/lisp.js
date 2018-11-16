@@ -64,7 +64,7 @@ function Lisp (input, lib) {
   }
 
   const categorize = function (input) {
-    if (input === 'nil') {
+    if (!input || input === 'nil') {
       return { type: 'nil', value: helpers.nil }
     } else if (!isNaN(parseFloat(input))) {
       return { type: 'number', value: parseFloat(input) }
