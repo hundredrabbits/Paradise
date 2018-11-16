@@ -75,6 +75,7 @@ function Learn (host) {
       program: require('./program'),
       use: require('./use'),
       cast: require('./cast')
+      echo: require('./echo');
     }
     for (const id in _actions) {
       const action = new _actions[id]()
