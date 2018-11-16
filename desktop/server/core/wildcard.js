@@ -47,7 +47,7 @@ function Wildcard (host, input, query, responder) {
       const target = host.paradise.world[id]
       if (!target) { return `(error:unknown vessel-${id})` }
       return target.usable() ? 'true' : helpers.nil
-    }
+    },
 
     is_passive: function (id) {
       if (typeof id === 'function') { id = id() }
@@ -55,7 +55,7 @@ function Wildcard (host, input, query, responder) {
       const target = host.paradise.world[id]
       if (!target) { return `(error:unknown vessel-${id})` }
       return target.passive() ? 'true' : helpers.nil
-    }
+    },
 
     // TODO?: to_a
     // TODO?: toString
