@@ -344,7 +344,7 @@ function Action (host, name) {
   }
 
   this.err_UNKNOWN = function (target = null, usage = 'action', learn = true) {
-    return new Error('err_UNKNOWN', `<p>Unknown ${usage}${target ? ` '${target}'` : ''}${learn ? `, to see a list of available ${pluralise(usage)}, type "<action data='learn'>learn</action>"` : ''}.</p>`)
+    return new Error('err_UNKNOWN', `<p>Unknown ${usage}${target ? ` '${target}'` : ''}${learn ? `, to see a list of available ${pluralize(usage)}, type "<action data='learn'>learn</action>"` : ''}.</p>`)
   }
 
   this.err_LEARN = function () {
