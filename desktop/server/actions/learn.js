@@ -2,6 +2,7 @@
 
 const Action = require(`../core/action`)
 const errors = require('../core/errors')
+const helpers = require('../core/helpers');
 
 function Learn (host) {
   Action.call(this, host, 'learn')
@@ -45,7 +46,7 @@ function Learn (host) {
     let _list = ''
     for (const id in docs) {
       if (id == 'learn') { continue }
-      _list += `<action data='learn to ${id}'>${id.capitalize()}</action>${index == count - 1 ? ' or ' : (index == count ? '. ' : ', ')} `
+      _list += `<action data='learn to ${id}'>${id.toSentenceCase()}</action>${index == count - 1 ? ' or ' : (index == count ? '. ' : ', ')} `
       index += 1
     }
     return `<img src='media/graphics/default.png'/><p>Which action would you like to <action data='learn'>learn</action>? ${_list}</p>`

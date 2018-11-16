@@ -2,6 +2,7 @@
 
 const Wildcard = require('./wildcard')
 const errors = require('./errors')
+const helpers = require('./helpers')
 const pluralize = require('pluralize')
 
 function Action (host, name) {
@@ -154,25 +155,8 @@ function Action (host, name) {
       brevity_level = "brief"
     }
 
-    /**
-     * Shuffles array in place.
-     * @param {Array} a items An array containing the items.
-     *
-     * TODO: Move somewhere reasonable
-     */
-    function shuffle(a) {
-      var j, x, i;
-      for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
-      }
-      return a;
-    }
-
     if (brevity_level != "detailed") {
-      siblings = shuffle(siblings)
+      siblings = helpers.shuffle(siblings)
     }
 
     if (brevity_level == "brief") {
@@ -326,12 +310,6 @@ function Action (host, name) {
     }
     return str
   }
-
-  // Helpers
-  // TODO: Move somewhere rational & clean up (not everything uses these)
-
-  String.prototype.to_base = function () { return this.toLowerCase().replace(/ /g, '_').replace(/[^0-9a-z\+]/gi, '').trim() }
-  String.prototype.capitalize = function () { return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase() }
 }
 
 module.exports = Action
