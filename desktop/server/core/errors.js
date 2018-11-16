@@ -1,8 +1,9 @@
 'use strict'
 
 const Error = require('./error');
+const pluralize = require('pluralize');
 
-errors = [
+const errors = {
   NOTARGET: function(params, type = 'visible') {
     const target = this.remove_articles(params)
     return new Error('err_NOTARGET', `<p>There is no ${type} vessel "${target}". ${errors.LEARN()}</p>`)
@@ -31,6 +32,6 @@ errors = [
   NOCHANGE: function(text = `<p>Nothing changed.</p>`) {
     return new Error('err_NOCHANGE', text)
   },
-]
+}
 
 module.exports = errors;
