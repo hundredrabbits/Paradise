@@ -14,6 +14,3 @@
 ### Save / Load
 
 -   Implement a save/load feature for the CLI
--   Allow choice between JSON/YAML formats
-    -   `.teapot.yaml`
-    -   `.teapot.json`
