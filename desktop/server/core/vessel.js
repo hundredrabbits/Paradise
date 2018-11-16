@@ -1,5 +1,7 @@
 'use strict'
 
+Error = require('./error')
+
 const basic = {
   name: 'ghost',
   attr: 'hungry',
@@ -17,14 +19,25 @@ function Vessel (data = basic) {
     if (!lines) { return this.act() }
 
     let output
+    let action
+    let params
     for (const id in lines) {
       const line = lines[id]
       const parts = line.split(' ')
-      const action = parts.splice(0, 1)[0]
-      const params = parts.join(' ').trim()
+      action = parts.splice(0, 1)[0]
+      params = parts.join(' ').trim()
       output = this.act(action, params)
     }
-    return output
+    if (output.reaction instanceof Error) {
+      this.data.last_error = output.reaction
+      output.reaction = output.reaction.to_a()
+      return output
+    } else if (action != 'look') {
+      this.data.last_error = null
+      return output
+    } else {
+      return output
+    }
   }
 
   this.act = function (a, p) {

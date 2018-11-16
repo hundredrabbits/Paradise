@@ -1,7 +1,7 @@
 'use strict'
 
 const Lisp = require('./lisp')
-const Clock = require('./clock')
+const clock = require('./clock')
 
 function Wildcard (host, input, query, responder) {
   const lib = {
@@ -47,6 +47,12 @@ function Wildcard (host, input, query, responder) {
     },
     responder: function () {
       return responder.id
+    },
+    success: function () {
+      return !!host.data.last_error
+    },
+    error: function () {
+      return host.data.last_error ? host.data.last_error.to_a() : 'none'
     },
 
     // Logic

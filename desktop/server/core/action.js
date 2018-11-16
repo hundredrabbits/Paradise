@@ -1,6 +1,7 @@
 'use strict'
 
 const Wildcard = require('./wildcard')
+const Error = require('./error')
 const pluralize = require('pluralize')
 
 function Action (host, name) {
@@ -15,7 +16,7 @@ function Action (host, name) {
     const _view = this._view()
     const _tips = this._tips()
     const _passive = this._passive()
-    const cli = _reaction || `${_header ? _header + '\n\n' : ''}${_note ? _note + '\n\n' : ''}${_view ? '> ' + _view : ''}`
+    const cli = (_reaction ? _reaction.toString() : null) || `${_header ? _header + '\n\n' : ''}${_note ? _note + '\n\n' : ''}${_view ? '> ' + _view : ''}`
 
     const h = {
       header: _header,
@@ -327,29 +328,31 @@ function Action (host, name) {
   }
 
   // Errors
+  // TODO: Move to errors.js
 
   this.err_NOTARGET = function (params, type = 'visible') {
     const target = this.remove_articles(params)
-    return `<p>There is no ${type} vessel "${target}". ${this.err_LEARN()}</p>`
+    return new Error('err_NOTARGET', `<p>There is no ${type} vessel "${target}". ${this.err_LEARN()}</p>`)
   }
 
   this.err_NOPARAM = function () {
-    return `<p>The ${this.name} action requires more information. ${this.err_LEARN()}</p>`
+    return new Error('err_NOPARAM', `<p>The ${this.name} action requires more information. ${this.err_LEARN()}</p>`)
   }
 
   this.err_NOVALID = function () {
-    return `<p>Invalid use of the "${this.name}" action. ${this.err_LEARN()}</p>`
+    return new Error('err_NOVALID', `<p>Invalid use of the "${this.name}" action. ${this.err_LEARN()}</p>`)
   }
 
   this.err_UNKNOWN = function () {
-    return `<p>Unknown action, to see a list of available actions, type "<action data='learn'>learn</action>".</p>`
+    return new Error('err_UNKNOWN', `<p>Unknown action, to see a list of available actions, type "<action data='learn'>learn</action>".</p>`)
   }
 
   this.err_LEARN = function () {
-    return `For more details on how to ${this.name}, type "<action data='learn to ${this.name}'>learn to ${this.name}</action>".`
+    return new Error('err_LEARN', `For more details on how to ${this.name}, type "<action data='learn to ${this.name}'>learn to ${this.name}</action>".`)
   }
 
   // Helpers
+  // TODO: Move somewhere rational & clean up (not everything uses these)
 
   String.prototype.to_base = function () { return this.toLowerCase().replace(/ /g, '_').replace(/[^0-9a-z\+]/gi, '').trim() }
   String.prototype.capitalize = function () { return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase() }
