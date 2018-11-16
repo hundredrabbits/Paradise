@@ -64,8 +64,8 @@ function Wildcard (host, input, query, responder) {
     sub: function (a, b) {
       return a - b
     },
-    mult: function (...items) {
-      return items.reduce((a, b) => a * b, 0) // Not working
+    mult: function (a, b) {
+      return a * b
     },
     div: function (a, b) {
       return a / b
