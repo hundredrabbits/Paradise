@@ -35,12 +35,11 @@ say hello
 ### Wildcards
 
 ```
-create a dice & 
-enter the dice & 
-program look & 
-trigger roll You rolled @random(1 2 3 4 5 6). & 
-leave & 
-roll the dice
+create a die &
+enter the die &
+trigger roll You rolled @( random 1 2 3 4 5 6 ). &
+leave &
+roll the die
 ```
 
 ### Random Warp
