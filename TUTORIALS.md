@@ -153,10 +153,10 @@ A coffee machine using the `error` wildcard. It fills empty mugs, and tells you 
     create a coffee machine &
     enter the coffee machine &
     program transform a mug into a coffee mug &
-    trigger use @( if ( equal error "none" ) "You fill the mug with coffee." ( if ( equal error "NOCHANGE" ) "The mug is already full." "There is no mug to fill." ) ) &
+    trigger use @( if success "You fill the mug with coffee." ( if ( equal error "NOCHANGE" ) "The mug is already full." "There is no mug to fill." ) ) &
     leave &
     create empty mug &
     use coffee machine
 
 Copyable:
-`create a coffee machine & enter the coffee machine & program transform a mug into a coffee mug & trigger use @( if ( equal error "none" ) "You fill the mug with coffee." ( if ( equal error "NOCHANGE" ) "The mug is already full." "There is no mug to fill." ) ) & leave & create empty mug & use coffee machine`
+`create a coffee machine & enter the coffee machine & program transform a mug into a coffee mug & trigger use @( if success "You fill the mug with coffee." ( if ( equal error "NOCHANGE" ) "The mug is already full." "There is no mug to fill." ) ) & leave & create empty mug & use coffee machine`

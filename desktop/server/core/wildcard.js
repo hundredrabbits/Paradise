@@ -51,10 +51,10 @@ function Wildcard (host, input, query, responder) {
       return responder.id
     },
     success: function () {
-      return !!host.data.last_error ? 'true' : 'false'
+      return !host.data.last_error ? 'true' : new helpers.nil()
     },
     error: function () {
-      return host.data.last_error ? host.data.last_error.to_a() : 'none'
+      return host.data.last_error ? host.data.last_error.to_a() : new helpers.nil()
     },
 
     // Arithmetic
@@ -82,10 +82,24 @@ function Wildcard (host, input, query, responder) {
 
     // Logic
     equal: function (a, b) {
-      return (typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)
+      if ((typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)) {
+        return "true"
+      }
+      return new helpers.nil()
     },
     if: function (i, t, e) {
-      return typeof id === 'function' ? i() : i ? t : e
+      let condition = false
+      if (typeof i === 'function') {
+        let _i = i()
+        condition = (!_i || (_i instanceof helpers.nil) ? false : true)
+      } else {
+        condition = (!i || (i instanceof helpers.nil) ? false : true)
+      }
+      if (condition) {
+        return t
+      } else {
+        return e
+      }
     },
     and: function (...items) { // Return first non-null input if all inputs are non-null
       let first_non_null = new helpers.nil()

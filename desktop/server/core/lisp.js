@@ -59,7 +59,7 @@ function Lisp (input, lib) {
     } else if (input.type === 'number' || input.type === 'string') {
       return input.value
     } else if (input.type === 'nil') {
-      return 'nil'
+      return input.value
     }
   }
 
