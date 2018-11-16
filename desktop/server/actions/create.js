@@ -3,6 +3,19 @@
 const Action = require(`../core/action`)
 const Vessel = require(`../core/vessel`)
 
+const reserved_names = [
+  "some",
+  "any",
+  "itself",
+  "a",
+  "an",
+  "the",
+  "of",
+  "some",
+  "one",
+  "two"
+]
+
 function Create (host) {
   Action.call(this, host, 'create')
 
@@ -15,10 +28,13 @@ function Create (host) {
     const attr = parts[parts.length - 2] && parts[parts.length - 2] != parts[parts.length - 1] ? parts[parts.length - 2].toLowerCase() : null
     const name = parts[parts.length - 1].toLowerCase()
 
+    // TODO: Transform these into Errors
     if (parseInt(name) > -1) { return `<p>Vessel names cannot be numbers.</p>` }
     if (name == '') { return this.err_NOVALID() }
     if (name.length < 3 || name.length > 14) { return `<p>The vessel name must be between 3 and 14 characters long.</p>` }
     if (attr && attr.length > 14) { return `<p>The vessel attribute is too long.</p>` }
+    if (reserved_names.indexOf(name) > -1) { return `<p>Vessel names cannot be reserved words ('some', 'any', or 'itself') or articles.</p>` }
+    if (reserved_names.indexOf(attr) > -1) { return `<p>Vessel attributes cannot be reserved words ('some', 'any', or 'itself') or articles.</p>` }
 
     const data = {
       name: name,
@@ -30,6 +46,7 @@ function Create (host) {
     const vessel = new Vessel(data)
     const success = this.host.paradise.add(vessel)
 
+    // TODO: Transform these into Errors
     return !success ? `<p>A visible vessel with that name already exists.</p>` : `<p>You created <action data='enter the ${vessel.name()}'>${vessel.to_a()}</action> in the ${this.host.parent().name()}.</p>`
   }
 }
