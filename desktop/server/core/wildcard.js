@@ -2,6 +2,8 @@
 
 const Lisp = require('./lisp')
 const clock = require('./clock')
+const helpers = require('./helpers');
+
 
 function Wildcard (host, input, query, responder) {
   const lib = {
@@ -49,7 +51,7 @@ function Wildcard (host, input, query, responder) {
       return responder.id
     },
     success: function () {
-      return !!host.data.last_error
+      return !!host.data.last_error ? 'true' : 'false'
     },
     error: function () {
       return host.data.last_error ? host.data.last_error.to_a() : 'none'
@@ -61,6 +63,25 @@ function Wildcard (host, input, query, responder) {
     },
     if: function (i, t, e) {
       return typeof id === 'function' ? i() : i ? t : e
+    },
+    and: function (...items) { // Return first non-null input if all inputs are non-null
+      let first_non_null = new helpers.nil()
+      for (var id in items) {
+        if (!items[id] || items[id] instanceof helpers.nil) {
+          return new helpers.nil()
+        } else {
+          first_non_null = items[id]
+        }
+      }
+      return first_non_null
+    },
+    or: function (...items) { // Return first non-null input
+      for (var id in items) {
+        if (!!items[id] && !(items[id] instanceof helpers.nil)) {
+          return items[id]
+        }
+      }
+      return new helpers.nil()
     },
 
     // Clock
@@ -91,7 +112,7 @@ function Wildcard (host, input, query, responder) {
       for (const i in children) {
         if (children[i].is(target)) { return true }
       }
-      return false
+      return new helpers.nil()
     },
     random: function (...items) {
       return items[Math.floor((Math.random() * items.length))]
