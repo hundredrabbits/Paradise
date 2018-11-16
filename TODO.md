@@ -16,7 +16,7 @@
 
 -   Implement lists
     -   Random from list
--   Implement addition, multiplication, subtraction, division, powers, logarithms, increment, decrement, etc.
+-   Implement logarithms, and any other maths operators I can think of.
 -   Loops
 -   Lambdas?
 -   Functions?

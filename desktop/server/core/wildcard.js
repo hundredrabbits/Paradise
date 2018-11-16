@@ -57,6 +57,29 @@ function Wildcard (host, input, query, responder) {
       return host.data.last_error ? host.data.last_error.to_a() : 'none'
     },
 
+    // Arithmetic
+    add: function (...items) {
+      return items.reduce((a, b) => a + b, 0)
+    },
+    sub: function (a, b) {
+      return a - b
+    },
+    mult: function (...items) {
+      return items.reduce((a, b) => a * b, 0) // Not working
+    },
+    div: function (a, b) {
+      return a / b
+    },
+    pow: function (a, b) {
+      return a ** b
+    },
+    inc: function (a) {
+      return a + 1
+    },
+    dec: function (a) {
+      return a - 1
+    },
+
     // Logic
     equal: function (a, b) {
       return (typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)
