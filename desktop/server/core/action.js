@@ -124,17 +124,18 @@ function Action (host, name) {
     return parent.data.note ? this.render(parent.data.note) : ''
   }
 
-  // Pretty-print the current view.
-  //
-  // Brevity thresholds:
-  // [threshold_1, threshold_2]
-  // For a number of visible objects, if below threshold_1, output like so:
-  //   You see a teapot, a ceramic mug, a green saucer, and a blue saucer.
-  // Else if below threshold_2:
-  //   You see a ceramic mug, a green saucer, a teapot, and a blue saucer. (Randomised order each time)
-  // Else:
-  //   You see a teapot, a mug, and 2 saucers. (Removed attributes and combines similar objects, as well as randomised order)
-  //
+  /**
+   * Pretty-prints the current view.
+   * Brevity thresholds:
+   * @param {Array} brevity_thresholds [threshold_1, threshold_2]
+   *
+   * For a number of visible objects, if below threshold_1, output like so:
+   *   You see a teapot, a ceramic mug, a green saucer, and a blue saucer.
+   * Else if below threshold_2:
+   *   You see a ceramic mug, a green saucer, a teapot, and a blue saucer. (Randomised order each time)
+   * Else:
+   *   You see a teapot, a mug, and 2 saucers. (Removed attributes and combines similar objects, as well as randomised order)
+   */
   this._view = function (brevity_thresholds = [5, 10]) {
     const oxford_comma = true
 
