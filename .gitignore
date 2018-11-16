@@ -1,4 +1,23 @@
+# Dependencies
 node_modules/
+
+# Builds
 builds/
+
+# Platform-specific management files
 .DS_Store
 */.DS_Store
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Runtime data
+pids
+*.pid
+*.seed
+*.pid.lock
+
+# dotenv environment variables file
+.env
