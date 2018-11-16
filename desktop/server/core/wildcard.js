@@ -51,10 +51,10 @@ function Wildcard (host, input, query, responder) {
       return responder.id
     },
     success: function () {
-      return !host.data.last_error ? 'true' : new helpers.nil()
+      return !host.data.last_error ? 'true' : helpers.nil
     },
     error: function () {
-      return host.data.last_error ? host.data.last_error.to_a() : new helpers.nil()
+      return host.data.last_error ? host.data.last_error.to_a() : helpers.nil
     },
 
     // Arithmetic
@@ -85,15 +85,15 @@ function Wildcard (host, input, query, responder) {
       if ((typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)) {
         return "true"
       }
-      return new helpers.nil()
+      return helpers.nil
     },
     if: function (i, t, e) {
       let condition = false
       if (typeof i === 'function') {
         let _i = i()
-        condition = (!_i || (_i instanceof helpers.nil) ? false : true)
+        condition = (!_i || (_i === helpers.nil) ? false : true)
       } else {
-        condition = (!i || (i instanceof helpers.nil) ? false : true)
+        condition = (!i || (i === helpers.nil) ? false : true)
       }
       if (condition) {
         return t
@@ -101,24 +101,24 @@ function Wildcard (host, input, query, responder) {
         return e
       }
     },
-    and: function (...items) { // Return first non-null input if all inputs are non-null
-      let first_non_null = new helpers.nil()
+    and: function (...items) { // Return first non-nil input if all inputs are non-nil
+      let first_non_nil = helpers.nil
       for (var id in items) {
-        if (!items[id] || items[id] instanceof helpers.nil) {
-          return new helpers.nil()
-        } else {
-          first_non_null = items[id]
+        if (!items[id] || items[id] === helpers.nil) {
+          return helpers.nil
+        } else if (first_non_nil === helpers.nil) {
+          first_non_nil = items[id]
         }
       }
-      return first_non_null
+      return first_non_nil
     },
     or: function (...items) { // Return first non-null input
       for (var id in items) {
-        if (!!items[id] && !(items[id] instanceof helpers.nil)) {
+        if (!!items[id] && !(items[id] === helpers.nil)) {
           return items[id]
         }
       }
-      return new helpers.nil()
+      return helpers.nil
     },
 
     // Clock
@@ -149,7 +149,7 @@ function Wildcard (host, input, query, responder) {
       for (const i in children) {
         if (children[i].is(target)) { return true }
       }
-      return new helpers.nil()
+      return helpers.nil
     },
     random: function (...items) {
       return items[Math.floor((Math.random() * items.length))]
