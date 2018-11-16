@@ -96,7 +96,7 @@ function Browser (paradise) {
     fs.readFile(paths[0], 'utf-8', (err, data) => {
       if (err) { alert('An error ocurred reading the file :' + err.message); return }
       if (paths[0].endsWith('.yaml')) {
-        paradise.import(yaml.safeLoad(data))
+        paradise.importYAML(yaml.safeLoad(data))
       } else {
         paradise.import(JSON.parse(data))
       }
