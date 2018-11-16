@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "blessed": "^0.1.81",
+    "js-yaml": "^3.12.0",
     "pluralize": "^7.0.0"
   },
   "devDependencies": {},

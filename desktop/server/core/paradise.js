@@ -1,6 +1,7 @@
 'use strict'
 
 const Vessel = require('./vessel')
+const yaml   = require('js-yaml')
 
 function Paradise () {
   this.client = null
@@ -33,6 +34,25 @@ function Paradise () {
       a.push(json)
     }
     return JSON.stringify(a)
+  }
+
+  this.importYAML = function (yml) {
+    const a = []
+    for (const id in yml) {
+      const vessel = new Vessel(yml[id])
+      a.push(vessel)
+    }
+    this.world = a
+  }
+
+  this.exportYAML = function () {
+    const a = []
+
+    for (const id in this.world) {
+      const yml = this.world[id].to_h()
+      a.push(yml)
+    }
+    return yaml.safeDump(a)
   }
 
   this.add = function (vessel) {
