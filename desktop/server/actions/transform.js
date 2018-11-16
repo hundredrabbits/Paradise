@@ -23,7 +23,7 @@ function Transform (host) {
     if (parts.length == 2) {
       const name_success = target.set('name', parts[1])
       const attr_success = target.set('attr', parts[0])
-      if (name_success && attr_success) {
+      if (name_success || attr_success) {
         return `<p>You transformed ${target.id != this.host.id ? origin + ' ' : ''}into ${target}.</p>`
       } else {
         return this.err_NOCHANGE()
