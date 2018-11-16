@@ -20,6 +20,9 @@ function Wildcard (host, input, query, responder) {
     },
 
     // Transform
+    concat: function (seperator = '', ...items) {
+      return items.reduce((a, b) => a.toString() + seperator + b.toString())
+    },
     lc: function (str) {
       return str ? `${str}`.toLowerCase() : ''
     },
