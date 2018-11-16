@@ -27,6 +27,16 @@ function Wildcard (host, input, query, responder) {
     uc: function (str) {
       return str ? `${str}`.toUpperCase() : ''
     },
+    tc: function (str) {
+      // TODO: move somewhere rational
+      // TODO: Look at using https://stackoverflow.com/a/46774740
+      function toTitleCase(str) {
+        return str.replace(/\w\S*/g, function(txt){
+          return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
+        });
+      }
+      return str ? toTitleCase(`${str}`) : ''
+    },
     format: function (word, settings) {
       return settings ? `<action data='${settings}'>${word}</action>` : `<action>${word}</action>`
     },
