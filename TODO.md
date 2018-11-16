@@ -14,6 +14,7 @@
 
 ### WildcardLISP
 
+-   Convert `nil` to a sinleton instead of a class
 -   Implement lists
     -   Random from list
 -   Implement logarithms, and any other maths operators I can think of.
