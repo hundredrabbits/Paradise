@@ -1,6 +1,10 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
+const helpers = require('../core/helpers');
+
+// TODO: Add wildcard docs here
 
 function Learn (host) {
   Action.call(this, host, 'learn')
@@ -19,7 +23,10 @@ function Learn (host) {
       const obj = new a()
       return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs} Type <action>learn</action> again to see the available actions.</p>`
     } catch (err) {
-      return this.default(target)
+      if (err.code === 'MODULE_NOT_FOUND') {
+        return this.default(target)
+      }
+      throw err
     }
   }
 
@@ -28,7 +35,7 @@ function Learn (host) {
       if (this.knowledge[key]) {
         return `<p>${this.knowledge[key]}</p>`
       } else {
-        return `Unknown term '${key}'.`
+        return errors.UNKNOWN(key, 'term', false)
       }
     } else {
       return this.general()
@@ -43,7 +50,7 @@ function Learn (host) {
     let _list = ''
     for (const id in docs) {
       if (id == 'learn') { continue }
-      _list += `<action data='learn to ${id}'>${id.capitalize()}</action>${index == count - 1 ? ' or ' : (index == count ? '. ' : ', ')} `
+      _list += `<action data='learn to ${id}'>${id.toSentenceCase()}</action>${index == count - 1 ? ' or ' : (index == count ? '. ' : ', ')} `
       index += 1
     }
     return `<img src='media/graphics/default.png'/><p>Which action would you like to <action data='learn'>learn</action>? ${_list}</p>`
@@ -74,7 +81,8 @@ function Learn (host) {
       trigger: require('./trigger'),
       program: require('./program'),
       use: require('./use'),
-      cast: require('./cast')
+      cast: require('./cast'),
+      echo: require('./echo')
     }
     for (const id in _actions) {
       const action = new _actions[id]()

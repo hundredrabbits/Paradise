@@ -1,5 +1,7 @@
 'use strict'
 
+Error = require('./error')
+
 const basic = {
   name: 'ghost',
   attr: 'hungry',
@@ -17,14 +19,25 @@ function Vessel (data = basic) {
     if (!lines) { return this.act() }
 
     let output
+    let action
+    let params
     for (const id in lines) {
       const line = lines[id]
       const parts = line.split(' ')
-      const action = parts.splice(0, 1)[0]
-      const params = parts.join(' ').trim()
+      action = parts.splice(0, 1)[0]
+      params = parts.join(' ').trim()
       output = this.act(action, params)
     }
-    return output
+    if (output.reaction instanceof Error) {
+      this.data.last_error = output.reaction
+      output.reaction = output.reaction.to_a()
+      return output
+    } else if (action != 'look') {
+      this.data.last_error = null
+      return output
+    } else {
+      return output
+    }
   }
 
   this.act = function (a, p) {
@@ -37,16 +50,24 @@ function Vessel (data = basic) {
     try {
       return require(`../actions/${action}`)
     } catch (err) {
-      return require(`./action`)
+      if (err.code === 'MODULE_NOT_FOUND') {
+        return require(`./action`)
+      }
+      throw err
     }
   }
 
   this.set = function (key, value) {
-    this.data[key] = value
+    if (this.data[key] != value) {
+      this.data[key] = value
+      return true
+    } else {
+      return false
+    }
   }
 
   this.move = function (target) {
-    this.set('parent', target.id)
+    return this.set('parent', target.id)
   }
 
   this.parent = function () {
@@ -82,7 +103,7 @@ function Vessel (data = basic) {
       i += 1
       known.push(v.id)
     }
-    return this
+    return this // REVIEW: Should this be null?
   }
 
   // Helpers

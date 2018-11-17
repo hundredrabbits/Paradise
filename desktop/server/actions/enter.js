@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Enter (host) {
   Action.call(this, host, 'enter')
@@ -8,7 +9,7 @@ function Enter (host) {
   this.docs = 'Enter a visible vessel.'
 
   this.operate = function (action, params) {
-    if (!params) { return this.err_NOPARAM() }
+    if (!params) { return errors.NOPARAM() }
 
     const target = this.find(params, this.host.siblings(true))
 
@@ -16,7 +17,7 @@ function Enter (host) {
       this.host.move(target)
       return `<p>You entered the <action>${target.name()}</action>.</p>`
     } else {
-      return this.err_NOTARGET(params)
+      return errors.NOTARGET(params)
     }
   }
 }

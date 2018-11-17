@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Use (host) {
   Action.call(this, host, 'use')
@@ -8,12 +9,12 @@ function Use (host) {
   this.docs = "Trigger a vessel's program."
 
   this.operate = function (action, params) {
-    if (!params) { return this.err_NOPARAM() }
+    if (!params) { return errors.NOPARAM() }
 
     const target = this.find(params, this.host.usables())
 
-    if (!target) { return this.err_NOTARGET(params, 'available') }
-    if (!target.usable()) { return `<p>${target} cannot be used.</p>` }
+    if (!target) { return errors.NOTARGET(params, 'available') }
+    if (!target.usable()) { return errors.NOPROGRAM(target) }
 
     const cmd_rendered = this.render(target.data.program, params, target)
     this.host.cmd(cmd_rendered)

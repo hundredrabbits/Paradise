@@ -1,0 +1,84 @@
+#
+# This world is a potential default world showcasing some of Paradise's
+# features. *It is not currently the default.*
+#
+
+## Player
+# The player
+- name:     ghost
+  parent:   2
+  owner:    0
+  note:     'Well, well, hello there.'
+
+# A map to tell you where you are
+- name:     map
+  parent:   0
+  owner:    0
+  note:     'A basic map.'
+  trigger:  'passive'
+  reaction: '@(uc (vessel parent))'
+
+## Paradoxes
+# The starting paradox #2
+- name:     library
+  parent:   2
+  owner:    0
+  note:     'Hello @(vessel self "name"), and welcome to the @(cc (vessel parent "name")), the stem to this world. Type "@(format "learn")" to get started.'
+
+# A secondary paradox #3
+- name:     basement
+  parent:   3
+  owner:    0
+  note: '' # TODO: Come up with a comment for here
+
+## Warps
+# A door - library -> basement
+- name:     door
+  attr:     basement
+  parent:   2
+  owner:    0
+  program:  warp to library door
+  trigger:  use
+  reaction: 'You enter the basement.'
+
+# A door - basement -> library
+- name:     door
+  attr:     library
+  parent:   3
+  owner:    0
+  program:  warp to basement door
+  trigger:  use
+  reaction: 'You enter the library.'
+
+## Objects
+# A table
+- name:     table
+  attr:     wooden
+  parent:   2
+  owner:    0
+
+# A shelving unit
+- name:     unit
+  attr:     shelving
+  parent:   3
+  owner:    0
+  note:     >-
+    A metal shelving unit.
+
+# A coffee machine
+- name:     machine
+  attr:     coffee
+  parent:   7
+  owner:    0
+  program:  transform a mug into a coffee mug
+  trigger:  use
+  reaction: '@( if success "You fill the mug with coffee." ( if ( equal error "NOCHANGE" ) "The mug is already full." "There is no mug to fill." ) )'
+
+# An accompanying mug
+- name: mug
+  attr: empty
+  parent: 7
+  owner: 0
+  program:  transform a mug into an empty mug
+  trigger:  use
+  reaction: '@(if success "You drink from the mug. The coffee is delicious." (if (equal error "NOCHANGE") "The mug is empty. It looks like it has coffee stains around its inside." "You stare at the mug in confusion."))'

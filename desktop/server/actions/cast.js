@@ -1,21 +1,23 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Cast (host) {
   Action.call(this, host, 'cast')
 
+  // TODO: Make this documentation clearer
   this.docs = 'Move a child vessel into the parent vessel.'
 
   this.operate = function (action, params) {
-    if (!params) { return this.err_NOPARAM() }
+    if (!params) { return errors.NOPARAM() }
 
     const parts = this.remove_articles(params).trim().split(' ')
     const spell_name = `${parts[0]} ${parts[1]}`
     const spell = this.find(spell_name)
 
-    if (!spell) { return `<p>Unknown spell ${spell_name}.</p>` }
-    if (!spell.is_program()) { return `<p>The ${spell.name()} is not a program.</p>` }
+    if (!spell) { return errors.UNKNOWN(spell_name, 'spell', false) }
+    if (!spell.is_program()) { return errors.NOPROGRAM(spell.name()) }
 
     const target = this.find(parts[parts.length - 1], this.host.siblings())
 

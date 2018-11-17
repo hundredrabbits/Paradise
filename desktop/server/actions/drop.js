@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Drop (host) {
   Action.call(this, host, 'drop')
@@ -8,11 +9,11 @@ function Drop (host) {
   this.docs = 'Move a child vessel into the parent vessel.'
 
   this.operate = function (action, params) {
-    if (!params) { return this.err_NOPARAM() }
+    if (!params) { return errors.NOPARAM() }
 
     const target = this.find(params, this.host.children())
 
-    if (!target) { return this.err_NOTARGET(params, 'child vessel') }
+    if (!target) { return errors.NOTARGET(params, 'child vessel') }
 
     target.move(this.host.parent())
 

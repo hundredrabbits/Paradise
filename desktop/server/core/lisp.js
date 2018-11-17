@@ -1,5 +1,7 @@
 'use strict'
 
+const helpers = require('./helpers');
+
 function Lisp (input, lib) {
   this.input = input
 
@@ -26,6 +28,7 @@ function Lisp (input, lib) {
       return interpret(input[2], letContext)
     },
 
+    // Syntax: (lambda (arguments) (body))
     lambda: function (input, context) {
       return function () {
         const lambdaArguments = arguments
@@ -56,13 +59,17 @@ function Lisp (input, lib) {
       return context.get(input.value)
     } else if (input.type === 'number' || input.type === 'string') {
       return input.value
+    } else if (input.type === 'nil') {
+      return input.value
     }
   }
 
   const categorize = function (input) {
-    if (!isNaN(parseFloat(input))) {
+    if (!input || input === 'nil') {
+      return { type: 'nil', value: helpers.nil }
+    } else if (!isNaN(parseFloat(input))) {
       return { type: 'number', value: parseFloat(input) }
-    } else if (input[0] === '"' && input.slice(-1) === '"') {
+    } else if ((input[0] === '"' && input.slice(-1) === '"') || (input[0] === "'" && input.slice(-1) === "'")) {
       return { type: 'string', value: input.slice(1, -1) }
     } else {
       return { type: 'identifier', value: input }

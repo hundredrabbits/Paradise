@@ -1,6 +1,8 @@
 'use strict'
 
 const Wildcard = require('./wildcard')
+const errors = require('./errors')
+const helpers = require('./helpers')
 const pluralize = require('pluralize')
 
 function Action (host, name) {
@@ -15,7 +17,7 @@ function Action (host, name) {
     const _view = this._view()
     const _tips = this._tips()
     const _passive = this._passive()
-    const cli = _reaction || `${_header ? _header + '\n\n' : ''}${_note ? _note + '\n\n' : ''}${_view ? '> ' + _view : ''}`
+    const cli = (_reaction ? _reaction.toString() : null) || `${_header ? _header + '\n\n' : ''}${_note ? _note + '\n\n' : ''}${_view ? '> ' + _view : ''}`
 
     const h = {
       header: _header,
@@ -41,7 +43,7 @@ function Action (host, name) {
       }
       return v.data.reaction ? `<p>${this.render(v.data.reaction, params, v)}</p>` : `<p>You used the ${v.name()} to ${v.data.program}.</p>`
     }
-    return this.err_UNKNOWN()
+    return errors.UNKNOWN()
   }
 
   this.change_vessel = function (params) {
@@ -124,17 +126,18 @@ function Action (host, name) {
     return parent.data.note ? this.render(parent.data.note) : ''
   }
 
-  // Pretty-print the current view.
-  //
-  // Brevity thresholds:
-  // [threshold_1, threshold_2]
-  // For a number of visible objects, if below threshold_1, output like so:
-  //   You see a teapot, a ceramic mug, a green saucer, and a blue saucer.
-  // Else if below threshold_2:
-  //   You see a ceramic mug, a green saucer, a teapot, and a blue saucer. (Randomised order each time)
-  // Else:
-  //   You see a teapot, a mug, and 2 saucers. (Removed attributes and combines similar objects, as well as randomised order)
-  //
+  /**
+   * Pretty-prints the current view.
+   * Brevity thresholds:
+   * @param {Array} brevity_thresholds [threshold_1, threshold_2]
+   *
+   * For a number of visible objects, if below threshold_1, output like so:
+   *   You see a teapot, a ceramic mug, a green saucer, and a blue saucer.
+   * Else if below threshold_2:
+   *   You see a ceramic mug, a green saucer, a teapot, and a blue saucer. (Randomised order each time)
+   * Else:
+   *   You see a teapot, a mug, and 2 saucers. (Removed attributes and combines similar objects, as well as randomised order)
+   */
   this._view = function (brevity_thresholds = [5, 10]) {
     const oxford_comma = true
 
@@ -152,25 +155,8 @@ function Action (host, name) {
       brevity_level = "brief"
     }
 
-    /**
-     * Shuffles array in place.
-     * @param {Array} a items An array containing the items.
-     *
-     * TODO: Move somewhere reasonable
-     */
-    function shuffle(a) {
-      var j, x, i;
-      for (i = a.length - 1; i > 0; i--) {
-        j = Math.floor(Math.random() * (i + 1));
-        x = a[i];
-        a[i] = a[j];
-        a[j] = x;
-      }
-      return a;
-    }
-
     if (brevity_level != "detailed") {
-      siblings = shuffle(siblings)
+      siblings = helpers.shuffle(siblings)
     }
 
     if (brevity_level == "brief") {
@@ -289,6 +275,18 @@ function Action (host, name) {
   }
 
   this.render = function (str, query = null, responder = null) {
+
+    // Added to prevent crash upon:
+    // > create button
+    //   enter button
+    //   trigger use Beep
+    //   leave
+    //   use button (crash)
+    // REVIEW
+    if (!str) {
+      return null
+    }
+
     str = str.replace(/\-\-/g, '<br />').replace(/ \&\& /g, ' & ')
 
     if (str.indexOf('@(') < 0) { return str } // No Templating
@@ -324,34 +322,6 @@ function Action (host, name) {
     }
     return str
   }
-
-  // Errors
-
-  this.err_NOTARGET = function (params, type = 'visible') {
-    const target = this.remove_articles(params)
-    return `<p>There is no ${type} vessel "${target}". ${this.err_LEARN()}</p>`
-  }
-
-  this.err_NOPARAM = function () {
-    return `<p>The ${this.name} action requires more information. ${this.err_LEARN()}</p>`
-  }
-
-  this.err_NOVALID = function () {
-    return `<p>Invalid use of the "${this.name}" action. ${this.err_LEARN()}</p>`
-  }
-
-  this.err_UNKNOWN = function () {
-    return `<p>Unknown action, to see a list of available actions, type "<action data='learn'>learn</action>".</p>`
-  }
-
-  this.err_LEARN = function () {
-    return `For more details on how to ${this.name}, type "<action data='learn to ${this.name}'>learn to ${this.name}</action>".`
-  }
-
-  // Helpers
-
-  String.prototype.to_base = function () { return this.toLowerCase().replace(/ /g, '_').replace(/[^0-9a-z\+]/gi, '').trim() }
-  String.prototype.capitalize = function () { return this.charAt(0).toUpperCase() + this.slice(1).toLowerCase() }
 }
 
 module.exports = Action

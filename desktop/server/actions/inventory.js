@@ -1,6 +1,7 @@
 'use strict'
 
 const Action = require(`../core/action`)
+const errors = require('../core/errors')
 
 function Inventory (host) {
   Action.call(this, host, 'inventory')
@@ -13,7 +14,7 @@ function Inventory (host) {
     const children = this.host.children()
 
     if (children.length == 0) {
-      return 'You are not carrying any vessels.'
+      return errors.NOCHANGE('You are not carrying any vessels.')
     }
 
     let output = '<p>You are carrying '
