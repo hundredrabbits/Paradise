@@ -79,6 +79,9 @@ function Wildcard (host, input, query, responder) {
 
     // Transform
     concat: function (separator = '', ...items) {
+      if (items.length === 1 && items[0] instanceof Array) {
+        items = items[0]
+      }
       return items.reduce((a, b) => a.toString() + separator + b.toString())
     },
     lc: function (str) {
@@ -113,12 +116,18 @@ function Wildcard (host, input, query, responder) {
 
     // Arithmetic
     add: function (...items) {
+      if (items.length === 1 && items[0] instanceof Array) {
+        items = items[0]
+      }
       return items.reduce((a, b) => a + b, 0)
     },
     sub: function (a, b) {
       return a - b
     },
     mult: function (...items) {
+      if (items.length === 1 && items[0] instanceof Array) {
+        items = items[0]
+      }
       return items.reduce((a, b) => a * b, 1)
     },
     div: function (a, b) {
@@ -156,6 +165,9 @@ function Wildcard (host, input, query, responder) {
       }
     },
     and: function (...items) { // Return first non-nil input if all inputs are non-nil
+      if (items.length === 1 && items[0] instanceof Array) {
+        items = items[0]
+      }
       let first_non_nil = helpers.nil
       for (var id in items) {
         if (!items[id] || items[id] === helpers.nil) {
@@ -167,6 +179,9 @@ function Wildcard (host, input, query, responder) {
       return first_non_nil
     },
     or: function (...items) { // Return first non-null input
+      if (items.length === 1 && items[0] instanceof Array) {
+        items = items[0]
+      }
       for (var id in items) {
         if (!!items[id] && !(items[id] === helpers.nil)) {
           return items[id]
@@ -209,11 +224,10 @@ function Wildcard (host, input, query, responder) {
     },
     random: function (...items) {
       if (items.length === 1 && items[0] instanceof Array) {
-        return items[0][Math.floor((Math.random() * items[0].length))]
-      } else {
-        return items[Math.floor((Math.random() * items.length))]
+        items = items[0]
       }
-    }
+      return items[Math.floor((Math.random() * items.length))]
+    },
   }
   Lisp.call(this, input, lib)
 }
