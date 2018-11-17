@@ -12,16 +12,23 @@ function Wildcard (host, input, query, responder) {
   const lib = {
 
     // Sights
+
+    // Returns the current vessel's ID
     self: function () {
       return host.id
     },
+    // Returns the vessel's parent's ID
     parent: function () {
       return host.parent().id
     },
+    // Returns the current vessel's stem
     stem: function () {
       return host.stem().id
     },
+
     // TODO: usables  - takes list, returns list
+
+    // Returns the given vessel's siblings
     siblings: function (id = host.id) {
       if (typeof id === 'function') { id = id() }
       if (typeof id !== 'number') { return '(error:misformated function)' }
@@ -31,6 +38,7 @@ function Wildcard (host, input, query, responder) {
         return sibling.id
       })
     },
+    // Returns the given vessel's children
     children: function (id = host.id) {
       if (typeof id === 'function') { id = id() }
       if (typeof id !== 'number') { return '(error:misformated function)' }
@@ -43,6 +51,7 @@ function Wildcard (host, input, query, responder) {
 
     // TODO: clean up the id checks; put in helpers.js
 
+    // Is the given vessel a paradox?
     is_paradox: function (id) {
       if (typeof id === 'function') { id = id() }
       if (typeof id !== 'number') { return '(error:misformated function)' }
@@ -51,6 +60,7 @@ function Wildcard (host, input, query, responder) {
       return target.is_paradox() ? 'true' : helpers.nil
     },
 
+    // Is the given vessel a program?
     is_program: function (id) {
       if (typeof id === 'function') { id = id() }
       if (typeof id !== 'number') { return '(error:misformated function)' }
@@ -59,6 +69,7 @@ function Wildcard (host, input, query, responder) {
       return target.is_program() ? 'true' : helpers.nil
     },
 
+    // Is the given vessel usable?
     is_usable: function (id) {
       if (typeof id === 'function') { id = id() }
       if (typeof id !== 'number') { return '(error:misformated function)' }
@@ -67,6 +78,7 @@ function Wildcard (host, input, query, responder) {
       return target.usable() ? 'true' : helpers.nil
     },
 
+    // Is the given vessel passive?
     is_passive: function (id) {
       if (typeof id === 'function') { id = id() }
       if (typeof id !== 'number') { return '(error:misformated function)' }
@@ -80,78 +92,102 @@ function Wildcard (host, input, query, responder) {
     // TODO?: particle, name, type
 
     // Transform
+
+    // Concatenate strings
     concat: function (separator = '', ...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
       }
       return items.reduce((a, b) => a.toString() + separator + b.toString())
     },
+    // Lowercase
     lc: function (str) {
       return str ? `${str}`.toLowerCase() : ''
     },
+    // Sentence case
+    // TODO: Use helpers
     cc: function (str) {
       return str ? `${str.charAt(0).toUpperCase()}${str.slice(1).toLowerCase()}` : ''
     },
+    // Upper case
     uc: function (str) {
       return str ? `${str}`.toUpperCase() : ''
     },
+    // Title case
     tc: function (str) {
       return str ? str.toTitleCase() : ''
     },
+    // Format a string to be an action
     format: function (word, settings) {
       return settings ? `<action data='${settings}'>${word}</action>` : `<action>${word}</action>`
     },
 
     // Programming
+
+    // The query that caused this evaluation
+    // Use sparingly
     query: function () {
-      return query
+      return query ? query : helpers.nil
     },
+    // The vessel that caused this evaluation
     responder: function () {
-      return responder.id
+      return responder ? responder.id : helpers.nil
     },
+    // Whether this vessel's previous action succeded
     success: function () {
       return !host.data.last_error ? 'true' : helpers.nil
     },
+    // The error raised by this vessel's last action, or `nil` otherwise
     error: function () {
       return host.data.last_error ? host.data.last_error.to_a() : helpers.nil
     },
 
     // Arithmetic
+
+    // Add numbers together
     add: function (...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
       }
       return items.reduce((a, b) => a + b, 0)
     },
+    // Subtract b from a
     sub: function (a, b) {
       return a - b
     },
+    // Multiply numbers together
     mult: function (...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
       }
       return items.reduce((a, b) => a * b, 1)
     },
+    // Divide a by b
     div: function (a, b) {
       return a / b
     },
+    // Raise a to the power of b
     pow: function (a, b) {
       return a ** b
     },
+    // Increment a
     inc: function (a) {
       return a + 1
     },
+    // Decrement a
     dec: function (a) {
       return a - 1
     },
 
     // Logic
+    // Does a equal b? ('true' if yes, `nil` if no)
     equal: function (a, b) {
       if ((typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)) {
         return "true"
       }
       return helpers.nil
     },
+    // If `i` then `t` else `e`
     if: function (i, t, e) {
       let condition = false
       if (typeof i === 'function') {
@@ -166,7 +202,8 @@ function Wildcard (host, input, query, responder) {
         return e
       }
     },
-    and: function (...items) { // Return first non-nil input if all inputs are non-nil
+    // Return first non-nil input if all inputs are non-nil
+    and: function (...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
       }
@@ -180,7 +217,8 @@ function Wildcard (host, input, query, responder) {
       }
       return first_non_nil
     },
-    or: function (...items) { // Return first non-null input
+    // Return first non-nil input (or `nil` if there are none)
+    or: function (...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
       }
@@ -304,6 +342,8 @@ function Wildcard (host, input, query, responder) {
     // Main
 
     // TODO: Convert to Errors
+
+    // Return the data field `field` of the specified vessel by ID
     vessel: function (id, field) {
       if (typeof id === 'function') { id = id() }
       if (typeof id !== 'number') { return '(error:misformated function)' }
@@ -311,14 +351,16 @@ function Wildcard (host, input, query, responder) {
       if (!target) { return `(error:unknown vessel-${id})` }
       return field && target.data[field] ? target.data[field] : target
     },
+    // Return `true` if the vessel 'id' is carrying the target
     carry: function (id, target) {
       if (typeof id === 'function') { id = id() }
       const children = host.children()
       for (const i in children) {
-        if (children[i].is(target)) { return true }
+        if (children[i].is(target)) { return `true` }
       }
       return helpers.nil
     },
+    // Return a random number from a list or a sequence of inputs
     random: function (...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]

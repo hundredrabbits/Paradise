@@ -13,7 +13,7 @@ function Echo (host) {
       return errors.NOPARAM()
     }
 
-    const reaction_rendered = this.render(params, params, host)
+    const reaction_rendered = this.render(params, null, host) // query = null
     return `<p>${reaction_rendered}</p>`
   }
 }

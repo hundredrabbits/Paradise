@@ -2,10 +2,13 @@
 
 -   Build a chat routing vessel example.
 -   Complete the RPS example.
+    -   Logic to tell if you won?
 -   Expand the default world.
 -   Improve walkthrough, add checks for multi-line.
 -   Potentially add syntax highlighting for both Paradise Commands and WildcardLISP.
 -   Implement `learn`-based docs for wildcards.
+-   Potentially move wildcards into multiple files for better organisation
+-   Add `<code>` tag support to the desktop client for monospace text
 
 ### Time - in progress
 
