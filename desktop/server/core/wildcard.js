@@ -262,9 +262,28 @@ function Wildcard (host, input, query, responder) {
       return list.length
     },
 
-    // Generate a list of length `size`, made of increasing numbers starting at `startAt`.
-    range: function (size, startAt = 0) {
-      return [...Array(size).keys()].map(i => i + startAt)
+    // Generate a list.
+    // `range length` - list starts at zero and is made of `length` increasing numbers
+    // `range start end` - list ranges from `start` to `end` (inclusive at start, exclusive at end)
+    // eg.
+    // `range 5`   -> [0, 1, 2, 3, 4]
+    // `range 3 7` -> [3, 4, 5, 6]
+    range: function (a, b) {
+      let start, end
+      if (!!a && !b) { // If start is defined but not end
+        start = 0
+        end = a
+      } else if (!!a && !!b) {
+        start = a
+        end = b
+      } else {
+        // error
+      }
+      if (isNaN(parseInt(start)) || isNaN(parseInt(end)) || parseInt(start) > parseInt(end)) {
+        // error
+      }
+      const size = (end - start)
+      return [...Array(size).keys()].map(i => i + start)
     },
 
     // TODO: contains(list, thing)
