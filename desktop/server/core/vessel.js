@@ -50,7 +50,10 @@ function Vessel (data = basic) {
     try {
       return require(`../actions/${action}`)
     } catch (err) {
-      return require(`./action`)
+      if (err.code === 'MODULE_NOT_FOUND') {
+        return require(`./action`)
+      }
+      throw err
     }
   }
 

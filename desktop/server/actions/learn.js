@@ -21,7 +21,10 @@ function Learn (host) {
       const obj = new a()
       return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs} Type <action>learn</action> again to see the available actions.</p>`
     } catch (err) {
-      return this.default(target)
+      if (err.code === 'MODULE_NOT_FOUND') {
+        return this.default(target)
+      }
+      throw err
     }
   }
 
