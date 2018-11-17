@@ -15,10 +15,6 @@
 
 ### WildcardLISP
 
--   __High priority__ - Find out how to make lists
-    -   Implement some list-related stuff
-    -   Random from list
-    -   Various functions need to support lists
 -   Implement logarithms (?), and any other maths operators I can think of.
 -   Loops
 -   Functions
