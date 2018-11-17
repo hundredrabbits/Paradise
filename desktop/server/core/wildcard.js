@@ -104,10 +104,10 @@ function Wildcard (host, input, query, responder) {
 
     // Programming
     query: function () {
-      return query
+      return query ? query : helpers.nil
     },
     responder: function () {
-      return responder.id
+      return responder ? responder.id : helpers.nil
     },
     success: function () {
       return !host.data.last_error ? 'true' : helpers.nil
