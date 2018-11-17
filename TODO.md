@@ -17,6 +17,7 @@
 
 -   Implement logarithms (?), and any other maths operators I can think of.
 -   Loops
+    -   Like `map` combined with `range`
 -   Functions?
 -   Variables - already done?
 -   Add the rest of the (as-of-yet) untransferred wildcards.
