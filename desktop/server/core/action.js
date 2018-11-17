@@ -275,6 +275,18 @@ function Action (host, name) {
   }
 
   this.render = function (str, query = null, responder = null) {
+
+    // Added to prevent crash upon:
+    // > create button
+    //   enter button
+    //   trigger use Beep
+    //   leave
+    //   use button (crash)
+    // REVIEW
+    if (!str) {
+      return null
+    }
+
     str = str.replace(/\-\-/g, '<br />').replace(/ \&\& /g, ' & ')
 
     if (str.indexOf('@(') < 0) { return str } // No Templating
