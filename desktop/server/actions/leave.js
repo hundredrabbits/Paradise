@@ -11,7 +11,6 @@ function Leave (host) {
   this.operate = function (action, params) {
     const origin = this.host.parent().name()
 
-    // TODO: Transform these into Errors
     if (this.host.is_paradox()) {
       return errors.NOCHANGE(`<p>You cannot leave the <action>${this.host.name()}</action> paradox.</p>`)
     }

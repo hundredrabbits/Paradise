@@ -11,8 +11,7 @@ function Move (host) {
   this.operate = function (action, params) {
     if (!params) { return errors.NOPARAM() }
 
-    // TODO: Transform these into Errors
-    if (params.indexOf(' in ') < 0 && params.indexOf(' into ') < 0) { return `<p>You must use the words <action data='move the vessel1 into the vessel2'>in or into</action>.</p>` }
+    if (params.indexOf(' in ') < 0 && params.indexOf(' into ') < 0) { return errors.NOVALID(false, `You must use the words <action data='move the vessel1 into the vessel2'>in or into</action>.`) }
 
     const parts = params.replace(' into ', ' in ').split(' in ')
 

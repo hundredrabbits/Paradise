@@ -13,8 +13,8 @@ const errors = {
     return new Error('err_NOPARAM', `<p>The ${this.name} action requires more information. ${errors.LEARN()}</p>`)
   },
 
-  NOVALID: function() {
-    return new Error('err_NOVALID', `<p>Invalid use of the "${this.name}" action. ${errors.LEARN()}</p>`)
+  NOVALID: function(learn = true, help_text = '') {
+    return new Error('err_NOVALID', `<p>Invalid use of the "${this.name}" action. ${help_text ? help_text + ' ' : ''}${learn ? errors.LEARN() : ''}</p>`)
   },
 
   UNKNOWN: function(target = null, usage = 'action', learn = true) {
