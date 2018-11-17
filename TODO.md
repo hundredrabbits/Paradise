@@ -18,13 +18,11 @@
 -   Implement logarithms (?), and any other maths operators I can think of.
 -   Loops
 -   Functions
-    -   `mapcar`-like utility to apply function to each element in list
+    -   `mapcar`-like utility to apply function to each element in list - in progress
     -   Lambdas
 -   Variables
 -   Add the rest of the (as-of-yet) untransferred wildcards.
-    -   `__random` - implement as random from list of vessels
     -   `time`, `beat`, `pulse`
-    -   Obtain lists of vessels
 
 ### Save / Load
 
