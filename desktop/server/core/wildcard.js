@@ -19,9 +19,25 @@ function Wildcard (host, input, query, responder) {
     stem: function () {
       return host.stem().id
     },
-    // TODO: siblings - returns list
-    // TODO: children - returns list
     // TODO: usables  - takes list, returns list
+    siblings: function (id = host.id) {
+      if (typeof id === 'function') { id = id() }
+      if (typeof id !== 'number') { return '(error:misformated function)' }
+      const target = host.paradise.world[id]
+      if (!target) { return `(error:unknown vessel-${id})` }
+      return target.siblings().map(function (sibling) {
+        return sibling.id
+      })
+    },
+    children: function (id = host.id) {
+      if (typeof id === 'function') { id = id() }
+      if (typeof id !== 'number') { return '(error:misformated function)' }
+      const target = host.paradise.world[id]
+      if (!target) { return `(error:unknown vessel-${id})` }
+      return target.children().map(function (child) {
+        return child.id
+      })
+    },
 
     // TODO: clean up the id checks; put in helpers.js
 
