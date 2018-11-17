@@ -19,8 +19,6 @@
 -   Loops
     -   Like `map` combined with `range`
 -   Key-value data structures
--   Functions?
--   Variables - already done?
 -   Add the rest of the (as-of-yet) untransferred wildcards.
     -   `time`, `beat`, `pulse`
 -   Pretty print lists
