@@ -205,6 +205,7 @@ function Wildcard (host, input, query, responder) {
     // create clock & enter clock & trigger time The time is @( time ) & leave & time
 
     // List utilities
+    // TODO: Add error handling in the slightest because this is awful and hacky
 
     // Transform a sequence of inputs into a list
     list: function (...items) {
