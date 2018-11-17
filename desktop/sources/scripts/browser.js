@@ -101,7 +101,6 @@ function Browser (paradise) {
   this.export = function () {
     dialog.showSaveDialog({ title: 'Save World', filters: [{ name: 'Teapot Format', extensions: ['teapot'] }] }, (fileName) => {
       if (fileName === undefined) { return }
-      fileName = fileName.substr(-5, 5) != '.grid' ? fileName + '.grid' : fileName
       fs.writeFileSync(fileName, paradise.export())
     })
   }
