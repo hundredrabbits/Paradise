@@ -5,6 +5,8 @@ const clock = require('./clock')
 const helpers = require('./helpers')
 const errors = require('./errors')
 
+// TODO: Document all wildcards
+// TODO: Allow access of documentation inworld (eg. `learn about @siblings`)
 
 function Wildcard (host, input, query, responder) {
   const lib = {
