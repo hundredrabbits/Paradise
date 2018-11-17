@@ -260,6 +260,10 @@ function Wildcard (host, input, query, responder) {
       return list.length
     },
 
+    range: function (size, startAt = 0) {
+      return [...Array(size).keys()].map(i => i + startAt)
+    },
+
     // TODO: contains(list, thing)
     // TODO: a concat for lists - or maybe if all args are lists, it concats those, and if all args are strings, it concats those.
 
