@@ -205,42 +205,63 @@ function Wildcard (host, input, query, responder) {
     // create clock & enter clock & trigger time The time is @( time ) & leave & time
 
     // List utilities
-    // TODO: Add error handling in the slightest because this is awful and hacky
+    // TODO: Add proper error handling
 
     // Transform a sequence of inputs into a list
     list: function (...items) {
+      if (!items) {
+        return helpers.nil
+      }
       return items
     },
 
     // Push an element to the end of a list
     // REVIEW: Which order should element and list be in?
     push: function (element, list) {
+      if (!element || !list) {
+        return helpers.nil
+      }
       list.push(element)
       return list
     },
 
     // Pop an element from the end of a list
     pop: function (list) {
+      if (!list) {
+        return helpers.nil
+      }
       return list.pop()
     },
 
     // Get an element from a list
     // REVIEW: Which order should index and list be in?
     get: function (index, list) {
+      if (!index || !list) {
+        return helpers.nil
+      }
       return list[index]
     },
 
     // Set an element of a list
     // REVIEW: Which order should index, value, and list be in?
     set: function (index, value, list) {
+      if (!index || !value || !list) {
+        return helpers.nil
+      }
       list[index] = value
       return list
     },
 
     // The length of a list
     length: function (list) {
+      if (!list) {
+        return helpers.nil
+      }
       return list.length
     },
+
+    // TODO: contains(list, thing)
+    // TODO: a concat for lists - or maybe if all args are lists, it concats those, and if all args are strings, it concats those.
 
     // Iterate over list elements
     map: function (list, func) {
