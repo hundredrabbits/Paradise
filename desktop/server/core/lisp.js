@@ -28,6 +28,7 @@ function Lisp (input, lib) {
       return interpret(input[2], letContext)
     },
 
+    // Syntax: (lambda (arguments) (body))
     lambda: function (input, context) {
       return function () {
         const lambdaArguments = arguments

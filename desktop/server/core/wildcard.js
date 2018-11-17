@@ -264,21 +264,16 @@ function Wildcard (host, input, query, responder) {
     // TODO: a concat for lists - or maybe if all args are lists, it concats those, and if all args are strings, it concats those.
 
     // Iterate over list elements
+    // eg. `create chair & create table & echo @( map siblings ( lambda (id) ( vessel id name ) ) )`
     map: function (list, func) {
       if (typeof list === 'function') {
         list = list()
       }
-      console.log(list);
-      console.log(func);
 
       if (list instanceof Array) {
         return list.map(func)
       }
     },
-
-    // BUG:
-    // create chair & create table & echo @( map siblings ( lambda id ( vessel id name ) ) )
-    // fails
 
     // Main
 
