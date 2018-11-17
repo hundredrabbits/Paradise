@@ -192,7 +192,11 @@ function Wildcard (host, input, query, responder) {
       return helpers.nil
     },
     random: function (...items) {
-      return items[Math.floor((Math.random() * items.length))]
+      if (items.length === 1 && items[0] instanceof Array) {
+        return items[0][Math.floor((Math.random() * items[0].length))]
+      } else {
+        return items[Math.floor((Math.random() * items.length))]
+      }
     }
   }
   Lisp.call(this, input, lib)
