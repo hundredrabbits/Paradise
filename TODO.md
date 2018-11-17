@@ -5,7 +5,7 @@
 -   Expand the default world.
 -   Improve walkthrough, add checks for multi-line.
 -   Potentially add syntax highlighting for both Paradise Commands and WildcardLISP.
--   Implement `learn`-lased docs for wildcards.
+-   Implement `learn`-based docs for wildcards.
 
 ### Time - in progress
 

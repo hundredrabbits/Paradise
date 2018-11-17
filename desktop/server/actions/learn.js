@@ -4,6 +4,8 @@ const Action = require(`../core/action`)
 const errors = require('../core/errors')
 const helpers = require('../core/helpers');
 
+// TODO: Add wildcard docs here
+
 function Learn (host) {
   Action.call(this, host, 'learn')
 
