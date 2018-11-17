@@ -260,6 +260,7 @@ function Wildcard (host, input, query, responder) {
       return list.length
     },
 
+    // Generate a list of length `size`, made of increasing numbers starting at `startAt`.
     range: function (size, startAt = 0) {
       return [...Array(size).keys()].map(i => i + startAt)
     },
