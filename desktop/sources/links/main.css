@@ -32,6 +32,7 @@ body wr action:hover { cursor: pointer; }
 #reaction p { font-size: 18px;margin: 0px auto 30px;min-width: 240px; font-family: 'lora_regular' }
 #action { position: relative; }
 #action::before { content:"•"; position: absolute; margin-left: -15px; font-size:14px; line-height: 30px }
+code {font-family: 'input_mono_regular';font-weight: normal;}
 
 /* Animation */
 
