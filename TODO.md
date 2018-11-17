@@ -17,12 +17,11 @@
 
 -   Implement logarithms (?), and any other maths operators I can think of.
 -   Loops
--   Functions
-    -   `mapcar`-like utility to apply function to each element in list - in progress
-    -   Lambdas
--   Variables
+-   Functions?
+-   Variables - already done?
 -   Add the rest of the (as-of-yet) untransferred wildcards.
     -   `time`, `beat`, `pulse`
+-   Pretty print lists
 
 ### Save / Load
 
