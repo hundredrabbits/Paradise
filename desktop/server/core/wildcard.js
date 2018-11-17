@@ -206,6 +206,42 @@ function Wildcard (host, input, query, responder) {
 
     // List utilities
 
+    // Transform a sequence of inputs into a list
+    list: function (...items) {
+      return items
+    },
+
+    // Push an element to the end of a list
+    // REVIEW: Which order should element and list be in?
+    push: function (element, list) {
+      list.push(element)
+      return list
+    },
+
+    // Pop an element from the end of a list
+    pop: function (list) {
+      return list.pop()
+    },
+
+    // Get an element from a list
+    // REVIEW: Which order should index and list be in?
+    get: function (index, list) {
+      return list[index]
+    },
+
+    // Set an element of a list
+    // REVIEW: Which order should index, value, and list be in?
+    set: function (index, value, list) {
+      list[index] = value
+      return list
+    },
+
+    // The length of a list
+    length: function (list) {
+      return list.length
+    },
+
+    // Iterate over list elements
     map: function (list, func) {
       if (typeof list === 'function') {
         list = list()
