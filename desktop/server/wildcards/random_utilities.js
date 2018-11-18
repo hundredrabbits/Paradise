@@ -11,6 +11,10 @@ const _lib = {
     return items[Math.floor((Math.random() * items.length))]
   },
 
+  randomf: function (context) {
+    return Math.random()
+  }
+
 }
 
 function lib (_host, _input, _query, _responder) {
