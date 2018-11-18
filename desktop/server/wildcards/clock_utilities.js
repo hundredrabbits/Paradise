@@ -1,19 +1,19 @@
 'use strict'
 
-const clock = require('../core/clock');
 const helpers = require('../core/helpers')
 
-const _clock_utilities = {
+
+const _lib = {
 
   // Clock
   // BUG: keeps returning undefined
-  time:  function () {
+  time:  function (context) {
     return clock.time
   },
-  beat:  function () {
+  beat:  function (context) {
     return clock.beat
   },
-  pulse: function () {
+  pulse: function (context) {
     return clock.pulse
   },
 
@@ -21,8 +21,17 @@ const _clock_utilities = {
 
 }
 
-function clock_utilities (host, input, query, responder) {
-  return _clock_utilities
+function lib (host, input, query, responder) {
+  let out = {}
+  for (var name in _lib) {
+    const func = _lib[name]
+    const new_func = function () {
+      return func({host: host, input: input, query: query, responder: responder})
+    }
+    out[name] = new_func
+  }
+
+  return out
 }
 
-module.exports = clock_utilities
+module.exports = lib

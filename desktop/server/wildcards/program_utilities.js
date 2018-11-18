@@ -2,30 +2,39 @@
 
 const helpers = require('../core/helpers')
 
-const _program_utilities = {
+const _lib = {
 
   // The query that caused this evaluation
   // Use sparingly!
-  query: function () {
-    return query ? query : helpers.nil
+  query: function (context) {
+    return context.query ? context.query : helpers.nil
   },
   // The vessel that caused this evaluation
-  responder: function () {
-    return responder ? responder.id : helpers.nil
+  responder: function (context) {
+    return context.responder ? context.responder.id : helpers.nil
   },
   // Whether this vessel's previous action succeded
-  success: function () {
-    return !host.data.last_error ? 'true' : helpers.nil
+  success: function (context) {
+    return !context.host.data.last_error ? 'true' : helpers.nil
   },
   // The error raised by this vessel's last action, or `nil` otherwise
-  error: function () {
-    return host.data.last_error ? host.data.last_error.to_a() : helpers.nil
+  error: function (context) {
+    returncontext. host.data.last_error ? context.host.data.last_error.to_a() : helpers.nil
   },
 
 }
 
-function program_utilities (host, input, query, responder) {
-  return _program_utilities
+function lib (host, input, query, responder) {
+  let out = {}
+  for (var name in _lib) {
+    const func = _lib[name]
+    const new_func = function () {
+      return func({host: host, input: input, query: query, responder: responder})
+    }
+    out[name] = new_func
+  }
+
+  return out
 }
 
-module.exports = program_utilities
+module.exports = lib

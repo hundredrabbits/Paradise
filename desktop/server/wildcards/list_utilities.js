@@ -2,12 +2,12 @@
 
 const helpers = require('../core/helpers')
 
-const _list_utilities = {
+const _lib = {
 
   // TODO: Add proper error handling
 
   // Transform a sequence of inputs into a list
-  list: function (...items) {
+  list: function (context, ...items) {
     if (!items) {
       return helpers.nil
     }
@@ -16,7 +16,7 @@ const _list_utilities = {
 
   // Push an element to the end of a list
   // REVIEW: Which order should element and list be in?
-  push: function (element, list) {
+  push: function (context, element, list) {
     if (!element || !list) {
       return helpers.nil
     }
@@ -25,7 +25,7 @@ const _list_utilities = {
   },
 
   // Pop an element from the end of a list
-  pop: function (list) {
+  pop: function (context, list) {
     if (!list) {
       return helpers.nil
     }
@@ -34,7 +34,7 @@ const _list_utilities = {
 
   // Get an element from a list
   // REVIEW: Which order should index and list be in?
-  get: function (index, list) {
+  get: function (context, index, list) {
     if (!index || !list) {
       return helpers.nil
     }
@@ -43,7 +43,7 @@ const _list_utilities = {
 
   // Set an element of a list
   // REVIEW: Which order should index, value, and list be in?
-  set: function (index, value, list) {
+  set: function (context, index, value, list) {
     if (!index || !value || !list) {
       return helpers.nil
     }
@@ -52,11 +52,21 @@ const _list_utilities = {
   },
 
   // The length of a list
-  length: function (list) {
+  length: function (context, list) {
     if (!list) {
       return helpers.nil
     }
     return list.length
+  },
+
+  // TODO: add error checking
+  // Concatenate lists
+  concatl: function (context, ...items) {
+    out = []
+    for (var id in items) {
+      out.concat(items[id])
+    }
+    return out
   },
 
   // Generate a list.
@@ -65,7 +75,7 @@ const _list_utilities = {
   // eg.
   // `range 5`   -> [0, 1, 2, 3, 4]
   // `range 3 7` -> [3, 4, 5, 6]
-  range: function (a, b) {
+  range: function (context, a, b) {
     let start, end
     if (!!a && !b) { // If start is defined but not end
       start = 0
@@ -88,7 +98,7 @@ const _list_utilities = {
 
   // Iterate over list elements
   // eg. `create chair & create table & echo @( map siblings ( lambda (id) ( vessel id name ) ) )`
-  map: function (list, func) {
+  map: function (context, list, func) {
     if (typeof list === 'function') {
       list = list()
     }
@@ -100,8 +110,17 @@ const _list_utilities = {
 
 }
 
-function list_utilities (host, input, query, responder) {
-  return _list_utilities
+function lib (host, input, query, responder) {
+  let out = {}
+  for (var name in _lib) {
+    const func = _lib[name]
+    const new_func = function () {
+      return func({host: host, input: input, query: query, responder: responder})
+    }
+    out[name] = new_func
+  }
+
+  return out
 }
 
-module.exports = list_utilities
+module.exports = lib

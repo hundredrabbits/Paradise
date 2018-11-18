@@ -2,17 +2,17 @@
 
 const helpers = require('../core/helpers')
 
-const _logic = {
+const _lib = {
 
   // Does a equal b? ('true' if yes, `nil` if no)
-  equal: function (a, b) {
+  equal: function (context, a, b) {
     if ((typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)) {
       return "true"
     }
     return helpers.nil
   },
   // If `i` then `t` else `e`
-  if: function (i, t, e) {
+  if: function (context, i, t, e) {
     let condition = false
     if (typeof i === 'function') {
       let _i = i()
@@ -27,7 +27,7 @@ const _logic = {
     }
   },
   // Return first non-nil input if all inputs are non-nil
-  and: function (...items) {
+  and: function (context, ...items) {
     if (items.length === 1 && items[0] instanceof Array) {
       items = items[0]
     }
@@ -42,7 +42,7 @@ const _logic = {
     return first_non_nil
   },
   // Return first non-nil input (or `nil` if there are none)
-  or: function (...items) {
+  or: function (context, ...items) {
     if (items.length === 1 && items[0] instanceof Array) {
       items = items[0]
     }
@@ -56,8 +56,17 @@ const _logic = {
 
 }
 
-function logic (host, input, query, responder) {
-  return _logic
+function lib (host, input, query, responder) {
+  let out = {}
+  for (var name in _lib) {
+    const func = _lib[name]
+    const new_func = function () {
+      return func({host: host, input: input, query: query, responder: responder})
+    }
+    out[name] = new_func
+  }
+
+  return out
 }
 
-module.exports = logic
+module.exports = lib
