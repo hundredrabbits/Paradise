@@ -20,7 +20,7 @@ const _lib = {
   // The error raised by this vessel's last action, or `nil` otherwise
   error: function (context) {
     return context.host.data.last_error ? context.host.data.last_error.to_a() : helpers.nil
-  },
+  }
 
 }
 
@@ -30,7 +30,7 @@ function lib (_host, _input, _query, _responder) {
     const func = _lib[name]
     const new_func = function (...given) {
       let args = []
-      args.push({host: _host, input: _input, query: _query, responder: _responder})
+      args.push({ host: _host, input: _input, query: _query, responder: _responder })
       args.push.apply(args, given)
       return func.apply(null, args)
     }

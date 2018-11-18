@@ -17,7 +17,7 @@ function Move (host) {
 
     const target_a = this.find(parts[0], this.host.siblings())
     let target_b
-    if (parts[1] === "itself") {
+    if (parts[1] === 'itself') {
       target_b = target_a
     } else {
       target_b = this.find(parts[1], this.host.siblings())

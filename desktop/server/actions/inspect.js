@@ -25,10 +25,10 @@ function Inspect (host) {
   }
 
   this.make_location = function (target = this.host.parent()) {
-    if (target.parent().is_paradox()) {
+    if (target.parent().isParadox()) {
       return `The ${target.name()} ${target.type()}, located in the ${target.parent().name()} ${target.parent().type()} paradox, was created by ${target.owner()}.`
     }
-    if (target.is_paradox()) {
+    if (target.isParadox()) {
       return `The ${target.name()} ${target.type()} paradox was created by ${target.owner()}.`
     }
     return `The ${target.name()} ${target.type()}, located in the ${target.parent().name()} ${target.parent().type()}, part of the ${target.stem().name()} constellation, was created by ${target.owner()}.`

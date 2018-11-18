@@ -10,11 +10,11 @@ const helpers = require('../core/helpers')
  * @param obj2
  * @returns obj3 a new object based on obj1 and obj2
  */
-function merge_options(obj1,obj2){
-    var obj3 = {};
-    for (var attrname in obj1) { obj3[attrname] = obj1[attrname]; }
-    for (var attrname in obj2) { obj3[attrname] = obj2[attrname]; }
-    return obj3;
+function merge_options (obj1, obj2) {
+  var obj3 = {}
+  for (var attrname in obj1) { obj3[attrname] = obj1[attrname] }
+  for (var attrname in obj2) { obj3[attrname] = obj2[attrname] }
+  return obj3
 }
 
 const _groups = {
@@ -27,7 +27,7 @@ const _groups = {
   'list_utilities': 'List wildcards. Used to perform operations on lists.',
   'program_utilities': 'Program utilities. Used to interact with the current program.',
   'random_utilities': 'Random utilities. Used to generate and use random numbers.',
-  'clock_utilities': 'Clock utilities. Used to find and use the current time.',
+  'clock_utilities': 'Clock utilities. Used to find and use the current time.'
 }
 
 let groups = []

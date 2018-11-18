@@ -6,7 +6,7 @@ const errors = require('../core/errors')
 function Inventory (host) {
   Action.call(this, host, 'inventory')
 
-  this.docs = "View the contents of your inventory."
+  this.docs = 'View the contents of your inventory.'
 
   this.operate = function () {
     const oxford_comma = true

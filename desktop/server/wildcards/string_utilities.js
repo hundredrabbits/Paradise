@@ -32,7 +32,7 @@ const _lib = {
   // Format a string to be an action
   format: function (context, word, settings) {
     return settings ? `<action data='${settings}'>${word}</action>` : `<action>${word}</action>`
-  },
+  }
 
 }
 
@@ -42,7 +42,7 @@ function lib (_host, _input, _query, _responder) {
     const func = _lib[name]
     const new_func = function (...given) {
       let args = []
-      args.push({host: _host, input: _input, query: _query, responder: _responder})
+      args.push({ host: _host, input: _input, query: _query, responder: _responder })
       args.push.apply(args, given)
       return func.apply(null, args)
     }
