@@ -3,6 +3,8 @@
 const Error = require('./error');
 const pluralize = require('pluralize');
 
+// TODO: Add errors for WildcardLISP
+
 const errors = {
   NOTARGET: function(params, type = 'visible') {
     const target = this.remove_articles(params)
