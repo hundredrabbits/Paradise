@@ -10,42 +10,56 @@ function Learn (host) {
   Action.call(this, host, 'learn')
 
   this.knowledge = {
+    actions: 'todo call actions_general() to generate this',
     paradoxes: 'There are two types of <b>Paradoxes</b> in Paradise. The first kind, is vessels folded onto themselves, existing within their own space. The second type, is vessels organized in a loop, where there are no real beginning to a space, a deeply nested vessel might become the parent of a first type paradox and create this kind of shape.',
     passive: "The <b>Passive</b> <action data='learn to trigger'>trigger</action>, is used to add dynamic content to the browser.",
     lisp: "WildcardLISP is a variant of the LISP programming language. It is based around nested brackets and <action data='learn about wildcards'>wildcards</action>, and can be embedded in vessel programs and triggers, as well as eveluated using echo. To embed WildcardLISP, use the following syntax: <code>@(lisp goes here)</code>",
-    wildcards: "Wildcards are the equivalent of actions for <action data='learn about lisp'>WildcardLISP</action>. They follow the format <code>@(wildcard inputs)</code>."
+    wildcards: "Wildcards are the equivalent of actions for <action data='learn about lisp'>WildcardLISP</action>. They follow the format <code>@(wildcard inputs)</code>.<br />There are several groups of wildcards:<br />[insert groups here]",
   }
 
   this.operate = function (action, params) {
     const parts = params.split(' ')
-    const target = parts[parts.length - 1].toLowerCase()
-
-    try {
-      const a = require(`./${target}`)
-      const obj = new a()
-      return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs} Type <action>learn</action> again to see the available actions.</p>`
-    } catch (err) {
-      if (err.code === 'MODULE_NOT_FOUND') {
-        return this.default(target)
+    const method = parts[0]
+    if (method == "to") {
+      const target = parts[parts.length - 1].toLowerCase()
+      try {
+        const a = require(`./${target}`)
+        const obj = new a()
+        return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs} Type <action>learn</action> again to see the available actions.</p>`
+      } catch (err) {
+        if (err.code === 'MODULE_NOT_FOUND') {
+          return this.default(target, 'action')
+        }
+        throw err
       }
-      throw err
-    }
-  }
+    } else if (method == "about") {
+      const target = parts[parts.length - 1].toLowerCase()
+      if (false) { // In wildcard docs
 
-  this.default = function (key) {
-    if (key) {
-      if (this.knowledge[key]) {
-        return `<p>${this.knowledge[key]}</p>`
       } else {
-        return errors.UNKNOWN(key, 'term', false)
+        return this.default(target, 'term')
       }
     } else {
-      return this.general()
+      return this.default(null, 'term')
     }
   }
 
-  this.general = function () {
-    const docs = this.documentation()
+  this.default = function (key, method = 'action') {
+    if (key) {
+      if (method == 'term' && this.knowledge[key]) {
+        return `<p>${this.knowledge[key]}</p>`
+      } else {
+        return errors.UNKNOWN(key, method, false)
+      }
+    } else if (method == 'action') {
+      return this.actions_general()
+    } else {
+      return 'insert some docs for learn here'
+    }
+  }
+
+  this.actions_general = function () {
+    const docs = this.action_documentation()
     const count = Object.keys(docs).length
 
     let index = 2
@@ -58,7 +72,7 @@ function Learn (host) {
     return `<img src='media/graphics/default.png'/><p>Which action would you like to <action data='learn'>learn</action>? ${_list}</p>`
   }
 
-  this.documentation = function () {
+  this.action_documentation = function () {
     const actions = {}
 
     const _actions = {
