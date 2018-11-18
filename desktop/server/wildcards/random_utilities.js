@@ -2,7 +2,7 @@
 
 const helpers = require('../core/helpers')
 
-const random_utilities = {
+const _random_utilities = {
 
   random: function (...items) {
     if (items.length === 1 && items[0] instanceof Array) {
@@ -11,6 +11,10 @@ const random_utilities = {
     return items[Math.floor((Math.random() * items.length))]
   },
 
+}
+
+function random_utilities (host, input, query, responder) {
+  return _random_utilities
 }
 
 module.exports = random_utilities

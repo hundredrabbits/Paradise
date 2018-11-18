@@ -2,7 +2,7 @@
 
 const helpers = require('../core/helpers')
 
-const program_utilities = {
+const _program_utilities = {
 
   // The query that caused this evaluation
   // Use sparingly!
@@ -22,6 +22,10 @@ const program_utilities = {
     return host.data.last_error ? host.data.last_error.to_a() : helpers.nil
   },
 
+}
+
+function program_utilities (host, input, query, responder) {
+  return _program_utilities
 }
 
 module.exports = program_utilities

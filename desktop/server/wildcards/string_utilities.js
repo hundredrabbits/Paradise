@@ -2,7 +2,7 @@
 
 const helpers = require('../core/helpers')
 
-const string_utilities = {
+const _string_utilities = {
 
   // Concatenate strings
   concat: function (separator = '', ...items) {
@@ -33,6 +33,10 @@ const string_utilities = {
     return settings ? `<action data='${settings}'>${word}</action>` : `<action>${word}</action>`
   },
 
+}
+
+function string_utilities (host, input, query, responder) {
+  return _string_utilities
 }
 
 module.exports = string_utilities

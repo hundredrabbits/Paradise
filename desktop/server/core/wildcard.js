@@ -372,7 +372,8 @@ function Wildcard (host, input, query, responder) {
   //   },
   // }
 
-  Lisp.call(this, input, lib)
+  // BUG: Pass (host, input, query, responder) to all wildcards
+  Lisp.call(this, input, lib(host, input, query, responder))
 }
 
 module.exports = Wildcard

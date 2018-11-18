@@ -2,7 +2,7 @@
 
 const helpers = require('../core/helpers')
 
-const mathematics = {
+const _mathematics = {
 
   // Add numbers together
   add: function (...items) {
@@ -39,6 +39,10 @@ const mathematics = {
     return a - 1
   },
 
+}
+
+function mathematics (host, input, query, responder) {
+  return _mathematics
 }
 
 module.exports = mathematics

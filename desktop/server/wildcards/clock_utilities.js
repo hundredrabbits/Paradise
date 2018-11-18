@@ -3,7 +3,7 @@
 const clock = require('../core/clock');
 const helpers = require('../core/helpers')
 
-const clock_utilities = {
+const _clock_utilities = {
 
   // Clock
   // BUG: keeps returning undefined
@@ -19,7 +19,10 @@ const clock_utilities = {
 
   // create clock & enter clock & trigger time The time is @( time ) & leave & time
 
+}
 
+function clock_utilities (host, input, query, responder) {
+  return _clock_utilities
 }
 
 module.exports = clock_utilities

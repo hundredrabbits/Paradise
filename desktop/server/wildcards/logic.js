@@ -2,7 +2,7 @@
 
 const helpers = require('../core/helpers')
 
-const logic = {
+const _logic = {
 
   // Does a equal b? ('true' if yes, `nil` if no)
   equal: function (a, b) {
@@ -54,6 +54,10 @@ const logic = {
     return helpers.nil
   },
 
+}
+
+function logic (host, input, query, responder) {
+  return _logic
 }
 
 module.exports = logic

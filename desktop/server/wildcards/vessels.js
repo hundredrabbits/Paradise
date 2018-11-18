@@ -2,7 +2,7 @@
 
 const helpers = require('../core/helpers')
 
-const vessels = {
+const _vessels = {
 
   // Return the data field `field` of the specified vessel by ID
   vessel: function (id, field) {
@@ -96,6 +96,10 @@ const vessels = {
     return target.passive() ? 'true' : helpers.nil
   },
 
+}
+
+function vessels (host, input, query, responder) {
+  return _vessels
 }
 
 module.exports = vessels

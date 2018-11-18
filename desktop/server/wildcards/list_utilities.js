@@ -2,7 +2,7 @@
 
 const helpers = require('../core/helpers')
 
-const list_utilities = {
+const _list_utilities = {
 
   // TODO: Add proper error handling
 
@@ -98,6 +98,10 @@ const list_utilities = {
     }
   },
 
+}
+
+function list_utilities (host, input, query, responder) {
+  return _list_utilities
 }
 
 module.exports = list_utilities
