@@ -19,7 +19,7 @@ const _lib = {
   },
   // The error raised by this vessel's last action, or `nil` otherwise
   error: function (context) {
-    returncontext. host.data.last_error ? context.host.data.last_error.to_a() : helpers.nil
+    return context.host.data.last_error ? context.host.data.last_error.to_a() : helpers.nil
   },
 
 }

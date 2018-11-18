@@ -62,7 +62,7 @@ const _lib = {
   // TODO: add error checking
   // Concatenate lists
   concatl: function (context, ...items) {
-    out = []
+    let out = []
     for (var id in items) {
       out.concat(items[id])
     }

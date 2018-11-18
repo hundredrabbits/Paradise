@@ -11,9 +11,9 @@ const _lib = {
     }
     return items.reduce((a, b) => a + b, 0)
   },
-  // Subtract b from a
+  // Subtract a from b
   sub: function (context, a, b) {
-    return a - b
+    return b - a
   },
   // Multiply numbers together
   mult: function (context, ...items) {

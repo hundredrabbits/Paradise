@@ -5,7 +5,6 @@ const helpers = require('../core/helpers')
 
 const _lib = {
 
-  // Clock
   // BUG: keeps returning undefined
   time:  function (context) {
     return clock.time

@@ -4,7 +4,6 @@ const helpers = require('../core/helpers')
 
 const _lib = {
 
-  // BUG: Not working at all
   // Return the data field `field` of the specified vessel by ID
   vessel: function (context, id, field) {
     if (typeof id === 'function') { id = id() }
