@@ -13,7 +13,7 @@ const _lib = {
 
   randomf: function (context) {
     return Math.random()
-  }
+  },
 
 }
 
