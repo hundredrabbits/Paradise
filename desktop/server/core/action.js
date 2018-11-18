@@ -112,10 +112,10 @@ function Action (host, name) {
   // Formatters
 
   this._header = function () {
-    if (this.host.is_paradox()) {
+    if (this.host.isParadox()) {
       return `You are the <action data='learn about paradoxes'>paradox</action> of ${this.host.particle()} ${this.host.name()}.`
     }
-    if (this.host.parent().is_paradox()) {
+    if (this.host.parent().isParadox()) {
       return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} ${this.host.parent().name()}.`
     }
     return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} <action data='leave'>${this.host.parent().name()}</action>.`
@@ -227,11 +227,11 @@ function Action (host, name) {
   this._tips = function () {
     const a = []
     // Paradox
-    if (this.host.is_paradox()) {
+    if (this.host.isParadox()) {
       a.push('Your vessel is a paradox, you may not leave.')
     }
     // Paradox
-    if (this.host.parent().is_paradox()) {
+    if (this.host.parent().isParadox()) {
       a.push(`The ${this.host.parent().name()} is a paradox, you may not leave.`)
     }
     // Empty
