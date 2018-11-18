@@ -2,6 +2,7 @@
 
 -   Build a chat routing vessel example.
 -   Complete the RPS example.
+    -   Logic to tell if you won?
 -   Expand the default world.
 -   Improve walkthrough, add checks for multi-line.
 -   Potentially add syntax highlighting for both Paradise Commands and WildcardLISP.
