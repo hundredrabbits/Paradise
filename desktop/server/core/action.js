@@ -112,10 +112,10 @@ function Action (host, name) {
   // Formatters
 
   this._header = function () {
-    if (this.host.is_paradox()) {
+    if (this.host.isParadox()) {
       return `You are the <action data='learn about paradoxes'>paradox</action> of ${this.host.particle()} ${this.host.name()}.`
     }
-    if (this.host.parent().is_paradox()) {
+    if (this.host.parent().isParadox()) {
       return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} ${this.host.parent().name()}.`
     }
     return `You are ${this.host.particle()} <action data='warp to ${this.host.id}'>${this.host.name()}</action> in ${this.host.parent().particle()} <action data='leave'>${this.host.parent().name()}</action>.`
@@ -148,21 +148,21 @@ function Action (host, name) {
     if (siblings.length == 0) {
       return
     } else if (siblings.length < brevity_thresholds[0]) {
-      brevity_level = "detailed"
+      brevity_level = 'detailed'
     } else if (siblings.length < brevity_thresholds[1]) {
-      brevity_level = "glance"
+      brevity_level = 'glance'
     } else {
-      brevity_level = "brief"
+      brevity_level = 'brief'
     }
 
-    if (brevity_level != "detailed") {
+    if (brevity_level != 'detailed') {
       siblings = helpers.shuffle(siblings)
     }
 
-    if (brevity_level == "brief") {
+    if (brevity_level == 'brief') {
       let obj_types = {}
       for (const id in siblings) {
-        if (!!obj_types[siblings[id].data.name]) {
+        if (obj_types[siblings[id].data.name]) {
           obj_types[siblings[id].data.name] += 1
         } else {
           obj_types[siblings[id].data.name] = 1
@@ -170,7 +170,7 @@ function Action (host, name) {
       }
       for (var obj in obj_types) {
         if (obj_types[obj] == 1) {
-          text_pieces.push("aeiou".indexOf(obj.substr(0, 1).toLowerCase()) > -1 ? `an ${obj}` : `a ${obj}`)
+          text_pieces.push('aeiou'.indexOf(obj.substr(0, 1).toLowerCase()) > -1 ? `an ${obj}` : `a ${obj}`)
         } else {
           text_pieces.push(pluralize(obj, obj_types[obj], true)) // eg. 5 saucers
         }
@@ -227,11 +227,11 @@ function Action (host, name) {
   this._tips = function () {
     const a = []
     // Paradox
-    if (this.host.is_paradox()) {
+    if (this.host.isParadox()) {
       a.push('Your vessel is a paradox, you may not leave.')
     }
     // Paradox
-    if (this.host.parent().is_paradox()) {
+    if (this.host.parent().isParadox()) {
       a.push(`The ${this.host.parent().name()} is a paradox, you may not leave.`)
     }
     // Empty
@@ -275,6 +275,8 @@ function Action (host, name) {
   }
 
   this.render = function (str, query = null, responder = null) {
+    const isContained = (str.match(/\(/g) || []).length === (str.match(/\)/g) || []).length
+    if (!isContained) { return str }
 
     // Added to prevent crash upon:
     // > create button

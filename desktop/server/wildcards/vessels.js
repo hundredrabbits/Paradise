@@ -64,12 +64,12 @@ const _lib = {
   // TODO: clean up the id checks; put in helpers.js
 
   // Is the given vessel a paradox?
-  is_paradox: function (context, id) {
+  isParadox: function (context, id) {
     if (typeof id === 'function') { id = id() }
     if (typeof id !== 'number') { return '(error:misformated function)' }
     const target = context.host.paradise.world[id]
     if (!target) { return `(error:unknown vessel-${id})` }
-    return target.is_paradox() ? 'true' : helpers.nil
+    return target.isParadox() ? 'true' : helpers.nil
   },
 
   // Is the given vessel a program?
@@ -97,7 +97,7 @@ const _lib = {
     const target = context.host.paradise.world[id]
     if (!target) { return `(error:unknown vessel-${id})` }
     return target.passive() ? 'true' : helpers.nil
-  },
+  }
 
 }
 
@@ -107,7 +107,7 @@ function lib (_host, _input, _query, _responder) {
     const func = _lib[name]
     const new_func = function (...given) {
       let args = []
-      args.push({host: _host, input: _input, query: _query, responder: _responder})
+      args.push({ host: _host, input: _input, query: _query, responder: _responder })
       args.push.apply(args, given)
       return func.apply(null, args)
     }

@@ -7,7 +7,7 @@ const _lib = {
   // Does a equal b? ('true' if yes, `nil` if no)
   equal: function (context, a, b) {
     if ((typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)) {
-      return "true"
+      return 'true'
     }
     return helpers.nil
   },
@@ -16,9 +16,9 @@ const _lib = {
     let condition = false
     if (typeof i === 'function') {
       let _i = i()
-      condition = (!_i || (_i === helpers.nil) ? false : true)
+      condition = (!(!_i || (_i === helpers.nil)))
     } else {
-      condition = (!i || (i === helpers.nil) ? false : true)
+      condition = (!(!i || (i === helpers.nil)))
     }
     if (condition) {
       return t
@@ -52,7 +52,7 @@ const _lib = {
       }
     }
     return helpers.nil
-  },
+  }
 
 }
 
@@ -62,7 +62,7 @@ function lib (_host, _input, _query, _responder) {
     const func = _lib[name]
     const new_func = function (...given) {
       let args = []
-      args.push({host: _host, input: _input, query: _query, responder: _responder})
+      args.push({ host: _host, input: _input, query: _query, responder: _responder })
       args.push.apply(args, given)
       return func.apply(null, args)
     }
