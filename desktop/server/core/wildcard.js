@@ -148,7 +148,7 @@ function Wildcard (host, input, query, responder) {
     // Logic
     equal: function (a, b) {
       if ((typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)) {
-        return "true"
+        return 'true'
       }
       return helpers.nil
     },
@@ -156,9 +156,9 @@ function Wildcard (host, input, query, responder) {
       let condition = false
       if (typeof i === 'function') {
         let _i = i()
-        condition = (!_i || (_i === helpers.nil) ? false : true)
+        condition = (!(!_i || (_i === helpers.nil)))
       } else {
-        condition = (!i || (i === helpers.nil) ? false : true)
+        condition = (!(!i || (i === helpers.nil)))
       }
       if (condition) {
         return t
@@ -324,7 +324,7 @@ function Wildcard (host, input, query, responder) {
         items = items[0]
       }
       return items[Math.floor((Math.random() * items.length))]
-    },
+    }
   }
   Lisp.call(this, input, lib)
 }

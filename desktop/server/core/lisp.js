@@ -1,6 +1,6 @@
 'use strict'
 
-const helpers = require('./helpers');
+const helpers = require('./helpers')
 
 function Lisp (input, lib) {
   this.input = input
@@ -97,12 +97,18 @@ function Lisp (input, lib) {
     return input.split('"').map(function (x, i) { return i % 2 === 0 ? x.replace(/\(/g, ' ( ').replace(/\)/g, ' ) ') : x.replace(/ /g, '!whitespace!') }).join('"').trim().split(/\s+/).map(function (x) { return x.replace(/!whitespace!/g, ' ') })
   }
 
+  this.validate = function (input) {
+    const open = (input.match(/\(/g) || []).length
+    const close = (input.match(/\)/g) || []).length
+    return open === close ? true : null
+  }
+
   this.parse = function (input) {
     return parenthesize(tokenize(input))
   }
 
   this.toString = function () {
-    return `${interpret(this.parse(this.input))}`
+    return this.validate(this.input) ? `${interpret(this.parse(this.input))}` : this.input
   }
 }
 

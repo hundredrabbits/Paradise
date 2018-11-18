@@ -2,7 +2,7 @@
 
 const Action = require(`../core/action`)
 const errors = require('../core/errors')
-const helpers = require('../core/helpers');
+const helpers = require('../core/helpers')
 
 // TODO: Add wildcard docs here
 
