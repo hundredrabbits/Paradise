@@ -5,16 +5,16 @@ const Vessel = require(`../core/vessel`)
 const errors = require('../core/errors')
 
 const reserved_names = [
-  "some",
-  "any",
-  "itself",
-  "a",
-  "an",
-  "the",
-  "of",
-  "some",
-  "one",
-  "two"
+  'some',
+  'any',
+  'itself',
+  'a',
+  'an',
+  'the',
+  'of',
+  'some',
+  'one',
+  'two'
 ]
 
 function Create (host) {

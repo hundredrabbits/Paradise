@@ -84,7 +84,7 @@ function Vessel (data = basic) {
     let v = this.parent()
     let i = 0
     while (i < 50) {
-      if (v.is_paradox()) { return false }
+      if (v.isParadox()) { return false }
       if (known.indexOf(v.id) > -1) { return true }
       known.push(v.id)
       v = v.parent()
@@ -99,7 +99,7 @@ function Vessel (data = basic) {
     let v = this.parent()
     let i = 0
     while (i < 50) {
-      if (v.parent().is_paradox() || known.indexOf(v.id) > -1) { return v }
+      if (v.parent().isParadox() || known.indexOf(v.id) > -1) { return v }
       i += 1
       known.push(v.id)
     }
@@ -109,7 +109,7 @@ function Vessel (data = basic) {
   // Helpers
 
   this.is = function (str) {
-    const parts = str.split(' ')
+    const parts = `${str}`.split(' ')
     const last_word = parts[parts.length - 1].toLowerCase()
 
     if (last_word == this.data.name) {
@@ -123,7 +123,7 @@ function Vessel (data = basic) {
     const parent = this.parent()
     for (const id in this.paradise.world) {
       const vessel = this.paradise.world[id]
-      if (parent.is_paradox() && vessel.id == parent.id) { continue } // Don' show paradoxes
+      if (parent.isParadox() && vessel.id == parent.id) { continue } // Don' show paradoxes
       if (vessel.parent().id == this.parent().id && vessel.id != this.id) {
         a.push(vessel)
       }
@@ -148,7 +148,7 @@ function Vessel (data = basic) {
 
   // Checks
 
-  this.is_paradox = function () {
+  this.isParadox = function () {
     return this.parent().id == this.id
   }
 
