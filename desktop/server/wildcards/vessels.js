@@ -4,6 +4,7 @@ const helpers = require('../core/helpers')
 
 const _lib = {
 
+  // BUG: Not working at all
   // Return the data field `field` of the specified vessel by ID
   vessel: function (context, id, field) {
     if (typeof id === 'function') { id = id() }
@@ -39,7 +40,8 @@ const _lib = {
   // TODO: usables  - takes list, returns list
 
   // Returns the given vessel's siblings
-  siblings: function (context, id = host.id) {
+  siblings: function (context, id) {
+    if (!id) { id = context.host.id }
     if (typeof id === 'function') { id = id() }
     if (typeof id !== 'number') { return '(error:misformated function)' }
     const target = context.host.paradise.world[id]
@@ -49,7 +51,8 @@ const _lib = {
     })
   },
   // Returns the given vessel's children
-  children: function (context, id = host.id) {
+  children: function (context, id) {
+    if (!id) { id = context.host.id }
     if (typeof id === 'function') { id = id() }
     if (typeof id !== 'number') { return '(error:misformated function)' }
     const target = context.host.paradise.world[id]
@@ -99,12 +102,15 @@ const _lib = {
 
 }
 
-function lib (host, input, query, responder) {
+function lib (_host, _input, _query, _responder) {
   let out = {}
   for (var name in _lib) {
     const func = _lib[name]
-    const new_func = function () {
-      return func({host: host, input: input, query: query, responder: responder})
+    const new_func = function (...given) {
+      let args = []
+      args.push({host: _host, input: _input, query: _query, responder: _responder})
+      args.push.apply(args, given)
+      return func.apply(null, args)
     }
     out[name] = new_func
   }
