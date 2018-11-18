@@ -108,6 +108,7 @@ function Vessel (data = basic) {
 
   // Helpers
 
+  // BUG: Causes crash on str.split (apparently it isn't a function)
   this.is = function (str) {
     const parts = str.split(' ')
     const last_word = parts[parts.length - 1].toLowerCase()
