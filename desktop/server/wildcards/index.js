@@ -27,7 +27,7 @@ const _groups = {
   'list_utilities': 'List wildcards. Used to perform operations on lists.',
   'program_utilities': 'Program utilities. Used to interact with the current program.',
   'random_utilities': 'Random utilities. Used to generate and use random numbers.',
-  'clock_utilities': 'Clock utilities. Used to find and use the current time.'
+  'clock_utilities': 'Clock utilities. Used to find and use the current time.',
 }
 
 let groups = []
@@ -37,13 +37,24 @@ for (var name in _groups) {
   groups.push(group)
 }
 
-function lib (host, input, query, responder) {
-  let _lib = {}
-  for (var id in groups) {
-    const group = groups[id]
-    _lib = merge_options(_lib, group(host, input, query, responder))
+
+const exp = {
+  lib: function (host, input, query, responder) {
+    let _lib = {}
+    for (var id in groups) {
+      const group = groups[id]
+      _lib = merge_options(_lib, group.lib(host, input, query, responder))
+    }
+    return _lib
+  },
+
+  descriptions: function () {
+    let _desc = {}
+    for (var id in groups) {
+      const group = groups[id]
+      _desc = merge_options(_desc, group.descriptions())
+    }
   }
-  return _lib
 }
 
-module.exports = lib
+module.exports = exp
