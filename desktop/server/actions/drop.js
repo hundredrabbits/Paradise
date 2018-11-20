@@ -9,11 +9,11 @@ function Drop (host) {
   this.docs = 'Move a child vessel into the parent vessel.'
 
   this.operate = function (action, params) {
-    if (!params) { return errors.NOPARAM() }
+    if (!params) { return errors.NOPARAM(action) }
 
     const target = this.find(params, this.host.children())
 
-    if (!target) { return errors.NOTARGET(params, 'child vessel') }
+    if (!target) { return errors.NOTARGET(params, 'child vessel', action) }
 
     target.move(this.host.parent())
 

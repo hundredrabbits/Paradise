@@ -10,7 +10,7 @@ function Cast (host) {
   this.docs = 'Move a child vessel into the parent vessel.'
 
   this.operate = function (action, params) {
-    if (!params) { return errors.NOPARAM() }
+    if (!params) { return errors.NOPARAM(action) }
 
     const parts = this.remove_articles(params).trim().split(' ')
     const spell_name = `${parts[0]} ${parts[1]}`

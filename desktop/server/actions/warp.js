@@ -9,7 +9,7 @@ function Warp (host) {
   this.docs = "Enter a distant vessel by either its name, or its warp id. The vessel must be visible. Use <action data='warp to'>warp to</action> to move at a vessel's parent location."
 
   this.operate = function (action, params) {
-    if (!params) { return errors.NOPARAM() }
+    if (!params) { return errors.NOPARAM(action) }
 
     const parts = this.remove_articles(params).split(' ')
     const relation = parts[0]

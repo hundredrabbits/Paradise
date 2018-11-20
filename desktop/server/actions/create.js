@@ -23,7 +23,7 @@ function Create (host) {
   this.docs = 'Create a new vessel at your current location. Vessel names and attributes must include <b>less than 14 characters and be unique</b>. '
 
   this.operate = function (action, params) {
-    if (!params) { return errors.NOPARAM() }
+    if (!params) { return errors.NOPARAM(action) }
 
     const parts = this.remove_articles(params).trim().split(' ')
     const attr = parts[parts.length - 2] && parts[parts.length - 2] != parts[parts.length - 1] ? parts[parts.length - 2].toLowerCase() : null
@@ -31,7 +31,7 @@ function Create (host) {
 
     // TODO: Transform these into Errors
     if (parseInt(name) > -1) { return `<p>Vessel names cannot be numbers.</p>` }
-    if (name == '') { return errors.NOVALID() }
+    if (name == '') { return errors.NOVALID(action) }
     if (name.length < 3 || name.length > 14) { return `<p>The vessel name must be between 3 and 14 characters long.</p>` }
     if (attr && attr.length > 14) { return `<p>The vessel attribute is too long.</p>` }
     if (reserved_names.indexOf(name) > -1) { return `<p>Vessel names cannot be reserved words ('some', 'any', or 'itself') or articles.</p>` }

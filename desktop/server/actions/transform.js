@@ -9,17 +9,17 @@ function Transform (host) {
   this.docs = 'Change your current vessel name.'
 
   this.operate = function (action, params) {
-    if (!params) { return errors.NOPARAM() }
+    if (!params) { return errors.NOPARAM(action) }
 
     const sides = ` ${params} `.replace(' into ', ' in ').split(' in ')
     const target = sides[0].trim() ? this.find(sides[0], this.host.siblings()) : this.host
 
-    if (!target) { return errors.NOTARGET(sides[0]) }
+    if (!target) { return errors.NOTARGET(sides[0], 'visible', action) }
 
     const parts = this.remove_articles(sides[1]).trim().split(' ')
     const origin = `${target}`
 
-    if (!parts[0]) { return errors.NOVALID() }
+    if (!parts[0]) { return errors.NOVALID(action) }
 
     if (parts.length == 2) {
       const name_success = target.set('name', parts[1])
@@ -38,7 +38,7 @@ function Transform (host) {
       }
     }
 
-    return errors.NOVALID()
+    return errors.NOVALID(action)
   }
 }
 

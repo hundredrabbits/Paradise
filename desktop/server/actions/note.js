@@ -9,7 +9,7 @@ function Note (host) {
   this.docs = 'Add a description to the current parent vessel.'
 
   this.operate = function (action, params) {
-    if (!this.host.parent().data.note && params.trim() == '') { return errors.NOVALID() }
+    if (!this.host.parent().data.note && params.trim() == '') { return errors.NOVALID(action) }
 
     const is_update = !!this.host.parent().data.note
 
