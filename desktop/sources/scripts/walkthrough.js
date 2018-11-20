@@ -2,6 +2,7 @@
 
 function Walkthrough () {
   this.basics = [
+    '_RESET',
     'warp to the library',
     'create a yellow house',
     'become the yellow house',
@@ -11,6 +12,7 @@ function Walkthrough () {
   ]
 
   this.warping = [
+    '_RESET',
     'warp to the library',
     'create a red house',
     'create a blue house',
@@ -24,6 +26,7 @@ function Walkthrough () {
   ]
 
   this.inventory = [
+    '_RESET',
     'warp to the library',
     'create a red house',
     'create a blue house',
@@ -33,6 +36,7 @@ function Walkthrough () {
   ]
 
   this.programing = [
+    '_RESET',
     'warp to the library',
     'create a red house',
     'create a blue house',
@@ -46,6 +50,7 @@ function Walkthrough () {
   ]
 
   this.metas = [
+    '_RESET',
     'warp to the library',
     'create a red house',
     'create a blue house',
@@ -59,6 +64,7 @@ function Walkthrough () {
   ]
 
   this.alchemy = [
+    '_RESET',
     'warp to the library',
     'create a lead teacup',
     'transform the teacup into a house',
@@ -68,6 +74,7 @@ function Walkthrough () {
   ]
 
   this.spells = [
+    '_RESET',
     'warp to the library',
     'create a storm scroll',
     'enter the scroll',
@@ -78,6 +85,7 @@ function Walkthrough () {
   ]
 
   this.errors = [
+    '_RESET',
     'become',
     'cast',
     'create',
