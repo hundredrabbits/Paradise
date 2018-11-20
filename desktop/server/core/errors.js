@@ -6,13 +6,13 @@ const pluralize = require('pluralize')
 // TODO: Add errors for WildcardLISP
 
 const errors = {
-  NOTARGET: function (params, type = 'visible') {
+  NOTARGET: function (params, type = 'visible', name = null) {
     const target = this.remove_articles(params)
-    return new Error('err_NOTARGET', `<p>There is no ${type} vessel "${target}". ${errors.LEARN()}</p>`)
+    return new Error('err_NOTARGET', `<p>There is no ${type} vessel "${target}".${name ? ` ${errors.LEARN(name)}` : ''}</p>`)
   },
 
   NOPARAM: function (name) {
-    return new Error('err_NOPARAM', `<p>The ${name} action requires more information. ${errors.LEARN()}</p>`)
+    return new Error('err_NOPARAM', `<p>The ${name} action requires more information. ${errors.LEARN(name)}</p>`)
   },
 
   NOVALID: function (name, learn = true, help_text = '') {

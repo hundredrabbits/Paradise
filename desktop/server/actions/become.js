@@ -9,7 +9,7 @@ function Become (host) {
   this.docs = 'Become a visible vessel.'
 
   this.operate = function (action, params) {
-    if (!params) { return errors.NOPARAM() }
+    if (!params) { return errors.NOPARAM(action) }
 
     const target = this.find(params, this.host.siblings())
 
@@ -19,7 +19,7 @@ function Become (host) {
       this.host.paradise.client.change_vessel(target.id)
       return `<p>You became ${target}.</p>`
     } else {
-      return errors.NOTARGET(params)
+      return errors.NOTARGET(params, 'visible', action)
     }
   }
 }
