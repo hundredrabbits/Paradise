@@ -10,14 +10,14 @@ const wildcards = require('../wildcards')
 function Learn (host) {
   Action.call(this, host, 'learn')
 
-  this.docs = 'The learn command allows you to read documentation for <action id="learn about actions">actions</action>, <action id="learn about wildcards">wildcards</action>, <action id="learn about groups">groups</action>, and <action id="learn about knowledge">general knowledge</action>.'
+  this.docs = "The learn command allows you to read documentation for <action data='learn about actions'>actions</action>, <action data='learn about wildcards'>wildcards</action>, <action data='learn about groups'>groups</action>, and <action data='learn about knowledge'>general knowledge</action>."
 
   this.knowledge = {
     actions: function () { return this.list_actions() },
     paradoxes: 'There are two types of <b>Paradoxes</b> in Paradise. The first kind, is vessels folded onto themselves, existing within their own space. The second type, is vessels organized in a loop, where there are no real beginning to a space, a deeply nested vessel might become the parent of a first type paradox and create this kind of shape.',
     passive: "The <b>Passive</b> <action data='learn to trigger'>trigger</action>, is used to add dynamic content to the browser.",
-    lisp: "WildcardLISP is a variant of the LISP programming language. It is based around nested brackets and <action data='learn about wildcards'>wildcards</action>, and can be embedded in vessel programs and triggers, as well as eveluated using echo. To embed WildcardLISP, use the following syntax: <code>@(lisp goes here)</code>",
-    wildcards: "Wildcards are the equivalent of actions for <action data='learn about lisp'>WildcardLISP</action>. They follow the format <code>@(wildcard inputs)</code>.<br />There are several <action id='learn about groups'>groups</action> of wildcards.",
+    lisp: "<b>WildcardLISP</b> is a variant of the LISP programming language. It is based around nested brackets and <action data='learn about wildcards'>wildcards</action>, and can be embedded in vessel programs and triggers, as well as eveluated using echo. To embed WildcardLISP, use the following syntax: <code>@(lisp goes here)</code>",
+    wildcards: "<b>Wildcards</b> are the equivalent of actions for <action data='learn about lisp'>WildcardLISP</action>. They follow the format <code>@(wildcard inputs)</code>.<br />There are several <action data='learn about groups'>groups</action> of wildcards.",
     groups: function () { return this.list_groups() }
   }
 
@@ -29,7 +29,7 @@ function Learn (host) {
     const parts = params.split(' ')
 
     if ((!parts[0]) || (!parts[1])) {
-      return errors.NOVALID(action)
+      return errors.NOVALID(action, false)
     }
 
     const method = parts[0].toString().toLowerCase()
@@ -75,7 +75,7 @@ function Learn (host) {
     if (target && descriptions[target]) {
       const desc = descriptions[target]
       let out = `Documentation for @${target}: <br /><br />`
-      out += desc.inputs ? `Accepts inputs: <code>${desc.inputs.join(', ')}</code><br />` : ''
+      out += (desc.inputs.length > 0) ? `Accepts inputs: <code>${desc.inputs.join(', ')}</code><br />` : ''
       out += desc.description
       return out
     } else {
@@ -89,7 +89,7 @@ function Learn (host) {
     if (target && groups[target]) {
       let cards = Object.keys(require(`../wildcards/${target}`).descriptions())
       cards = cards.map(function (name) { return `@${name}` })
-      return `Documentation for @:${target}:<br />${groups[target]}<br /><br />Includes wildcards: ${cards.join(', ')}`
+      return `Documentation for @:${target}:<br />${groups[target]}<br /><br />Includes wildcards: ${cards.map(function (inp) { return `<action data='learn about ${inp}'>${inp}</action>` }).join(', ')}`
     } else {
       return errors.UNKNOWN(target, 'group', false)
     }
@@ -102,7 +102,7 @@ function Learn (host) {
       }
       return this.knowledge[target]
     } else if (target === 'knowledge') {
-      return `Available knowledge:<br /><br />${Object.keys(this.knowledge).join('<br />')}`
+      return `Available knowledge:<br /><br />${Object.keys(this.knowledge).map(function (inp) { return `<action data='learn about ${inp}'>${inp}</action>` }).join('<br />')}`
     } else {
       return errors.UNKNOWN(target, 'term', false)
     }
@@ -134,12 +134,12 @@ function Learn (host) {
       "cast",
       "echo",
     ]
-    return `Available actions:<br /><br />${_actions.join('<br />')}`
+    return `Available actions:<br /><br />${_actions.map(function (inp) { return `<action data='learn to ${inp}'>${inp}</action>` }).join('<br />')}`
   }
 
   this.list_groups = function () {
     const groups = Object.keys(wildcards.groups).map(function (name) { return `@:${name}` })
-    return `Groups:<br /><br />${groups.join('<br />')}`
+    return `Groups:<br /><br />${groups.map(function (inp) { return `<action data='learn about ${inp}'>${inp}</action>` }).join('<br />')}`
   }
 }
 
