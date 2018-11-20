@@ -18,8 +18,8 @@ function merge_options (obj1, obj2) {
 }
 
 const _groups = {
-  'mathematics': 'Mathematics wildcards.',
-  'logic': 'Logic wildcards. Includes if, equal, and, & or.',
+  'mathematics': 'Mathematics wildcards. Used for manipulation of numbers.',
+  'logic': 'Logic wildcards. Used for program flow.',
 
   'vessels': 'Vessel wildcards. Used to find vessels and their properties.',
 
