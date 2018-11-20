@@ -1,13 +1,16 @@
 'use strict'
 
-const Action = require(`../core/action`)
-const errors = require('../core/errors')
-const helpers = require('../core/helpers')
+const Action    = require(`../core/action`)
+const errors    = require('../core/errors')
+const helpers   = require('../core/helpers')
+const wildcards = require('../wildcards')
 
 // TODO: Add wildcard docs here
 
 function Learn (host) {
   Action.call(this, host, 'learn')
+
+  this.docs = 'The learn command allows you to read documentation for actions, wildcards, groups, and general knowledge.'
 
   this.knowledge = {
     actions: 'todo call actions_general() to generate this',
@@ -18,93 +21,78 @@ function Learn (host) {
   }
 
   this.operate = function (action, params) {
+    if (!params) {
+      params = 'to learn' // `learn` -> `learn to learn`
+    }
+
     const parts = params.split(' ')
-    const method = parts[0]
-    if (method == "to") {
-      const target = parts[parts.length - 1].toLowerCase()
-      try {
-        const a = require(`./${target}`)
-        const obj = new a()
-        return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs} Type <action>learn</action> again to see the available actions.</p>`
-      } catch (err) {
-        if (err.code === 'MODULE_NOT_FOUND') {
-          return this.default(target, 'action')
+    const method = parts[0].toString().toLowerCase()
+    const target = parts[1].toString().toLowerCase()
+
+    if (method === 'to') {
+      return this.learn_action(parts, target)
+    } else if (method === 'about') {
+      if (target[0] === "@") {
+        if (target[1] === ":") {
+          return this.learn_wildcard_group(parts, target)
+        } else {
+          return this.learn_wildcard(parts, target)
         }
-        throw err
-      }
-    } else if (method == "about") {
-      const target = parts[parts.length - 1].toLowerCase()
-      if (false) { // In wildcard docs
-
       } else {
-        return this.default(target, 'term')
+        return this.learn_knowledge(parts, target)
       }
     } else {
-      return this.default(null, 'term')
+      return errors.NOVALID(action)
     }
   }
 
-  this.default = function (key, method = 'action') {
-    if (key) {
-      if (method == 'term' && this.knowledge[key]) {
-        return `<p>${this.knowledge[key]}</p>`
-      } else {
-        return errors.UNKNOWN(key, method, false)
+  this.learn_action = function (parts, target) {
+    if (!target) {
+      return errors.UNKNOWN(target)
+    }
+
+    try {
+      const a = require(`./${target}`)
+      const obj = new a()
+      return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs}<br /><br />Type <action>learn</action> again to see the available actions.</p>`
+    } catch (err) {
+      if (err.code === 'MODULE_NOT_FOUND') {
+        return errors.UNKNOWN(target)
       }
-    } else if (method == 'action') {
-      return this.actions_general()
+      throw err
+    }
+  }
+
+  this.learn_wildcard = function (parts, target) {
+    target = target ? target.replace('@', '') : null
+    const descriptions = wildcards.descriptions()
+    if (target && descriptions[target]) {
+      const desc = descriptions[target]
+      let out = `Documentation for @${target}: <br /><br />`
+      out += desc.inputs ? `Accepts inputs: <code>${desc.inputs.join(', ')}</code><br />` : ''
+      out += desc.description
+      return out
     } else {
-      return 'insert some docs for learn here'
+      return errors.UNKNOWN(target, 'wildcard', false)
     }
   }
 
-  this.actions_general = function () {
-    const docs = this.action_documentation()
-    const count = Object.keys(docs).length
-
-    let index = 2
-    let _list = ''
-    for (const id in docs) {
-      if (id == 'learn') { continue }
-      _list += `<action data='learn to ${id}'>${id.toSentenceCase()}</action>${index == count - 1 ? ' or ' : (index == count ? '. ' : ', ')} `
-      index += 1
+  this.learn_wildcard_group = function (parts, target) {
+    target = target ? target.replace('@:', '') : null
+    const groups = wildcards.groups
+    if (target && groups[target]) {
+      return groups[target]
+    } else {
+      return errors.UNKNOWN(target, 'group', false)
     }
-    return `<img src='media/graphics/default.png'/><p>Which action would you like to <action data='learn'>learn</action>? ${_list}</p>`
   }
 
-  this.action_documentation = function () {
-    const actions = {}
-
-    const _actions = {
-      look: require('./look'),
-
-      create: require('./create'),
-      become: require('./become'),
-      enter: require('./enter'),
-      leave: require('./leave'),
-
-      warp: require('./warp'),
-      take: require('./take'),
-      drop: require('./drop'),
-      inventory: require('./inventory'),
-      move: require('./move'),
-
-      learn: require('./learn'),
-      note: require('./note'),
-      transform: require('./transform'),
-      inspect: require('./inspect'),
-
-      trigger: require('./trigger'),
-      program: require('./program'),
-      use: require('./use'),
-      cast: require('./cast'),
-      echo: require('./echo')
+  this.learn_knowledge = function (parts, target) {
+    if (target && this.knowledge[target]) {
+      return this.knowledge[target]
+    } else {
+      return errors.UNKNOWN(target, 'term', false)
     }
-    for (const id in _actions) {
-      const action = new _actions[id]()
-      actions[id] = action.docs
-    }
-    return actions
   }
 }
 
