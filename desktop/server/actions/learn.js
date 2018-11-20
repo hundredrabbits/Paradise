@@ -5,7 +5,9 @@ const errors    = require('../core/errors')
 const helpers   = require('../core/helpers')
 const wildcards = require('../wildcards')
 
-// TODO: Add wildcard docs here
+// TODO: List available knowledge, groups, actions, etc.
+// TODO: Add list of actions
+// TODO: Add lists of wildcards for each group
 
 function Learn (host) {
   Action.call(this, host, 'learn')
