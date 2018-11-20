@@ -115,15 +115,25 @@ function Walkthrough () {
   this.speed = 500
 
   this.start = function (speed = 50) {
+
+    const backup_world = browser.save_string()
+
     this.speed = speed
     this.index = 0
     browser.reset()
-    this.run()
+    this.run(this.all)
+
+    browser.load_string(backup_world)
   }
 
   this.run = function (target = this.all) {
     console.log(target[this.index])
-    browser.query(target[this.index])
+    if (target[this.index] === '_RESET') {
+      browser.reset()
+    } else {
+      const sight = browser.query(target[this.index])
+      console.log(`> ${sight.reaction}`);
+    }
     this.index += 1
 
     if (target[this.index]) {
