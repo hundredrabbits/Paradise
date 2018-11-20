@@ -6,7 +6,6 @@
 -   Expand the default world.
 -   Improve walkthrough, add checks for multi-line.
 -   Potentially add syntax highlighting for both Paradise Commands and WildcardLISP.
--   Implement `learn`-based docs for wildcards.
 -   Make various class methods (eg. Vessel.parent) into getters
 
 ```
