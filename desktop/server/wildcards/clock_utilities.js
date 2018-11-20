@@ -1,37 +1,60 @@
 'use strict'
 
 const helpers = require('../core/helpers')
+const clock   = require('../core/clock')
 
-const _lib = {
+const _lib = [
 
-  time: function (context) {
-    return clock.time
+  {
+    props: ["time", [], 'Return the current time in Desamber format.'],
+    func: function (context) {
+      return clock.time
+    }
   },
-  beat: function (context) {
-    return clock.beat
+
+  {
+    props: ["beat", [], 'Return the current beat in Desamber format.'],
+    func: function (context) {
+      return clock.beat
+    }
   },
-  pulse: function (context) {
-    return clock.pulse
-  }
+
+  {
+    props: ["pulse", [], 'Return the current pulse in Desamber format.'],
+    func: function (context) {
+      return clock.pulse
+    }
+  },
 
   // create clock & enter clock & trigger time The time is @( time ) & leave & time
 
-}
+]
 
-function lib (_host, _input, _query, _responder) {
-  let out = {}
-  for (var name in _lib) {
-    const func = _lib[name]
-    const new_func = function (...given) {
-      let args = []
-      args.push({ host: _host, input: _input, query: _query, responder: _responder })
-      args.push.apply(args, given)
-      return func.apply(null, args)
+const exp = {
+  lib: function (_host, _input, _query, _responder) {
+    let out = {}
+    for (var id in _lib) {
+      const func = _lib[id].func
+      const new_func = function (...given) {
+        let args = []
+        args.push({ host: _host, input: _input, query: _query, responder: _responder })
+        args.push.apply(args, given)
+        return func.apply(null, args)
+      }
+      out[_lib[id].props[0]] = new_func
     }
-    out[name] = new_func
-  }
 
-  return out
+    return out
+  },
+
+  descriptions: function () {
+    let out = {}
+    for (var id in _lib) {
+      const props = _lib[id].props
+      out[props[0]] = {inputs: props[1], description: props[2]}
+    }
+    return out
+  }
 }
 
-module.exports = lib
+module.exports = exp

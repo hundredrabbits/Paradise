@@ -18,8 +18,8 @@ function merge_options (obj1, obj2) {
 }
 
 const _groups = {
-  'mathematics': 'Mathematics wildcards.',
-  'logic': 'Logic wildcards. Includes if, equal, and, & or.',
+  'mathematics': 'Mathematics wildcards. Used for manipulation of numbers.',
+  'logic': 'Logic wildcards. Used for program flow.',
 
   'vessels': 'Vessel wildcards. Used to find vessels and their properties.',
 
@@ -27,7 +27,7 @@ const _groups = {
   'list_utilities': 'List wildcards. Used to perform operations on lists.',
   'program_utilities': 'Program utilities. Used to interact with the current program.',
   'random_utilities': 'Random utilities. Used to generate and use random numbers.',
-  'clock_utilities': 'Clock utilities. Used to find and use the current time.'
+  'clock_utilities': 'Clock utilities. Used to find and use the current time.',
 }
 
 let groups = []
@@ -37,13 +37,27 @@ for (var name in _groups) {
   groups.push(group)
 }
 
-function lib (host, input, query, responder) {
-  let _lib = {}
-  for (var id in groups) {
-    const group = groups[id]
-    _lib = merge_options(_lib, group(host, input, query, responder))
-  }
-  return _lib
+
+const exp = {
+  lib: function (host, input, query, responder) {
+    let _lib = {}
+    for (var id in groups) {
+      const group = groups[id]
+      _lib = merge_options(_lib, group.lib(host, input, query, responder))
+    }
+    return _lib
+  },
+
+  descriptions: function () {
+    let _desc = {}
+    for (var id in groups) {
+      const group = groups[id]
+      _desc = merge_options(_desc, group.descriptions())
+    }
+    return _desc
+  },
+
+  groups: _groups
 }
 
-module.exports = lib
+module.exports = exp
