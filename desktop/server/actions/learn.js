@@ -10,7 +10,7 @@ const wildcards = require('../wildcards')
 function Learn (host) {
   Action.call(this, host, 'learn')
 
-  this.docs = 'The learn command allows you to read documentation for actions, wildcards, groups, and general knowledge.'
+  this.docs = 'The learn command allows you to read documentation for <action id="learn about actions">actions</action>, <action id="learn about wildcards">wildcards</action>, <action id="learn about groups">groups</action>, and <action id="learn about knowledge">general knowledge</action>.'
 
   this.knowledge = {
     actions: function () { return this.list_actions() },
@@ -27,6 +27,11 @@ function Learn (host) {
     }
 
     const parts = params.split(' ')
+
+    if ((!parts[0]) || (!parts[1])) {
+      return errors.NOVALID(action)
+    }
+
     const method = parts[0].toString().toLowerCase()
     const target = parts[1].toString().toLowerCase()
 
@@ -43,7 +48,7 @@ function Learn (host) {
         return this.learn_knowledge(parts, target)
       }
     } else {
-      return errors.NOVALID(action)
+      return errors.NOVALID(action, false)
     }
   }
 
@@ -96,6 +101,8 @@ function Learn (host) {
         return this.knowledge[target].call(this)
       }
       return this.knowledge[target]
+    } else if (target === 'knowledge') {
+      return `Available knowledge:<br /><br />${Object.keys(this.knowledge).join('<br />')}`
     } else {
       return errors.UNKNOWN(target, 'term', false)
     }
