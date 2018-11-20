@@ -54,7 +54,10 @@ const exp = {
       const group = groups[id]
       _desc = merge_options(_desc, group.descriptions())
     }
-  }
+    return _desc
+  },
+
+  groups: _groups
 }
 
 module.exports = exp
