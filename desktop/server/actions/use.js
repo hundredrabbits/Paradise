@@ -9,11 +9,11 @@ function Use (host) {
   this.docs = "Trigger a vessel's program."
 
   this.operate = function (action, params) {
-    if (!params) { return errors.NOPARAM() }
+    if (!params) { return errors.NOPARAM(action) }
 
     const target = this.find(params, this.host.usables())
 
-    if (!target) { return errors.NOTARGET(params, 'available') }
+    if (!target) { return errors.NOTARGET(params, 'available', action) }
     if (!target.usable()) { return errors.NOPROGRAM(target) }
 
     const cmd_rendered = this.render(target.data.program, params, target)
