@@ -39,6 +39,7 @@ function Client (paradise) {
   this.query = function (input = '', on_query = this.update) {
     const sight = this.paradise.query(this.id, input)
     this.update(sight)
+    return sight
   }
 
   this.change_vessel = function (id) {
