@@ -114,30 +114,38 @@ function Walkthrough () {
   this.index = 0
   this.speed = 500
 
-  this.start = function (speed = 50) {
-
+  this.start = function (speed = 50, log = false) {
     const backup_world = browser.save_string()
+    console.log(backup_world);
 
     this.speed = speed
     this.index = 0
     browser.reset()
-    this.run(this.all)
-
-    browser.load_string(backup_world)
+    this.run(function (backup_world, browser) {
+      console.log(backup_world);
+      browser.load_string(backup_world)
+      browser.query('look')
+    }, [backup_world, browser], this.all, log)
   }
 
-  this.run = function (target = this.all) {
-    console.log(target[this.index])
+  this.run = function (callback, callback_params, target = this.all, log = false) {
+    if (log) {
+      console.log(target[this.index])
+    }
     if (target[this.index] === '_RESET') {
       browser.reset()
     } else {
       const sight = browser.query(target[this.index])
-      console.log(`> ${sight.reaction}`);
+      if (log) {
+        console.log(`> ${sight.reaction}`);
+      }
     }
     this.index += 1
 
     if (target[this.index]) {
-      setTimeout(() => { this.run() }, this.speed)
+      setTimeout(() => { this.run(callback, callback_params, target, log) }, this.speed)
+    } else {
+      callback.apply(this, callback_params)
     }
   }
 }
