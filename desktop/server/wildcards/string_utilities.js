@@ -5,6 +5,46 @@ const helpers = require('../core/helpers')
 const _lib = [
 
   {
+    props: ["tostring", ['a'], 'Convert "a" to a string. Does not work on nil.'],
+    func: function (context, a) {
+      if (a && !(a === helpers.nil) && a.toString) {
+        return a.toString()
+      } else {
+        return helpers.nil
+      }
+    }
+  },
+
+  {
+    props: ["pretty", ['a', 'number_commas = true'], 'Convert "a" to a string and make it human readable.'],
+    func: function (context, a, number_commas = true) {
+      if (!a || a === helpers.nil) { // BUG: Returns nil when a === 0
+        return "nil" // REVIEW: "nil" or nil?
+      } else if (typeof a === 'string') {
+        return a
+      } else if (typeof a === 'number') {
+        if (number_commas === helpers.nil) {
+          return a.toString()
+        } else {
+          let parts = a.toString().split(".");
+          parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          return parts.join(".");
+        }
+      } else if (a instanceof Array) {
+        return `[${a.join(', ')}]` // REVIEW: Should we use square-bracket format? Or is another format better for WildcardLISP?
+                                   // TODO: Recurse over all list items?
+      } else if (typeof a === 'function') {
+        return "nil" // REVIEW: "nil" or nil?
+                     // REVIEW: Should return nil?
+      } else if (a.toString) {
+        return a.toString()
+      } else {
+        return "nil" // REVIEW: "nil" or nil?
+      }
+    }
+  },
+
+  {
     props: ["concats", ['...items'], 'Concatenate strings.'],
     func: function (context, separator = '', ...items) {
       if (items.length === 1 && items[0] instanceof Array) {
