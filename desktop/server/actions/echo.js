@@ -10,7 +10,7 @@ function Echo (host) {
 
   this.operate = function (action, params) {
     if (!params) {
-      return errors.NOPARAM()
+      return errors.NOPARAM(action)
     }
 
     const reaction_rendered = this.render(params, null, host) // query = null

@@ -2,6 +2,7 @@
 
 function Walkthrough () {
   this.basics = [
+    '_RESET',
     'warp to the library',
     'create a yellow house',
     'become the yellow house',
@@ -11,6 +12,7 @@ function Walkthrough () {
   ]
 
   this.warping = [
+    '_RESET',
     'warp to the library',
     'create a red house',
     'create a blue house',
@@ -24,6 +26,7 @@ function Walkthrough () {
   ]
 
   this.inventory = [
+    '_RESET',
     'warp to the library',
     'create a red house',
     'create a blue house',
@@ -33,6 +36,7 @@ function Walkthrough () {
   ]
 
   this.programing = [
+    '_RESET',
     'warp to the library',
     'create a red house',
     'create a blue house',
@@ -46,6 +50,7 @@ function Walkthrough () {
   ]
 
   this.metas = [
+    '_RESET',
     'warp to the library',
     'create a red house',
     'create a blue house',
@@ -59,6 +64,7 @@ function Walkthrough () {
   ]
 
   this.alchemy = [
+    '_RESET',
     'warp to the library',
     'create a lead teacup',
     'transform the teacup into a house',
@@ -68,6 +74,7 @@ function Walkthrough () {
   ]
 
   this.spells = [
+    '_RESET',
     'warp to the library',
     'create a storm scroll',
     'enter the scroll',
@@ -78,6 +85,7 @@ function Walkthrough () {
   ]
 
   this.errors = [
+    '_RESET',
     'become',
     'cast',
     'create',
@@ -106,20 +114,38 @@ function Walkthrough () {
   this.index = 0
   this.speed = 500
 
-  this.start = function (speed = 50) {
+  this.start = function (speed = 50, log = false) {
+    const backup_world = browser.save_string()
+    console.log(backup_world);
+
     this.speed = speed
     this.index = 0
     browser.reset()
-    this.run()
+    this.run(function (backup_world, browser) {
+      console.log(backup_world);
+      browser.load_string(backup_world)
+      browser.query('look')
+    }, [backup_world, browser], this.all, log)
   }
 
-  this.run = function (target = this.all) {
-    console.log(target[this.index])
-    browser.query(target[this.index])
+  this.run = function (callback, callback_params, target = this.all, log = false) {
+    if (log) {
+      console.log(target[this.index])
+    }
+    if (target[this.index] === '_RESET') {
+      browser.reset()
+    } else {
+      const sight = browser.query(target[this.index])
+      if (log) {
+        console.log(`> ${sight.reaction}`);
+      }
+    }
     this.index += 1
 
     if (target[this.index]) {
-      setTimeout(() => { this.run() }, this.speed)
+      setTimeout(() => { this.run(callback, callback_params, target, log) }, this.speed)
+    } else {
+      callback.apply(this, callback_params)
     }
   }
 }

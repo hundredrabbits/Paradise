@@ -16,7 +16,7 @@ function Inspect (host) {
     if (target) {
       return `<p>You are inspecting the <action>${target.name()}</action>#${target.id}. ${this.make_location(target)}</p>`
     } else {
-      return errors.NOTARGET(params)
+      return errors.NOTARGET(params, 'visible', action)
     }
   }
 

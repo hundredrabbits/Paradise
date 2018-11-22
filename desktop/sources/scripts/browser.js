@@ -113,6 +113,14 @@ function Browser (paradise) {
     return JSON.parse(localStorage.getItem('world'))
   }
 
+  this.save_string = function () {
+    return JSON.stringify(paradise.to_a())
+  }
+
+  this.load_string = function (str) {
+    paradise.import(JSON.parse(str))
+  }
+
   this.resume = function () {
     this.reset()
 
