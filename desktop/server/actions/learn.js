@@ -58,7 +58,11 @@ function Learn (host) {
     try {
       const a = require(`./${target}`)
       const obj = new a()
-      return `<img src='media/graphics/${obj.name}.png'/><p>${obj.docs}<br /><br />Type <action>learn about actions</action> again to see the available actions.</p>`
+      const image_src = `media/graphics/${obj.name}.png`
+      const alt_src   = 'media/graphics/default.png'
+      let out = `<img src='${image_src}' onerror='this.onerror=null; this.src="${alt_src}"' />`
+      out += `<p>${obj.docs}<br /><br />Type <action>learn about actions</action> again to see the available actions.</p>`
+      return out
     } catch (err) {
       if (err.code === 'MODULE_NOT_FOUND') {
         return errors.UNKNOWN(target, 'action', false)
