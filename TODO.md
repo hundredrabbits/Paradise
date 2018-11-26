@@ -10,7 +10,7 @@
 -   Add more sections to walkthrough
 -   Maybe add menu item for walkthrough?
 
-```
+```javascript
 class Rectangle {
   constructor(height, width) {
     this.height = height;
