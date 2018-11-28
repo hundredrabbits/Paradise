@@ -84,6 +84,14 @@ function Walkthrough () {
     'cast the storm scroll on the blue bug'
   ]
 
+  // TODO: Expand
+  this.cards = [
+    '_RESET',
+    'echo @(self)',
+    'echo @(vessel self "name")',
+    'create @( random "chair" "table" "sofa" )'
+  ]
+
   this.errors = [
     '_RESET',
     'become',
@@ -109,6 +117,7 @@ function Walkthrough () {
   this.all = this.all.concat(this.metas)
   this.all = this.all.concat(this.alchemy)
   this.all = this.all.concat(this.spells)
+  this.all = this.all.concat(this.cards)
   this.all = this.all.concat(this.errors)
 
   this.index = 0
