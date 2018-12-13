@@ -8,9 +8,16 @@ _“I have always imagined that Paradise will be a kind of library.”_ — Jorg
 
 ## Install
 
+### Cli
+
 ```sh
 npm install
 npm start # Will start cli mode
+```
+
+### Electron
+
+```sh
 cd desktop
 npm install
 npm start # Will start graphical mode
