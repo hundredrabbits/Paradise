@@ -128,6 +128,9 @@ function Browser (paradise) {
 
     if (previous) {
       console.info('Loaded world')
+      if(localStorage.getItem('vessel')){
+        this.id = parseInt(localStorage.getItem('vessel'))  
+      }
       paradise.import(previous)
     } else {
       console.info('New world')
@@ -142,6 +145,12 @@ function Browser (paradise) {
     this.theme.reset()
     paradise.reset()
     setTimeout(() => { this.query(); this.speaker.play('click1') }, 250)
+  }
+
+  this.change_vessel = function (id) {
+    this.id = id
+    this.query()
+    localStorage.setItem('vessel', `${id}`)
   }
 
   document.onclick = function (event) {
