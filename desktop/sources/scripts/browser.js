@@ -128,8 +128,8 @@ function Browser (paradise) {
 
     if (previous) {
       console.info('Loaded world')
-      if(localStorage.getItem('vessel')){
-        this.id = parseInt(localStorage.getItem('vessel'))  
+      if (localStorage.getItem('vessel')) {
+        this.id = parseInt(localStorage.getItem('vessel'))
       }
       paradise.import(previous)
     } else {

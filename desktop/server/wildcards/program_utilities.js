@@ -7,32 +7,32 @@ const _lib = [
   // Use sparingly!
   // BUG: Can crash / hang if recursion occurs
   {
-    props: ["query", [], 'The query that caused this evaluation.'],
+    props: ['query', [], 'The query that caused this evaluation.'],
     func: function (context) {
       return context.query ? context.query : helpers.nil
     }
   },
 
   {
-    props: ["responder", [], 'The vessel that performed this evaluation.'],
+    props: ['responder', [], 'The vessel that performed this evaluation.'],
     func: function (context) {
       return context.responder ? context.responder.id : helpers.nil
     }
   },
 
   {
-    props: ["success", [], 'Whether this vessel\'s (self) previous action succeded'],
+    props: ['success', [], 'Whether this vessel\'s (self) previous action succeded'],
     func: function (context) {
       return !context.host.data.last_error ? 'true' : helpers.nil
     }
   },
 
   {
-    props: ["error", [], 'The error raised by this vessel\'s last action, or nil otherwise'],
+    props: ['error', [], 'The error raised by this vessel\'s last action, or nil otherwise'],
     func: function (context) {
       return context.host.data.last_error ? context.host.data.last_error.to_a() : helpers.nil
     }
-  },
+  }
 
 ]
 
@@ -57,7 +57,7 @@ const exp = {
     let out = {}
     for (var id in _lib) {
       const props = _lib[id].props
-      out[props[0]] = {inputs: props[1], description: props[2]}
+      out[props[0]] = { inputs: props[1], description: props[2] }
     }
     return out
   }

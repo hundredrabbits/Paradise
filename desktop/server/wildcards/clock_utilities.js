@@ -1,30 +1,30 @@
 'use strict'
 
 const helpers = require('../core/helpers')
-const clock   = require('../core/clock')
+const clock = require('../core/clock')
 
 const _lib = [
 
   {
-    props: ["time", [], 'Return the current time in Desamber format.'],
+    props: ['time', [], 'Return the current time in Desamber format.'],
     func: function (context) {
       return clock.time
     }
   },
 
   {
-    props: ["beat", [], 'Return the current beat in Desamber format.'],
+    props: ['beat', [], 'Return the current beat in Desamber format.'],
     func: function (context) {
       return clock.beat
     }
   },
 
   {
-    props: ["pulse", [], 'Return the current pulse in Desamber format.'],
+    props: ['pulse', [], 'Return the current pulse in Desamber format.'],
     func: function (context) {
       return clock.pulse
     }
-  },
+  }
 
   // create clock & enter clock & trigger time The time is @( time ) & leave & time
 
@@ -51,7 +51,7 @@ const exp = {
     let out = {}
     for (var id in _lib) {
       const props = _lib[id].props
-      out[props[0]] = {inputs: props[1], description: props[2]}
+      out[props[0]] = { inputs: props[1], description: props[2] }
     }
     return out
   }

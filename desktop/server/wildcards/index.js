@@ -27,7 +27,7 @@ const _groups = {
   'list_utilities': 'List wildcards. Used to perform operations on lists.',
   'program_utilities': 'Program utilities. Used to interact with the current program.',
   'random_utilities': 'Random utilities. Used to generate and use random numbers.',
-  'clock_utilities': 'Clock utilities. Used to find and use the current time.',
+  'clock_utilities': 'Clock utilities. Used to find and use the current time.'
 }
 
 let groups = []
@@ -36,7 +36,6 @@ for (var name in _groups) {
   const group = require(`./${name}`)
   groups.push(group)
 }
-
 
 const exp = {
   lib: function (host, input, query, responder) {
