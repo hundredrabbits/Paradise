@@ -33,8 +33,10 @@ function Client (paradise) {
 
   this.update = (response = 'idle') => {
     const visibles = this.vessel.sight()
+    const children = this.vessel.inventory()
     this._location.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
-    this._sight.innerHTML = `<ul>${visibles.reduce((acc, item) => { return acc + item.name + '<br/>' }, '')}</ul>`
+    this._sight.innerHTML = `<ul>${visibles.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')}</ul>`
+    this._inventory.innerHTML = `<ul>${children.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')}</ul>`
     this._response.innerHTML = response
   }
 

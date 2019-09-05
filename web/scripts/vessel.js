@@ -14,7 +14,7 @@ function Vessel (id, name, owner, parent) {
   }
 
   this.enter = (q) => {
-    const target = this.target(q)
+    const target = this.find(this.sight(), q)
     if (!target) { return 'You do not see that thing.' }
     this.parent = target
     return 'You entered something.'
@@ -26,17 +26,21 @@ function Vessel (id, name, owner, parent) {
   }
 
   this.become = (q) => {
-    const target = this.target(q)
+    const target = this.find(this.sight(), q)
     if (!target) { return 'You do not see that thing.' }
     client.vessel = target
   }
 
   this.take = (q) => {
-
+    const target = this.find(this.sight(), q)
+    if (!target) { return 'You do not see that thing.' }
+    target.parent = this
   }
 
   this.drop = (q) => {
-
+    const target = this.find(this.inventory(), q)
+    if (!target) { return 'You do not carry that thing.' }
+    target.parent = this.parent
   }
 
   // Etcs
@@ -48,9 +52,16 @@ function Vessel (id, name, owner, parent) {
     return a
   }
 
-  this.target = (q) => {
+  this.inventory = () => {
+    const a = paradise.filter((vessel) => {
+      return vessel.parent.id === this.id
+    })
+    return a
+  }
+
+  this.find = (arr, q) => {
     const name = removeParticles(q)
-    for (const vessel of this.sight()) {
+    for (const vessel of arr) {
       if (vessel.name !== name) { continue }
       return vessel
     }
