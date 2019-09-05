@@ -34,9 +34,8 @@ function Client (paradise) {
 
   this.update = () => {
     const visibles = this.vessel.sight()
-    console.log('!!',visibles)
     this._sight.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
-    this._sight.innerHTML += `<ul>${visibles.reduce((acc,item) => { return acc + item.name + '<br/>' }, '')}</ul>`
+    this._sight.innerHTML += `<ul>${visibles.reduce((acc, item) => { return acc + item.name + '<br/>' }, '')}</ul>`
   }
 
   this.validate = (cmd) => {

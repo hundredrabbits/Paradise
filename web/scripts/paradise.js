@@ -14,9 +14,20 @@ function Paradise () {
   }
 
   this.add = (vessel) => {
-    if(this.names().indexOf(vessel.name) > -1){ return console.warn('duplicate') }
+    if (this.names().indexOf(vessel.name) > -1) { return console.warn('duplicate') }
     console.log(`Adding ${vessel.name}, in ${vessel.parent.name}`)
     this.database[vessel.id] = vessel
+  }
+
+  this.find = (name) => {
+    for (vessel of this.vessels()) {
+      if (vessel.name !== name) { continue }
+      return vessel
+    }
+  }
+
+  this.vessels = () => {
+    return Object.values(this.database)
   }
 
   this.read = (id) => {
@@ -28,12 +39,16 @@ function Paradise () {
   }
 
   this.names = () => {
-    return Object.values(this.database).map((vessel) => { return vessel.name })
+    return this.vessels().map((vessel) => { return vessel.name })
   }
 
   this.next = () => {
     for (var i = 0; i < 1000; i++) {
       if (!this.read(i)) { return i }
     }
+  }
+
+  this.filter = (fn) => {
+    return this.vessels().filter(fn)
   }
 }
