@@ -4,7 +4,7 @@ function Vessel (id, name, owner, parent) {
   this.owner = owner
   this.parent = parent
 
-  // Actions
+  // A
 
   this.create = (q) => {
     const name = removeParticles(q)
@@ -17,7 +17,7 @@ function Vessel (id, name, owner, parent) {
     const target = this.find(this.sight(), q)
     if (!target) { return 'You do not see that thing.' }
     this.parent = target
-    return 'You entered something.'
+    return `You entered the ${target.name}.`
   }
 
   this.leave = () => {
@@ -29,32 +29,53 @@ function Vessel (id, name, owner, parent) {
     const target = this.find(this.sight(), q)
     if (!target) { return 'You do not see that thing.' }
     client.vessel = target
+    return `You became the ${target.name}`
   }
+
+  // B
 
   this.take = (q) => {
     const target = this.find(this.sight(), q)
     if (!target) { return 'You do not see that thing.' }
     target.parent = this
+    return `You took the ${target.name}.`
   }
 
   this.drop = (q) => {
     const target = this.find(this.inventory(), q)
     if (!target) { return 'You do not carry that thing.' }
     target.parent = this.parent
+    return `You dropped the ${target.name}.`
+  }
+
+  this.move = (q) => {
+    if (!q.indexOf(' in ') < 0) { return 'You must use the A in B format.' }
+    const a = this.find(this.sight(), q.split(' in ')[0])
+    const b = this.find(this.sight(), q.split(' in ')[1])
+    if (!a || !b) { return 'You do not see these vessels.' }
+    a.parent = b
+    return `You moved the ${a.name} into ${b.name}.`
+  }
+
+  this.warp = (q) => {
+    const target = this.find(paradise.vessels(), q)
+    if (!target) { return 'There is no vessel with that name.' }
+    this.parent = target
+    return `You warped to the ${target.name}.`
   }
 
   // Etcs
 
   this.sight = () => {
     const a = paradise.filter((vessel) => {
-      return vessel.parent.id === this.parent.id
+      return vessel.parent.id === this.parent.id && vessel.id !== this.id
     })
     return a
   }
 
   this.inventory = () => {
     const a = paradise.filter((vessel) => {
-      return vessel.parent.id === this.id
+      return vessel.parent.id === this.id && vessel.id !== this.id
     })
     return a
   }
