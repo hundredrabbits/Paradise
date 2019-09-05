@@ -1,18 +1,18 @@
 function Client (paradise) {
   this._el = document.createElement('div')
-  this._el.id = 'client'
   this._input = document.createElement('input')
-  this._input.id = 'input'
+  this._location = document.createElement('h2')
   this._sight = document.createElement('p')
-  this._sight.id = 'sight'
+  this._response = document.createElement('p')
   this._inventory = document.createElement('ul')
-  this._inventory.id = 'inventory'
 
   this.vessel = null
 
   this.install = (host = document.body) => {
     paradise.install()
+    this._el.appendChild(this._location)
     this._el.appendChild(this._sight)
+    this._el.appendChild(this._response)
     this._el.appendChild(this._inventory)
     this._el.appendChild(this._input)
     host.appendChild(this._el)
@@ -24,7 +24,6 @@ function Client (paradise) {
     this.become(id)
     paradise.start()
     this.update()
-
     this._input.value = 'create a test'
   }
 
@@ -32,10 +31,11 @@ function Client (paradise) {
     this.vessel = paradise.read(id)
   }
 
-  this.update = () => {
+  this.update = (response = 'idle') => {
     const visibles = this.vessel.sight()
-    this._sight.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
-    this._sight.innerHTML += `<ul>${visibles.reduce((acc, item) => { return acc + item.name + '<br/>' }, '')}</ul>`
+    this._location.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
+    this._sight.innerHTML = `<ul>${visibles.reduce((acc, item) => { return acc + item.name + '<br/>' }, '')}</ul>`
+    this._response.innerHTML = response
   }
 
   this.validate = (cmd) => {
@@ -43,7 +43,8 @@ function Client (paradise) {
     const params = cmd.trim().split(' ')
     const action = params.shift()
     if (!this.vessel[action]) { return console.warn(`Unknown ${action}`, params) }
-    this.vessel[action](params.join(' '))
-    this.update()
+    const response = this.vessel[action](params.join(' '))
+    this.update(response)
+    this._input.value = ''
   }
 }

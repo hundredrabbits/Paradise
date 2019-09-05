@@ -4,19 +4,42 @@ function Vessel (id, name, owner, parent) {
   this.owner = owner
   this.parent = parent
 
+  // Actions
+
   this.create = (q) => {
     const name = removeParticles(q)
     const id = paradise.next()
     const vessel = new Vessel(id, name, this, this.parent)
-    paradise.add(vessel)
+    return paradise.add(vessel) ? 'You created something.' : 'You cannot create that thing.'
   }
 
   this.enter = (q) => {
-    const name = removeParticles(q)
-    const target = this.target(name)
-    if (!target) { return console.warn('Cannot find', name) }
+    const target = this.target(q)
+    if (!target) { return 'You do not see that thing.' }
     this.parent = target
+    return 'You entered something.'
   }
+
+  this.leave = () => {
+    this.parent = this.parent.parent
+    return 'You left something.'
+  }
+
+  this.become = (q) => {
+    const target = this.target(q)
+    if (!target) { return 'You do not see that thing.' }
+    client.vessel = target
+  }
+
+  this.take = (q) => {
+
+  }
+
+  this.drop = (q) => {
+
+  }
+
+  // Etcs
 
   this.sight = () => {
     const a = paradise.filter((vessel) => {
@@ -25,7 +48,8 @@ function Vessel (id, name, owner, parent) {
     return a
   }
 
-  this.target = (name) => {
+  this.target = (q) => {
+    const name = removeParticles(q)
     for (const vessel of this.sight()) {
       if (vessel.name !== name) { continue }
       return vessel

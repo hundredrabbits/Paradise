@@ -14,9 +14,10 @@ function Paradise () {
   }
 
   this.add = (vessel) => {
-    if (this.names().indexOf(vessel.name) > -1) { return console.warn('duplicate') }
+    if (this.names().indexOf(vessel.name) > -1) { return null }
     console.log(`Adding ${vessel.name}, in ${vessel.parent.name}`)
     this.database[vessel.id] = vessel
+    return vessel
   }
 
   this.find = (name) => {
