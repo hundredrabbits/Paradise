@@ -5,6 +5,7 @@ function Client (paradise) {
   this._input = document.createElement('input')
   this._location = document.createElement('h2')
   this._sight = document.createElement('ul')
+  this._note = document.createElement('ul')
   this._response = document.createElement('p')
   this._inventory = document.createElement('ul')
 
@@ -14,6 +15,7 @@ function Client (paradise) {
     paradise.install()
     this._el.appendChild(this._location)
     this._el.appendChild(this._sight)
+    this._el.appendChild(this._note)
     this._el.appendChild(this._response)
     this._el.appendChild(this._inventory)
     this._el.appendChild(this._input)
@@ -26,17 +28,18 @@ function Client (paradise) {
     this.become(id)
     paradise.start()
     this.update()
-    this._input.value = 'create a test'
+    this._input.value = 'create a machine'
   }
 
   this.become = (id) => {
     this.vessel = paradise.read(id)
   }
 
-  this.update = (response = 'idle') => {
+  this.update = (response = '') => {
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
     this._location.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
+    this._note.innerHTML = this.vessel.parent.note ? this.vessel.parent.note : ''
     this._sight.innerHTML = visibles.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')
     this._inventory.innerHTML = children.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')
     this._response.innerHTML = response

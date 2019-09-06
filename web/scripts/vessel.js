@@ -56,6 +56,10 @@ function Vessel (id, name, owner, parent) {
       this.parent = target
       return `You warped to the ${target.name}.`
     },
+    note: (q) => {
+      this.parent.note = q
+      return `You ${q !== '' ? 'added' : 'removed'} the ${this.parent.name} note.`
+    },
     program: (q) => {
       this.parent.program = q
       return `You ${q !== '' ? 'added' : 'removed'} the ${this.parent.name} program.`
