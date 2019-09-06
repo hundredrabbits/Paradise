@@ -66,11 +66,9 @@ function Vessel (id, name, owner, parent) {
       if (!target.program) { return `The ${target.name} has no program.` }
       return this.act(target.program)
     },
-    lock: (q) => {
-
-    },
-    unlock: (q) => {
-
+    learn: (q) => {
+      const actions = Object.keys(this.actions)
+      return `The available commands(${actions.length}) are ${andList(actions)}.`
     }
   }
 
@@ -106,9 +104,15 @@ function Vessel (id, name, owner, parent) {
   }
 
   function removeParticles (str) {
-    const particles = ['a', 'the', 'an', 'at', 'in', 'into']
+    const particles = ['a', 'the', 'an', 'at', 'in', 'into', 'to']
     return str.split(' ').filter((item) => {
       return particles.indexOf(item) < 0
     }).join(' ').trim()
+  }
+
+  function andList (arr) {
+    return arr.reduce((acc, item, id) => {
+      return acc + item + (id === arr.length - 2 ? ' and ' : id === arr.length - 1 ? ' ' : ', ')
+    }, '').trim()
   }
 }
