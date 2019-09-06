@@ -80,14 +80,14 @@ function Vessel (id, name, owner, parent) {
 
   this.sight = () => {
     const a = paradise.filter((vessel) => {
-      return vessel.parent.id === this.parent.id && vessel.id !== this.id
+      return vessel.parent.id === this.parent.id && vessel.id !== this.id && vessel.id !== this.parent.id
     })
     return a
   }
 
   this.inventory = () => {
     const a = paradise.filter((vessel) => {
-      return vessel.parent.id === this.id && vessel.id !== this.id
+      return vessel.parent.id === this.id && vessel.id !== this.id && vessel.id !== this.parent.id
     })
     return a
   }

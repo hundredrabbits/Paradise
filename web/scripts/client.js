@@ -29,6 +29,7 @@ function Client (paradise) {
     paradise.start()
     this.update()
     this._input.value = 'create a machine'
+    this._input.focus()
   }
 
   this.become = (id) => {
