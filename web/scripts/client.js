@@ -21,7 +21,16 @@ function Client (paradise) {
     this._el.appendChild(this._input)
     host.appendChild(this._el)
 
-    this._input.onkeydown = (e) => { if (e.key === 'Enter') { this.validate(e.target.value) } }
+    this._input.onkeydown = (e) => {
+      if (e.key === 'Enter') {
+        this.validate(e.target.value)
+      }
+    }
+    document.onclick = (e) => {
+      if (e.target.getAttribute('data-action')) {
+        this.action(e.target.getAttribute('data-action'))
+      }
+    }
   }
 
   this.start = (id = 0) => {
@@ -36,13 +45,22 @@ function Client (paradise) {
     this.vessel = paradise.read(id)
   }
 
+  this.action = (str) => {
+    this._input.value = str
+    this._input.focus()
+  }
+
   this.update = (response = '') => {
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
     this._location.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
     this._note.innerHTML = this.vessel.parent.note ? this.vessel.parent.note : ''
-    this._sight.innerHTML = visibles.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')
-    this._inventory.innerHTML = children.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')
+    this._sight.innerHTML = visibles.reduce((acc, vessel) => {
+      return acc + '<li>' + vessel.toAction() + '</li>'
+    }, '')
+    this._inventory.innerHTML = children.reduce((acc, vessel) => {
+      return acc + '<li>' + vessel.toAction() + '</li>'
+    }, '')
     this._response.innerHTML = response
   }
 

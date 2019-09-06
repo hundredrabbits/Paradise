@@ -107,6 +107,20 @@ function Vessel (id, name, owner, parent) {
     }
   }
 
+  this.has = (name) => {
+    return this.find(this.inventory(), name)
+  }
+
+  this.action = () => {
+    if (this.program) { return 'use' }
+    if (client.vessel.has(this.name)) { return 'drop' }
+    return 'enter'
+  }
+
+  this.toAction = () => {
+    return `<a data-action='${this.action()} the ${this.name}' href='#${this.name}'>${this.action()} the ${this.name}</a>`
+  }
+
   function removeParticles (str) {
     const particles = ['a', 'the', 'an', 'at', 'in', 'into', 'to']
     return str.split(' ').filter((item) => {
