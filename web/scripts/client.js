@@ -1,8 +1,10 @@
+/* global paradise */
+
 function Client (paradise) {
   this._el = document.createElement('div')
   this._input = document.createElement('input')
   this._location = document.createElement('h2')
-  this._sight = document.createElement('p')
+  this._sight = document.createElement('ul')
   this._response = document.createElement('p')
   this._inventory = document.createElement('ul')
 
@@ -35,17 +37,14 @@ function Client (paradise) {
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
     this._location.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
-    this._sight.innerHTML = `<ul>${visibles.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')}</ul>`
-    this._inventory.innerHTML = `<ul>${children.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')}</ul>`
+    this._sight.innerHTML = visibles.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')
+    this._inventory.innerHTML = children.reduce((acc, item) => { return acc + '<li>' + item.name + '</li>' }, '')
     this._response.innerHTML = response
   }
 
   this.validate = (cmd) => {
     console.log('==============')
-    const params = cmd.trim().split(' ')
-    const action = params.shift()
-    if (!this.vessel[action]) { return console.warn(`Unknown ${action}`, params) }
-    const response = this.vessel[action](params.join(' '))
+    const response = this.vessel.act(cmd)
     this.update(response)
     this._input.value = ''
   }

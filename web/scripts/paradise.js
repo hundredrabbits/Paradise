@@ -6,7 +6,7 @@ function Paradise () {
     library.owner = library
     library.parent = library
     this.add(library)
-    library.create('ghost')
+    library.actions.create('ghost')
   }
 
   this.start = () => {
