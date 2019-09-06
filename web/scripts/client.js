@@ -26,6 +26,7 @@ function Client (paradise) {
         this.validate(e.target.value)
       }
     }
+
     document.onclick = (e) => {
       if (e.target.getAttribute('data-action')) {
         this.action(e.target.getAttribute('data-action'))

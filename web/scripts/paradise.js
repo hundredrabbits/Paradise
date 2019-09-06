@@ -7,7 +7,7 @@ function Paradise () {
     library.parent = library
     this.add(library)
     library.actions.create('ghost')
-    library.note = 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.'
+    library.note = 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.<br/>Type learn to see the list of commands.'
   }
 
   this.start = () => {
