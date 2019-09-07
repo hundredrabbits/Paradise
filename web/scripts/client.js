@@ -8,6 +8,7 @@ function Client (paradise) {
   this._note = document.createElement('ul')
   this._response = document.createElement('p')
   this._inventory = document.createElement('ul')
+  this._program = document.createElement('pre')
 
   this.vessel = null
 
@@ -19,6 +20,7 @@ function Client (paradise) {
     this._el.appendChild(this._response)
     this._el.appendChild(this._inventory)
     this._el.appendChild(this._input)
+    this._el.appendChild(this._program)
     host.appendChild(this._el)
 
     this._input.onkeydown = (e) => {
@@ -56,6 +58,7 @@ function Client (paradise) {
     const children = this.vessel.inventory()
     this._location.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
     this._note.innerHTML = this.vessel.parent.note ? this.vessel.parent.note : ''
+    this._program.innerHTML = this.vessel.parent.program ? this.vessel.parent.program : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => {
       return acc + '<li>' + vessel.toAction() + '</li>'
     }, '')
