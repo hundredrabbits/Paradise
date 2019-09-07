@@ -1,74 +1,71 @@
-function Vessel (id, name, owner, parent) {
-  this.id = id
-  this.name = name
-  this.owner = owner
-  this.parent = parent
-
-  // A
+function Vessel (id, name, owner, parent, note, program) {
+  this.data = {
+    id, name, owner, parent, note, program
+  }
 
   this.actions = {
     create: (q) => {
       const name = removeParticles(q)
       const id = paradise.next()
-      const vessel = new Vessel(id, name, this, this.parent)
-      return paradise.add(vessel) ? `You created the ${vessel.name}.` : `You cannot create the ${vessel.name}.`
+      const vessel = new Vessel(id, name, this.data.id, this.parent().data.id)
+      return paradise.add(vessel) ? `You created the ${vessel.data.name}.` : `You cannot create the ${vessel.data.name}.`
     },
     enter: (q) => {
       const target = this.find(this.sight(), q)
       if (!target) { return `You do not see ${q}.` }
-      this.parent = target
-      return `You entered the ${target.name}.`
+      this.data.parent = target.data.id
+      return `You entered the ${target.data.name}.`
     },
     leave: () => {
-      const origin = this.parent.name
-      this.parent = this.parent.parent
+      const origin = this.parent().data.name
+      this.data.parent = this.parent().parent().data.id
       return `You left the ${origin}.`
     },
     become: (q) => {
       const target = this.find(this.sight(), q)
       if (!target) { return `You do not see ${q}.` }
       client.vessel = target
-      return `You became the ${target.name}`
+      return `You became the ${target.data.name}`
     },
     take: (q) => {
       const target = this.find(this.sight(), q)
       if (!target) { return `You do not see ${q}.` }
-      target.parent = this
-      return `You took the ${target.name}.`
+      target.data.parent = this.data.id
+      return `You took the ${target.data.name}.`
     },
     drop: (q) => {
       const target = this.find(this.inventory(), q)
       if (!target) { return `You do not carry ${q}.` }
-      target.parent = this.parent
-      return `You dropped the ${target.name}.`
+      target.data.parent = this.parent().data.id
+      return `You dropped the ${target.data.name}.`
     },
     move: (q) => {
       if (!q.indexOf(' in ') < 0) { return 'You must use the A in B format.' }
       const a = this.find(this.sight(), q.split(' in ')[0])
       const b = this.find(this.sight(), q.split(' in ')[1])
       if (!a || !b) { return 'You do not see these vessels.' }
-      a.parent = b
-      return `You moved the ${a.name} into ${b.name}.`
+      a.data.parent = b.data.id
+      return `You moved the ${a.data.name} into ${b.data.name}.`
     },
     warp: (q) => {
       const target = this.find(paradise.vessels(), q)
       if (!target) { return `You cannot warp to ${q}.` }
-      this.parent = target
-      return `You warped to the ${target.name}.`
+      this.data.parent = target.data.id
+      return `You warped to the ${target.data.name}.`
     },
     note: (q) => {
-      this.parent.note = q
-      return `You ${q !== '' ? 'added' : 'removed'} the ${this.parent.name} note.`
+      this.parent().data.note = q
+      return `You ${q !== '' ? 'added' : 'removed'} the ${this.parent().data.name} note.`
     },
     program: (q) => {
-      this.parent.program = q
-      return `You ${q !== '' ? 'added' : 'removed'} the ${this.parent.name} program.`
+      this.parent().data.program = q
+      return `You ${q !== '' ? 'added' : 'removed'} the ${this.parent().data.name} program.`
     },
     use: (q) => {
       const target = this.find(paradise.vessels(), q)
       if (!target) { return `You cannot use the ${q}.` }
-      if (!target.program) { return `The ${target.name} has no program.` }
-      return this.act(target.program)
+      if (!target.data.program) { return `The ${target.data.name} has no program.` }
+      return this.act(target.data.program)
     },
     learn: (q) => {
       const actions = Object.keys(this.actions)
@@ -76,18 +73,28 @@ function Vessel (id, name, owner, parent) {
     }
   }
 
+  // Getters
+
+  this.parent = () => {
+    return paradise.read(this.data.parent)
+  }
+
+  this.owner = () => {
+    return paradise.read(this.data.owner)
+  }
+
   // Etcs
 
   this.sight = () => {
     const a = paradise.filter((vessel) => {
-      return vessel.parent.id === this.parent.id && vessel.id !== this.id && vessel.id !== this.parent.id
+      return vessel.parent().data.id === this.parent().data.id && vessel.data.id !== this.data.id && vessel.data.id !== this.parent().data.id
     })
     return a
   }
 
   this.inventory = () => {
     const a = paradise.filter((vessel) => {
-      return vessel.parent.id === this.id && vessel.id !== this.id && vessel.id !== this.parent.id
+      return vessel.parent().data.id === this.data.id && vessel.data.id !== this.data.id && vessel.data.id !== this.parent().data.id
     })
     return a
   }
@@ -102,7 +109,7 @@ function Vessel (id, name, owner, parent) {
   this.find = (arr, q) => {
     const name = removeParticles(q)
     for (const vessel of arr) {
-      if (vessel.name !== name) { continue }
+      if (vessel.data.name !== name) { continue }
       return vessel
     }
   }
@@ -112,13 +119,13 @@ function Vessel (id, name, owner, parent) {
   }
 
   this.action = () => {
-    if (this.program) { return 'use' }
-    if (client.vessel.has(this.name)) { return 'drop' }
+    if (this.data.program) { return 'use' }
+    if (client.vessel.has(this.data.name)) { return 'drop' }
     return 'enter'
   }
 
   this.toAction = () => {
-    return `<a data-action='${this.action()} the ${this.name}' href='#${this.name}'>${this.action()} the ${this.name}</a>`
+    return `<a data-action='${this.action()} the ${this.data.name}' href='#${this.data.name}'>${this.action()} the ${this.data.name}</a>`
   }
 
   function removeParticles (str) {

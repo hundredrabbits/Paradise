@@ -2,12 +2,10 @@ function Paradise () {
   this.database = {}
 
   this.install = () => {
-    const library = new Vessel(this.next(), 'library')
-    library.owner = library
-    library.parent = library
+    const library = new Vessel(0, 'library', 0, 0)
     this.add(library)
     library.actions.create('ghost')
-    library.note = 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.<br/>Type learn to see the list of commands.'
+    library.data.note = 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.<br/>Type learn to see the list of commands.'
   }
 
   this.start = () => {
@@ -15,9 +13,9 @@ function Paradise () {
   }
 
   this.add = (vessel) => {
-    if (this.names().indexOf(vessel.name) > -1) { return null }
-    console.log(`Adding ${vessel.name}, in ${vessel.parent.name}`)
-    this.database[vessel.id] = vessel
+    if (this.names().indexOf(vessel.data.name) > -1) { return null }
+    this.database[vessel.data.id] = vessel
+    console.log(`Adding ${vessel.data.name}`)
     return vessel
   }
 
@@ -52,5 +50,17 @@ function Paradise () {
 
   this.filter = (fn) => {
     return this.vessels().filter(fn)
+  }
+
+  this.import = (json) => {
+
+  }
+
+  this.export = () => {
+    const a = []
+    for (const vessel of this.vessels()) {
+      a.push(vessel.data)
+    }
+    return JSON.stringify(a)
   }
 }

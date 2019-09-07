@@ -37,7 +37,7 @@ function Client (paradise) {
   }
 
   this.start = (id = 0) => {
-    this.become(id)
+    this.become(1)
     paradise.start()
     this.update()
     this._input.value = 'create a machine'
@@ -46,6 +46,7 @@ function Client (paradise) {
 
   this.become = (id) => {
     this.vessel = paradise.read(id)
+    console.log('Become ', this.vessel.data.name)
   }
 
   this.action = (str) => {
@@ -56,9 +57,9 @@ function Client (paradise) {
   this.update = (response = '') => {
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
-    this._location.innerHTML = `You are ${this.vessel.name}, in ${this.vessel.parent.name}.`
-    this._note.innerHTML = this.vessel.parent.note ? this.vessel.parent.note : ''
-    this._program.innerHTML = this.vessel.parent.program ? this.vessel.parent.program : ''
+    this._location.innerHTML = `You are ${this.vessel.data.name}, in ${this.vessel.parent().data.name}.`
+    this._note.innerHTML = this.vessel.parent().data.note ? this.vessel.parent().data.note : ''
+    this._program.innerHTML = this.vessel.parent().data.program ? this.vessel.parent().data.program : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => {
       return acc + '<li>' + vessel.toAction() + '</li>'
     }, '')
