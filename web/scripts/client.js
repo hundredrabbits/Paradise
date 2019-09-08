@@ -75,4 +75,9 @@ function Client (paradise) {
     this.update(response)
     this._input.value = ''
   }
+
+  this.import = (world) => {
+    paradise.import(world)
+    this.update()
+  }
 }

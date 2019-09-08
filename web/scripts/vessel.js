@@ -1,13 +1,11 @@
-function Vessel (id, name, owner, parent, note, program) {
-  this.data = {
-    id, name, owner, parent, note, program
-  }
+function Vessel (data) {
+  this.data = data
 
   this.actions = {
     create: (q) => {
       const name = removeParticles(q)
       const id = paradise.next()
-      const vessel = new Vessel(id, name, this.data.id, this.parent().data.id)
+      const vessel = new Vessel({ id: id, name: name, owner: this.data.id, parent: this.parent().data.id })
       return paradise.add(vessel) ? `You created the ${vessel.data.name}.` : `You cannot create the ${vessel.data.name}.`
     },
     enter: (q) => {
