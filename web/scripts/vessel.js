@@ -10,6 +10,9 @@ function Vessel (data) {
     },
     duplicate: (q) => {
       return `you cannot create another ${q}.`
+    },
+    unknown: (q) => {
+      return `you cannot ${q}.`
     }
   }
 
@@ -121,7 +124,7 @@ function Vessel (data) {
   this.act = (q) => {
     const params = `${q}`.trim().split(' ')
     const action = params.shift()
-    if (!this.actions[action]) { return `You cannot do that.` }
+    if (!this.actions[action]) { return this.errors.unknown(action) }
     return this.actions[action](params.join(' '))
   }
 

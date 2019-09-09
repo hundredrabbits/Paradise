@@ -59,6 +59,7 @@ function Client (paradise) {
   }
 
   this.update = (response = '') => {
+    console.log(response)
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
     this._location.innerHTML = this.putLocation()
@@ -104,6 +105,7 @@ function Client (paradise) {
 
   this.walkthrough = () => {
     const cmds = [
+      'create', // error: empty
       'create a blue house', // create1
       'create a blue house', // create duplicate
       'create a red house', // create2
@@ -122,6 +124,10 @@ function Client (paradise) {
       'drop', // error: empty
       'drop unseen', // error: unseen
       'drop the tool',
+      // program
+      'enter the tool',
+      'program ',
+      'take the tool',
       // move
       'move the blue house into the red house',
       'warp into the red house',

@@ -15,7 +15,6 @@ function Paradise () {
   this.add = (vessel) => {
     if (this.exists(vessel.data.name)) { return null }
     this.database[vessel.data.id] = vessel
-    console.log(`Adding ${vessel.data.name}`)
     return vessel
   }
 
