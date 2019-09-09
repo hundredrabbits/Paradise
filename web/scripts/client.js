@@ -44,7 +44,7 @@ function Client (paradise) {
     this.become(1)
     paradise.start()
     this.update()
-    this._input.value = 'create a machine'
+    this._input.value = 'create a super duper machine'
     this._input.focus()
   }
 
@@ -82,6 +82,7 @@ function Client (paradise) {
       return
     }
     console.log('==============')
+    console.info(cmd)
     const response = this.vessel.act(cmd)
     this.update(response)
     this._input.value = ''
@@ -100,5 +101,26 @@ function Client (paradise) {
   this.import = (world) => {
     paradise.import(world)
     this.update()
+  }
+
+  this.walkthrough = () => {
+    const cmds = [
+      'create a blue house', // create1
+      'create a blue house', // create duplicate
+      'create a red house', // create2
+      'enter the blue house', // enter
+      'note the house is in fact blue', // note
+      'leave',
+      'take the blue house', // take
+      'drop the blue house', // drop
+      'move the blue house into the red house',
+      'warp into the red house',
+      'learn',
+      ''
+    ]
+    for (const cmd of cmds) {
+      this.validate(cmd)
+    }
+    return 'done.'
   }
 }

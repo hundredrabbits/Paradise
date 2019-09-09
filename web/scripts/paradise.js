@@ -13,7 +13,7 @@ function Paradise () {
   }
 
   this.add = (vessel) => {
-    if (this.names().indexOf(vessel.data.name) > -1) { return null }
+    if (this.exists(vessel.data.name)) { return null }
     this.database[vessel.data.id] = vessel
     console.log(`Adding ${vessel.data.name}`)
     return vessel
@@ -21,9 +21,13 @@ function Paradise () {
 
   this.find = (name) => {
     for (vessel of this.vessels()) {
-      if (vessel.name !== name) { continue }
+      if (vessel.data.name !== name) { continue }
       return vessel
     }
+  }
+
+  this.exists = (name) => {
+    return !!this.find(name)
   }
 
   this.vessels = () => {

@@ -110,6 +110,10 @@ function Vessel (data) {
       if (vessel.data.name !== name) { continue }
       return vessel
     }
+    for (const vessel of arr) {
+      if (vessel.data.name.indexOf(q) > -1) { continue }
+      return vessel
+    }
   }
 
   this.has = (name) => {
