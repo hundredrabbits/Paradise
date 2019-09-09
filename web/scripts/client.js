@@ -9,6 +9,7 @@ function Client (paradise) {
   this._response = document.createElement('p')
   this._inventory = document.createElement('ul')
   this._program = document.createElement('pre')
+  this._footer = document.createElement('p')
 
   this.vessel = null
 
@@ -21,6 +22,9 @@ function Client (paradise) {
     this._el.appendChild(this._inventory)
     this._el.appendChild(this._input)
     this._el.appendChild(this._program)
+    // this._el.appendChild(document.createElement('hr'))
+    this._el.appendChild(this._footer)
+
     host.appendChild(this._el)
 
     this._input.onkeydown = (e) => {
@@ -67,6 +71,7 @@ function Client (paradise) {
       return acc + '<li>' + vessel.toAction() + '</li>'
     }, '')
     this._response.innerHTML = response
+    this._footer.innerHTML = `<i>${this.vessel.stem().data.name}:${this.vessel.parent().data.id}:${this.vessel.data.id}</i>`
   }
 
   this.validate = (cmd) => {
@@ -89,7 +94,7 @@ function Client (paradise) {
     if (this.vessel.stem().data.id === this.vessel.parent().data.id) {
       return `You are a ${this.vessel.data.name}, at the ${this.vessel.parent().data.name}.`
     }
-    return `You are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name} of the ${this.vessel.stem().data.name}.`
+    return `You are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
   }
 
   this.import = (world) => {
