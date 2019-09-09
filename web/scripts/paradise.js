@@ -1,15 +1,24 @@
+'use strict'
+
+/* global Vessel */
+
 function Paradise () {
   this.database = {}
 
   this.install = () => {
-    const library = new Vessel({ id: 0, name: 'library', owner: 0, parent: 0 })
-    this.add(library)
-    library.actions.create('ghost')
-    library.data.note = 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.<br/>Type learn to see the list of commands.'
+    this.clear()
   }
 
   this.start = () => {
 
+  }
+
+  this.clear = () => {
+    this.database = {}
+    const library = new Vessel({ id: 0, name: 'library', owner: 0, parent: 0 })
+    this.add(library)
+    library.actions.create('ghost')
+    library.data.note = 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.<br/>Type learn to see the list of commands.'
   }
 
   this.add = (vessel) => {
@@ -19,7 +28,7 @@ function Paradise () {
   }
 
   this.find = (name) => {
-    for (vessel of this.vessels()) {
+    for (const vessel of this.vessels()) {
       if (vessel.data.name !== name) { continue }
       return vessel
     }

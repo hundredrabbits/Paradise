@@ -1,3 +1,7 @@
+'use strict'
+
+/* global paradise */
+
 function Vessel (data) {
   this.data = data
 
@@ -6,13 +10,16 @@ function Vessel (data) {
       return `you cannot do that.`
     },
     unseen: (q) => {
-      return `you do not see ${q}.`
+      return `you cannot see ${q}.`
     },
     duplicate: (q) => {
       return `you cannot create another ${q}.`
     },
     unknown: (q) => {
       return `you cannot ${q}.`
+    },
+    invalid: (q) => {
+      return `you cannot use "${q}".`
     },
     empty: () => {
       return `you did nothing.`
@@ -24,6 +31,7 @@ function Vessel (data) {
       if (!q) { return this.errors.incomplete() }
       const name = removeParticles(q)
       if (paradise.exists(name)) { return this.errors.duplicate(name) }
+      if (!name.isAlpha()) { return this.errors.invalid(name) }
       const id = paradise.next()
       const vessel = new Vessel({ id: id, name: name, owner: this.data.id, parent: this.parent().data.id })
       return paradise.add(vessel) ? `you created the ${vessel.data.name}.` : `you cannot create the ${vessel.data.name}.`
@@ -168,6 +176,10 @@ function Vessel (data) {
     return `<a data-action='${this.action()} the ${this.data.name}' href='#${this.data.name}'>${this.action()} the ${this.data.name}</a>`
   }
 
+  this.toString = () => {
+    return `${this.data.name}`
+  }
+
   this.isParadox = () => {
     return this.data.id === this.parent().data.id
   }
@@ -185,3 +197,8 @@ function Vessel (data) {
     }, '').trim()
   }
 }
+
+String.prototype.toAlpha = function () { return this.replace(/[^a-z ]/gi, '').trim() }
+String.prototype.toAlphanum = function () { return this.replace(/[^0-9a-z ]/gi, '') }
+String.prototype.isAlpha = function () { return !!this.match(/^[a-z ]+$/) }
+String.prototype.isAlphanum = function () { return !!this.match(/^[A-Za-z0-9 ]+$/) }

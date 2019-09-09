@@ -1,4 +1,6 @@
-/* global paradise */
+'use strict'
+
+/* global Walkthrough */
 
 function Client (paradise) {
   this._el = document.createElement('div')
@@ -11,9 +13,11 @@ function Client (paradise) {
   this._program = document.createElement('pre')
   this._footer = document.createElement('p')
 
+  this.walkthrough = null
   this.vessel = null
 
   this.install = (host = document.body) => {
+    this.walkthrough = new Walkthrough(this, paradise)
     paradise.install()
     this._el.appendChild(this._location)
     this._el.appendChild(this._sight)
@@ -45,7 +49,7 @@ function Client (paradise) {
     this.update()
     this._input.value = 'create a super duper machine'
     this._input.focus()
-    // this.walkthrough()
+    // this.walkthrough.run()
   }
 
   this.become = (id) => {
@@ -55,6 +59,11 @@ function Client (paradise) {
   this.action = (str) => {
     this._input.value = str
     this._input.focus()
+  }
+
+  this.reset = () => {
+    console.log('==================')
+    paradise.clear()
   }
 
   this.update = (response = '') => {
@@ -100,48 +109,5 @@ function Client (paradise) {
   this.import = (world) => {
     paradise.import(world)
     this.update()
-  }
-
-  this.walkthrough = () => {
-    const cmds = [
-      // create
-      'create', // error: empty
-      'create a blue house', // create1
-      'create a blue house', // create duplicate
-      'create a red house', // create2
-      'create a tool',
-      // become
-      'become',
-      'become unseen',
-      'become the tool',
-      'become the ghost',
-      // enter
-      'enter', // error: empty
-      'enter unseen', // error: unseen
-      'enter the blue house', // success
-      'note the house is in fact blue.', // note
-      'leave',
-      // take
-      'take', // error: empty
-      'take unseen', // error: unseen
-      'take the tool',
-      // drop
-      'drop', // error: empty
-      'drop unseen', // error: unseen
-      'drop the tool',
-      // program
-      'enter the tool',
-      'program ',
-      'take the tool',
-      // move
-      'move the blue house into the red house',
-      'warp into the red house',
-      'learn',
-      ''
-    ]
-    for (const cmd of cmds) {
-      this.validate(cmd)
-    }
-    return 'done.'
   }
 }
