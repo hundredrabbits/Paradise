@@ -122,8 +122,22 @@ function Vessel (data) {
     return 'enter'
   }
 
+  this.stem = () => {
+    let i = 0
+    let v = this.parent()
+    while (!v.isParadox() || i < 20) {
+      v = v.parent()
+      i++
+    }
+    return v
+  }
+
   this.toAction = () => {
     return `<a data-action='${this.action()} the ${this.data.name}' href='#${this.data.name}'>${this.action()} the ${this.data.name}</a>`
+  }
+
+  this.isParadox = () => {
+    return this.data.id === this.parent().data.id
   }
 
   function removeParticles (str) {

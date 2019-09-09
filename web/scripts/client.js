@@ -57,7 +57,7 @@ function Client (paradise) {
   this.update = (response = '') => {
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
-    this._location.innerHTML = `You are ${this.vessel.data.name}, in ${this.vessel.parent().data.name}.`
+    this._location.innerHTML = this.putLocation()
     this._note.innerHTML = this.vessel.parent().data.note ? this.vessel.parent().data.note : ''
     this._program.innerHTML = this.vessel.parent().data.program ? this.vessel.parent().data.program : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => {
@@ -70,10 +70,26 @@ function Client (paradise) {
   }
 
   this.validate = (cmd) => {
+    if (cmd.indexOf('&') > -1) {
+      for (const c of cmd.split('&')) {
+        this.validate(c)
+      }
+      return
+    }
     console.log('==============')
     const response = this.vessel.act(cmd)
     this.update(response)
     this._input.value = ''
+  }
+
+  this.putLocation = () => {
+    if (this.vessel.isParadox()) {
+      return `You are the paradox of the ${this.vessel.data.name}.`
+    }
+    if (this.vessel.stem().data.id === this.vessel.parent().data.id) {
+      return `You are a ${this.vessel.data.name}, at the ${this.vessel.parent().data.name}.`
+    }
+    return `You are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name} of the ${this.vessel.stem().data.name}.`
   }
 
   this.import = (world) => {

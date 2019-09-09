@@ -93,3 +93,11 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 #### Cast
 
 -   `cast the storm scroll at the golden beetle` Trigger a **distant vessel**'s automation as another vessel.
+
+## TODOs
+
+- Travel across server
+- Implement tests
+- Can you "take" the parent paradox!?
+
+
