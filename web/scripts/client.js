@@ -22,7 +22,6 @@ function Client (paradise) {
     this._el.appendChild(this._inventory)
     this._el.appendChild(this._input)
     this._el.appendChild(this._program)
-    // this._el.appendChild(document.createElement('hr'))
     this._el.appendChild(this._footer)
 
     host.appendChild(this._el)
@@ -46,11 +45,11 @@ function Client (paradise) {
     this.update()
     this._input.value = 'create a super duper machine'
     this._input.focus()
+    // this.walkthrough()
   }
 
   this.become = (id) => {
     this.vessel = paradise.read(id)
-    console.log('Become ', this.vessel.data.name)
   }
 
   this.action = (str) => {
@@ -105,12 +104,18 @@ function Client (paradise) {
 
   this.walkthrough = () => {
     const cmds = [
+      // create
       'create', // error: empty
       'create a blue house', // create1
       'create a blue house', // create duplicate
       'create a red house', // create2
       'create a tool',
-      // Enter
+      // become
+      'become',
+      'become unseen',
+      'become the tool',
+      'become the ghost',
+      // enter
       'enter', // error: empty
       'enter unseen', // error: unseen
       'enter the blue house', // success

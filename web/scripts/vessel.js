@@ -13,6 +13,9 @@ function Vessel (data) {
     },
     unknown: (q) => {
       return `you cannot ${q}.`
+    },
+    empty: () => {
+      return `you did nothing.`
     }
   }
 
@@ -124,6 +127,7 @@ function Vessel (data) {
   this.act = (q) => {
     const params = `${q}`.trim().split(' ')
     const action = params.shift()
+    if (!action) { return this.errors.empty() }
     if (!this.actions[action]) { return this.errors.unknown(action) }
     return this.actions[action](params.join(' '))
   }

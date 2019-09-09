@@ -97,7 +97,6 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 ## TODOs
 
 - Travel across server
-- Implement tests
 - Can you "take" the parent paradox!?
 
 
