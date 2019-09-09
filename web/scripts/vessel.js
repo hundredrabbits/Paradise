@@ -1,73 +1,94 @@
 function Vessel (data) {
   this.data = data
 
+  this.errors = {
+    incomplete: () => {
+      return `you cannot do that.`
+    },
+    unseen: (q) => {
+      return `you do not see ${q}.`
+    },
+    duplicate: (q) => {
+      return `you cannot create another ${q}.`
+    }
+  }
+
   this.actions = {
     create: (q) => {
+      if (!q) { return this.errors.incomplete() }
       const name = removeParticles(q)
+      if (paradise.exists(name)) { return this.errors.duplicate(name) }
       const id = paradise.next()
       const vessel = new Vessel({ id: id, name: name, owner: this.data.id, parent: this.parent().data.id })
-      return paradise.add(vessel) ? `You created the ${vessel.data.name}.` : `You cannot create the ${vessel.data.name}.`
+      return paradise.add(vessel) ? `you created the ${vessel.data.name}.` : `you cannot create the ${vessel.data.name}.`
     },
     enter: (q) => {
+      if (!q) { return this.errors.incomplete() }
       const target = this.find(this.sight(), q)
-      if (!target) { return `You do not see ${q}.` }
+      if (!target) { return this.errors.unseen(q) }
       this.data.parent = target.data.id
       return `You entered the ${target.data.name}.`
     },
     leave: () => {
       const origin = this.parent().data.name
       this.data.parent = this.parent().parent().data.id
-      return `You left the ${origin}.`
+      return `you left the ${origin}.`
     },
     become: (q) => {
+      if (!q) { return this.errors.incomplete() }
       const target = this.find(this.sight(), q)
-      if (!target) { return `You do not see ${q}.` }
+      if (!target) { return this.errors.unseen(q) }
       client.vessel = target
-      return `You became the ${target.data.name}`
+      return `you became the ${target.data.name}`
     },
     take: (q) => {
+      if (!q) { return this.errors.incomplete() }
       const target = this.find(this.sight(), q)
-      if (!target) { return `You do not see ${q}.` }
+      if (!target) { return this.errors.unseen(q) }
       target.data.parent = this.data.id
-      return `You took the ${target.data.name}.`
+      return `you took the ${target.data.name}.`
     },
     drop: (q) => {
+      if (!q) { return this.errors.incomplete() }
       const target = this.find(this.inventory(), q)
-      if (!target) { return `You do not carry ${q}.` }
+      if (!target) { return this.errors.unseen(q) }
       target.data.parent = this.parent().data.id
-      return `You dropped the ${target.data.name}.`
+      return `you dropped the ${target.data.name}.`
     },
     move: (q) => {
-      if (!q.indexOf(' in ') < 0) { return 'You must use the A in B format.' }
+      if (!q) { return this.errors.incomplete() }
+      if (!q.indexOf(' in ') < 0) { return 'you must use the A in B format.' }
       const a = this.find(this.sight(), q.split(' in ')[0])
       const b = this.find(this.sight(), q.split(' in ')[1])
-      if (!a || !b) { return 'You do not see these vessels.' }
+      if (!a || !b) { return 'you do not see these vessels.' }
       a.data.parent = b.data.id
-      return `You moved the ${a.data.name} into ${b.data.name}.`
+      return `you moved the ${a.data.name} into ${b.data.name}.`
     },
     warp: (q) => {
+      if (!q) { return this.errors.incomplete() }
       const target = this.find(paradise.vessels(), q)
-      if (!target) { return `You cannot warp to ${q}.` }
+      if (!target) { return `you cannot warp to ${q}.` }
       this.data.parent = target.data.id
-      return `You warped to the ${target.data.name}.`
+      return `you warped to the ${target.data.name}.`
     },
     note: (q) => {
       this.parent().data.note = q
-      return `You ${q !== '' ? 'added' : 'removed'} the ${this.parent().data.name} note.`
+      return `you ${q !== '' ? 'added' : 'removed'} the ${this.parent().data.name} note.`
     },
     program: (q) => {
       this.parent().data.program = q
-      return `You ${q !== '' ? 'added' : 'removed'} the ${this.parent().data.name} program.`
+      return `you ${q !== '' ? 'added' : 'removed'} the ${this.parent().data.name} program.`
     },
     use: (q) => {
+      if (!q) { return this.errors.incomplete() }
       const target = this.find(paradise.vessels(), q)
-      if (!target) { return `You cannot use the ${q}.` }
-      if (!target.data.program) { return `The ${target.data.name} has no program.` }
+      if (!target) { return this.errors.unseen(q) }
+      if (!target.data.program) { return `the ${target.data.name} has no program.` }
       return this.act(target.data.program)
     },
     learn: (q) => {
       const actions = Object.keys(this.actions)
-      return `The available commands(${actions.length}) are ${andList(actions)}.`
+      return `the available commands(${actions.length}) are ${andList(actions)}.`
     }
   }
 
@@ -111,7 +132,7 @@ function Vessel (data) {
       return vessel
     }
     for (const vessel of arr) {
-      if (vessel.data.name.indexOf(q) > -1) { continue }
+      if (vessel.data.name.indexOf(name) < 0) { continue }
       return vessel
     }
   }

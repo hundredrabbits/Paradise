@@ -5,7 +5,7 @@ function Client (paradise) {
   this._input = document.createElement('input')
   this._location = document.createElement('h2')
   this._sight = document.createElement('ul')
-  this._note = document.createElement('ul')
+  this._note = document.createElement('p')
   this._response = document.createElement('p')
   this._inventory = document.createElement('ul')
   this._program = document.createElement('pre')
@@ -81,8 +81,7 @@ function Client (paradise) {
       }
       return
     }
-    console.log('==============')
-    console.info(cmd)
+    console.info('> ' + cmd)
     const response = this.vessel.act(cmd)
     this.update(response)
     this._input.value = ''
@@ -90,12 +89,12 @@ function Client (paradise) {
 
   this.putLocation = () => {
     if (this.vessel.isParadox()) {
-      return `You are the paradox of the ${this.vessel.data.name}.`
+      return `you are the paradox of the ${this.vessel.data.name}.`
     }
     if (this.vessel.stem().data.id === this.vessel.parent().data.id) {
-      return `You are a ${this.vessel.data.name}, at the ${this.vessel.parent().data.name}.`
+      return `you are a ${this.vessel.data.name}, at the ${this.vessel.parent().data.name}.`
     }
-    return `You are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
+    return `you are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
   }
 
   this.import = (world) => {
@@ -108,11 +107,22 @@ function Client (paradise) {
       'create a blue house', // create1
       'create a blue house', // create duplicate
       'create a red house', // create2
-      'enter the blue house', // enter
-      'note the house is in fact blue', // note
+      'create a tool',
+      // Enter
+      'enter', // error: empty
+      'enter unseen', // error: unseen
+      'enter the blue house', // success
+      'note the house is in fact blue.', // note
       'leave',
-      'take the blue house', // take
-      'drop the blue house', // drop
+      // take
+      'take', // error: empty
+      'take unseen', // error: unseen
+      'take the tool',
+      // drop
+      'drop', // error: empty
+      'drop unseen', // error: unseen
+      'drop the tool',
+      // move
       'move the blue house into the red house',
       'warp into the red house',
       'learn',
