@@ -152,6 +152,23 @@ function Vessel (data) {
     return paradise.world[this.data.owner]
   }
 
+  this.action = () => {
+    if (this.data.program) { return 'use' }
+    if (paradise.find(this.data.name, client.vessel.inventory())) { return 'drop' }
+    return 'enter'
+  }
+
+  this.stem = () => {
+    const known = []
+    let v = this
+    while (v.isParadox() !== true) {
+      if (known.indexOf(v.data.id) >= 0) { return null }
+      known.push(v.data.id)
+      v = v.parent()
+    }
+    return v
+  }
+
   // selector
 
   this.sight = () => {
@@ -173,23 +190,6 @@ function Vessel (data) {
   }
 
   // tools
-
-  this.action = () => {
-    if (this.data.program) { return 'use' }
-    if (paradise.find(this.data.name, client.vessel.inventory())) { return 'drop' }
-    return 'enter'
-  }
-
-  this.stem = () => {
-    const known = []
-    let v = this
-    while (v.isParadox() !== true) {
-      if (known.indexOf(v.data.id) >= 0) { return null }
-      known.push(v.data.id)
-      v = v.parent()
-    }
-    return v
-  }
 
   this.isParadox = () => {
     return this.data.id === this.parent().data.id
