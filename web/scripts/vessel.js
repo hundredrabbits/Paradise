@@ -35,7 +35,7 @@ function Vessel (data) {
     },
     enter: (q) => {
       if (!q) { return this.errors.incomplete() }
-      const target = this.find(this.reach(), q)
+      const target = this.find(this.sight(), q)
       if (!target) { return this.errors.unseen(q) }
       this.data.parent = target.data.id
       return `you entered the ${target}.`
