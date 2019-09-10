@@ -69,12 +69,8 @@ function Walkthrough (client, paradise) {
     ]
   }
 
-  this.run = (chapter = 'all') => {
-    this.chapters.all = []
-    for (const chapter in this.chapters) {
-      this.chapters.all = this.chapters.all.concat(this.chapters[chapter])
-    }
-    client.reset()
+  this.run = (chapter = 'basics') => {
+    if (!this.chapters[chapter]) { return console.warn('Unknown walkthrough chapter') }
     for (const cmd of this.chapters[chapter]) {
       client.validate(cmd)
     }

@@ -122,7 +122,7 @@ function Vessel (data) {
     },
     learn: (q) => {
       const actions = Object.keys(this.actions)
-      return `the available commands(${actions.length}) are ${andList(actions)}.`
+      return `the ${actions.length} available commands are: ${andList(actions)}.`
     }
   }
 
@@ -134,12 +134,28 @@ function Vessel (data) {
     return this.actions[action](params.join(' '))
   }
 
+  // access
+
   this.parent = () => {
     return paradise.world[this.data.parent]
   }
 
   this.owner = () => {
     return paradise.world[this.data.owner]
+  }
+
+  // selector
+
+  this.find = (arr, q) => {
+    const name = removeParticles(q)
+    for (const vessel of arr) {
+      if (vessel.data.name !== name) { continue }
+      return vessel
+    }
+    for (const vessel of arr) {
+      if (vessel.data.name.indexOf(name) < 0) { continue }
+      return vessel
+    }
   }
 
   this.sight = () => {
@@ -160,17 +176,7 @@ function Vessel (data) {
     return [].concat(this.sight()).concat(this.inventory())
   }
 
-  this.find = (arr, q) => {
-    const name = removeParticles(q)
-    for (const vessel of arr) {
-      if (vessel.data.name !== name) { continue }
-      return vessel
-    }
-    for (const vessel of arr) {
-      if (vessel.data.name.indexOf(name) < 0) { continue }
-      return vessel
-    }
-  }
+  // tools
 
   this.action = () => {
     if (this.data.program) { return 'use' }
