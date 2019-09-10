@@ -66,6 +66,16 @@ function Walkthrough (client, paradise) {
       'transform into a foggy bat',
       'transform into glass',
       'transform the house into a golden cat'
+    ],
+    paradox: [
+      'warp into the ghost',
+      'create a box',
+      'enter the box',
+      'leave',
+      'enter the box',
+      'create a cat',
+      'become the cat',
+      'leave & leave & leave'
     ]
   }
 
@@ -73,6 +83,16 @@ function Walkthrough (client, paradise) {
     if (!this.chapters[chapter]) { return console.warn('Unknown walkthrough chapter') }
     for (const cmd of this.chapters[chapter]) {
       client.validate(cmd)
+    }
+  }
+
+  this.runAll = () => {
+    for (const chapter in this.chapters) {
+      console.log('========== ' + chapter)
+      paradise.start()
+      for (const cmd of this.chapters[chapter]) {
+        client.validate(cmd)
+      }
     }
   }
 }
