@@ -3,7 +3,7 @@
 /* global Vessel */
 
 function Paradise () {
-  this.database = {}
+  this.world = {}
 
   this.install = () => {
     this.clear()
@@ -14,16 +14,14 @@ function Paradise () {
   }
 
   this.clear = () => {
-    this.database = {}
-    const library = new Vessel({ id: 0, name: 'library', owner: 0, parent: 0 })
-    this.add(library)
-    library.actions.create('ghost')
-    library.data.note = 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.<br/>Type learn to see the list of commands.'
+    this.world = {}
+    this.add(new Vessel({ id: 0, name: 'library', owner: 0, parent: 0, note: 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.<br/>Type learn to see the list of commands.' }))
+    this.add(new Vessel({ id: 1, name: 'ghost', owner: 0, parent: 0, note: 'This is the library ghost vessel.' }))
   }
 
   this.add = (vessel) => {
     if (this.exists(vessel.data.name)) { return null }
-    this.database[vessel.data.id] = vessel
+    this.world[vessel.data.id] = vessel
     return vessel
   }
 
@@ -39,15 +37,7 @@ function Paradise () {
   }
 
   this.vessels = () => {
-    return Object.values(this.database)
-  }
-
-  this.read = (id) => {
-    return this.database[id]
-  }
-
-  this.write = () => {
-
+    return Object.values(this.world)
   }
 
   this.names = () => {
@@ -55,8 +45,8 @@ function Paradise () {
   }
 
   this.next = () => {
-    for (var i = 0; i < 1000; i++) {
-      if (!this.read(i)) { return i }
+    for (var id = 0; id < 1000; id++) {
+      if (!this.world[id]) { return id }
     }
   }
 
@@ -69,7 +59,7 @@ function Paradise () {
     for (const vessel of JSON.parse(json)) {
       db[vessel.id] = new Vessel(vessel)
     }
-    this.database = db
+    this.world = db
   }
 
   this.export = () => {

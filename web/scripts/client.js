@@ -53,7 +53,7 @@ function Client (paradise) {
   }
 
   this.become = (id) => {
-    this.vessel = paradise.read(id)
+    this.vessel = paradise.world[id]
   }
 
   this.action = (str) => {

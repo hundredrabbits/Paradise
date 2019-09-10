@@ -109,11 +109,11 @@ function Vessel (data) {
   // Getters
 
   this.parent = () => {
-    return paradise.read(this.data.parent)
+    return paradise.world[this.data.parent]
   }
 
   this.owner = () => {
-    return paradise.read(this.data.owner)
+    return paradise.world[this.data.owner]
   }
 
   // Etcs
