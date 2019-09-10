@@ -15,8 +15,8 @@ function Paradise () {
 
   this.clear = () => {
     this.world = {}
-    this.add(new Vessel({ id: 0, name: 'library', owner: 0, parent: 0, note: 'Welcome to paradise, you can edit this message with the note action. <br />To begin, make a new vessel with create.<br/>Type learn to see the list of commands.' }))
-    this.add(new Vessel({ id: 1, name: 'ghost', owner: 0, parent: 0, note: 'This is the library ghost vessel.' }))
+    this.add(new Vessel({ id: 0, name: 'library', owner: 0, parent: 0, note: 'welcome to paradise, you can edit this message with the note action. <br />to begin, make a new vessel with create.<br/>type learn to see the list of commands.' }))
+    this.add(new Vessel({ id: 1, name: 'ghost', owner: 0, parent: 0, note: 'this is the library ghost vessel.' }))
   }
 
   this.add = (vessel) => {

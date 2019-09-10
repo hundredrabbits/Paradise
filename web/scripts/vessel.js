@@ -41,7 +41,7 @@ function Vessel (data) {
       const target = this.find(this.sight(), q)
       if (!target) { return this.errors.unseen(q) }
       this.data.parent = target.data.id
-      return `You entered the ${target.data.name}.`
+      return `you entered the ${target.data.name}.`
     },
     leave: () => {
       const origin = this.parent().data.name
