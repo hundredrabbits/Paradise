@@ -49,7 +49,7 @@ function Client (paradise) {
     this.update()
     this._input.value = 'create a super duper machine'
     this._input.focus()
-    // this.walkthrough.run()
+    // this.walkthrough.run('warping')
   }
 
   this.become = (id) => {
@@ -62,7 +62,6 @@ function Client (paradise) {
   }
 
   this.reset = () => {
-    console.log('==================')
     paradise.clear()
   }
 

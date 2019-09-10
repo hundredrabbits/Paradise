@@ -7,6 +7,7 @@ function Walkthrough (client, paradise) {
     errors: [
       'create',
       'create ?!',
+      'create a house & create a house',
       'become',
       'become unseen',
       'enter',
@@ -23,7 +24,7 @@ function Walkthrough (client, paradise) {
       'create a yellow house',
       'become the yellow house',
       'become the ghost',
-      'enter the yellow house',
+      'enter the house',
       'leave'
     ],
     inventory: [
@@ -32,18 +33,15 @@ function Walkthrough (client, paradise) {
       'create a blue house',
       'create a yellow house',
       'take the yellow house',
-      'drop any house'
+      'drop a house'
     ],
     warping: [
       'warp to the library',
       'create a red house',
       'create a blue house',
       'create a yellow house',
-      'warp to any house',
-      'warp into any house',
       'warp to the red house',
-      'warp into the red house',
-      'warp anywhere',
+      'warp in the red house',
       'leave'
     ],
     programing: [
@@ -77,13 +75,14 @@ function Walkthrough (client, paradise) {
     ]
   }
 
-  this.run = () => {
+  this.run = (chapter = 'all') => {
+    this.chapters.all = []
     for (const chapter in this.chapters) {
-      console.log('Walkthrough: ' + chapter)
-      client.reset()
-      for (const cmd of this.chapters[chapter]) {
-        client.validate(cmd)
-      }
+      this.chapters.all = this.chapters.all.concat(this.chapters[chapter])
+    }
+    client.reset()
+    for (const cmd of this.chapters[chapter]) {
+      client.validate(cmd)
     }
   }
 }

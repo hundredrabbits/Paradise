@@ -69,6 +69,20 @@ function Vessel (data) {
       target.data.parent = this.parent().data.id
       return `you dropped the ${target.data.name}.`
     },
+    warp: (q) => {
+      if (!q) { return this.errors.incomplete() }
+      const target = this.find(paradise.vessels(), q)
+      if (!target) { return `you cannot warp to ${q}.` }
+      const relation = createRelation(q.split(' ')[0])
+      if (relation === 'outside') {
+        this.data.parent = target.parent().data.id
+        return `you warped ${relation} the ${target.data.name}.`
+      } else if (relation === 'inside') {
+        this.data.parent = target.data.id
+        return `you warped ${relation} the ${target.data.name}.`
+      }
+      return this.errors.invalid('warp ' + relation)
+    },
     move: (q) => {
       if (!q) { return this.errors.incomplete() }
       if (!q.indexOf(' in ') < 0) { return 'you must use the A in B format.' }
@@ -77,13 +91,6 @@ function Vessel (data) {
       if (!a || !b) { return 'you do not see these vessels.' }
       a.data.parent = b.data.id
       return `you moved the ${a.data.name} into ${b.data.name}.`
-    },
-    warp: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const target = this.find(paradise.vessels(), q)
-      if (!target) { return `you cannot warp to ${q}.` }
-      this.data.parent = target.data.id
-      return `you warped to the ${target.data.name}.`
     },
     note: (q) => {
       this.parent().data.note = q
@@ -99,6 +106,9 @@ function Vessel (data) {
       if (!target) { return this.errors.unseen(q) }
       if (!target.data.program) { return `the ${target.data.name} has no program.` }
       return this.act(target.data.program)
+    },
+    cast: (q) => {
+      return '?!'
     },
     learn: (q) => {
       const actions = Object.keys(this.actions)
@@ -176,16 +186,20 @@ function Vessel (data) {
     return `<a data-action='${this.action()} the ${this.data.name}' href='#${this.data.name}'>${this.action()} the ${this.data.name}</a>`
   }
 
-  this.toString = () => {
-    return `${this.data.name}`
-  }
-
   this.isParadox = () => {
     return this.data.id === this.parent().data.id
   }
 
+  this.toString = () => {
+    return `${this.data.name}`
+  }
+
+  function createRelation (word) {
+    return word.replace('in', 'inside').replace('into', 'inside').replace('within', 'inside').replace('by', 'outside').replace('at', 'outside').replace('to', 'outside')
+  }
+
   function removeParticles (str) {
-    const particles = ['a', 'the', 'an', 'at', 'in', 'into', 'to']
+    const particles = ['a', 'the', 'an', 'at', 'in', 'into', 'to', 'by']
     return str.split(' ').filter((item) => {
       return particles.indexOf(item) < 0
     }).join(' ').trim()
