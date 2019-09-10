@@ -44,7 +44,7 @@ function Client (paradise) {
     paradise.start()
     this.vessel = paradise.world[id]
     this.update()
-    this._input.value = 'create a machine'
+    this._input.value = 'create a machine & create a box & move the machine in the box'
     this._input.focus()
     // this.walkthrough.runAll('basics')
   }

@@ -5,141 +5,80 @@
 function Vessel (data) {
   this.data = data
 
-  this.errors = {
-    incomplete: () => {
-      return `you cannot do that.`
-    },
-    unseen: (q) => {
-      return `you do not see that vessel.`
-    },
-    duplicate: (q) => {
-      return `you cannot create another ${q}.`
-    },
-    unknown: (q) => {
-      return `you cannot ${q}.`
-    },
-    unexist: (q) => {
-      return `you cannot find that vessel.`
-    },
-    invalid: (q, type = 'vessel name') => {
-      return `you cannot use the ${type} "${q}".`
-    }
-  }
-
   this.actions = {
-    create: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const name = removeParticles(q)
-      if (!isValid(name)) { return this.errors.invalid(name) }
-      if (paradise.find(name)) { return this.errors.duplicate(name) }
-      paradise.add(new Vessel({
-        id: paradise.next(),
-        name: name,
-        owner: this.data.id,
-        parent: this.parent().data.id
-      }))
-      return `you created the ${name}.`
-    },
-    enter: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const target = paradise.find(q, this.sight())
-      if (!target) { return this.errors.unseen(q) }
-      this.data.parent = target.data.id
-      return `you entered the ${target}.`
-    },
-    leave: () => {
-      if (this.parent().isParadox()) { return `you cannot leave a paradox.` }
-      const origin = this.parent().data.name
-      this.data.parent = this.parent().parent().data.id
-      return `you left the ${origin}.`
-    },
-    become: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const target = paradise.find(q, this.sight())
-      if (!target) { return this.errors.unseen(q) }
-      client.vessel = target
-      return `you became the ${target}`
-    },
-    take: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const target = paradise.find(q, this.sight())
-      if (!target) { return this.errors.unseen(q) }
-      target.data.parent = this.data.id
-      return `you took the ${target}.`
-    },
-    drop: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const target = paradise.find(q, this.inventory())
-      if (!target) { return this.errors.unseen(q) }
-      target.data.parent = this.parent().data.id
-      return `you dropped the ${target}.`
-    },
-    warp: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const id = q.split(' ').pop()
-      const target = !isNaN(id) && paradise.world[id] ? paradise.world[id] : paradise.find(q, paradise.vessels())
-      if (!target) { return this.errors.unexist(q) }
-      const relation = createRelation(q)
-      if (!relation) { return this.errors.unknown(q) }
-      if (relation === 'outside') {
-        this.data.parent = target.parent().data.id
-      } else if (relation === 'inside') {
+    create: new Action('create', 'Create a new vessel at your current location.', 'words unique valid notempty',
+      (name) => {
+        paradise.add(new Vessel({ id: paradise.next(), name: name, owner: this.data.id, parent: this.parent().data.id }))
+        return `you created the ${name}.`
+      }),
+    enter: new Action('enter', 'Enter a visible vessel.', 'words visible target notempty',
+      (name, target) => {
         this.data.parent = target.data.id
-      }
-      return target.data.id === client.vessel.data.id ? `you warped ${relation} yourself.` : `you warped ${relation} the ${target}.`
-    },
-    move: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const relation = findRelation(q)
-      if (!relation) { return this.errors.incomplete(q) }
-      const parts = q.split(relation)
-      const a = paradise.find(parts[0], this.reach())
-      const b = paradise.find(parts[1], this.reach())
-      if (!a) { return this.errors.unseen(parts[0]) }
-      if (!b) { return this.errors.unseen(parts[1]) }
-      a.data.parent = b.data.id
-      return `you moved the ${a} into ${b}.`
-    },
-    transform: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const relation = findRelation(q)
-      if (!relation) { return this.errors.incomplete(q) }
-      const parts = q.split(relation)
-      const target = parts[0] ? paradise.find(parts[0], this.reach()) : this
-      if (!target) { return this.errors.unseen(q) }
-      const before = target.data.name
-      const name = removeParticles(parts[1])
-      if (paradise.find(name)) { return this.errors.duplicate(name) }
-      target.data.name = name
-      return parts[0] ? `you transformed the ${before} into a ${name}.` : `you transformed into a ${name}.`
-    },
-    note: (q) => {
-      this.parent().data.note = q
-      return `you ${q !== '' ? 'added' : 'removed'} the ${this.parent()} note.`
-    },
-    program: (q) => {
-      this.parent().data.program = q
-      return `you ${q !== '' ? 'added' : 'removed'} the ${this.parent()} program.`
-    },
-    use: (q) => {
-      if (!q) { return this.errors.incomplete() }
-      const target = paradise.find(q, paradise.vessels())
-      if (!target) { return this.errors.unseen(q) }
-      if (!target.data.program) { return `the ${target} has no program.` }
-      return this.act(target.data.program)
-    },
-    learn: (q) => {
-      const actions = Object.keys(this.actions)
-      return `the ${actions.length} available commands are: ${andList(actions)}.`
-    }
+        return `you entered the ${target}.`
+      }),
+    leave: new Action('leave', 'Exit the parent vessel.', 'notparadox',
+      () => {
+        const origin = this.parent().data.name
+        this.data.parent = this.parent().parent().data.id
+        return `you left the ${origin}.`
+      }),
+    become: new Action('become', 'Become a visible vessel.', 'visible target notempty',
+      (name, target) => {
+        client.vessel = target
+        return `you became the ${target}`
+      }),
+    take: new Action('take', 'Move a visible vessel into a child vessel.', 'visible target notempty',
+      (name, target) => {
+        target.data.parent = this.data.id
+        return `you took the ${target}.`
+      }),
+    drop: new Action('drop', 'Move a child vessel into the parent vessel.', 'inventory target notempty',
+      (name, target) => {
+        target.data.parent = this.parent().data.id
+        return `you dropped the ${target}.`
+      }),
+    warp: new Action('warp', 'Move to a distant vessel.', 'distant target relation notempty',
+      (name, target, relation) => {
+        this.data.parent = relation === 'outside' ? target.parent().data.id : target.data.id
+        return target.data.id === client.vessel.data.id ? `you warped ${relation} yourself.` : `you warped ${relation} the ${target}.`
+      }),
+    note: new Action('note', 'Add a description to the current parent vessel.', '',
+      (name) => {
+        this.parent().data.note = q
+        return `you ${q !== '' ? 'added' : 'removed'} the ${this.parent()} note.`
+      }),
+    program: new Action('program', 'Add an automation program to a vessel, making it available to the use command.', '',
+      (name) => {
+        this.parent().data.program = q
+        return `you ${q !== '' ? 'added' : 'removed'} the ${this.parent()} program.`
+      }),
+    learn: new Action('learn', 'Read documentation for each action, or see a list of action.', 'words',
+      (name) => {
+        return this.actions[name] ? this.actions[name].docs : `the available commands are: ${andList(Object.keys(this.actions))}. to see the documentation for a specific command, use "learn to move".`
+      }),
+    use: new Action('use', 'Trigger a vessel\'s program.', 'notempty cast',
+      (name, target) => {
+        if (!target.data.program) { return `the ${target} has no program.` }
+        return this.act(target.data.program)
+      }),
+    transform: new Action('transform', 'Change your current vessel name.', 'words unique valid notempty cast',
+      (name, target) => {
+        this.data.name = name
+        return `you transformed into a ${name}.`
+      }),
+    move: new Action('move', 'Move a visible vessel into another visible vessel.', 'notempty cast',
+      (name, target, relation, cast) => {
+        target.data.parent = cast.data.id
+        return `you moved the ${target} into ${cast}.`
+      })
   }
 
   this.act = (q) => {
     const params = `${q}`.trim().split(' ')
     const action = params.shift()
     if (!action) { return '' }
-    if (!this.actions[action]) { return this.errors.unknown(action) }
-    return this.actions[action](params.join(' '))
+    if (!this.actions[action]) { return `you cannot ${action}` }
+    return this.actions[action].run(this, params.join(' '))
   }
 
   // access
