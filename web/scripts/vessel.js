@@ -72,16 +72,15 @@ function Vessel (data) {
     warp: (q) => {
       if (!q) { return this.errors.incomplete() }
       const target = this.find(paradise.vessels(), q)
-      if (!target) { return `you cannot warp to ${q}.` }
-      const relation = createRelation(q.split(' ')[0])
+      if (!target) { return this.errors.unknown(q) }
+      const relation = createRelation(q)
+      if (!relation) { return this.errors.unknown(q) }
       if (relation === 'outside') {
         this.data.parent = target.parent().data.id
-        return `you warped ${relation} the ${target.data.name}.`
       } else if (relation === 'inside') {
         this.data.parent = target.data.id
-        return `you warped ${relation} the ${target.data.name}.`
       }
-      return this.errors.invalid('warp ' + relation)
+      return `you warped ${relation} the ${target.data.name}.`
     },
     move: (q) => {
       if (!q) { return this.errors.incomplete() }
@@ -194,8 +193,14 @@ function Vessel (data) {
     return `${this.data.name}`
   }
 
-  function createRelation (word) {
-    return word.replace('in', 'inside').replace('into', 'inside').replace('within', 'inside').replace('by', 'outside').replace('at', 'outside').replace('to', 'outside')
+  // function createRelation (word) {
+  //   return word.replace('in', 'inside').replace('into', 'inside').replace('within', 'inside').replace('by', 'outside').replace('at', 'outside').replace('to', 'outside')
+  // }
+
+  function createRelation (str) {
+    const padded = ` ${str.trim()} `
+    if (padded.indexOf(' in ') > -1 || padded.indexOf(' inside ') > -1 || padded.indexOf(' into ') > -1) { return 'inside' }
+    if (padded.indexOf(' out ') > -1 || padded.indexOf(' outside ') > -1 || padded.indexOf(' at ') > -1 || padded.indexOf(' to ') > -1) { return 'outside' }
   }
 
   function removeParticles (str) {
