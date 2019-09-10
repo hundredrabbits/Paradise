@@ -29,8 +29,8 @@ function Client (paradise) {
     host.appendChild(this._el)
 
     this._input.onkeydown = (e) => {
-      if (e.key !== 'Enter') { return }
-      this.validate(e.target.value)
+      if (e.key === 'Enter') { return this.validate(e.target.value) }
+      if (e.key === 's' && e.ctrlKey) { return this.export() }
     }
 
     document.onclick = (e) => {
@@ -75,5 +75,10 @@ function Client (paradise) {
     const response = this.vessel.act(cmd)
     this.update(response)
     this._input.value = ''
+  }
+
+  this.export = () => {
+    const output = paradise.export()
+    window.open('data:application/json;' + (window.btoa ? 'base64,' + btoa(output) : output))
   }
 }
