@@ -20,9 +20,6 @@ function Vessel (data) {
     },
     invalid: (q) => {
       return `you cannot use "${q}".`
-    },
-    empty: () => {
-      return `you did nothing.`
     }
   }
 
@@ -85,7 +82,7 @@ function Vessel (data) {
     move: (q) => {
       if (!q) { return this.errors.incomplete() }
       const relation = findRelation(q)
-      if (!relation) { return this.errors.unknown(q) }
+      if (!relation) { return this.errors.incomplete(q) }
       const parts = q.split(relation)
       const a = this.find(this.reach(), parts[0])
       const b = this.find(this.reach(), parts[1])
@@ -93,6 +90,18 @@ function Vessel (data) {
       if (!b) { return this.errors.unseen(parts[1]) }
       a.data.parent = b.data.id
       return `you moved the ${a.data.name} into ${b.data.name}.`
+    },
+    transform: (q) => {
+      if (!q) { return this.errors.incomplete() }
+      const relation = findRelation(q)
+      if (!relation) { return this.errors.incomplete(q) }
+      const parts = q.split(relation)
+      const target = parts[0] ? this.find(this.reach(), parts[0]) : this
+      if (!target) { return this.errors.unseen(q) }
+      const before = target.data.name
+      const name = removeParticles(parts[1])
+      target.data.name = name
+      return parts[0] ? `you transformed the ${before} into a ${name}.` : `you transformed into a ${name}.`
     },
     note: (q) => {
       this.parent().data.note = q
@@ -108,9 +117,6 @@ function Vessel (data) {
       if (!target) { return this.errors.unseen(q) }
       if (!target.data.program) { return `the ${target.data.name} has no program.` }
       return this.act(target.data.program)
-    },
-    cast: (q) => {
-      return '?!'
     },
     learn: (q) => {
       const actions = Object.keys(this.actions)
@@ -151,7 +157,7 @@ function Vessel (data) {
   this.act = (q) => {
     const params = `${q}`.trim().split(' ')
     const action = params.shift()
-    if (!action) { return this.errors.empty() }
+    if (!action) { return '' }
     if (!this.actions[action]) { return this.errors.unknown(action) }
     return this.actions[action](params.join(' '))
   }
@@ -206,7 +212,7 @@ function Vessel (data) {
 
   function findRelation (str, words = ['in', 'inside', 'into', 'out', 'outside', 'at', 'to']) {
     for (const word of words) {
-      if (str.indexOf(word) > -1) {
+      if (` ${str} `.indexOf(` ${word} `) > -1) {
         return word
       }
     }

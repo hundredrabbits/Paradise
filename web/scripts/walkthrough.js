@@ -17,7 +17,9 @@ function Walkthrough (client, paradise) {
       'drop',
       'drop unseen',
       'warp',
-      'warp unseen'
+      'warp unseen',
+      'move',
+      'move unseen'
     ],
     basics: [
       'warp to the library',
@@ -27,25 +29,7 @@ function Walkthrough (client, paradise) {
       'enter the house',
       'leave'
     ],
-    move: [
-      'warp to the library',
-      'create a red house',
-      'create a blue house',
-      'create a yellow house',
-      'create a kitchen',
-      'move the yellow house in the blue house',
-      'take the kitchen',
-      'move the kitchen in the red house'
-    ],
-    inventory: [
-      'warp to the library',
-      'create a red house',
-      'create a blue house',
-      'create a yellow house',
-      'take the yellow house',
-      'drop a house'
-    ],
-    warping: [
+    warp: [
       'warp to the library',
       'create a red house',
       'create a blue house',
@@ -54,7 +38,16 @@ function Walkthrough (client, paradise) {
       'warp in the red house',
       'leave'
     ],
-    programing: [
+    move: [
+      'warp to the library',
+      'create a red house',
+      'create a blue house',
+      'create a yellow house',
+      'move the yellow house in the blue house',
+      'take the blue house',
+      'move the blue house in the red house'
+    ],
+    program: [
       'warp to the library',
       'create a red house',
       'create a blue house',
