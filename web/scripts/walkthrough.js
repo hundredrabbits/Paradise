@@ -36,6 +36,8 @@ function Walkthrough (client, paradise) {
       'create a yellow house',
       'warp to the red house',
       'warp in the red house',
+      'warp to 3',
+      'warp in 3',
       'leave'
     ],
     move: [

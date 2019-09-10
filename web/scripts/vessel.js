@@ -10,7 +10,7 @@ function Vessel (data) {
       return `you cannot do that.`
     },
     unseen: (q) => {
-      return `you do not see ${q}.`
+      return `you do not see that vessel.`
     },
     duplicate: (q) => {
       return `you cannot create another ${q}.`
@@ -18,8 +18,11 @@ function Vessel (data) {
     unknown: (q) => {
       return `you cannot ${q}.`
     },
-    invalid: (q) => {
-      return `you cannot use "${q}".`
+    unexist: (q) => {
+      return `you cannot find that vessel.`
+    },
+    invalid: (q, type = 'vessel name') => {
+      return `you cannot use the ${type} "${q}".`
     }
   }
 
@@ -27,15 +30,19 @@ function Vessel (data) {
     create: (q) => {
       if (!q) { return this.errors.incomplete() }
       const name = removeParticles(q)
+      if (!isValid(name)) { return this.errors.invalid(name) }
       if (paradise.find(name)) { return this.errors.duplicate(name) }
-      if (!name.isAlpha()) { return this.errors.invalid(name) }
-      const id = paradise.next()
-      paradise.add(new Vessel({ id: id, name: name, owner: this.data.id, parent: this.parent().data.id }))
+      paradise.add(new Vessel({
+        id: paradise.next(),
+        name: name,
+        owner: this.data.id,
+        parent: this.parent().data.id
+      }))
       return `you created the ${name}.`
     },
     enter: (q) => {
       if (!q) { return this.errors.incomplete() }
-      const target = this.find(this.sight(), q)
+      const target = paradise.find(q, this.sight())
       if (!target) { return this.errors.unseen(q) }
       this.data.parent = target.data.id
       return `you entered the ${target}.`
@@ -48,21 +55,21 @@ function Vessel (data) {
     },
     become: (q) => {
       if (!q) { return this.errors.incomplete() }
-      const target = this.find(this.sight(), q)
+      const target = paradise.find(q, this.sight())
       if (!target) { return this.errors.unseen(q) }
       client.vessel = target
       return `you became the ${target}`
     },
     take: (q) => {
       if (!q) { return this.errors.incomplete() }
-      const target = this.find(this.sight(), q)
+      const target = paradise.find(q, this.sight())
       if (!target) { return this.errors.unseen(q) }
       target.data.parent = this.data.id
       return `you took the ${target}.`
     },
     drop: (q) => {
       if (!q) { return this.errors.incomplete() }
-      const target = this.find(this.inventory(), q)
+      const target = paradise.find(q, this.inventory())
       if (!target) { return this.errors.unseen(q) }
       target.data.parent = this.parent().data.id
       return `you dropped the ${target}.`
@@ -70,7 +77,8 @@ function Vessel (data) {
     warp: (q) => {
       if (!q) { return this.errors.incomplete() }
       const id = q.split(' ').pop()
-      const target = !isNaN(id) && paradise.world[id] ? paradise.world[id] : this.find(paradise.vessels(), q)
+      const target = !isNaN(id) && paradise.world[id] ? paradise.world[id] : paradise.find(q, paradise.vessels())
+      if (!target) { return this.errors.unexist(q) }
       const relation = createRelation(q)
       if (!relation) { return this.errors.unknown(q) }
       if (relation === 'outside') {
@@ -85,8 +93,8 @@ function Vessel (data) {
       const relation = findRelation(q)
       if (!relation) { return this.errors.incomplete(q) }
       const parts = q.split(relation)
-      const a = this.find(this.reach(), parts[0])
-      const b = this.find(this.reach(), parts[1])
+      const a = paradise.find(parts[0], this.reach())
+      const b = paradise.find(parts[1], this.reach())
       if (!a) { return this.errors.unseen(parts[0]) }
       if (!b) { return this.errors.unseen(parts[1]) }
       a.data.parent = b.data.id
@@ -97,7 +105,7 @@ function Vessel (data) {
       const relation = findRelation(q)
       if (!relation) { return this.errors.incomplete(q) }
       const parts = q.split(relation)
-      const target = parts[0] ? this.find(this.reach(), parts[0]) : this
+      const target = parts[0] ? paradise.find(parts[0], this.reach()) : this
       if (!target) { return this.errors.unseen(q) }
       const before = target.data.name
       const name = removeParticles(parts[1])
@@ -115,7 +123,7 @@ function Vessel (data) {
     },
     use: (q) => {
       if (!q) { return this.errors.incomplete() }
-      const target = this.find(paradise.vessels(), q)
+      const target = paradise.find(q, paradise.vessels())
       if (!target) { return this.errors.unseen(q) }
       if (!target.data.program) { return `the ${target} has no program.` }
       return this.act(target.data.program)
@@ -146,18 +154,6 @@ function Vessel (data) {
 
   // selector
 
-  this.find = (arr, q) => {
-    const name = removeParticles(q)
-    for (const vessel of arr) {
-      if (vessel.data.name !== name) { continue }
-      return vessel
-    }
-    for (const vessel of arr) {
-      if (vessel.data.name.indexOf(name) < 0) { continue }
-      return vessel
-    }
-  }
-
   this.sight = () => {
     const a = paradise.filter((vessel) => {
       return vessel.parent().data.id === this.parent().data.id && vessel.data.id !== this.data.id && vessel.data.id !== this.parent().data.id
@@ -180,7 +176,7 @@ function Vessel (data) {
 
   this.action = () => {
     if (this.data.program) { return 'use' }
-    if (client.vessel.find(client.vessel.inventory(), this.data.name)) { return 'drop' }
+    if (paradise.find(this.data.name, client.vessel.inventory())) { return 'drop' }
     return 'enter'
   }
 
@@ -206,36 +202,4 @@ function Vessel (data) {
   this.toString = () => {
     return `${this.data.name}`
   }
-
-  function findRelation (str, words = ['in', 'inside', 'into', 'out', 'outside', 'at', 'to']) {
-    for (const word of words) {
-      if (` ${str} `.indexOf(` ${word} `) > -1) {
-        return word
-      }
-    }
-  }
-
-  function createRelation (str) {
-    const padded = ` ${str.trim()} `
-    if (padded.indexOf(' in ') > -1 || padded.indexOf(' inside ') > -1 || padded.indexOf(' into ') > -1) { return 'inside' }
-    if (padded.indexOf(' out ') > -1 || padded.indexOf(' outside ') > -1 || padded.indexOf(' at ') > -1 || padded.indexOf(' to ') > -1) { return 'outside' }
-  }
-
-  function removeParticles (str) {
-    const particles = ['a', 'the', 'an', 'at', 'in', 'into', 'to', 'by']
-    return str.split(' ').filter((item) => {
-      return particles.indexOf(item) < 0
-    }).join(' ').trim()
-  }
-
-  function andList (arr) {
-    return arr.reduce((acc, item, id) => {
-      return acc + item + (id === arr.length - 2 ? ' and ' : id === arr.length - 1 ? ' ' : ', ')
-    }, '').trim()
-  }
 }
-
-String.prototype.toAlpha = function () { return this.replace(/[^a-z ]/gi, '').trim() }
-String.prototype.toAlphanum = function () { return this.replace(/[^0-9a-z ]/gi, '') }
-String.prototype.isAlpha = function () { return !!this.match(/^[a-z ]+$/) }
-String.prototype.isAlphanum = function () { return !!this.match(/^[A-Za-z0-9 ]+$/) }

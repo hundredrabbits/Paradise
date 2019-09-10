@@ -46,7 +46,7 @@ function Client (paradise) {
     this.update()
     this._input.value = 'create a machine'
     this._input.focus()
-    // this.walkthrough.run('all')
+    // this.walkthrough.runAll('basics')
   }
 
   this.update = (response = '') => {
@@ -82,4 +82,35 @@ function Client (paradise) {
     const output = paradise.export()
     window.open('data:application/json;' + (window.btoa ? 'base64,' + btoa(output) : output))
   }
+}
+
+function findRelation (str, words = ['in', 'inside', 'into', 'out', 'outside', 'at', 'to']) {
+  for (const word of words) {
+    if (` ${str} `.indexOf(` ${word} `) > -1) {
+      return word
+    }
+  }
+}
+
+function createRelation (str) {
+  const padded = ` ${str.trim()} `
+  if (padded.indexOf(' in ') > -1 || padded.indexOf(' inside ') > -1 || padded.indexOf(' into ') > -1) { return 'inside' }
+  if (padded.indexOf(' out ') > -1 || padded.indexOf(' outside ') > -1 || padded.indexOf(' at ') > -1 || padded.indexOf(' to ') > -1) { return 'outside' }
+}
+
+function removeParticles (str) {
+  const particles = ['a', 'the', 'an', 'at', 'in', 'into', 'to', 'by']
+  return str.split(' ').filter((item) => {
+    return particles.indexOf(item) < 0
+  }).join(' ').trim()
+}
+
+function andList (arr) {
+  return arr.reduce((acc, item, id) => {
+    return acc + item + (id === arr.length - 2 ? ' and ' : id === arr.length - 1 ? ' ' : ', ')
+  }, '').trim()
+}
+
+function isValid (name) {
+  return !!name.match(/^[a-z ]+$/) && name.length >= 3 || name.length <= 24
 }
