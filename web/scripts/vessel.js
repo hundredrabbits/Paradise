@@ -69,8 +69,8 @@ function Vessel (data) {
     },
     warp: (q) => {
       if (!q) { return this.errors.incomplete() }
-      const target = this.find(paradise.vessels(), q)
-      if (!target) { return this.errors.unknown(q) }
+      const id = q.split(' ').pop()
+      const target = !isNaN(id) && paradise.world[id] ? paradise.world[id] : this.find(paradise.vessels(), q)
       const relation = createRelation(q)
       if (!relation) { return this.errors.unknown(q) }
       if (relation === 'outside') {
