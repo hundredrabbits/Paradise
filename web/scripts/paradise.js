@@ -12,7 +12,7 @@ function Paradise () {
   }
 
   this.add = (vessel) => {
-    if (this.exists(vessel.data.name)) { return null }
+    if (this.find(vessel.data.name)) { return }
     this.world[vessel.data.id] = vessel
     return vessel
   }
@@ -24,26 +24,18 @@ function Paradise () {
     }
   }
 
-  this.exists = (name) => {
-    return !!this.find(name)
-  }
-
-  this.vessels = () => {
-    return Object.values(this.world)
-  }
-
-  this.names = () => {
-    return this.vessels().map((vessel) => { return vessel.name })
+  this.filter = (fn) => {
+    return this.vessels().filter(fn)
   }
 
   this.next = () => {
-    for (var id = 0; id < 1000; id++) {
+    for (var id = 0; id < 10000; id++) {
       if (!this.world[id]) { return id }
     }
   }
 
-  this.filter = (fn) => {
-    return this.vessels().filter(fn)
+  this.vessels = () => {
+    return Object.values(this.world)
   }
 
   this.import = (json) => {

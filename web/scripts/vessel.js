@@ -27,7 +27,7 @@ function Vessel (data) {
     create: (q) => {
       if (!q) { return this.errors.incomplete() }
       const name = removeParticles(q)
-      if (paradise.exists(name)) { return this.errors.duplicate(name) }
+      if (paradise.find(name)) { return this.errors.duplicate(name) }
       if (!name.isAlpha()) { return this.errors.invalid(name) }
       const id = paradise.next()
       paradise.add(new Vessel({ id: id, name: name, owner: this.data.id, parent: this.parent().data.id }))
@@ -35,7 +35,7 @@ function Vessel (data) {
     },
     enter: (q) => {
       if (!q) { return this.errors.incomplete() }
-      const target = this.find(this.sight(), q)
+      const target = this.find(this.reach(), q)
       if (!target) { return this.errors.unseen(q) }
       this.data.parent = target.data.id
       return `you entered the ${target}.`
@@ -101,7 +101,7 @@ function Vessel (data) {
       if (!target) { return this.errors.unseen(q) }
       const before = target.data.name
       const name = removeParticles(parts[1])
-      if (paradise.exists(name)) { return this.errors.duplicate(name) }
+      if (paradise.find(name)) { return this.errors.duplicate(name) }
       target.data.name = name
       return parts[0] ? `you transformed the ${before} into a ${name}.` : `you transformed into a ${name}.`
     },
@@ -185,11 +185,14 @@ function Vessel (data) {
   }
 
   this.stem = () => {
-    let i = 0
-    let v = this.parent()
-    while (!v.isParadox() || i < 20) {
+    const known = []
+    let v = this
+    while (v.isParadox() !== true) {
+      if (known.indexOf(v.data.id) >= 0) {
+        return null
+      }
       v = v.parent()
-      i++
+      known.push(v.data.id)
     }
     return v
   }

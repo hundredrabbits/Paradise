@@ -52,7 +52,8 @@ function Client (paradise) {
   this.update = (response = '') => {
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
-    this._location.innerHTML = this.vessel.isParadox() ? `you are the paradox of the ${this.vessel.data.name}.` : `you are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
+    const stem = this.vessel.stem()
+    this._location.innerHTML = this.vessel.isParadox() ? `you are the paradox of the ${this.vessel.data.name}^.` : `you are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
     this._note.innerHTML = this.vessel.parent().data.note ? this.vessel.parent().data.note : ''
     this._program.innerHTML = this.vessel.parent().data.program ? this.vessel.parent().data.program : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => {
@@ -62,7 +63,7 @@ function Client (paradise) {
       return acc + '<li>' + vessel.toAction() + '</li>'
     }, '')
     this._response.innerHTML = response
-    this._footer.innerHTML = `<i>${this.vessel.stem().data.name}:${this.vessel.parent().data.id}:${this.vessel.data.id}</i>`
+    this._footer.innerHTML = `<i>${stem ? stem.data.name : 'circular universe^'}:${this.vessel.parent().data.id}:${this.vessel.data.id}</i>`
     console.log(response)
   }
 
