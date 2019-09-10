@@ -47,9 +47,9 @@ function Client (paradise) {
     this.become(1)
     paradise.start()
     this.update()
-    this._input.value = 'create a super duper machine'
+    this._input.value = 'create a quiet machine'
     this._input.focus()
-    // this.walkthrough.run('warping')
+    // this.walkthrough.run('all')
   }
 
   this.become = (id) => {

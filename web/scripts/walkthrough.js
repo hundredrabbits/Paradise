@@ -66,15 +66,6 @@ function Walkthrough (client, paradise) {
       'transform into a foggy bat',
       'transform into glass',
       'transform the house into a golden cat'
-    ],
-    spells: [
-      'warp to the library',
-      'create a storm scroll',
-      'enter the scroll',
-      'program warp in the ghost',
-      'leave',
-      'create blue bug',
-      'cast the storm scroll on the blue bug'
     ]
   }
 
