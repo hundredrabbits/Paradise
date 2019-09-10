@@ -53,7 +53,7 @@ function Client (paradise) {
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
     const stem = this.vessel.stem()
-    this._location.innerHTML = this.vessel.isParadox() ? `you are the paradox of the ${this.vessel.data.name}^.` : `you are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
+    this._location.innerHTML = this.vessel.isParadox() ? `you are the ${this.vessel.data.name}^.` : `you are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
     this._note.innerHTML = this.vessel.parent().data.note ? this.vessel.parent().data.note : ''
     this._program.innerHTML = this.vessel.parent().data.program ? this.vessel.parent().data.program : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => {

@@ -78,7 +78,7 @@ function Vessel (data) {
       } else if (relation === 'inside') {
         this.data.parent = target.data.id
       }
-      return `you warped ${relation} the ${target}.`
+      return target.data.id === client.vessel.data.id ? `you warped ${relation} yourself.` : `you warped ${relation} the ${target}.`
     },
     move: (q) => {
       if (!q) { return this.errors.incomplete() }
