@@ -188,11 +188,9 @@ function Vessel (data) {
     const known = []
     let v = this
     while (v.isParadox() !== true) {
-      if (known.indexOf(v.data.id) >= 0) {
-        return null
-      }
-      v = v.parent()
+      if (known.indexOf(v.data.id) >= 0) { return null }
       known.push(v.data.id)
+      v = v.parent()
     }
     return v
   }
