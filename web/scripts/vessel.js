@@ -10,7 +10,7 @@ function Vessel (data) {
       return `you cannot do that.`
     },
     unseen: (q) => {
-      return `you cannot see ${q}.`
+      return `you do not see ${q}.`
     },
     duplicate: (q) => {
       return `you cannot create another ${q}.`
@@ -84,10 +84,13 @@ function Vessel (data) {
     },
     move: (q) => {
       if (!q) { return this.errors.incomplete() }
-      if (!q.indexOf(' in ') < 0) { return 'you must use the A in B format.' }
-      const a = this.find(this.sight(), q.split(' in ')[0])
-      const b = this.find(this.sight(), q.split(' in ')[1])
-      if (!a || !b) { return 'you do not see these vessels.' }
+      const relation = findRelation(q)
+      if (!relation) { return this.errors.unknown(q) }
+      const parts = q.split(relation)
+      const a = this.find(this.reach(), parts[0])
+      const b = this.find(this.reach(), parts[1])
+      if (!a) { return this.errors.unseen(parts[0]) }
+      if (!b) { return this.errors.unseen(parts[1]) }
       a.data.parent = b.data.id
       return `you moved the ${a.data.name} into ${b.data.name}.`
     },
@@ -139,6 +142,10 @@ function Vessel (data) {
       return vessel.parent().data.id === this.data.id && vessel.data.id !== this.data.id && vessel.data.id !== this.parent().data.id
     })
     return a
+  }
+
+  this.reach = () => {
+    return [].concat(this.sight()).concat(this.inventory())
   }
 
   this.act = (q) => {
@@ -196,6 +203,14 @@ function Vessel (data) {
   // function createRelation (word) {
   //   return word.replace('in', 'inside').replace('into', 'inside').replace('within', 'inside').replace('by', 'outside').replace('at', 'outside').replace('to', 'outside')
   // }
+
+  function findRelation (str, words = ['in', 'inside', 'into', 'out', 'outside', 'at', 'to']) {
+    for (const word of words) {
+      if (str.indexOf(word) > -1) {
+        return word
+      }
+    }
+  }
 
   function createRelation (str) {
     const padded = ` ${str.trim()} `

@@ -27,6 +27,16 @@ function Walkthrough (client, paradise) {
       'enter the house',
       'leave'
     ],
+    move: [
+      'warp to the library',
+      'create a red house',
+      'create a blue house',
+      'create a yellow house',
+      'create a kitchen',
+      'move the yellow house in the blue house',
+      'take the kitchen',
+      'move the kitchen in the red house'
+    ],
     inventory: [
       'warp to the library',
       'create a red house',
