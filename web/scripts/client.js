@@ -13,6 +13,9 @@ function Client (paradise) {
   this._program = document.createElement('pre')
   this._footer = document.createElement('p')
 
+  this._input.setAttribute('size', 48)
+  this._form.setAttribute('onsubmit', 'return client.validate(client._input.value)')
+
   this.walkthrough = null
   this.vessel = null
 
@@ -29,9 +32,6 @@ function Client (paradise) {
     host.appendChild(this._program)
     host.appendChild(this._footer)
 
-    this._input.setAttribute('size', 48)
-    this._form.setAttribute('onsubmit', 'return client.validate(client._input.value)')
-
     document.onclick = (e) => {
       if (!e.target.getAttribute('data-action')) { return }
       this._input.value = e.target.getAttribute('data-action')
@@ -43,7 +43,7 @@ function Client (paradise) {
     paradise.start()
     this.vessel = paradise.world[id]
     this.update()
-    this._input.value = 'create a machine & create a box & move the machine in the box'
+    this._input.value = 'create a tool & take the tool' // 'create a machine & create a box & move the machine in the box'
     this._input.focus()
     // this.walkthrough.run('basics')
   }

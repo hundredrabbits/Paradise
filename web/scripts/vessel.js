@@ -1,6 +1,6 @@
 'use strict'
 
-/* global paradise */
+/* global paradise Action client */
 
 function Vessel (data) {
   this.data = data
@@ -93,7 +93,7 @@ function Vessel (data) {
 
   this.action = () => {
     if (this.data.program) { return 'use' }
-    if (paradise.find(this.data.name, client.vessel.inventory())) { return 'drop' }
+    if (this.parent().data.id === client.vessel.data.id) { return 'drop' }
     return 'enter'
   }
 

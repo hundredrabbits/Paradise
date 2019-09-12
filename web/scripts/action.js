@@ -1,3 +1,7 @@
+'use strict'
+
+/* global paradise */
+
 function Action (name, docs, flags, fn) {
   this.name = name
   this.flags = flags

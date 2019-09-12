@@ -43,6 +43,8 @@ function Paradise () {
     return Object.values(this.world)
   }
 
+  // IO
+
   this.import = (json) => {
     const db = {}
     for (const vessel of JSON.parse(json)) {
