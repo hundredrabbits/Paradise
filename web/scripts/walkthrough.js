@@ -22,12 +22,19 @@ function Walkthrough (client, paradise) {
       'move unseen'
     ],
     basics: [
-      'warp to the library',
-      'create a yellow house',
-      'become the yellow house',
+      'create a blue whale',
+      'become the blue whale',
       'become the ghost',
       'enter the house',
-      'leave'
+      'leave',
+      'warp to the blue whale',
+      'warp into the blue whale',
+      'program create a flower pot',
+      'note this might make a flower pot',
+      'leave',
+      'use the blue whale',
+      'move the flower pot in the blue whale',
+      'transform into a bat'
     ],
     warp: [
       'warp to the library',

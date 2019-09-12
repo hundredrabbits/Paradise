@@ -30,8 +30,8 @@ function Action (name, docs, flags, fn) {
       const parts = input.split(` ${relation} `)
       target = paradise.find(parts[0], host.sight())
       cast = paradise.find(parts[1], host.sight())
-      if (!target) { return `Missing ${part[0]}.` }
-      if (!cast) { return `Missing ${part[1]}.` }
+      if (!target) { return `Missing ${parts[0]}.` }
+      if (!cast) { return `Missing ${parts[1]}.` }
     }
 
     return this.fn(input, target, relation, cast)

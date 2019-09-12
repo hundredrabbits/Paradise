@@ -44,24 +44,24 @@ function Vessel (data) {
       }),
     note: new Action('note', 'Add a description to the current parent vessel.', '',
       (name) => {
-        this.parent().data.note = q
-        return `you ${q !== '' ? 'added' : 'removed'} the ${this.parent()} note.`
+        this.parent().data.note = name
+        return `you ${name !== '' ? 'added' : 'removed'} the ${this.parent()} note.`
       }),
     program: new Action('program', 'Add an automation program to a vessel, making it available to the use command.', '',
       (name) => {
-        this.parent().data.program = q
-        return `you ${q !== '' ? 'added' : 'removed'} the ${this.parent()} program.`
+        this.parent().data.program = name
+        return `you ${name !== '' ? 'added' : 'removed'} the ${this.parent()} program.`
       }),
     learn: new Action('learn', 'Read documentation for each action, or see a list of action.', 'words',
       (name) => {
         return this.actions[name] ? this.actions[name].docs : `the available commands are: ${andList(Object.keys(this.actions))}. to see the documentation for a specific command, use "learn to move".`
       }),
-    use: new Action('use', 'Trigger a vessel\'s program.', 'notempty cast',
+    use: new Action('use', 'Trigger a vessel\'s program.', 'notempty visible target',
       (name, target) => {
         if (!target.data.program) { return `the ${target} has no program.` }
         return this.act(target.data.program)
       }),
-    transform: new Action('transform', 'Change your current vessel name.', 'words unique valid notempty cast',
+    transform: new Action('transform', 'Change your current vessel name.', 'notempty words unique valid',
       (name, target) => {
         this.data.name = name
         return `you transformed into a ${name}.`

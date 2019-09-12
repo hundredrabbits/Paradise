@@ -46,7 +46,7 @@ function Client (paradise) {
     this.update()
     this._input.value = 'create a machine & create a box & move the machine in the box'
     this._input.focus()
-    // this.walkthrough.runAll('basics')
+    // this.walkthrough.run('basics')
   }
 
   this.update = (response = '') => {
@@ -100,7 +100,7 @@ function createRelation (str) {
 
 function removeParticles (str) {
   const particles = ['a', 'the', 'an', 'at', 'in', 'into', 'to', 'by']
-  return str.split(' ').filter((item) => {
+  return `${str}`.split(' ').filter((item) => {
     return particles.indexOf(item) < 0
   }).join(' ').trim()
 }
@@ -112,5 +112,5 @@ function andList (arr) {
 }
 
 function isValid (name) {
-  return !!name.match(/^[a-z ]+$/) && name.length >= 3 || name.length <= 24
+  return !!name.match(/^[a-z ]+$/) && name.length >= 3 && name.length <= 24
 }
