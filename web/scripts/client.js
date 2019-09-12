@@ -1,6 +1,6 @@
 'use strict'
 
-/* global Walkthrough */
+/* global */
 
 function Client (paradise) {
   this._form = document.createElement('form')
@@ -16,11 +16,9 @@ function Client (paradise) {
   this._input.setAttribute('size', 48)
   this._form.setAttribute('onsubmit', 'return client.validate(client._input.value)')
 
-  this.walkthrough = null
   this.vessel = null
 
   this.install = (host = document.body) => {
-    this.walkthrough = new Walkthrough(this, paradise)
     host.appendChild(this._location)
     host.appendChild(this._sight)
     host.appendChild(this._note)
@@ -45,7 +43,6 @@ function Client (paradise) {
     this.update()
     this._input.value = 'create a tool & take the tool' // 'create a machine & create a box & move the machine in the box'
     this._input.focus()
-    // this.walkthrough.run('basics')
   }
 
   this.update = (response = '') => {
