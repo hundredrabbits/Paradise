@@ -141,4 +141,10 @@ function Vessel (data) {
   this.toString = () => {
     return `${this.data.name}`
   }
+
+  function andList (arr) {
+    return arr.reduce((acc, item, id) => {
+      return acc + item + (id === arr.length - 2 ? ' and ' : id === arr.length - 1 ? ' ' : ', ')
+    }, '').trim()
+  }
 }
