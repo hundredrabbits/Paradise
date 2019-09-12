@@ -35,6 +35,13 @@ function Client (paradise) {
       this._input.value = e.target.getAttribute('data-action')
       this._input.focus()
     }
+
+    this._form.onsubmit = (e) => {
+      this.validate(this._input.value)
+      this._input.value = ''
+      this._input.focus()
+      e.preventDefault()
+    }
   }
 
   this.start = (id = 1) => {
