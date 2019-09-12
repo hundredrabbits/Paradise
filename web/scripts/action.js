@@ -16,14 +16,14 @@ function Action (name, docs, flags, fn) {
     // Filters
     if (this.flag('words')) { input = removeParticles(input) }
     // Checks
-    if (this.flag('unique') && paradise.find(input)) { return `you cannot create another ${input}.` }
+    if (this.flag('unique') && this.find(input)) { return `you cannot create another ${input}.` }
     if (this.flag('valid') && !isValid(input)) { return `you cannot create the ${input}.` }
     if (this.flag('notparadox') && host.parent().isParadox()) { return `you cannot leave a paradox.` }
     if (this.flag('notempty') && !input) { return `you cannot use this action without parameter.` }
     // Targets
-    if (this.flag('visible')) { target = paradise.find(q, host.sight()) }
-    if (this.flag('inventory')) { target = paradise.find(q, host.inventory()) }
-    if (this.flag('distant')) { target = paradise.find(q, paradise.vessels()) }
+    if (this.flag('visible')) { target = this.find(q, host.sight()) }
+    if (this.flag('inventory')) { target = this.find(q, host.inventory()) }
+    if (this.flag('distant')) { target = this.find(q, paradise.vessels()) }
 
     if (this.flag('relation')) { relation = createRelation(input) }
 
@@ -32,13 +32,25 @@ function Action (name, docs, flags, fn) {
     if (this.flag('cast')) {
       relation = findRelation(input)
       const parts = input.split(` ${relation} `)
-      target = paradise.find(parts[0], host.sight())
-      cast = paradise.find(parts[1], host.sight())
+      target = this.find(parts[0], host.sight())
+      cast = this.find(parts[1], host.sight())
       if (!target) { return `Missing ${parts[0]}.` }
       if (!cast) { return `Missing ${parts[1]}.` }
     }
 
     return this.fn(input, target, relation, cast)
+  }
+
+  this.find = (q, arr = paradise.vessels()) => {
+    const name = removeParticles(q)
+    for (const vessel of arr) {
+      if (vessel.data.name !== name) { continue }
+      return vessel
+    }
+    for (const vessel of arr) {
+      if (vessel.data.name.indexOf(name) < 0) { continue }
+      return vessel
+    }
   }
 
   this.flag = (id) => {

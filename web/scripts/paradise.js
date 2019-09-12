@@ -12,21 +12,8 @@ function Paradise () {
   }
 
   this.add = (vessel) => {
-    if (this.find(vessel.data.name, this.vessels())) { return }
     this.world[vessel.data.id] = vessel
     return vessel
-  }
-
-  this.find = (q, arr = this.vessels()) => {
-    const name = removeParticles(q)
-    for (const vessel of arr) {
-      if (vessel.data.name !== name) { continue }
-      return vessel
-    }
-    for (const vessel of arr) {
-      if (vessel.data.name.indexOf(name) < 0) { continue }
-      return vessel
-    }
   }
 
   this.filter = (fn) => {
