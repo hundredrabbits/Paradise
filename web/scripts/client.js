@@ -38,10 +38,11 @@ function Client (paradise) {
   }
 
   this.start = (id = 1) => {
+    console.clear()
     paradise.start()
     this.vessel = paradise.world[id]
     this.update()
-    this._input.value = 'create a tool & take the tool' // 'create a machine & create a box & move the machine in the box'
+    this._input.value = 'create a pocket watch & enter the watch & pass the current time is (time). & leave & take the watch' // 'create a machine & create a box & move the machine in the box'
     this._input.focus()
   }
 
@@ -50,10 +51,10 @@ function Client (paradise) {
     const children = this.vessel.inventory()
     const stem = this.vessel.stem()
     this._location.innerHTML = this.vessel.isParadox() ? `you are the ${this.vessel.data.name}^.` : `you are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
-    this._note.innerHTML = this.vessel.parent().data.note ? this.vessel.parent().data.note : ''
-    this._program.innerHTML = this.vessel.parent().data.program ? this.vessel.parent().data.program : ''
+    this._note.innerHTML = this.vessel.parent().data.note ? this.vessel.parent().data.note.template(this.vessel.parent(), this.vessel) : ''
+    this._program.innerHTML = this.vessel.parent().data.program || this.vessel.parent().data.passive ? (this.vessel.parent().data.program ? this.vessel.parent().data.program : '') + '\n' + (this.vessel.parent().data.passive ? this.vessel.parent().data.passive : '') : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + '</li>' }, '')
-    this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + '</li>' }, '')
+    this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + (vessel.data.passive ? ' ' + vessel.data.passive.template(this.vessel.parent(), this.vessel) : '') + '</li>' }, '')
     this._response.innerHTML = response
     this._footer.innerHTML = `<i>${stem ? stem.data.name : 'circular universe^'}:${this.vessel.parent().data.id}:${this.vessel.data.id}</i>`
   }

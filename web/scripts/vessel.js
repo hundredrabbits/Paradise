@@ -47,6 +47,11 @@ function Vessel (data) {
         this.parent().data.note = name
         return `you ${name !== '' ? 'added' : 'removed'} the ${this.parent()} note.`
       }),
+    pass: new Action('pass', 'Add a passive note to the current parent vessel.', '',
+      (name) => {
+        this.parent().data.passive = name
+        return `you ${name !== '' ? 'added' : 'removed'} the passive message ${this.parent()}.`
+      }),
     program: new Action('program', 'Add an automation program to a vessel, making it available to the use command.', '',
       (name) => {
         this.parent().data.program = name
@@ -135,7 +140,7 @@ function Vessel (data) {
   }
 
   this.toAction = () => {
-    return `<a data-action='${this.action()} the ${this}' href='#${this}'>${this.action()} the ${this}</a>`
+    return `<a data-action='${this.action()} the ${this}' href='#${this}'>${this.action()} the ${this}</a> ${this.data.pass ? this.data.pass : ''}`.trim()
   }
 
   this.toString = () => {

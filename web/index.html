@@ -8,20 +8,20 @@
     <script type="text/javascript" src="scripts/client.js"></script>
     <script type="text/javascript" src="scripts/vessel.js"></script>
     <script type="text/javascript" src="scripts/action.js"></script>
+    <script type="text/javascript" src="scripts/lisp.js"></script>
+    <script type="text/javascript" src="scripts/lisp.library.js"></script>
     <title>Paradise</title>
   </head>
   <body>
     <script>
-      'use strict';
-
-      console.clear()
-
+      const library = new Library()
+      const interpreter = new Lisp(library)
       const paradise = new Paradise()
       const client = new Client(paradise)
-
       client.install()
-
-      window.addEventListener('load', () => { client.start(1); })
+      window.addEventListener('load', () => { 
+        client.start(1); 
+      })
     </script>
   </body>
 </html>
