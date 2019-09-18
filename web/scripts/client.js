@@ -6,8 +6,8 @@ function Client (paradise) {
   this._form = document.createElement('form')
   this._input = document.createElement('input')
   this._location = document.createElement('h2')
-  this._sight = document.createElement('ul')
   this._note = document.createElement('p')
+  this._sight = document.createElement('ul')
   this._response = document.createElement('p')
   this._inventory = document.createElement('ul')
   this._program = document.createElement('pre')
@@ -20,8 +20,8 @@ function Client (paradise) {
 
   this.install = (host = document.body) => {
     host.appendChild(this._location)
-    host.appendChild(this._sight)
     host.appendChild(this._note)
+    host.appendChild(this._sight)
     host.appendChild(this._response)
     host.appendChild(this._inventory)
     host.appendChild(this._form)
@@ -30,16 +30,11 @@ function Client (paradise) {
     host.appendChild(this._program)
     host.appendChild(this._footer)
 
+    host.style.maxWidth = '400px'
+
     window.addEventListener('dragover', this.onDrag, false)
     window.addEventListener('drop', this.onDrop, false)
     window.addEventListener('click', this.onClick, false)
-
-    this._form.onsubmit = (e) => {
-      this.validate(this._input.value)
-      this._input.value = ''
-      this._input.focus()
-      e.preventDefault()
-    }
   }
 
   this.start = (id = 1) => {
@@ -61,7 +56,7 @@ function Client (paradise) {
     this._sight.innerHTML = visibles.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + '</li>' }, '')
     this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + (vessel.data.passive ? ' ' + vessel.data.passive.template(this.vessel.parent(), this.vessel) : '') + '</li>' }, '')
     this._response.innerHTML = response
-    this._footer.innerHTML = `<i><a href='#' onclick='client.export()'>${stem ? stem.data.name : 'circular universe^'}</a> ${this.vessel.parent().data.id}:${this.vessel.data.id}</i>`
+    this._footer.innerHTML = `<i><a href='#' onclick='client.export()'>${stem ? stem.data.name : 'circular universe^'}</a> ${this.vessel.parent().data.id}:${this.vessel.data.id} ${this.vessel.parent().data.note ? `| <a href='#' data-action='note ${this.vessel.parent().data.note}'>edit note</a> ` : ''} ${this.vessel.parent().data.program ? `| <a href='#' data-action='program ${this.vessel.parent().data.program}'>edit program</a> ` : ''}</i>`
   }
 
   this.validate = (cmd) => {
@@ -100,6 +95,13 @@ function Client (paradise) {
     e.stopPropagation()
     e.preventDefault()
     e.dataTransfer.dropEffect = 'copy'
+  }
+
+  this.onSubmit = (e) => {
+    this.validate(this._input.value)
+    this._input.value = ''
+    this._input.focus()
+    e.preventDefault()
   }
 
   this.export = () => {

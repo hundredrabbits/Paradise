@@ -157,17 +157,29 @@ function Lisp (lib = {}) {
   }
 }
 
-String.prototype.template = function (host, guest) {
-  const from = this.indexOf('(')
-  if (from < 0) { return `${this}` }
+function findSegs (str) {
+  const segments = []
   let seq = 0
   let len = 0
-  for (const c of this.substr(from)) {
-    if (c === '(') { seq += 1 }
-    if (c === ')') { seq -= 1 }
+  let from = null
+  for (const c of str) {
+    if (c === '(') {
+      if (seq === 0) { from = len } ;
+      seq += 1
+    }
+    if (c === ')') {
+      if (seq === 1) { segments.push(str.substr(from, len - from + 1)) }
+      seq -= 1
+    }
     len += 1
-    if (seq === 0) { break }
   }
-  const seg = this.substr(from, len)
-  return this.replace(seg, `${interpreter.run(seg, host, guest)}`)
+  return segments
+}
+
+String.prototype.template = function (host, guest) {
+  let str = `${this}`
+  for (const seg of findSegs(str)) {
+    str = str.replace(seg, `${interpreter.run(seg, host, guest)}`)
+  }
+  return str
 }

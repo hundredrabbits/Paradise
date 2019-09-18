@@ -244,4 +244,10 @@ function Library () {
   this.fix = (...items) => {
     return items[0].toFixed(items[1])
   }
+
+  // Special
+
+  this.action = (action, name) => {
+    return `<a href='#' data-action='${action}'>${name || action}</a>`
+  }
 }
