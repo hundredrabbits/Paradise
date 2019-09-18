@@ -30,6 +30,10 @@ function Paradise () {
     return Object.values(this.world)
   }
 
+  this.name = () => {
+    return this.vessels()[0].data.name
+  }
+
   // IO
 
   this.import = (json) => {

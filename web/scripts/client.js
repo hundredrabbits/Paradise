@@ -30,11 +30,9 @@ function Client (paradise) {
     host.appendChild(this._program)
     host.appendChild(this._footer)
 
-    document.onclick = (e) => {
-      if (!e.target.getAttribute('data-action')) { return }
-      this._input.value = e.target.getAttribute('data-action')
-      this._input.focus()
-    }
+    window.addEventListener('dragover', this.onDrag, false)
+    window.addEventListener('drop', this.onDrop, false)
+    window.addEventListener('click', this.onClick, false)
 
     this._form.onsubmit = (e) => {
       this.validate(this._input.value)
@@ -63,7 +61,7 @@ function Client (paradise) {
     this._sight.innerHTML = visibles.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + '</li>' }, '')
     this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + (vessel.data.passive ? ' ' + vessel.data.passive.template(this.vessel.parent(), this.vessel) : '') + '</li>' }, '')
     this._response.innerHTML = response
-    this._footer.innerHTML = `<i>${stem ? stem.data.name : 'circular universe^'}:${this.vessel.parent().data.id}:${this.vessel.data.id}</i>`
+    this._footer.innerHTML = `<i>${stem ? stem.data.name : 'circular universe^'}:${this.vessel.parent().data.id}:${this.vessel.data.id}</i> <a href='#' onclick='client.export()'>export</a>`
   }
 
   this.validate = (cmd) => {
@@ -79,8 +77,37 @@ function Client (paradise) {
     this._input.value = ''
   }
 
+  this.onClick = (e) => {
+    if (!e.target.getAttribute('data-action')) { return }
+    this._input.value = e.target.getAttribute('data-action')
+    this._input.focus()
+  }
+
+  this.onDrop = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+    const file = e.dataTransfer.files[0]
+    const filename = file.path ? file.path : file.name ? file.name : ''
+    const reader = new FileReader()
+    reader.onload = (event) => {
+      paradise.import(event.target.result)
+      this.update()
+    }
+    reader.readAsText(file)
+  }
+
+  this.onDrag = (e) => {
+    e.stopPropagation()
+    e.preventDefault()
+    e.dataTransfer.dropEffect = 'copy'
+  }
+
   this.export = () => {
-    const output = paradise.export()
-    window.open('data:application/json;' + (window.btoa ? 'base64,' + btoa(output) : output))
+    const base64 = 'data:application/json;' + 'base64,' + btoa(paradise.export())
+    const name = paradise.name() + '.json'
+    const link = document.createElement('a')
+    link.setAttribute('href', base64)
+    link.setAttribute('download', name)
+    link.dispatchEvent(new MouseEvent(`click`, { bubbles: true, cancelable: true, view: window }))
   }
 }
