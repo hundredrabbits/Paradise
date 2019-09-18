@@ -61,7 +61,7 @@ function Client (paradise) {
     this._sight.innerHTML = visibles.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + '</li>' }, '')
     this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + (vessel.data.passive ? ' ' + vessel.data.passive.template(this.vessel.parent(), this.vessel) : '') + '</li>' }, '')
     this._response.innerHTML = response
-    this._footer.innerHTML = `<i>${stem ? stem.data.name : 'circular universe^'}:${this.vessel.parent().data.id}:${this.vessel.data.id}</i> <a href='#' onclick='client.export()'>export</a>`
+    this._footer.innerHTML = `<i><a href='#' onclick='client.export()'>${stem ? stem.data.name : 'circular universe^'}</a> ${this.vessel.parent().data.id}:${this.vessel.data.id}</i>`
   }
 
   this.validate = (cmd) => {
@@ -87,7 +87,7 @@ function Client (paradise) {
     e.preventDefault()
     e.stopPropagation()
     const file = e.dataTransfer.files[0]
-    const filename = file.path ? file.path : file.name ? file.name : ''
+    if (!file) { return }
     const reader = new FileReader()
     reader.onload = (event) => {
       paradise.import(event.target.result)

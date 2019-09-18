@@ -45,21 +45,21 @@ function Vessel (data) {
     note: new Action('note', 'Add a description to the current parent vessel.', '',
       (name) => {
         this.parent().data.note = name
-        return `you ${name !== '' ? 'added' : 'removed'} the ${this.parent()} note.`
+        return `you modified the note of the ${this.parent()}.`
       }),
     pass: new Action('pass', 'Add a passive note to the current parent vessel.', '',
       (name) => {
         this.parent().data.passive = name
-        return `you ${name !== '' ? 'added' : 'removed'} the passive message ${this.parent()}.`
+        return `you modified the passive message ${this.parent()}.`
       }),
     program: new Action('program', 'Add an automation program to a vessel, making it available to the use command.', '',
       (name) => {
         this.parent().data.program = name
-        return `you ${name !== '' ? 'added' : 'removed'} the ${this.parent()} program.`
+        return `you modified the program of the ${this.parent()}.`
       }),
     learn: new Action('learn', 'Read documentation for each action, or see a list of action.', 'words',
       (name) => {
-        return this.actions[name] ? this.actions[name].docs : `the available commands are: ${andList(Object.keys(this.actions))}. to see the documentation for a specific command, use "learn to move".`
+        return this.actions[name] ? name + ': ' + this.actions[name].docs : `the available commands are: ${andList(Object.keys(this.actions))}. to see the documentation for a specific command, use "learn to move".`
       }),
     use: new Action('use', 'Trigger a vessel\'s program.', 'notempty visible target',
       (name, target) => {
@@ -99,6 +99,7 @@ function Vessel (data) {
   this.action = () => {
     if (this.data.program) { return 'use' }
     if (this.parent().data.id === client.vessel.data.id) { return 'drop' }
+    if (this.data.passive) { return 'take' }
     return 'enter'
   }
 
