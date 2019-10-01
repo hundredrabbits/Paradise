@@ -24,7 +24,7 @@ const errors = {
   },
 
   LEARN: function (name) {
-    return new Error('err_LEARN', `For more details on how to ${name}, type "<action data='learn to ${this.name}'>learn to ${this.name}</action>".`)
+    return new Error('err_LEARN', `For more details on how to ${name}, type "<action data='learn to ${name}'>learn to ${name}</action>".`)
   },
 
   NOPROGRAM: function (target, usage = 'program') {
