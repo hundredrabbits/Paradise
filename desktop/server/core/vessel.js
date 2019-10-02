@@ -9,11 +9,13 @@ const basic = {
   owner: -1
 }
 
-function Vessel (data = basic) {
-  this.paradise = null
-  this.data = data
+class Vessel {
+  constructor(data = basic) {
+    this.paradise = null;
+    this.data = data;
+  }
 
-  this.cmd = function (q = '') {
+  cmd(q = '') {
     const lines = `${q}`.indexOf(' & ') > -1 ? `${q}`.split(' & ') : [`${q}`]
 
     if (!lines) { return this.act() }
@@ -40,13 +42,13 @@ function Vessel (data = basic) {
     }
   }
 
-  this.act = function (a, p) {
+  act(a, p) {
     const Responder = this.response(a || 'look')
     const action = new Responder(this)
     return action.run(a, p)
   }
 
-  this.response = function (action = 'look') {
+  response(action = 'look') {
     try {
       return require(`../actions/${action}`)
     } catch (err) {
@@ -57,7 +59,7 @@ function Vessel (data = basic) {
     }
   }
 
-  this.set = function (key, value) {
+  set(key, value) {
     if (this.data[key] != value) {
       this.data[key] = value
       return true
@@ -66,19 +68,19 @@ function Vessel (data = basic) {
     }
   }
 
-  this.move = function (target) {
+  move(target) {
     return this.set('parent', target.id)
   }
 
-  this.parent = function () {
+  parent() {
     return this.paradise.world[this.data.parent]
   }
 
-  this.owner = function () {
+  owner() {
     return this.paradise.world[this.data.owner]
   }
 
-  this.is_circular = function () {
+  is_circular() {
     // find Root
     const known = []
     let v = this.parent()
@@ -93,7 +95,7 @@ function Vessel (data = basic) {
     return false
   }
 
-  this.stem = function () {
+  stem() {
     // find Root
     const known = []
     let v = this.parent()
@@ -108,7 +110,7 @@ function Vessel (data = basic) {
 
   // Helpers
 
-  this.is = function (str) {
+  is(str) {
     const parts = `${str}`.split(' ')
     const last_word = parts[parts.length - 1].toLowerCase()
 
@@ -118,7 +120,7 @@ function Vessel (data = basic) {
     return false
   }
 
-  this.siblings = function () {
+  siblings() {
     const a = []
     const parent = this.parent()
     for (const id in this.paradise.world) {
@@ -131,7 +133,7 @@ function Vessel (data = basic) {
     return a
   }
 
-  this.children = function () {
+  children() {
     const a = []
     for (const id in this.paradise.world) {
       const vessel = this.paradise.world[id]
@@ -142,51 +144,51 @@ function Vessel (data = basic) {
     return a
   }
 
-  this.usables = function () {
+  usables() {
     return [].concat(this.siblings()).concat(this.children())
   }
 
   // Checks
 
-  this.isParadox = function () {
+  isParadox() {
     return this.parent().id == this.id
   }
 
-  this.is_program = function () {
+  is_program() {
     return !!this.data.program
   }
 
   // Formatters
 
-  this.to_h = function () {
+  to_h() {
     return this.data
   }
 
-  this.to_a = function (show_particle = true) {
+  to_a(show_particle = true) {
     return `${show_particle ? this.particle() + ' ' : ''}<action data='${this.action()}'>${this.name()}</action>`
   }
 
-  this.particle = function () {
+  particle() {
     const letter = this.data.attr ? this.data.attr.substr(0, 1).toLowerCase() : this.data.name.substr(0, 1).toLowerCase()
     return letter == 'a' || letter == 'e' || letter == 'i' || letter == 'o' || letter == 'u' ? 'an' : 'a'
   }
 
-  this.name = function () {
+  name() {
     return `${this.data.attr ? this.data.attr + ' ' : ''}${this.data.name}`
   }
 
-  this.type = function () {
+  type() {
     if (this.data.program) { return `program` }
     if (this.data.note) { return `location` }
 
     return `vessel`
   }
 
-  this.usable = function () {
+  usable() {
     return this.trigger() !== false
   }
 
-  this.trigger = function () {
+  trigger() {
     if (this.data.trigger) {
       return this.data.trigger.indexOf(' ') > -1 ? this.data.trigger.split(' ')[0] : this.data.trigger
     }
@@ -196,14 +198,14 @@ function Vessel (data = basic) {
     return false
   }
 
-  this.passive = function () {
+  passive() {
     if (this.trigger() != 'passive') { return }
     if (!this.data.reaction) { return }
 
     return this.data.reaction
   }
 
-  this.action = function () {
+  action() {
     let action = `warp into the ${this.name()}`
 
     // Inventory
@@ -224,7 +226,7 @@ function Vessel (data = basic) {
     return action
   }
 
-  this.toString = function () {
+  toString() {
     return `${this.particle()} ${this.name()}`.trim()
   }
 }
