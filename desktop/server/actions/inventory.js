@@ -9,6 +9,8 @@ function Inventory (host) {
   this.docs = 'View the contents of your inventory.'
 
   this.operate = function () {
+    // 'a, b, c, and d' if true
+    // 'a, b, c and d' if false
     const oxford_comma = true
 
     const children = this.host.children()
@@ -19,12 +21,16 @@ function Inventory (host) {
 
     let output = '<p>You are carrying '
 
+    // For each carried item:
     for (var id in children) {
       if (id == 0) {
+        // If it is the first one, add it to the output
         output += children[id].to_a()
       } else if (id < children.length - 1) {
+        // If it is not first or last, add it with  a comma before
         output += `, ${children[id].to_a()}`
       } else {
+        // If it is the last, add an 'and' before it
         if (id != 1 && oxford_comma) {
           output += ', and '
         } else {

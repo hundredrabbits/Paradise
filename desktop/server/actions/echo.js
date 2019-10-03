@@ -10,9 +10,11 @@ function Echo (host) {
 
   this.operate = function (action, params) {
     if (!params) {
+      // Ensure parameters are given
       return errors.NOPARAM(action)
     }
 
+    // Render and return reaction
     const reaction_rendered = this.render(params, null, host) // query = null
     return `<p>${reaction_rendered}</p>`
   }

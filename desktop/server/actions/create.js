@@ -23,13 +23,16 @@ function Create (host) {
   this.docs = 'Create a new vessel at your current location. Vessel names and attributes must include <b>less than 14 characters and be unique</b>. '
 
   this.operate = function (action, params) {
+    // Ensure parameters are given
     if (!params) { return errors.NOPARAM(action) }
 
+    // Find attr and name of proposed vessel
     const parts = this.remove_articles(params).trim().split(' ')
     const attr = parts[parts.length - 2] && parts[parts.length - 2] != parts[parts.length - 1] ? parts[parts.length - 2].toLowerCase() : null
     const name = parts[parts.length - 1].toLowerCase()
 
     // TODO: Transform these into Errors
+    // Ensure name is valid
     if (parseInt(name) > -1) { return `<p>Vessel names cannot be numbers.</p>` }
     if (name == '') { return errors.NOVALID(action) }
     if (name.length < 3 || name.length > 14) { return `<p>The vessel name must be between 3 and 14 characters long.</p>` }
@@ -37,6 +40,7 @@ function Create (host) {
     if (reserved_names.indexOf(name) > -1) { return `<p>Vessel names cannot be reserved words ('some', 'any', or 'itself') or articles.</p>` }
     if (reserved_names.indexOf(attr) > -1) { return `<p>Vessel attributes cannot be reserved words ('some', 'any', or 'itself') or articles.</p>` }
 
+    // Form data object
     const data = {
       name: name,
       attr: attr,
@@ -44,6 +48,7 @@ function Create (host) {
       parent: this.host.data.parent
     }
 
+    // Create vessel
     const vessel = new Vessel(data)
     const success = this.host.paradise.add(vessel)
 
