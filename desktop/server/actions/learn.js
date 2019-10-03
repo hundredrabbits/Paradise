@@ -70,8 +70,8 @@ function Learn (host) {
       const a = require(`./${target}`)
       const obj = new a()
       // Find images
-      const image_src = `media/graphics/${obj.name}.png`
-      const alt_src = 'media/graphics/default.png'
+      const image_src = `media/graphics/${obj.name}.svg`
+      const alt_src = 'media/graphics/default.svg'
       let out = `<img src='${image_src}' onerror='this.onerror=null; this.src="${alt_src}"' />`
       out += `<p>${obj.docs}<br /><br />Type <action>learn about actions</action> again to see the available actions.</p>`
       return out
