@@ -5,7 +5,7 @@ const helpers = require('../core/helpers')
 const _lib = [
 
   {
-    props: ["add", ['...items'], 'Sum the items.'],
+    props: ['add', ['...items'], 'Sum the items.'],
     func: function (context, ...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
@@ -15,14 +15,14 @@ const _lib = [
   },
 
   {
-    props: ["sub", ['a', 'b'], 'Subtract a from b.'],
+    props: ['sub', ['a', 'b'], 'Subtract a from b.'],
     func: function (context, a, b) {
       return b - a
     }
   },
 
   {
-    props: ["mult", ['...items'], 'Multiply the items.'],
+    props: ['mult', ['...items'], 'Multiply the items.'],
     func: function (context, ...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
@@ -32,14 +32,14 @@ const _lib = [
   },
 
   {
-    props: ["div", ['a', 'b'], 'Divide the a by b.'],
+    props: ['div', ['a', 'b'], 'Divide the a by b.'],
     func: function (context, a, b) {
       return a / b
     }
   },
 
   {
-    props: ["pow", ['a', 'b'], 'Raise a to the power of b.'],
+    props: ['pow', ['a', 'b'], 'Raise a to the power of b.'],
     func:
     function (context, a, b) {
       return a ** b
@@ -47,18 +47,18 @@ const _lib = [
   },
 
   {
-    props: ["inc", ['a'], 'Increment a.'],
+    props: ['inc', ['a'], 'Increment a.'],
     func: function (context, a) {
       return a + 1
     }
   },
 
   {
-    props: ["dec", ['a'], 'Decrement a.'],
+    props: ['dec', ['a'], 'Decrement a.'],
     func: function (context, a) {
       return a - 1
     }
-  },
+  }
 
 ]
 
@@ -83,7 +83,7 @@ const exp = {
     let out = {}
     for (var id in _lib) {
       const props = _lib[id].props
-      out[props[0]] = {inputs: props[1], description: props[2]}
+      out[props[0]] = { inputs: props[1], description: props[2] }
     }
     return out
   }

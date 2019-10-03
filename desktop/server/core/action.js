@@ -19,7 +19,7 @@ function Action (host, name) {
     const _view = this._view()
     const _tips = this._tips()
     const _passive = this._passive()
-    const cli = (_reaction ? _reaction : null) || `${_header ? _header + '\n\n' : ''}${_note ? _note + '\n\n' : ''}${_view ? '> ' + _view : ''}`
+    const cli = (_reaction || null) || `${_header ? _header + '\n\n' : ''}${_note ? _note + '\n\n' : ''}${_view ? '> ' + _view : ''}`
 
     const h = {
       header: _header,

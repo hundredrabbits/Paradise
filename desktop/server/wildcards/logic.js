@@ -5,7 +5,7 @@ const helpers = require('../core/helpers')
 const _lib = [
 
   {
-    props: ["equal", ['a', 'b'], 'Return "true" if a is b, or nil otherwise.'],
+    props: ['equal', ['a', 'b'], 'Return "true" if a is b, or nil otherwise.'],
     func: function (context, a, b) {
       if ((typeof a === 'function' ? a() : a) == (typeof b === 'function' ? b() : b)) {
         return 'true'
@@ -15,7 +15,7 @@ const _lib = [
   },
 
   {
-    props: ["if", ['condition', 'then', 'else'], 'If condition is not nil, return "then". Otherwise, return "else".'],
+    props: ['if', ['condition', 'then', 'else'], 'If condition is not nil, return "then". Otherwise, return "else".'],
     func: function (context, i, t, e) {
       let condition = false
       if (typeof i === 'function') {
@@ -33,7 +33,7 @@ const _lib = [
   },
 
   {
-    props: ["and", ['...items'], 'Return first non-nil input if all inputs are non-first_non_nil (or nil if there are none).'],
+    props: ['and', ['...items'], 'Return first non-nil input if all inputs are non-first_non_nil (or nil if there are none).'],
     func: function (context, ...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
@@ -51,7 +51,7 @@ const _lib = [
   },
 
   {
-    props: ["or", ['...items'], 'Return first non-nil input (or nil if there are none).'],
+    props: ['or', ['...items'], 'Return first non-nil input (or nil if there are none).'],
     func: function (context, ...items) {
       if (items.length === 1 && items[0] instanceof Array) {
         items = items[0]
@@ -62,7 +62,7 @@ const _lib = [
         }
       }
       return helpers.nil
-    }},
+    } }
 
 ]
 
@@ -87,7 +87,7 @@ const exp = {
     let out = {}
     for (var id in _lib) {
       const props = _lib[id].props
-      out[props[0]] = {inputs: props[1], description: props[2]}
+      out[props[0]] = { inputs: props[1], description: props[2] }
     }
     return out
   }

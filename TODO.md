@@ -6,11 +6,11 @@
 -   Expand the default world.
 -   Improve walkthrough, add checks for multi-line.
 -   Potentially add syntax highlighting for both Paradise Commands and WildcardLISP.
--   Make various class methods (eg. Vessel.parent) into getters
 -   Add more sections to walkthrough
 -   Maybe add menu item for walkthrough?
+-   Make various class methods (eg. Vessel.parent) into getters
 
-```
+```javascript
 class Rectangle {
   constructor(height, width) {
     this.height = height;
@@ -45,7 +45,6 @@ console.log(square.area); // 100
 -   Key-value data structures
 -   Add the rest of the (as-of-yet) untransferred wildcards.
     -   `time`, `beat`, `pulse`
--   Pretty print lists
 
 ### Save / Load
 
