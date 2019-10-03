@@ -34,7 +34,7 @@ const exp = {
     let out = {}
     for (var id in _lib) {
       const props = _lib[id].props
-      out[props[0]] = {inputs: props[1], description: props[2]}
+      out[props[0]] = { inputs: props[1], description: props[2] }
     }
     return out
   }

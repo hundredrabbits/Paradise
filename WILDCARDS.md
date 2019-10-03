@@ -6,15 +6,15 @@ The wildcardLISP is a collection of tools to create more [dynamic vessels](TUTOR
 
 ### Self
 
--   `Your id is @(self)`, to get your vessel id.
+- `Your id is @(self)`, to get your vessel id.
 
 ### Parent
 
--   `Your parent vessel is @(parent)`, to get your parent id.
+- `Your parent vessel is @(parent)`, to get your parent id.
 
 ### Stem
 
--   `You are in the @(stem) paradox`, to get the stem id.
+- `You are in the @(stem) paradox`, to get the stem id.
 
 ## Logic
 
@@ -22,31 +22,31 @@ The wildcardLISP is a collection of tools to create more [dynamic vessels](TUTOR
 
 Tests values to see if they are equal. Returns `"true"` if yes, `nil` if no.
 
--   `@(equal 1 1)`, true.
--   `@(equal "blue" "red")`, false.
+- `@(equal 1 1)`, true.
+- `@(equal "blue" "red")`, false.
 
 ### if
 
 The 'if' method allows to do basic logic tests, it basically does '@(if a b c)', or if a then b, else c. The 'truth' of a is judjed on whether it is not `nil`.
 
--   `@(if "true" "yes" "no")` will print `yes`.
--   `@(if nil "yes" "no")` will print `no`.
--   `The vessel @(if (equal (vessel parent "name") "house") "is a house" "is not a house")`, will print `is a house`, if parent vessel is a house.
+- `@(if "true" "yes" "no")` will print `yes`.
+- `@(if nil "yes" "no")` will print `no`.
+- `The vessel @(if (equal (vessel parent "name") "house") "is a house" "is not a house")`, will print `is a house`, if parent vessel is a house.
 
 ### and
 
 Returns the first non-`nil` value it is given if all values are non-`nil`. If one or more values are `nil`, it returns `nil`.
 
--   `@(and "true" "teapot" "yes")`, will print `yes`.
--   `@(and "true" nil "yes")`, will print `nil`.
+- `@(and "true" "teapot" "yes")`, will print `yes`.
+- `@(and "true" nil "yes")`, will print `nil`.
 
 ### or
 
 Returns the first non-`nil` value it is given, or `nil` if all values are `nil`.
 
--   `@(or "true" "yes" "teapot")`, will print `true`.
--   `@(or nil "true" nil)`, will print `true`.
--   `@(or nil nil nil)`, will print `nil`.
+- `@(or "true" "yes" "teapot")`, will print `true`.
+- `@(or nil "true" nil)`, will print `true`.
+- `@(or nil nil nil)`, will print `nil`.
 
 ## Mathematics
 

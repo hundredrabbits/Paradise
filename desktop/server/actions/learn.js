@@ -1,8 +1,8 @@
 'use strict'
 
-const Action    = require(`../core/action`)
-const errors    = require('../core/errors')
-const helpers   = require('../core/helpers')
+const Action = require(`../core/action`)
+const errors = require('../core/errors')
+const helpers = require('../core/helpers')
 const wildcards = require('../wildcards')
 
 function Learn (host) {
@@ -36,8 +36,8 @@ function Learn (host) {
     if (method === 'to') {
       return this.learn_action(parts, target)
     } else if (method === 'about') {
-      if (target[0] === "@") {
-        if (target[1] === ":") {
+      if (target[0] === '@') {
+        if (target[1] === ':') {
           return this.learn_wildcard_group(parts, target)
         } else {
           return this.learn_wildcard(parts, target)
@@ -59,7 +59,7 @@ function Learn (host) {
       const a = require(`./${target}`)
       const obj = new a()
       const image_src = `media/graphics/${obj.name}.png`
-      const alt_src   = 'media/graphics/default.png'
+      const alt_src = 'media/graphics/default.png'
       let out = `<img src='${image_src}' onerror='this.onerror=null; this.src="${alt_src}"' />`
       out += `<p>${obj.docs}<br /><br />Type <action>learn about actions</action> again to see the available actions.</p>`
       return out
@@ -112,29 +112,29 @@ function Learn (host) {
 
   this.list_actions = function () {
     const _actions = [
-      "look",
+      'look',
 
-      "create",
-      "become",
-      "enter",
-      "leave",
+      'create',
+      'become',
+      'enter',
+      'leave',
 
-      "warp",
-      "take",
-      "drop",
-      "inventory",
-      "move",
+      'warp',
+      'take',
+      'drop',
+      'inventory',
+      'move',
 
-      "learn",
-      "note",
-      "transform",
-      "inspect",
+      'learn',
+      'note',
+      'transform',
+      'inspect',
 
-      "trigger",
-      "program",
-      "use",
-      "cast",
-      "echo",
+      'trigger',
+      'program',
+      'use',
+      'cast',
+      'echo'
     ]
     return `Available actions:<br /><br />${_actions.map(function (inp) { return `<action data='learn to ${inp}'>${inp}</action>` }).join('<br />')}`
   }

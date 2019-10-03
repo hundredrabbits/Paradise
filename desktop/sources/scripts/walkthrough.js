@@ -125,13 +125,13 @@ function Walkthrough () {
 
   this.start = function (speed = 50, log = false) {
     const backup_world = browser.save_string()
-    console.log(backup_world);
+    console.log(backup_world)
 
     this.speed = speed
     this.index = 0
     browser.reset()
     this.run(function (backup_world, browser) {
-      console.log(backup_world);
+      console.log(backup_world)
       browser.load_string(backup_world)
       browser.query('look')
     }, [backup_world, browser], this.all, log)
@@ -146,7 +146,7 @@ function Walkthrough () {
     } else {
       const sight = browser.query(target[this.index])
       if (log) {
-        console.log(`> ${sight.reaction}`);
+        console.log(`> ${sight.reaction}`)
       }
     }
     this.index += 1

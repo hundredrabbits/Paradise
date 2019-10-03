@@ -7,7 +7,7 @@ const _lib = [
   // TODO: Add proper error handling
 
   {
-    props: ["list", ['...items'], 'Transform a sequence of inputs into a list.'],
+    props: ['list', ['...items'], 'Transform a sequence of inputs into a list.'],
     func: function (context, ...items) {
       if (!items) {
         return helpers.nil
@@ -18,7 +18,7 @@ const _lib = [
 
   // REVIEW: Which order should element and list be in?
   {
-    props: ["push", ['element', 'list'], 'Push an element to the end of a list.'],
+    props: ['push', ['element', 'list'], 'Push an element to the end of a list.'],
     func: function (context, element, list) {
       if (!element || !list) {
         return helpers.nil
@@ -29,7 +29,7 @@ const _lib = [
   },
 
   {
-    props: ["pop", ['list'], 'Pop an element from the end of a list.'],
+    props: ['pop', ['list'], 'Pop an element from the end of a list.'],
     func: function (context, list) {
       if (!list) {
         return helpers.nil
@@ -40,7 +40,7 @@ const _lib = [
 
   // REVIEW: Which order should index and list be in?
   {
-    props: ["get", ['index', 'list'], 'Get an element from a list.'],
+    props: ['get', ['index', 'list'], 'Get an element from a list.'],
     func: function (context, index, list) {
       if (!index || !list) {
         return helpers.nil
@@ -51,8 +51,8 @@ const _lib = [
 
   // REVIEW: Which order should index, value, and list be in?
   {
-    props: ["set", ['index', 'value', 'list'], 'Set an element of a list.'],
-    func:  function (context, index, value, list) {
+    props: ['set', ['index', 'value', 'list'], 'Set an element of a list.'],
+    func: function (context, index, value, list) {
       if (!index || !value || !list) {
         return helpers.nil
       }
@@ -62,7 +62,7 @@ const _lib = [
   },
 
   {
-    props: ["length", ['list'], 'Get the length of a list.'],
+    props: ['length', ['list'], 'Get the length of a list.'],
     func: function (context, list) {
       if (!list) {
         return helpers.nil
@@ -73,7 +73,7 @@ const _lib = [
 
   // TODO: add error checking
   {
-    props: ["concatl", ['...items'], 'Concatenate a sequence of lists.'],
+    props: ['concatl', ['...items'], 'Concatenate a sequence of lists.'],
     func: function (context, ...items) {
       let out = []
       for (var id in items) {
@@ -87,7 +87,7 @@ const _lib = [
   // `range 5`   -> [0, 1, 2, 3, 4]
   // `range 3 7` -> [3, 4, 5, 6]
   {
-    props: ["range", ['a', 'b'], 'Generate a list. Accepts two formats: <code>range length</code> and <code>range start end</code>. The <code>end</code> value is not included.'],
+    props: ['range', ['a', 'b'], 'Generate a list. Accepts two formats: <code>range length</code> and <code>range start end</code>. The <code>end</code> value is not included.'],
     func: function (context, a, b) {
       let start, end
       if (!!a && !b) { // If start is defined but not end
@@ -111,7 +111,7 @@ const _lib = [
 
   // eg. `create chair & create table & echo @( map siblings ( lambda (id) ( vessel id name ) ) )`
   {
-    props: ["map", ['list', 'function'], 'Iterate over list elements. The return values of the function will modify the list values.'],
+    props: ['map', ['list', 'function'], 'Iterate over list elements. The return values of the function will modify the list values.'],
     func: function (context, list, func) {
       if (typeof list === 'function') {
         list = list()
@@ -121,7 +121,7 @@ const _lib = [
         return list.map(func)
       }
     }
-  },
+  }
 
 ]
 
@@ -146,7 +146,7 @@ const exp = {
     let out = {}
     for (var id in _lib) {
       const props = _lib[id].props
-      out[props[0]] = {inputs: props[1], description: props[2]}
+      out[props[0]] = { inputs: props[1], description: props[2] }
     }
     return out
   }
