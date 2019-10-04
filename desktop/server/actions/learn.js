@@ -5,6 +5,7 @@ const errors = require('../core/errors')
 const helpers = require('../core/helpers')
 const wildcards = require('../wildcards')
 const fs = require('fs');
+const path = require('path');
 
 function Learn (host) {
   Action.call(this, host, 'learn')
@@ -181,11 +182,12 @@ function Learn (host) {
 
   this.obtain_image = function (name, fallback = 'default') {
     // Obtaining an image, so must be an SVG in the graphics directory
-    const path = `sources/media/graphics/${name}.svg`
+    name = name.replace(/^[ /]+|[ /]+$/g, '') + '.svg'
+    const img_path = path.resolve(__dirname, '../../sources/media/graphics/', name)
     // Try to read the file
     try {
       // Success!
-      return fs.readFileSync(path, 'utf8')
+      return fs.readFileSync(img_path, 'utf8')
     } catch (err) {
       if (!fallback) { throw err }
       // Failure; try again with the fallback, but last chance!
