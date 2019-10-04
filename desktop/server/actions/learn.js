@@ -189,8 +189,9 @@ function Learn (host) {
       // Success!
       return fs.readFileSync(img_path, 'utf8')
     } catch (err) {
-      if (!fallback) { throw err }
-      // Failure; try again with the fallback, but last chance!
+      if (!fallback) { return '' }
+      // Failure; try again with the fallback, or return nothing if that's
+      // already failed
       return this.obtain_image(fallback, null)
     }
   }
