@@ -4,6 +4,7 @@ const Action = require(`../core/action`)
 const errors = require('../core/errors')
 const helpers = require('../core/helpers')
 const wildcards = require('../wildcards')
+const fs = require('fs');
 
 function Learn (host) {
   Action.call(this, host, 'learn')
@@ -70,9 +71,7 @@ function Learn (host) {
       const a = require(`./${target}`)
       const obj = new a()
       // Find images
-      const image_src = `media/graphics/${obj.name}.svg`
-      const alt_src = 'media/graphics/default.svg'
-      let out = `<img src='${image_src}' onerror='this.onerror=null; this.src="${alt_src}"' />`
+      let out = `<div id="learn_image">${this.obtain_image(obj.name)}</div>`
       out += `<p>${obj.docs}<br /><br />Type <action>learn about actions</action> again to see the available actions.</p>`
       return out
     } catch (err) {
@@ -178,6 +177,20 @@ function Learn (host) {
   this.list_groups = function () {
     const groups = Object.keys(wildcards.groups).map(function (name) { return `@:${name}` })
     return `Groups:<br /><br />${groups.map(function (inp) { return `<action data='learn about ${inp}'>${inp}</action>` }).join('<br />')}`
+  }
+
+  this.obtain_image = function (name, fallback = 'default') {
+    // Obtaining an image, so must be an SVG in the graphics directory
+    const path = `sources/media/graphics/${name}.svg`
+    // Try to read the file
+    try {
+      // Success!
+      return fs.readFileSync(path, 'utf8')
+    } catch (err) {
+      if (!fallback) { throw err }
+      // Failure; try again with the fallback, but last chance!
+      return this.obtain_image(fallback, null)
+    }
   }
 }
 

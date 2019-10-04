@@ -10,9 +10,9 @@
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    version="1.1"
-   id="svg2"
-   width="1000"
-   height="619"
+   class="themed_svg"
+   width="100%"
+   height="inherit"
    viewBox="0 0 1000 619"
    sodipodi:docname="become.svg"
    inkscape:version="0.92.3 (2405546, 2018-03-11)">
