@@ -6,6 +6,7 @@ body wr page h1 *:first-child { border-color:var(--b_med) !important;  }
 body wr page #passive::before { color:var(--f_med) !important;  }
 body wr page #passive::after { color:var(--f_med) !important;  }
 body wr page #reaction p { color:var(--f_med) !important;  }
+body wr page #note { color:var(--f_high) !important; }
 body wr page list ln:before { color:var(--f_low) !important;  }
 body wr page #tips ln code { background-color:var(--b_low) !important; }
 body wr hint { border-color:var(--b_med) !important;  }

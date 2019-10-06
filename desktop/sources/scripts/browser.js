@@ -3,17 +3,7 @@
 function Browser (paradise) {
   Client.call(this, paradise)
 
-  this.theme = new Theme({
-    background: '#ffffff',
-    f_high: '#000000',
-    f_med: '#999999',
-    f_low: '#cccccc',
-    f_inv: '#000000',
-    b_high: '#999999',
-    b_med: '#cccccc',
-    b_low: '#efefef',
-    b_inv: '#ffffff'
-  })
+  this.theme = new Theme()
 
   this.controller = new Controller()
   this.walkthrough = new Walkthrough()
