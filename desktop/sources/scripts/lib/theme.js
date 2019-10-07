@@ -1,5 +1,7 @@
 'use strict'
 
+const systemPreferences = require('electron').remote.systemPreferences
+
 function Theme (default_theme = null) {
   const themer = this
 
@@ -15,7 +17,10 @@ function Theme (default_theme = null) {
     default: default_theme
   }
 
-  if (!this.collection.default) { this.collection.default = this.collection.pale }
+  if (!this.collection.default) {
+    const dark_theme = systemPreferences.isDarkMode()
+    this.collection.default = dark_theme ? this.collection.noir : this.collection.pale
+  }
 
   this.install = function (host = document.body, callback) {
     console.log('Theme', 'Installing..')
