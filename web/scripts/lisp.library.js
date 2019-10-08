@@ -248,6 +248,6 @@ function Library () {
   // Special
 
   this.action = (action, name) => {
-    return `<a href='#' data-action='${action}'>${name || action}</a>`
+    return `<action data-action='${action}'>${name || action}</action>`
   }
 }

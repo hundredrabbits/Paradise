@@ -59,7 +59,14 @@ function Vessel (data) {
       }),
     learn: new Action('learn', 'Read documentation for each action, or see a list of action.', 'words',
       (name) => {
-        return this.actions[name] ? name + ': ' + this.actions[name].docs : `the available commands are: ${andList(Object.keys(this.actions))}. to see the documentation for a specific command, use "learn to move".`
+        if (this.actions[name]) {
+          return `<action data-action='${name}'>${name}</action>: ${this.actions[name].docs}`
+        } else {
+          const composed_actions = Object.keys(this.actions).map((a) => {
+            return `<action data-action='learn to ${a}'>${a}</action>`
+          })
+          return `the available commands are: ${andList(composed_actions)}. to see the documentation for a specific command, use "learn to move".`
+        }
       }),
     use: new Action('use', 'Trigger a vessel\'s program.', 'notempty visible target',
       (name, target) => {
@@ -140,13 +147,18 @@ function Vessel (data) {
     return this.data.id === this.parent().data.id
   }
 
-  this.toAction = () => {
-    return `<a data-action='${this.action()} the ${this}' href='#${this}'>${this.action()} the ${this}</a> ${this.data.pass ? this.data.pass : ''}`.trim()
+  this.toAction = (inner = null) => {
+    inner = inner || this.action() + ' the ' + this
+    return `<action data-action='${this.action()} the ${this}' href='#${this}'>${inner}</action>`.trim()
   }
 
   this.toString = () => {
     return `${this.data.name}`
   }
+  
+  this.particle = () => (
+    'aeiou'.includes(this.data.name.substr(0,1)) ? 'an' : 'a'
+  )
 
   function andList (arr) {
     return arr.reduce((acc, item, id) => {

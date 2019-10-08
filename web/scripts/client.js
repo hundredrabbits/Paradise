@@ -3,13 +3,15 @@
 /* global */
 
 function Client (paradise) {
+  this._wr = document.createElement('wr')
+  this._page = document.createElement('page')
   this._form = document.createElement('form')
   this._input = document.createElement('input')
   this._location = document.createElement('h2')
   this._note = document.createElement('p')
   this._sight = document.createElement('ul')
   this._response = document.createElement('p')
-  this._inventory = document.createElement('ul')
+  this._inventory = document.createElement('dl')
   this._program = document.createElement('pre')
   this._footer = document.createElement('p')
 
@@ -18,16 +20,22 @@ function Client (paradise) {
   this.vessel = null
 
   this.install = (host = document.body) => {
-    host.appendChild(this._location)
-    host.appendChild(this._note)
-    host.appendChild(this._sight)
-    host.appendChild(this._response)
-    host.appendChild(this._inventory)
-    host.appendChild(this._form)
+    host.appendChild(this._wr)
+    this._wr.appendChild(this._page)
+    this._page.appendChild(this._location)
+    this._page.appendChild(this._note)
+    this._page.appendChild(this._sight)
+    this._sight.id = 'sight'
+    this._page.appendChild(this._response)
+    this._page.appendChild(this._inventory)
+    this._inventory.id = 'inventory'
+    this._wr.appendChild(this._form)
     this._form.appendChild(this._input)
+    this._input.placeholder = 'what would you like to do?'
     this._form.appendChild(document.createElement('br'))
-    host.appendChild(this._program)
+    this._wr.appendChild(this._program)
     host.appendChild(this._footer)
+    this._footer.id = 'footer'
 
     host.style.maxWidth = '400px'
 
@@ -50,13 +58,30 @@ function Client (paradise) {
     const visibles = this.vessel.sight()
     const children = this.vessel.inventory()
     const stem = this.vessel.stem()
-    this._location.innerHTML = this.vessel.isParadox() ? `you are the ${this.vessel.data.name}^.` : `you are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
+    this._location.innerHTML = this.vessel.isParadox() ? `you are the ${this.vessel.data.name}^.` : `you are a ${this.vessel.data.name} in the ${this.vessel.parent().data.name}.`
     this._note.innerHTML = this.vessel.parent().data.note ? this.vessel.parent().data.note.template(this.vessel.parent(), this.vessel) : ''
     this._program.innerHTML = this.vessel.parent().data.program || this.vessel.parent().data.passive ? (this.vessel.parent().data.program ? this.vessel.parent().data.program : '') + '\n' + (this.vessel.parent().data.passive ? this.vessel.parent().data.passive : '') : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + '</li>' }, '')
-    this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + (vessel.data.passive ? ' ' + vessel.data.passive.template(this.vessel.parent(), this.vessel) : '') + '</li>' }, '')
+    this._inventory.innerHTML = children.reduce((acc, vessel) => {
+      return acc + `
+      <dt>${vessel.toAction(vessel.particle() + ' ' + vessel.data.name)}</dt>
+      <dd>
+        ${vessel.data.passive ? vessel.data.passive.template(this.vessel.parent(), this.vessel) : ''}
+      </dd>`
+    }, '') || '<dt class="nothing">nothing</dt>'
     this._response.innerHTML = response
-    this._footer.innerHTML = `<i><a href='#' onclick='client.export()'>${stem ? stem.data.name : 'circular universe^'}</a> ${this.vessel.parent().data.id}:${this.vessel.data.id} ${this.vessel.parent().data.note ? `| <a href='#' data-action='note ${this.vessel.parent().data.note}'>edit note</a> ` : ''} ${this.vessel.parent().data.program ? `| <a href='#' data-action='program ${this.vessel.parent().data.program}'>edit program</a> ` : ''} ${this.vessel.parent().data.passive ? `| <a href='#' data-action='pass ${this.vessel.parent().data.passive}'>edit passive</a> ` : ''}</i>`
+    
+    const stem_name = stem ? stem.data.name : 'circular universe^'
+    const note_text = this.vessel.parent().data.note ? `| <a href='#' data-action='note ${this.vessel.parent().data.note}'>edit note</a> ` : ''
+    const program_text = this.vessel.parent().data.program ? `| <a href='#' data-action='program ${this.vessel.parent().data.program}'>edit program</a> ` : ''
+    const passive_text = this.vessel.parent().data.passive ? `| <a href='#' data-action='pass ${this.vessel.parent().data.passive}'>edit passive</a> ` : ''
+    
+    this._footer.innerHTML = `
+      <a href='#' onclick='client.export()'>
+        ${stem_name}
+      </a>
+      ${this.vessel.parent().data.id}:${this.vessel.data.id}
+      ${note_text} ${program_text} ${passive_text}`
   }
 
   this.validate = (cmd) => {
