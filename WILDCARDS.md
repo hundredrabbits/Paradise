@@ -91,7 +91,7 @@ Transform a string to sentence case.
 
 ### uc
 
-Transform a string to lowercase.
+Transform a string to uppercase.
 
 -   `@(uc "hello world")`, will print `HELLO WORLD`.
 
