@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script type="text/javascript" src="web/scripts/lib/lisp.js"></script>
     <script type="text/javascript" src="web/scripts/paradise.js"></script>
     <script type="text/javascript" src="web/scripts/client.js"></script>
     <script type="text/javascript" src="web/scripts/vessel.js"></script>
     <script type="text/javascript" src="web/scripts/action.js"></script>
-    <script type="text/javascript" src="web/scripts/lisp.js"></script>
     <script type="text/javascript" src="web/scripts/lisp.library.js"></script>
     <title>Paradise</title>
   </head>
@@ -18,7 +18,9 @@
       const interpreter = new Lisp(library)
       const paradise = new Paradise()
       const client = new Client(paradise)
+
       client.install()
+      
       window.addEventListener('load', () => { 
         client.start(1); 
       })

@@ -220,8 +220,8 @@ function Library () {
     return a % b
   }
 
-  this.rand = (min,max) => {
-    return Math.floor(Math.random() * (max - min) ) + min
+  this.rand = (min, max) => {
+    return Math.floor(Math.random() * (max - min)) + min
   }
 
   this.clamp = (val, min, max) => { // Clamps a value between min and max.

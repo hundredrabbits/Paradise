@@ -1,5 +1,8 @@
 'use strict'
 
+// In the real world, it didn’t matter if I was there or not.
+// When I realized that, I was no longer afraid of losing my body.
+
 function Lisp (lib = {}) {
   const TYPES = { identifier: 0, number: 1, string: 2, bool: 3, symbol: 4 }
 
@@ -25,15 +28,17 @@ function Lisp (lib = {}) {
     },
     def: function (input, context) {
       const identifier = input[1].value
+      if (context.scope[identifier]) { console.warn(`Redefining variable: ${identifier}`) }
       const value = input[2].type === TYPES.string && input[3] ? input[3] : input[2]
       context.scope[identifier] = interpret(value, context)
       return value
     },
     defn: function (input, context) {
-      const fnName = input[1].value
+      const identifier = input[1].value
+      if (context.scope[identifier]) { console.warn(`Redefining function: ${identifier}`) }
       const fnParams = input[2].type === TYPES.string && input[3] ? input[3] : input[2]
       const fnBody = input[2].type === TYPES.string && input[4] ? input[4] : input[3]
-      context.scope[fnName] = function () {
+      context.scope[identifier] = function () {
         const lambdaArguments = arguments
         const lambdaScope = fnParams.reduce(function (acc, x, i) {
           acc[x.value] = lambdaArguments[i]
@@ -42,7 +47,7 @@ function Lisp (lib = {}) {
         return interpret(fnBody, new Context(lambdaScope, context))
       }
     },
-    lambda: function (input, context) {
+    λ: function (input, context) {
       return function () {
         const lambdaArguments = arguments
         const lambdaScope = input[1].reduce(function (acc, x, i) {
@@ -57,27 +62,6 @@ function Lisp (lib = {}) {
         return interpret(input[2], context)
       }
       return input[3] ? interpret(input[3], context) : []
-    },
-    __fn: function (input, context) {
-      return function () {
-        const lambdaArguments = arguments
-        const keys = [...new Set(input.slice(2).flat(100).filter(i =>
-          i.type === TYPES.identifier &&
-          i.value[0] === '%'
-        ).map(x => x.value).sort())]
-        const lambdaScope = keys.reduce(function (acc, x, i) {
-          acc[x] = lambdaArguments[i]
-          return acc
-        }, {})
-        return interpret(input.slice(1), new Context(lambdaScope, context))
-      }
-    },
-    __obj: function (input, context) {
-      const obj = {}
-      for (let i = 1; i < input.length; i += 2) {
-        obj[interpret(input[i], context)] = interpret(input[i + 1], context)
-      }
-      return obj
     }
   }
 
@@ -137,18 +121,10 @@ function Lisp (lib = {}) {
     const token = input.shift()
     if (token === undefined) {
       return list.pop()
-    } else if (token === '\'(') {
-      input.unshift('__fn')
-      list.push(parenthesize(input, []))
-      return parenthesize(input, list)
-    } else if (token === '{') {
-      input.unshift('__obj')
-      list.push(parenthesize(input, []))
-      return parenthesize(input, list)
     } else if (token === '(') {
       list.push(parenthesize(input, []))
       return parenthesize(input, list)
-    } else if (token === ')' || token === '}') {
+    } else if (token === ')') {
       return list
     } else {
       return parenthesize(input, list.concat(categorize(token)))
@@ -156,18 +132,10 @@ function Lisp (lib = {}) {
   }
 
   const tokenize = function (input) {
-    const i = input.replace(/^;.*\n?/gm, '').replace(/λ /g, 'lambda ').split('"')
+    const i = input.replace(/^[\s]*\;.*\n?/gm, '').split('"')
     return i.map(function (x, i) {
-      return i % 2 === 0
-        ? x.replace(/\(/g, ' ( ')
-          .replace(/\)/g, ' ) ')
-          .replace(/' \( /g, ' \'( ') // '()
-          .replace(/\{/g, ' { ') // {}
-          .replace(/\}/g, ' } ') // {}
-        : x.replace(/ /g, '!whitespace!')
-    })
-      .join('"').trim().split(/\s+/)
-      .map(function (x) { return x.replace(/!whitespace!/g, ' ') })
+      return i % 2 === 0 ? x.replace(/\(/g, ' ( ').replace(/\)/g, ' ) ') : x.replace(/ /g, '!ws!')
+    }).join('"').trim().split(/\s+/).map(function (x) { return x.replace(/!ws!/g, ' ') })
   }
 
   this.run = (input) => {
