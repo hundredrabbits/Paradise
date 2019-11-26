@@ -84,7 +84,7 @@ function Client (paradise) {
   this.docs = () => {
     let markdown = ''
     for (const action of Object.values(this.vessel.actions)) {
-      markdown += `- **${action.name}**: ${action.flags ? '\`' + action.flags + '\` ' : ''}${action.docs}\n`
+      markdown += `- \`${action.name}\`: ${action.docs}\n`
     }
     return markdown
   }
