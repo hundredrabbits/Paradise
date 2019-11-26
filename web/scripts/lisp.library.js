@@ -14,15 +14,15 @@ function Library () {
     'years-since': (q = '1986-03-22') => {
       return ((new Date() - new Date(q)) / 31557600000)
     },
-    'date': () => {
+    date: () => {
       var today = new Date()
       return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
     },
-    'time': () => {
+    time: () => {
       var today = new Date()
       return today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
     },
-    'toString': () => {
+    toString: () => {
       return this.time.time()
     }
   }

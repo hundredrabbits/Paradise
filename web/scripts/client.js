@@ -72,6 +72,23 @@ function Client (paradise) {
     this._input.value = ''
   }
 
+  this.export = () => {
+    const base64 = 'data:application/json;' + 'base64,' + btoa(paradise.export())
+    const name = paradise.name() + '.json'
+    const link = document.createElement('a')
+    link.setAttribute('href', base64)
+    link.setAttribute('download', name)
+    link.dispatchEvent(new MouseEvent('click', { bubbles: true, cancelable: true, view: window }))
+  }
+
+  this.docs = () => {
+    let markdown = ''
+    for (const action of Object.values(this.vessel.actions)) {
+      markdown += `-**${action.name}**: ${action.flags ? '\`' + action.flags + '\` ' : ''}${action.docs}\n`
+    }
+    return markdown
+  }
+
   this.onClick = (e) => {
     if (!e.target.getAttribute('data-action')) { return }
     this._input.value = e.target.getAttribute('data-action')
@@ -103,14 +120,5 @@ function Client (paradise) {
     this._input.focus()
     e.preventDefault()
     return false
-  }
-
-  this.export = () => {
-    const base64 = 'data:application/json;' + 'base64,' + btoa(paradise.export())
-    const name = paradise.name() + '.json'
-    const link = document.createElement('a')
-    link.setAttribute('href', base64)
-    link.setAttribute('download', name)
-    link.dispatchEvent(new MouseEvent(`click`, { bubbles: true, cancelable: true, view: window }))
   }
 }
