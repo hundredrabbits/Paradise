@@ -1,6 +1,6 @@
 'use strict'
 
-const Action = require(`../core/action`)
+const Action = require('../core/action')
 const errors = require('../core/errors')
 
 function Move (host) {
@@ -11,7 +11,7 @@ function Move (host) {
   this.operate = function (action, params) {
     if (!params) { return errors.NOPARAM(action) }
 
-    if (params.indexOf(' in ') < 0 && params.indexOf(' into ') < 0) { return errors.NOVALID(false, `You must use the words <action data='move the vessel1 into the vessel2'>in or into</action>.`) }
+    if (params.indexOf(' in ') < 0 && params.indexOf(' into ') < 0) { return errors.NOVALID(false, 'You must use the words <action data=\'move the vessel1 into the vessel2\'>in or into</action>.') }
 
     const parts = params.replace(' into ', ' in ').split(' in ')
 

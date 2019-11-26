@@ -51,7 +51,7 @@ function Vessel (data = basic) {
       return require(`../actions/${action}`)
     } catch (err) {
       if (err.code === 'MODULE_NOT_FOUND') {
-        return require(`./action`)
+        return require('./action')
       }
       throw err
     }
@@ -96,7 +96,7 @@ function Vessel (data = basic) {
   this.stem = function () {
     // find Root
     const known = []
-    let v = this.parent()
+    const v = this.parent()
     let i = 0
     while (i < 50) {
       if (v.parent().isParadox() || known.indexOf(v.id) > -1) { return v }
@@ -176,10 +176,10 @@ function Vessel (data = basic) {
   }
 
   this.type = function () {
-    if (this.data.program) { return `program` }
-    if (this.data.note) { return `location` }
+    if (this.data.program) { return 'program' }
+    if (this.data.note) { return 'location' }
 
-    return `vessel`
+    return 'vessel'
   }
 
   this.usable = function () {

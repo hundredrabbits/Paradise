@@ -6,18 +6,20 @@ _“I have always imagined that Paradise will be a kind of library.”_ — Jorg
 
 ## Install
 
+You can use paradise directly [in your browser](https://hundredrabbits.github.io/Paradise/).
+
 ### Cli/Desktop
 
 Move to either `/desktop`, or `/cli` and run:
 
 ```sh
 npm install
-npm start # Will start cli mode
+npm start
 ```
 
 ## Actions
 
-There are 16 base actions, you can queue multiple actions using the `&` character, for example `create a teapot & enter the teapot`.
+There are 16 base actions, you can queue multiple actions using the `&` character, for example `create a teapot & enter the teapot`. To see the action documention from within Paradise, use `learn to create`.
 
 - `create`: Create a new vessel at your current location.
 - `enter`: Enter a visible vessel.
@@ -33,6 +35,26 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 - `use`: Trigger a vessel's program.
 - `transform`: Change your current vessel name.
 - `move`: Move a visible vessel into another visible vessel.
+
+## Programming
+
+Paradise has a small [lisp language](https://en.wikipedia.org/wiki/Lisp_(programming_language)) that allows for basic scripting, you can find the list of functions [here](https://github.com/hundredrabbits/Paradise/blob/master/web/scripts/lisp.library.js). If you would like to display the name of acting vessel for example.
+
+```
+note you are the (guest) in the (host). # you are the ghost in the house.
+```
+
+You can access class methods like this:
+
+```
+note you carry (len (guest:inventory)) items.
+```
+
+You can also do basic math like:
+
+```
+note (mul 4 (add 2 1))
+```
 
 ## Extras
 

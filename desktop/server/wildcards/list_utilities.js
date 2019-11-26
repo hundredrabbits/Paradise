@@ -75,7 +75,7 @@ const _lib = [
   {
     props: ['concatl', ['...items'], 'Concatenate a sequence of lists.'],
     func: function (context, ...items) {
-      let out = []
+      const out = []
       for (var id in items) {
         out.concat(items[id])
       }
@@ -127,11 +127,11 @@ const _lib = [
 
 const exp = {
   lib: function (_host, _input, _query, _responder) {
-    let out = {}
+    const out = {}
     for (var id in _lib) {
       const func = _lib[id].func
       const new_func = function (...given) {
-        let args = []
+        const args = []
         args.push({ host: _host, input: _input, query: _query, responder: _responder })
         args.push.apply(args, given)
         return func.apply(null, args)
@@ -143,7 +143,7 @@ const exp = {
   },
 
   descriptions: function () {
-    let out = {}
+    const out = {}
     for (var id in _lib) {
       const props = _lib[id].props
       out[props[0]] = { inputs: props[1], description: props[2] }

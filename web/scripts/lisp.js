@@ -25,17 +25,15 @@ function Lisp (lib = {}) {
     },
     def: function (input, context) {
       const identifier = input[1].value
-      if (context.scope[identifier]) { console.warn(`Redefining variable: ${identifier}`) }
       const value = input[2].type === TYPES.string && input[3] ? input[3] : input[2]
       context.scope[identifier] = interpret(value, context)
       return value
     },
     defn: function (input, context) {
-      const identifier = input[1].value
-      if (context.scope[identifier]) { console.warn(`Redefining function: ${identifier}`) }
+      const fnName = input[1].value
       const fnParams = input[2].type === TYPES.string && input[3] ? input[3] : input[2]
       const fnBody = input[2].type === TYPES.string && input[4] ? input[4] : input[3]
-      context.scope[identifier] = function () {
+      context.scope[fnName] = function () {
         const lambdaArguments = arguments
         const lambdaScope = fnParams.reduce(function (acc, x, i) {
           acc[x.value] = lambdaArguments[i]
@@ -44,7 +42,7 @@ function Lisp (lib = {}) {
         return interpret(fnBody, new Context(lambdaScope, context))
       }
     },
-    λ: function (input, context) {
+    lambda: function (input, context) {
       return function () {
         const lambdaArguments = arguments
         const lambdaScope = input[1].reduce(function (acc, x, i) {
@@ -59,6 +57,20 @@ function Lisp (lib = {}) {
         return interpret(input[2], context)
       }
       return input[3] ? interpret(input[3], context) : []
+    },
+    __fn: function (input, context) {
+      return function () {
+        const lambdaArguments = arguments
+        const keys = [...new Set(input.slice(2).flat(100).filter(i =>
+          i.type === TYPES.identifier &&
+          i.value[0] === '%'
+        ).map(x => x.value).sort())]
+        const lambdaScope = keys.reduce(function (acc, x, i) {
+          acc[x] = lambdaArguments[i]
+          return acc
+        }, {})
+        return interpret(input.slice(1), new Context(lambdaScope, context))
+      }
     },
     __obj: function (input, context) {
       const obj = {}
@@ -125,6 +137,10 @@ function Lisp (lib = {}) {
     const token = input.shift()
     if (token === undefined) {
       return list.pop()
+    } else if (token === '\'(') {
+      input.unshift('__fn')
+      list.push(parenthesize(input, []))
+      return parenthesize(input, list)
     } else if (token === '{') {
       input.unshift('__obj')
       list.push(parenthesize(input, []))
@@ -140,46 +156,21 @@ function Lisp (lib = {}) {
   }
 
   const tokenize = function (input) {
-    const i = input.replace(/^\;.*\n?/gm, '').split('"')
+    const i = input.replace(/^;.*\n?/gm, '').replace(/λ /g, 'lambda ').split('"')
     return i.map(function (x, i) {
-      return i % 2 === 0 ? x.replace(/\(/g, ' ( ').replace(/\)/g, ' ) ').replace(/\{/g, ' { ').replace(/\}/g, ' } ') : x.replace(/ /g, '!ws!')
-    }).join('"').trim().split(/\s+/).map(function (x) { return x.replace(/!ws!/g, ' ') })
+      return i % 2 === 0
+        ? x.replace(/\(/g, ' ( ')
+          .replace(/\)/g, ' ) ')
+          .replace(/' \( /g, ' \'( ') // '()
+          .replace(/\{/g, ' { ') // {}
+          .replace(/\}/g, ' } ') // {}
+        : x.replace(/ /g, '!whitespace!')
+    })
+      .join('"').trim().split(/\s+/)
+      .map(function (x) { return x.replace(/!whitespace!/g, ' ') })
   }
 
-  this.parse = function (input) {
-    return parenthesize(tokenize(input))
+  this.run = (input) => {
+    return interpret(parenthesize(tokenize(input)))
   }
-
-  this.run = (input, host, guest) => {
-    lib.host = host
-    lib.guest = guest
-    return interpret(this.parse(`(${input})`))
-  }
-}
-
-function findSegs (str) {
-  const segments = []
-  let seq = 0
-  let len = 0
-  let from = null
-  for (const c of str) {
-    if (c === '(') {
-      if (seq === 0) { from = len } ;
-      seq += 1
-    }
-    if (c === ')') {
-      if (seq === 1) { segments.push(str.substr(from, len - from + 1)) }
-      seq -= 1
-    }
-    len += 1
-  }
-  return segments
-}
-
-String.prototype.template = function (host, guest) {
-  let str = `${this}`
-  for (const seg of findSegs(str)) {
-    str = str.replace(seg, `${interpreter.run(seg, host, guest)}`)
-  }
-  return str
 }

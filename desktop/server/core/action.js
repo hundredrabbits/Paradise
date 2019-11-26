@@ -144,7 +144,7 @@ function Action (host, name) {
     const oxford_comma = true
 
     let siblings = this.host.siblings().slice()
-    let text_pieces = []
+    const text_pieces = []
 
     let brevity_level = null
     if (siblings.length == 0) {
@@ -162,7 +162,7 @@ function Action (host, name) {
     }
 
     if (brevity_level == 'brief') {
-      let obj_types = {}
+      const obj_types = {}
       for (const id in siblings) {
         if (obj_types[siblings[id].data.name]) {
           obj_types[siblings[id].data.name] += 1

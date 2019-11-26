@@ -70,15 +70,15 @@ function Theme (default_theme = { background: '#222', f_high: '#fff', f_med: '#c
 
     try {
       return {
-        'background': svg.getElementById('background').getAttribute('fill'),
-        'f_high': svg.getElementById('f_high').getAttribute('fill'),
-        'f_med': svg.getElementById('f_med').getAttribute('fill'),
-        'f_low': svg.getElementById('f_low').getAttribute('fill'),
-        'f_inv': svg.getElementById('f_inv').getAttribute('fill'),
-        'b_high': svg.getElementById('b_high').getAttribute('fill'),
-        'b_med': svg.getElementById('b_med').getAttribute('fill'),
-        'b_low': svg.getElementById('b_low').getAttribute('fill'),
-        'b_inv': svg.getElementById('b_inv').getAttribute('fill')
+        background: svg.getElementById('background').getAttribute('fill'),
+        f_high: svg.getElementById('f_high').getAttribute('fill'),
+        f_med: svg.getElementById('f_med').getAttribute('fill'),
+        f_low: svg.getElementById('f_low').getAttribute('fill'),
+        f_inv: svg.getElementById('f_inv').getAttribute('fill'),
+        b_high: svg.getElementById('b_high').getAttribute('fill'),
+        b_med: svg.getElementById('b_med').getAttribute('fill'),
+        b_low: svg.getElementById('b_low').getAttribute('fill'),
+        b_inv: svg.getElementById('b_inv').getAttribute('fill')
       }
     } catch (err) {
       console.warn('Theme', 'Incomplete SVG Theme', err)

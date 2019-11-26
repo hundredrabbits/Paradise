@@ -31,7 +31,7 @@ const errors = {
     return new Error('err_NOPROGRAM', `<p>The ${target} is not a ${usage}.</p>`)
   },
 
-  NOCHANGE: function (text = `<p>Nothing changed.</p>`) {
+  NOCHANGE: function (text = '<p>Nothing changed.</p>') {
     return new Error('err_NOCHANGE', text)
   }
 }

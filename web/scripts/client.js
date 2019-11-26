@@ -1,6 +1,9 @@
 'use strict'
 
-/* global */
+/* global btoa */
+/* global MouseEvent */
+/* global FileReader */
+/* global interpreter */
 
 function Client (paradise) {
   this._form = document.createElement('form')
@@ -51,10 +54,10 @@ function Client (paradise) {
     const children = this.vessel.inventory()
     const stem = this.vessel.stem()
     this._location.innerHTML = this.vessel.isParadox() ? `you are the ${this.vessel.data.name}^.` : `you are a ${this.vessel.data.name}, in the ${this.vessel.parent().data.name}.`
-    this._note.innerHTML = this.vessel.parent().data.note ? this.vessel.parent().data.note.template(this.vessel.parent(), this.vessel) : ''
+    this._note.innerHTML = this.vessel.parent().data.note ? parse(this.vessel.parent().data.note, this.vessel.parent(), this.vessel) : ''
     this._program.innerHTML = this.vessel.parent().data.program || this.vessel.parent().data.passive ? (this.vessel.parent().data.program ? this.vessel.parent().data.program : '') + '\n' + (this.vessel.parent().data.passive ? this.vessel.parent().data.passive : '') : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + '</li>' }, '')
-    this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + (vessel.data.passive ? ' ' + vessel.data.passive.template(this.vessel.parent(), this.vessel) : '') + '</li>' }, '')
+    this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + (vessel.data.passive ? ' ' + parse(vessel.data.passive, this.vessel.parent(), this.vessel) : '') + '</li>' }, '')
     this._response.innerHTML = response
     this._footer.innerHTML = `<i><a href='#' onclick='client.export()'>${stem ? stem.data.name : 'circular universe^'}</a> ${this.vessel.parent().data.id}:${this.vessel.data.id} ${this.vessel.parent().data.note ? `| <a href='#' data-action='note ${this.vessel.parent().data.note}'>edit note</a> ` : ''} ${this.vessel.parent().data.program ? `| <a href='#' data-action='program ${this.vessel.parent().data.program}'>edit program</a> ` : ''} ${this.vessel.parent().data.passive ? `| <a href='#' data-action='pass ${this.vessel.parent().data.passive}'>edit passive</a> ` : ''}</i>`
   }
@@ -120,5 +123,33 @@ function Client (paradise) {
     this._input.focus()
     e.preventDefault()
     return false
+  }
+
+  function parse (str, host, guest) {
+    library.host = host
+    library.guest = guest
+    for (const seg of findSegs(str)) {
+      str = str.replace(seg, `${interpreter.run(seg)}`)
+    }
+    return str
+  }
+
+  function findSegs (str) {
+    const segments = []
+    let seq = 0
+    let len = 0
+    let from = null
+    for (const c of str) {
+      if (c === '(') {
+        if (seq === 0) { from = len } ;
+        seq += 1
+      }
+      if (c === ')') {
+        if (seq === 1) { segments.push(str.substr(from, len - from + 1)) }
+        seq -= 1
+      }
+      len += 1
+    }
+    return segments
   }
 }

@@ -19,7 +19,7 @@ const _lib = [
     func: function (context, i, t, e) {
       let condition = false
       if (typeof i === 'function') {
-        let _i = i()
+        const _i = i()
         condition = (!(!_i || (_i === helpers.nil)))
       } else {
         condition = (!(!i || (i === helpers.nil)))
@@ -62,17 +62,18 @@ const _lib = [
         }
       }
       return helpers.nil
-    } }
+    }
+  }
 
 ]
 
 const exp = {
   lib: function (_host, _input, _query, _responder) {
-    let out = {}
+    const out = {}
     for (var id in _lib) {
       const func = _lib[id].func
       const new_func = function (...given) {
-        let args = []
+        const args = []
         args.push({ host: _host, input: _input, query: _query, responder: _responder })
         args.push.apply(args, given)
         return func.apply(null, args)
@@ -84,7 +85,7 @@ const exp = {
   },
 
   descriptions: function () {
-    let out = {}
+    const out = {}
     for (var id in _lib) {
       const props = _lib[id].props
       out[props[0]] = { inputs: props[1], description: props[2] }

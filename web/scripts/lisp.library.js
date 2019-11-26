@@ -245,6 +245,10 @@ function Library () {
     return items[0].toFixed(items[1])
   }
 
+  this.debug = (item) => {
+    return console.info(item)
+  }
+
   // Special
 
   this.action = (action, name) => {

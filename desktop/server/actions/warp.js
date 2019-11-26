@@ -1,6 +1,6 @@
 'use strict'
 
-const Action = require(`../core/action`)
+const Action = require('../core/action')
 const errors = require('../core/errors')
 
 function Warp (host) {
@@ -16,10 +16,10 @@ function Warp (host) {
     const target = this.find(parts.length > 1 ? params.replace(relation, '').trim() : params)
 
     if (!target) {
-      return `You cannot warp to this location.`
+      return 'You cannot warp to this location.'
     }
     if (relation == 'at' || relation == 'by' || relation == 'to') {
-      let result = this.host.move(target.parent())
+      const result = this.host.move(target.parent())
       if (result) {
         return `<p>You warped by the <action>${target.name()}</action>, inside the ${target.parent().name()}.</p>`
       } else {
@@ -27,7 +27,7 @@ function Warp (host) {
       }
     }
 
-    let result = this.host.move(target)
+    const result = this.host.move(target)
     if (result) {
       return `<p>You warped in <action>${target}</action>.</p>`
     } else {

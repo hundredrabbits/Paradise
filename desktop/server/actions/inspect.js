@@ -1,12 +1,12 @@
 'use strict'
 
-const Action = require(`../core/action`)
+const Action = require('../core/action')
 const errors = require('../core/errors')
 
 function Inspect (host) {
   Action.call(this, host, 'inspect')
 
-  this.docs = `Inspect a vessel to see its program, precise location and various details. An excellent tool to find issues with vessels.`
+  this.docs = 'Inspect a vessel to see its program, precise location and various details. An excellent tool to find issues with vessels.'
 
   this.operate = function (action, params) {
     if (params.trim() == '') { return this.inspect_parent() }

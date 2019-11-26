@@ -1,6 +1,6 @@
 'use strict'
 
-const Action = require(`../core/action`)
+const Action = require('../core/action')
 const errors = require('../core/errors')
 
 function Take (host) {

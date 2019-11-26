@@ -18,19 +18,19 @@ function merge_options (obj1, obj2) {
 }
 
 const _groups = {
-  'mathematics': 'Mathematics wildcards. Used for manipulation of numbers.',
-  'logic': 'Logic wildcards. Used for program flow.',
+  mathematics: 'Mathematics wildcards. Used for manipulation of numbers.',
+  logic: 'Logic wildcards. Used for program flow.',
 
-  'vessels': 'Vessel wildcards. Used to find vessels and their properties.',
+  vessels: 'Vessel wildcards. Used to find vessels and their properties.',
 
-  'string_utilities': 'String wildcards. Used to transform strings of text.',
-  'list_utilities': 'List wildcards. Used to perform operations on lists.',
-  'program_utilities': 'Program utilities. Used to interact with the current program.',
-  'random_utilities': 'Random utilities. Used to generate and use random numbers.',
-  'clock_utilities': 'Clock utilities. Used to find and use the current time.'
+  string_utilities: 'String wildcards. Used to transform strings of text.',
+  list_utilities: 'List wildcards. Used to perform operations on lists.',
+  program_utilities: 'Program utilities. Used to interact with the current program.',
+  random_utilities: 'Random utilities. Used to generate and use random numbers.',
+  clock_utilities: 'Clock utilities. Used to find and use the current time.'
 }
 
-let groups = []
+const groups = []
 
 for (var name in _groups) {
   const group = require(`./${name}`)
