@@ -3,7 +3,7 @@
 /* global btoa */
 /* global MouseEvent */
 /* global FileReader */
-/* global interpreter */
+/* global lain */
 
 function Client (paradise) {
   this._form = document.createElement('form')
@@ -129,7 +129,7 @@ function Client (paradise) {
     library.host = host
     library.guest = guest
     for (const seg of findSegs(str)) {
-      str = str.replace(seg, `${interpreter.run(seg)}`)
+      str = str.replace(seg, `${lain.run(seg)}`)
     }
     return str
   }

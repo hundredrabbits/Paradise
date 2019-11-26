@@ -3,7 +3,7 @@
 // In the real world, it didn’t matter if I was there or not.
 // When I realized that, I was no longer afraid of losing my body.
 
-function Lisp (lib = {}) {
+function Lain (lib = {}) {
   const TYPES = { identifier: 0, number: 1, string: 2, bool: 3, symbol: 4 }
 
   const Context = function (scope, parent) {
