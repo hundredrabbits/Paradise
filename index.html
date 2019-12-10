@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type="text/javascript" src="web/scripts/lib/lain.js"></script>
-    <script type="text/javascript" src="web/scripts/library.js"></script>
+    <script type="text/javascript" src="web/scripts/lain.library.js"></script>
     <script type="text/javascript" src="web/scripts/paradise.js"></script>
     <script type="text/javascript" src="web/scripts/client.js"></script>
     <script type="text/javascript" src="web/scripts/vessel.js"></script>
@@ -14,8 +14,7 @@
   </head>
   <body style='padding:30px'>
     <script>
-      const library = new Library()
-      const lain = new Lain(library)
+      const lain = new Lain(lainLibrary)
       const paradise = new Paradise()
       const client = new Client(paradise)
 

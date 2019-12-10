@@ -36,12 +36,12 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 - `transform`: Change your current vessel name.
 - `move`: Move a visible vessel into another visible vessel.
 
-## LainLISP
+## Scripting
 
-Paradise has a small [lisp dialect](https://wiki.xxiivv.com/Lain) that allows for basic scripting, you can find the list of functions [here](https://github.com/hundredrabbits/Paradise/blob/master/web/scripts/library.js). If you would like to display the name of acting vessel for example.
+Paradise has a small [lisp dialect](https://wiki.xxiivv.com/Lain) that allows for basic scripting, you can find the list of functions [here](https://github.com/hundredrabbits/Paradise/blob/master/web/scripts/lain.library.js). If you would like to display the name of acting vessel for example.
 
 ```
-note you are the (guest) in the (host). # you are the ghost in the house.
+note you are the (self) in the (parent). # you are the ghost in the house.
 ```
 
 You can access class methods like this:

@@ -51,11 +51,4 @@ function Paradise () {
     }
     return JSON.stringify(a)
   }
-
-  function removeParticles (str) {
-    const particles = ['a', 'the', 'an', 'at', 'in', 'into', 'to', 'by']
-    return `${str}`.split(' ').filter((item) => {
-      return particles.indexOf(item) < 0
-    }).join(' ').trim()
-  }
 }
