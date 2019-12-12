@@ -16,15 +16,15 @@ function Action (name, docs, flags, fn) {
     // Filters
     if (this.flag('words')) { input = removeParticles(input) }
     // Checks
-    if (this.flag('isunique') && this.find(input)) { return `you cannot create another ${input}.` }
-    if (this.flag('isvalid') && !isValid(input)) { return `you cannot create the ${input}.` }
-    if (this.flag('isnotparadox') && host.parent().isParadox()) { return 'you cannot leave a paradox.' }
-    if (this.flag('isnotempty') && !input) { return 'you cannot use this action without parameter.' }
+    if (this.flag('isunique') && this.find(input)) { return `You cannot create another ${input}.` }
+    if (this.flag('isvalid') && !isValid(input)) { return `You cannot create the ${input}.` }
+    if (this.flag('isnotparadox') && host.parent().isParadox()) { return 'You cannot leave a paradox.' }
+    if (this.flag('isnotempty') && !input) { return 'You cannot use this action without parameter.' }
     // Targets
     if (this.flag('visible')) { target = this.find(q, host.sight()) }
     if (this.flag('inventory')) { target = this.find(q, host.inventory()) }
     if (this.flag('distant')) { target = this.find(q, paradise.vessels()) }
-    if (this.flag('target') && !target) { return 'Missing target vessel.' }
+    if (this.flag('target') && !target) { return 'You do not see the target vessel.' }
 
     if (this.flag('relation')) { relation = createRelation(input) }
 

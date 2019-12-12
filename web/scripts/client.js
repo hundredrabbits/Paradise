@@ -4,7 +4,6 @@
 /* global MouseEvent */
 /* global FileReader */
 /* global lain */
-/* global lainLibrary */
 
 function Client (paradise) {
   this._form = document.createElement('form')
@@ -128,8 +127,6 @@ function Client (paradise) {
 
   function parse (str, host, guest) {
     for (const seg of findSegs(str)) {
-      lainLibrary.host = host
-      lainLibrary.guest = guest
       str = str.replace(seg, `${lain.run(seg, host)}`)
     }
     return str

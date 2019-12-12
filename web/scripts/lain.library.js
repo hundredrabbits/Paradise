@@ -1,33 +1,6 @@
 'use strict'
 
 const lainLibrary = {
-  time: {
-    now: () => {
-      return Date.now()
-    },
-    new: (g) => {
-      return new Date(g)
-    },
-    iso: (g) => {
-      return (g ? new Date(g) : new Date()).toISOString()
-    },
-    'years-since': (q = '1986-03-22') => {
-      return ((new Date() - new Date(q)) / 31557600000)
-    },
-    date: () => {
-      var today = new Date()
-      return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
-    },
-    time: () => {
-      var today = new Date()
-      return today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
-    },
-    toString: () => {
-      var today = new Date()
-      return today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
-    }
-  },
-
   // str
 
   substr: (str, from, len) => {
@@ -225,6 +198,10 @@ const lainLibrary = {
     return a % b
   },
 
+  rand: (val) => {
+    return Math.floor(Math.random() * val)
+  },
+
   clamp: (val, min, max) => { // Clamps a value between min and max.
     return Math.min(max, Math.max(min, val))
   },
@@ -248,6 +225,38 @@ const lainLibrary = {
 
   fix: (...items) => {
     return items[0].toFixed(items[1])
+  },
+
+  debug: (item) => {
+    console.log(item)
+    return item
+  },
+
+  time: {
+    now: () => {
+      return Date.now()
+    },
+    new: (g) => {
+      return new Date(g)
+    },
+    iso: (g) => {
+      return (g ? new Date(g) : new Date()).toISOString()
+    },
+    'years-since': (q = '1986-03-22') => {
+      return ((new Date() - new Date(q)) / 31557600000)
+    },
+    date: () => {
+      var today = new Date()
+      return today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate()
+    },
+    time: () => {
+      var today = new Date()
+      return today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+    },
+    toString: () => {
+      var today = new Date()
+      return today.getHours() + ':' + today.getMinutes() + ':' + today.getSeconds()
+    }
   },
 
   // Special

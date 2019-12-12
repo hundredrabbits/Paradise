@@ -1,6 +1,9 @@
 'use strict'
 
-/* global paradise Action client */
+/* global paradise */
+/* global client */
+/* global Action */
+/* global lain */
 
 function Vessel (data) {
   this.data = data
@@ -9,33 +12,33 @@ function Vessel (data) {
     create: new Action('create', 'Create a new vessel at your current location.', 'words isunique isvalid isnotempty',
       (name) => {
         paradise.add(new Vessel({ id: paradise.next(), name: name, owner: this.data.id, parent: this.parent().data.id }))
-        return `you created the ${name}.`
+        return `You created the ${name}.`
       }),
     enter: new Action('enter', 'Enter a visible vessel.', 'words visible target isnotempty',
       (name, target) => {
         this.data.parent = target.data.id
-        return `you entered the ${target}.`
+        return `You entered the ${target}.`
       }),
     leave: new Action('leave', 'Exit the parent vessel.', 'isnotparadox',
       () => {
         const origin = this.parent().data.name
         this.data.parent = this.parent().parent().data.id
-        return `you left the ${origin}.`
+        return `You left the ${origin}.`
       }),
     become: new Action('become', 'Become a visible vessel.', 'visible target isnotempty',
       (name, target) => {
         client.vessel = target
-        return `you became the ${target}`
+        return `You became the ${target}`
       }),
     take: new Action('take', 'Move a visible vessel into a child vessel.', 'visible target isnotempty',
       (name, target) => {
         target.data.parent = this.data.id
-        return `you took the ${target}.`
+        return `You took the ${target}.`
       }),
     drop: new Action('drop', 'Move a child vessel into the parent vessel.', 'inventory target isnotempty',
       (name, target) => {
         target.data.parent = this.parent().data.id
-        return `you dropped the ${target}.`
+        return `You dropped the ${target}.`
       }),
     warp: new Action('warp', 'Move to a distant vessel.', 'distant target relation isnotempty',
       (name, target, relation) => {
@@ -45,17 +48,17 @@ function Vessel (data) {
     note: new Action('note', 'Add a description to the current parent vessel.', '',
       (name) => {
         this.parent().data.note = name
-        return `you modified the note of the ${this.parent()}.`
+        return `You modified the note of the ${this.parent()}.`
       }),
     pass: new Action('pass', 'Add a passive note to the current parent vessel.', '',
       (name) => {
         this.parent().data.passive = name
-        return `you modified the passive message ${this.parent()}.`
+        return `You modified the passive message ${this.parent()}.`
       }),
     program: new Action('program', 'Add an automation program to a vessel, making it available to the use command.', '',
       (name) => {
         this.parent().data.program = name
-        return `you modified the program of the ${this.parent()}.`
+        return `You modified the program of the ${this.parent()}.`
       }),
     learn: new Action('learn', 'Read documentation for each action, or see a list of action.', 'words',
       (name) => {
@@ -69,12 +72,12 @@ function Vessel (data) {
     transform: new Action('transform', 'Change your current vessel name.', 'isnotempty words isunique isvalid',
       (name, target) => {
         this.data.name = name
-        return `you transformed into a ${name}.`
+        return `You transformed into a ${name}.`
       }),
     move: new Action('move', 'Move a visible vessel into another visible vessel.', 'isnotempty cast',
       (name, target, relation, cast) => {
         target.data.parent = cast.data.id
-        return `you moved the ${target} into ${cast}.`
+        return `You moved the ${target} into ${cast}.`
       })
   }
 
@@ -82,7 +85,7 @@ function Vessel (data) {
     const params = `${q}`.trim().split(' ')
     const action = params.shift()
     if (!action) { return '' }
-    if (!this.actions[action]) { return `you cannot ${action}` }
+    if (!this.actions[action]) { return `you said "${lain.run(q, this)}"` }
     return this.actions[action].run(this, params.join(' '))
   }
 
