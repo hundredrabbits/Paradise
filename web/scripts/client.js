@@ -127,7 +127,9 @@ function Client (paradise) {
 
   function parse (str, host, guest) {
     for (const seg of findSegs(str)) {
-      str = str.replace(seg, `${lain.run(seg, host)}`)
+      lainLibrary.host = host
+      lainLibrary.guest = guest
+      str = str.replace(seg, `${lain.run(seg)}`)
     }
     return str
   }

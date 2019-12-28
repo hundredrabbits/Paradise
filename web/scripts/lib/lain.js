@@ -140,8 +140,7 @@ function Lain (lib = {}) {
     }).join('"').trim().split(/\s+/).map(function (x) { return x.replace(/!ws!/g, ' ') })
   }
 
-  this.run = (input, host) => {
-    lib.host = host
+  this.run = (input) => {
     return interpret(parenthesize(tokenize(input)))
   }
 }
