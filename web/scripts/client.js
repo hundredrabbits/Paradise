@@ -4,6 +4,7 @@
 /* global MouseEvent */
 /* global FileReader */
 /* global lain */
+/* global lainLibrary */
 
 function Client (paradise) {
   this._form = document.createElement('form')
@@ -58,7 +59,7 @@ function Client (paradise) {
     this._program.innerHTML = this.vessel.parent().data.program || this.vessel.parent().data.passive ? (this.vessel.parent().data.program ? this.vessel.parent().data.program : '') + '\n' + (this.vessel.parent().data.passive ? this.vessel.parent().data.passive : '') : ''
     this._sight.innerHTML = visibles.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + '</li>' }, '')
     this._inventory.innerHTML = children.reduce((acc, vessel) => { return acc + '<li>' + vessel.toAction() + (vessel.data.passive ? ' ' + parse(vessel.data.passive, vessel, this.vessel) : '') + '</li>' }, '')
-    this._response.innerHTML = response
+    this._response.innerHTML = parse(response, this.vessel, this.vessel)
     this._footer.innerHTML = `<i><a href='#' onclick='client.export()'>${stem ? stem.data.name : 'circular universe^'}</a> ${this.vessel.parent().data.id}:${this.vessel.data.id} ${this.vessel.parent().data.note ? `| <a href='#' data-action='note ${this.vessel.parent().data.note}'>edit note</a> ` : ''} ${this.vessel.parent().data.program ? `| <a href='#' data-action='program ${this.vessel.parent().data.program}'>edit program</a> ` : ''} ${this.vessel.parent().data.passive ? `| <a href='#' data-action='pass ${this.vessel.parent().data.passive}'>edit passive</a> ` : ''}</i>`
   }
 

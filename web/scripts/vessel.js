@@ -3,7 +3,6 @@
 /* global paradise */
 /* global client */
 /* global Action */
-/* global lain */
 
 function Vessel (data) {
   this.data = data
@@ -85,7 +84,7 @@ function Vessel (data) {
     const params = `${q}`.trim().split(' ')
     const action = params.shift()
     if (!action) { return '' }
-    if (!this.actions[action]) { return `you said "${lain.run(q, this)}"` }
+    if (!this.actions[action]) { return `You said "${q}"` }
     return this.actions[action].run(this, params.join(' '))
   }
 
