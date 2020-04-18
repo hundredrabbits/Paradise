@@ -1,0 +1,6 @@
+p a { color: black }
+p a:hover, ::selection { background-color:#000;color:#fff;text-decoration:none } 
+p a:before{ content:"{" }
+p a:after{ content:"}" }
+p a.external:before{ content:"[" }
+p a.external:after{ content:"]" }

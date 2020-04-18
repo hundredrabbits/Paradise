@@ -12,6 +12,7 @@ function Client (paradise) {
   this._location = document.createElement('h2')
   this._note = document.createElement('p')
   this._sight = document.createElement('ul')
+  this._media = document.createElement('div')
   this._response = document.createElement('p')
   this._inventory = document.createElement('ul')
   this._program = document.createElement('pre')
@@ -25,6 +26,7 @@ function Client (paradise) {
     host.appendChild(this._location)
     host.appendChild(this._note)
     host.appendChild(this._sight)
+    host.appendChild(this._media)
     host.appendChild(this._response)
     host.appendChild(this._inventory)
     host.appendChild(this._form)
@@ -73,6 +75,7 @@ function Client (paradise) {
     const response = this.vessel.act(cmd)
     this.update(response)
     console.info('> ' + cmd + ' : ' + response)
+    this._media.innerHTML = this.media(cmd)
     this._input.value = ''
   }
 
@@ -91,6 +94,14 @@ function Client (paradise) {
       markdown += `- \`${action.name}\`: ${action.docs}\n`
     }
     return markdown
+  }
+
+  this.media = (cmd) => {
+    const words = cmd.split(' ')
+    if(words[0] !== 'learn'){ return '' }
+    const target = words[words.length-1]
+    if(!this.vessel.actions[target]){ return '' }
+    return `<img src='media/${target}.png' width='400'/>`
   }
 
   this.onClick = (e) => {
