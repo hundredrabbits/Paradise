@@ -98,9 +98,9 @@ function Client (paradise) {
 
   this.media = (cmd) => {
     const words = cmd.split(' ')
-    if(words[0] !== 'learn'){ return '' }
-    const target = words[words.length-1]
-    if(!this.vessel.actions[target]){ return '' }
+    if (words[0] !== 'learn') { return '' }
+    const target = words[words.length - 1]
+    if (!this.vessel.actions[target]) { return '' }
     return `<img src='media/${target}.png' width='400'/>`
   }
 
