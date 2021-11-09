@@ -38,7 +38,7 @@ There are 16 base actions, you can queue multiple actions using the `&` characte
 
 ## Scripting
 
-Paradise has a small [lisp dialect](https://wiki.xxiivv.com/Lain) that allows for basic scripting, you can find the list of functions [here](https://github.com/hundredrabbits/Paradise/blob/master/web/scripts/lain.library.js). If you would like to display the name of acting vessel for example.
+Paradise has a small [lisp dialect](https://wiki.xxiivv.com/Lain) that allows for basic scripting, you can find the list of functions [here](https://github.com/hundredrabbits/Paradise/blob/master/scripts/lain.library.js). If you would like to display the name of acting vessel for example.
 
 ```
 note you are the (host) in the (host:parent). # you are the ghost in the house.
