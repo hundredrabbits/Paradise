@@ -59,6 +59,6 @@ note (mul 4 (add 2 1))
 ## Extras
 
 - This application supports the [Ecosystem Theme](https://github.com/hundredrabbits/Themes).
-- Support this project through [Patreon](https://patreon.com/100).
+- Support this project through [Patreon](https://patreon.com/hundredrabbits).
 - See the [License](LICENSE.md) file for license rights and limitations (MIT).
 - Pull Requests are welcome!
